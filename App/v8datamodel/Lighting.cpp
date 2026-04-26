@@ -3,13 +3,6 @@
 #include "v8datamodel/lighting.h"
 #include "v8datamodel/sky.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
-
-static void sendLightingShadowsStats()
-{
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "LightingShadows");
-}
-
 using namespace ARL;
 
 REFLECTION_BEGIN();
@@ -227,12 +220,6 @@ void Lighting::setGlobalShadows(bool value)
 	{
 		globalShadows = value;
 		this->raisePropertyChanged(desc_GlobalShadows);
-
-        if (value)
-        {
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendLightingShadowsStats, flag);
-        }
 	}
 }
 

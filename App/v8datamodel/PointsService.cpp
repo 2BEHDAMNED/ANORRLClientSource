@@ -4,8 +4,6 @@
 
 #include "v8xml/WebParser.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
-
 #include "v8datamodel/PointsService.h"
 #include "v8datamodel/ContentProvider.h"
 
@@ -283,12 +281,6 @@ namespace ARL
 		return std::numeric_limits<int>::max();
 	}
 
-
-	static void sendPointAwardStats(int placeId)
-	{
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HasAwardedAPoint", format("%d", placeId).c_str());
-	}
-
 	static void fireErrorFunctions(PointsService::AwardPointYieldFunctions& yieldingFunctions, const char* error)
 	{
 		for (PointsService::AwardPointYieldFunctions::iterator iter = yieldingFunctions.begin(); iter != yieldingFunctions.end(); ++iter)
@@ -364,9 +356,6 @@ namespace ARL
 
 							fireResumeFunctions(yieldingFunctions, args);
 							pointsService->firePointsAwardedSignal(userId, amountAwarded, universeBalance, userBalance);
-
-							static boost::once_flag flag = BOOST_ONCE_INIT;
-							boost::call_once(flag, boost::bind(sendPointAwardStats, dm->getPlaceID()));
 
 							return;
 						}

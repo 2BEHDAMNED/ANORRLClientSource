@@ -14,7 +14,6 @@
 #include "network/Player.h"
 #include "network/Players.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "v8xml/WebParser.h"
 #include "Script/Script.h"
 
@@ -69,14 +68,6 @@ bool TeleportService::teleported = false;
 shared_ptr<Instance> TeleportService::customTeleportLoadingGui = shared_ptr<Instance>();
 Reflection::Variant TeleportService::dataTable = Reflection::Variant();
 TeleportService::SettingsMap TeleportService::settingsTable = TeleportService::SettingsMap();
-
-
-namespace {
-static void sendTeleportStats(const char* label)
-{
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "Teleport", label);
-}
-}
 
 static bool defCallback(std::string message, int placeId, std::string spawnName)
 {
@@ -485,24 +476,6 @@ void TeleportService::ServerTeleport(shared_ptr<Instance> characterOrPlayerInsta
     }
     if (player)
     {
-        {
-			if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToPlace)
-            {
-                static boost::once_flag flag = BOOST_ONCE_INIT;
-                boost::call_once(flag, boost::bind(&sendTeleportStats, "ToPlace"));
-            }
-            else if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToInstance)
-            {
-                static boost::once_flag flag = BOOST_ONCE_INIT;
-                boost::call_once(flag, boost::bind(&sendTeleportStats, "ToInstance"));
-            } 
-			else if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToReservedServer)
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-                boost::call_once(flag, boost::bind(&sendTeleportStats, "ToReservedServer"));
-			}
-        }
-
 		customLoadingGUI = sanitizeCustomLoadingGui(customLoadingGUI);
 		if (customLoadingGUI)
 		{

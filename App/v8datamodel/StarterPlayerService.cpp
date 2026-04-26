@@ -10,7 +10,6 @@
 #include "Humanoid/Humanoid.h"
 #include "Network/Player.h"
 #include "Network/Players.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 DYNAMIC_FASTFLAGVARIABLE(UseStarterPlayerCharacter, false)
 DYNAMIC_FASTFLAGVARIABLE(UseStarterPlayerCharacterScripts, false)
@@ -349,100 +348,5 @@ void StarterPlayerService::setupPlayerScripts()
 		}
 	}
 }
-
-void StarterPlayerService::recordSettingsInGA() const
-{
-	const char *CameraMovement = NULL;
-	const char *CameraOcclusion = NULL;
-	const char *CharacterMovement = NULL;
-
-	switch (touchCameraMovementMode) {
-		case DEV_TOUCH_CAMERA_MOVEMENT_MODE_CLASSIC:
-			CameraMovement = "TouchCameraMoveModeClassic";
-			break;
-		case DEV_TOUCH_CAMERA_MOVEMENT_MODE_FOLLOW:
-			CameraMovement = "TouchCameraMoveModeFollow";
-			break;
-		case DEV_TOUCH_CAMERA_MOVEMENT_MODE_USER:
-		default:
-			CameraMovement = "TouchCameraMoveModeUser";
-			break;
-	}
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevTouchCameraMove", CameraMovement);
-
-	switch (touchMovementMode) {
-	case DEV_TOUCH_MOVEMENT_MODE_THUMBSTICK:
-		CharacterMovement = "TouchMovementModeThumbStick";
-		break;
-	case DEV_TOUCH_MOVEMENT_MODE_DPAD:
-		CharacterMovement = "TouchMovementModeDPad";
-		break;
-	case DEV_TOUCH_MOVEMENT_MODE_THUMBPAD:
-		CharacterMovement = "TouchMovementModeThumbpad";
-		break;
-	case DEV_TOUCH_MOVEMENT_MODE_CLICK_TO_MOVE:
-		CharacterMovement = "TouchMovementModeClickToMove";
-		break;
-	case DEV_TOUCH_MOVEMENT_MODE_SCRIPTABLE:
-		CharacterMovement = "TouchMovementModeScriptable";
-		break;
-	case DEV_TOUCH_MOVEMENT_MODE_USER:
-	default:
-		CharacterMovement = "TouchMovementModeUser";
-		break;
-	}
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevTouchMovement", CharacterMovement);
-
-	switch (computerCameraMovementMode) {
-		case DEV_COMPUTER_CAMERA_MOVEMENT_MODE_CLASSIC:
-			CameraMovement = "ComputerCameraMoveModeClassic";
-			break;
-		case DEV_COMPUTER_CAMERA_MOVEMENT_MODE_FOLLOW:
-			CameraMovement = "ComputerCameraMoveModeFollow";
-			break;
-		case DEV_COMPUTER_CAMERA_MOVEMENT_MODE_USER:
-		default:
-			CameraMovement = "ComputerCameraMoveModeUser";
-			break;
-	}
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevComputerCameraMove", CameraMovement);
-
-	switch (computerMovementMode) {
-	case DEV_COMPUTER_MOVEMENT_MODE_KBD_MOUSE:
-		CharacterMovement = "ComputerMovementModeKbdMouse";
-		break;
-	case DEV_COMPUTER_MOVEMENT_MODE_CLICK_TO_MOVE:
-		CharacterMovement = "ComputerMovementModeClickToMove";
-		break;
-	case DEV_COMPUTER_MOVEMENT_MODE_SCRIPTABLE:
-		CharacterMovement = "ComputerMovementModeScriptable";
-		break;
-	case DEV_COMPUTER_MOVEMENT_MODE_USER:
-	default:
-		CharacterMovement = "ComputerMovementModeUser";
-		break;
-	}
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevComputerMovement", CharacterMovement);
-
-	if (enableMouseLockOption) {
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevComputerEnableMouseLock", "True");
-	} else {
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevComputerEnableMouseLock", "False");
-	}
-
-	switch (cameraOcclusionMode) {
-	case DEV_CAMERA_OCCLUSION_MODE_INVISI:
-		CameraOcclusion = "DevCameraOcclusionInvisi";
-		break;
-	case DEV_CAMERA_OCCLUSION_MODE_ZOOM:
-	default:
-		CameraOcclusion = "DevCameraOcclusionZoom";
-		break;
-	}
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DevCameraOcclusion", CameraOcclusion);
-}
-
-
-
 
 } // Namespace

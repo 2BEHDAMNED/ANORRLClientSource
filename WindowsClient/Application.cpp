@@ -14,7 +14,6 @@
 #include "util/MD5Hasher.h"
 #include "util/SoundService.h"
 #include "util/Statistics.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "util/SafeToLower.h"
 #include "rbx/ProcessPerfCounter.h"
 #include "rbx/Tasks/Coordinator.h"
@@ -59,7 +58,6 @@
 LOGGROUP(RobloxWndInit)
 LOGGROUP(Network)
 FASTFLAGVARIABLE(ReloadSettingsOnTeleport, false)
-DYNAMIC_LOGGROUP(GoogleAnalyticsTracking)
 FASTFLAGVARIABLE(DebugUseDefaultGlobalSettings, false)
 FASTINTVARIABLE(ValidateLauncherPercent, 0)
 FASTINTVARIABLE(BootstrapperVersionNumber, 51261)
@@ -678,8 +676,6 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
 	// initialize the TaskScheduler
 	TaskScheduler::singleton().setThreadCount(TaskSchedulerSettings::singleton().getThreadPoolConfig());
 
-	RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, GA_CLIENT_START, baseInitTime, "Base Init");
-	RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, GA_CLIENT_START, Time::nowFast().timestampSeconds() * 1000, "Load ClientAppSettings");
 	analyticsPoints.addPoint("SettingsLoaded", Time::nowFastSec());
 
 	TCHAR strProfile[MAX_PATH];
@@ -687,18 +683,8 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
 
 	ARL::postMachineConfiguration(GetBaseURL().c_str(), atoi(strProfile));
 
-	RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, GA_CLIENT_START, Time::nowFast().timestampSeconds() * 1000, "Post machine info");
-
     TaskScheduler::singleton().add( shared_ptr<TaskScheduler::Job>( new VerifyConnectionJob() ) );
-
-    // reporting for odd issues with the vmprotect sections.
-    if (FFlag::RwxFailReport && sizeDiff > 4096)
-    {
-        std::stringstream msg;
-        msg << std::hex << sizeDiff;
-        ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "VmpInfo", msg.str().c_str());    
-    }
-
+	
 	if (!scriptIsPlaceLauncher)
 	{
 		// Create new document and start the game
@@ -726,16 +712,14 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
     // and after the document has been completely set up by StartNewGame
     boost::thread t(boost::bind(&doMachineIdCheck, this, marshaller, hWnd));
 
-	RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, GA_CLIENT_START, Time::nowFast().timestampSeconds() * 1000, "Game started");
-
 	// delay setting started event if in protocol handler mode, bootstrapper dialog needs to stay up until this window is shown
 	if (!scriptIsPlaceLauncher)
 	{
 		// Bootstrapper will wait for this event, to make sure that app was started
-		ATL::CEvent robloxStartedEvent;
-		if (robloxStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/robloxStartedEvent"))
+		ATL::CEvent anorrlStartedEvent;
+		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/anorrlStartedEvent"))
 		{
-			robloxStartedEvent.Set();
+			anorrlStartedEvent.Set();
 		}
 	}
 
@@ -1281,10 +1265,10 @@ void Application::waitForShowWindow(int delay)
 			mainView->ShowWindow();
 
 		// Bootstrapper will wait for this event, to make sure that app was started
-		ATL::CEvent robloxStartedEvent;
-		if (robloxStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/robloxStartedEvent"))
+		ATL::CEvent anorrlStartedEvent;
+		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/anorrlStartedEvent"))
 		{
-			robloxStartedEvent.Set();
+			anorrlStartedEvent.Set();
 		}
 	}
 }
@@ -1341,7 +1325,7 @@ void Application::validateBootstrapperVersion()
 
 				// write file to tmp directory
 				boost::filesystem::path tempPath = boost::filesystem::temp_directory_path();
-				tempPath /= "rbxtmp";
+				tempPath /= "arltmp";
 				std::ofstream outStream(tempPath.c_str(), std::ios_base::out | std::ios::binary);
 				outStream.write(file.c_str(), file.length());
 				outStream.close();
@@ -1368,17 +1352,13 @@ void Application::validateBootstrapperVersion()
 		catch (boost::filesystem::filesystem_error& e)
 		{
 			StandardOut::singleton()->printf(MESSAGE_INFO, "validateBootstrapperVersion File Error: %s (%d)", e.what(), e.code().value());
-			RobloxGoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_ERROR, "ValidateBootstrapperVersion File Error", e.what());
 		}
 		catch (ARL::base_exception& e)
 		{
 			StandardOut::singleton()->printf(MESSAGE_INFO, "validateBootstrapperVersion Error: %s", e.what());
-			RobloxGoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_ERROR, "ValidateBootstrapperVersion Error", e.what());
 		}
 
 	}
-	else
-		RobloxGoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_ERROR, "ValidateBootstrapperVersion Fail Loading Version Info", launcherPath.string().c_str());
 }
 
 void Application::onMessageOut(const StandardOutMessage& message)

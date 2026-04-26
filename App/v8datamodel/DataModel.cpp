@@ -103,7 +103,6 @@
 #include "Util/IMetric.h"
 #include "Util/Statistics.h"
 #include "Util/ContentFilter.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include "rbx/Log.h"
 #include "FastLog.h"
@@ -211,7 +210,6 @@ static Reflection::BoundFuncDesc<DataModel, std::string(std::string, std::string
 
 static Reflection::BoundFuncDesc<DataModel, shared_ptr<const Reflection::ValueArray>()>  getJobsInfo(&DataModel::getJobsInfo, "GetJobsInfo", Security::Plugin);
 static Reflection::BoundFuncDesc<DataModel, void(std::string, std::string, std::string, std::string, std::string)>  func_reportMeasurement(&DataModel::reportMeasurement, "ReportMeasurement", "id", "key1", "value1", "key2", "value2", Security::RobloxScript);
-static Reflection::BoundFuncDesc<DataModel, void(std::string, std::string, std::string, int)> googleAnalyticsFunction(&DataModel::luaReportGoogleAnalytics, "ReportInGoogleAnalytics", "category", "action", "custom", "label", "none", "value", 0, Security::RobloxScript);
 
 #if defined(ARL_STUDIO_BUILD) || defined (ARL_RCC_SECURITY) || defined (ARL_TEST_BUILD)
 static Reflection::BoundFuncDesc<DataModel, void(bool)> sanitizeFunction(&DataModel::clearContents, "ClearContent", "resettingSimulation", Security::LocalUser);
@@ -547,13 +545,6 @@ bool DataModel::serverSavePlace(const SaveFilter saveFilter, boost::function<voi
 	return uploadPlace(baseUrl + "ide/publish/UploadExistingAsset" + parameters, saveFilter, boost::bind(resumeFunction, true), errorFunction);
 }
 
-namespace {
-	static void sendSavePlaceStats()
-	{
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SavePlace");
-	}
-} // namespace
-
 void DataModel::savePlaceAsync(const SaveFilter saveFilter, boost::function<void(bool)> resumeFunction, boost::function<void(std::string)> errorFunction)
 {
 	if (placeID <= 0)
@@ -575,10 +566,6 @@ void DataModel::savePlaceAsync(const SaveFilter saveFilter, boost::function<void
 	}
 	else if(Network::Players::backendProcessing(this))
 	{
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendSavePlaceStats, flag);
-		}
 		serverSavePlace(saveFilter, resumeFunction, errorFunction);
 
 	}
@@ -1398,14 +1385,6 @@ void DataModel::httpPostAsync(std::string url, std::string data, std::string opt
 	doHttpPost(url, data, optionalContentType, resumeFunction, errorFunction);
 }
 
-void DataModel::luaReportGoogleAnalytics(std::string category, std::string action, std::string label, int value)
-{
-	std::string encodedCategory = Http::urlEncode(category);
-	std::string encodedAction = Http::urlEncode(action);
-	std::string encodedLabel = Http::urlEncode(label);
-	RobloxGoogleAnalytics::trackEvent(encodedCategory.c_str(), encodedAction.c_str(), encodedLabel.c_str(), value);
-}
-
 std::auto_ptr<std::istream> DataModel::loadAssetIdIntoStream(int assetID)
 {
 	// construct the url
@@ -1483,7 +1462,6 @@ void DataModel::loadContent(ContentId contentId)
 
 	if (isContentLoaded)
 	{
-		Analytics::GoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_ERROR, "loadContent re-entrant", contentId.getAssetId().c_str());
 		return;
 	}
 
@@ -1498,7 +1476,6 @@ void DataModel::loadContent(ContentId contentId)
 	if (isContentLoaded)
 	{
         stream.release();
-		Analytics::GoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_ERROR, "loadContent re-entrant post", contentId.getAssetId().c_str());
 		return;
 	}
 
@@ -3606,7 +3583,6 @@ void DataModel::setPlaceID(int placeID, bool robloxPlace)
 	Http::placeID = ARL::format("%d", placeID);
 
 	Analytics::setPlaceId(placeID);
-	RobloxGoogleAnalytics::setPlaceID(placeID);
 }
 
 

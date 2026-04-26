@@ -38,7 +38,6 @@ public:
 	void registerPersistentVariable(PersistentVariable* variable);
 
 private:
-	void reportEvent(const char* name, int value = 0, const char* label = "none", const char* category = "UsageFeatures");
 	std::vector<PersistentVariable*> persistentVariables;
 
 	QSettings storage;

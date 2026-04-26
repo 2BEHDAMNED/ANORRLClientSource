@@ -15,7 +15,6 @@
 
 #include "Util/ContentId.h"
 #include "Util/LuaWebService.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "V8DataModel/ContentProvider.h"
 #include "V8DataModel/DataModel.h"
 #include "V8DataModel/Decal.h"
@@ -457,9 +456,6 @@ void createImageAssetAndNameThread(const QString& name, const QString& imageFile
 		*created = false;
 		std::string returnedMessage = createImageAssetResponse.get<std::string>("Message").get_value_or("Try again later.");
 		*errorMessage =QString("Failed to create image: %1").arg(QString::fromStdString(returnedMessage));
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", "Failed to create image asset", 0, false), flag);
 		return;
 	}
 	int assetId = optionalAssetId.get();
@@ -491,13 +487,8 @@ void createImageAssetAndNameThread(const QString& name, const QString& imageFile
 		*errorMessage = "An error occurred. See Output Window for details.";
 		std::string gaMessage = format("Error while creating named asset: %s", e.what());
 		StandardOut::singleton()->print(MESSAGE_ERROR, gaMessage.c_str());
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", gaMessage.c_str(), 0, false), flag);
 		return;
 	}
-
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Game Explorer", "Created named image", 0);
 
 	*created = true;
 }
@@ -759,9 +750,6 @@ void EntityProperties::waitUntilLoaded()
 	}
 	catch (const ARL::base_exception&)
 	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", "load entity settings http failure", 0, false), flag);
 		ableToGetFuture = false;
 		ableToParseJson = false;
 		return;
@@ -774,9 +762,6 @@ void EntityProperties::waitUntilLoaded()
 
 	if (!ableToParseJson) 
 	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", "load entity settings json parse failure", 0, false), flag);
 		return;
 	}
 
@@ -998,10 +983,6 @@ void EntityPropertiesForCategory::handlePage(int loadedPage, std::string* json, 
 	{
 		StandardOut::singleton()->printf(MESSAGE_ERROR, "Error while loading entities for universe %d: %s",
 			universeId, errorStatus.c_str());
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		std::string label = format("load entity page failed: %s", errorStatus.c_str());
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", label.c_str(), 0, false), flag);
 		return;
 	}
 
@@ -1037,10 +1018,6 @@ void EntityPropertiesForCategory::handlePage(int loadedPage, std::string* json, 
 	}
 	catch (const std::exception& e)
 	{
-		std::string label = format("load entity page exception: %s", e.what());
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", label.c_str(), 0, false), flag);
 		StandardOut::singleton()->print(MESSAGE_WARNING, "Error while loading data for game. Try again later.");
 
 		doneEvent.Set();
@@ -1054,9 +1031,6 @@ void EntityPropertiesForCategory::handlePage(int loadedPage, std::string* json, 
 				"Warning: studio can currently only load %d items per category at a time. "
 				"Some of your items may not have been loaded.",
 				FInt::GameViewItemCap);
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_ACTION,
-				"Game Explorer", "over item limit", 0, false), flag);
 		}
 
 		// wait for actual data
@@ -1977,10 +1951,6 @@ void RobloxGameExplorer::publishGameThread(boost::function<int()> newUniverseFut
 	}
 	catch (const ARL::base_exception& e)
 	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", format("PublishTo exception: %s", e.what()).c_str(),
-			0, false), flag);
 		StandardOut::singleton()->printf(MESSAGE_ERROR, "Error while publishing game: %s", e.what());
 		*succeeded = false;
 	}
@@ -1988,8 +1958,6 @@ void RobloxGameExplorer::publishGameThread(boost::function<int()> newUniverseFut
 
 void RobloxGameExplorer::publishGameToNewSlot()
 {
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Game Explorer", "Publish Game To New Slot");
-
 	EntityProperties newUniverseProperties;
 	newUniverseProperties.set("Name", gameSettings.getName() + " (Copy)");
 	HttpFuture future = HttpAsync::post(formatUrl("%API_PROXY%/universes/create-universe", -1),
@@ -1998,9 +1966,7 @@ void RobloxGameExplorer::publishGameToNewSlot()
 	publishInternal(extractProperty<int>(future, "UniverseId"));
 }
 
-void RobloxGameExplorer::publishGameToNewGroupSlot(int groupId)
-{
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Game Explorer", "Publish Game To New Group Slot");
+void RobloxGameExplorer::publishGameToNewGroupSlot(int groupId) {
 
 	EntityProperties newUniverseProperties;
 	newUniverseProperties.set("Name", gameSettings.getName() + " (Copy)");
@@ -2012,9 +1978,6 @@ void RobloxGameExplorer::publishGameToNewGroupSlot(int groupId)
 
 void RobloxGameExplorer::publishGameToExistingSlot(int gameId)
 {
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Game Explorer",
-		gameId == currentGameId ? "Publish Game To Current Slot" : "Publish Game To Other Existing Slot");
-
 	publishInternal(boost::bind(&identity<int>, gameId));
 }
 
@@ -2115,9 +2078,6 @@ void RobloxGameExplorer::setGroupLoadingStatus(EntityCategory category)
 
 void RobloxGameExplorer::placeDoubleClickCallback(EntityProperties* placeInfo)
 {
-	static boost::once_flag flag = BOOST_ONCE_INIT;
-	boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_ACTION,
-		"Game Explorer", "Open Place", 0, false), flag);
 	openPlace(getEntityId(placeInfo, ENTITY_CATEGORY_Places).toInt());
 }
 
@@ -2561,10 +2521,6 @@ static void addNewPlaceHelperThread(int universeId, bool* succeeded)
 	{
 		*succeeded = false;
 		StandardOut::singleton()->printf(MESSAGE_ERROR, "Error while adding: %s", e.what());
-		std::string gaMessage = format("Error while getting default place value for add: %s", e.what());
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", gaMessage.c_str(), 0, false), flag);
 		return;
 	}
 
@@ -2581,10 +2537,6 @@ static void addNewPlaceHelperThread(int universeId, bool* succeeded)
 	{
 		*succeeded = false;
 		StandardOut::singleton()->printf(MESSAGE_ERROR, "Error while adding: %s", e.what());
-		std::string gaMessage = format("Error while creating place from getting default value: %s", e.what());
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-			GA_CATEGORY_ACTION, "Game Explorer", gaMessage.c_str(), 0, false), flag);
 		return;
 	}
 
@@ -2658,10 +2610,6 @@ void RobloxGameExplorer::placeContextMenuHandler(const QPoint& point, EntityProp
 	bool reload = false;
 	if (result == remove)
 	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-		GA_CATEGORY_ACTION, "Game Explorer", "Removing place from universe", 0, false), flag);
-
 		bool placeNotCurrentlyOpen = true;
 		if (currentPlaceId == placeId)
 		{
@@ -2686,10 +2634,6 @@ void RobloxGameExplorer::placeContextMenuHandler(const QPoint& point, EntityProp
 	}
 	else if (result == makeRoot)
 	{	
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-		GA_CATEGORY_ACTION, "Game Explorer", "Setting root place", 0, false), flag);
-
 		UpdateUIManager::Instance().waitForLongProcess(
 			QString("Changing start place for game"),
 			boost::bind(&blockingMakeRoot, currentGameId, placeId, &reload));
@@ -2878,10 +2822,6 @@ void RobloxGameExplorer::namedAssetsContextMenuHandler(const QPoint& point, Enti
 		{
 			return;
 		}
-	
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-		GA_CATEGORY_ACTION, "Game Explorer", "Removing name from universe", 0, false), flag);
 
 		std::string name = properties->get<std::string>("Name").get();
 		UpdateUIManager::Instance().waitForLongProcess(QString("Removing name"),
@@ -3017,10 +2957,6 @@ void RobloxGameExplorer::namedAssetsGroupContextMenuHandler(const QPoint& point)
 
 void RobloxGameExplorer::handleRename(const QPoint& globalPoint)
 {
-	static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent,
-	GA_CATEGORY_ACTION, "Game Explorer", "Context menu rename", 0, false), flag);
-
 	QModelIndex index = indexAt(viewport()->mapFromGlobal(globalPoint));
 	ARLASSERT(index.isValid());
 	if (index.isValid())

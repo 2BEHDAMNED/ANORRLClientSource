@@ -2,7 +2,6 @@
 #include "stdafx.h"
 
 #include "CSGOperations.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "v8datamodel/PartOperation.h"
 #include "V8DataModel/CSGDictionaryService.h"
 #include "V8Xml/SerializerBinary.h"

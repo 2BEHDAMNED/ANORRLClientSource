@@ -30,7 +30,6 @@
 #include "RobloxMainWindow.h"
 #include "RobloxCookieJar.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/MachineIdUploader.h"
 #include "V8DataModel/ContentProvider.h"
 #include "RobloxWebDoc.h"
@@ -38,7 +37,6 @@
 
 #include "ANORRLServicesTools.h"
 
-FASTFLAG(GoogleAnalyticsTrackingEnabled)
 FASTFLAGVARIABLE(StudioInSyncWebKitAuthentication, false)
 FASTFLAGVARIABLE(UseAssetGameSubdomainForGetCurrentUser, false)
 FASTFLAG(UseBuildGenericGameUrl)

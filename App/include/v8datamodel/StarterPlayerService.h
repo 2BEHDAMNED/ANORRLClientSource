@@ -76,8 +76,6 @@ namespace ARL {
 		StarterPlayerService();
 		void setupPlayerScripts();
 
-		void recordSettingsInGA() const;
-
 		void setCameraMode(ARL::Camera::CameraMode value);
 		ARL::Camera::CameraMode getCameraMode() const {return cameraMode;}
 

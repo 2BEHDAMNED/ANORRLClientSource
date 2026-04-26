@@ -32,7 +32,6 @@
 #include "RobloxIDEDoc.h"
 #include "V8DataModel/InputObject.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/PhysicalProperties.h"
 #include "v8datamodel/Workspace.h"
 #include "RobloxPluginHost.h"

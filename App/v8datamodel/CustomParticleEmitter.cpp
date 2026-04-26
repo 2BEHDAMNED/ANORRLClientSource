@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "v8datamodel/CustomParticleEmitter.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #define CAT_VIS category_Appearance
 #define CAT_EMISSION "Emission"
@@ -226,15 +225,8 @@ namespace ARL
 		}
 
 
-    static void trackCreation()
-    {
-        ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CustomParticleEmitter");
-    }
-
     void CustomParticleEmitter::onAncestorChanged(const AncestorChanged& ev)
     {
         Base::onAncestorChanged(ev);
-        static boost::once_flag flag = BOOST_ONCE_INIT;
-        boost::call_once(&trackCreation, flag );
     }
 }

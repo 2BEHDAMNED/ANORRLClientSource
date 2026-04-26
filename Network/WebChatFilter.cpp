@@ -13,7 +13,6 @@
 #include "util/standardout.h"
 #include "reflection/Type.h"
 #include "util/Statistics.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include <boost/lexical_cast.hpp>
 #include <boost/thread/once.hpp>
@@ -127,8 +126,7 @@ void filterMessageHelper(
 	{
 		FASTLOGS(DFLog::WebChatFiltering, "Web chat failed: %s", e.what());
         failureReason = e.what();
-        RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ChatFailure", failureReason.c_str());
-	}
+    }
 
 	logResponseData(message, result, responseDelta);
 }

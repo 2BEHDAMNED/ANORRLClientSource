@@ -94,7 +94,6 @@ private:
     void onTakeScreenshot();
     bool saveScreenshotToFile(std::string& /*output*/ filename);
     void prepareSceneGraph();
-    void sendFeatureLevelStats();
     void drawRecordingFrame(DeviceContext* context);
     void drawProfiler(DeviceContext* context);
     void drawVRWindow(DeviceContext* context);

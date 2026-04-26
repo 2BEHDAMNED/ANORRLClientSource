@@ -26,7 +26,6 @@
 #include "v8datamodel/Selection.h"
 #include "rbx/CEvent.h"
 #include "ReflectionMetaData.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 // Roblox Studio Headers
 #include "RobloxContextualHelp.h"
@@ -754,7 +753,6 @@ CategoryItem* PropertyTreeWidget::getCategoryItem(const ARL::Reflection::Propert
 void PropertyTreeWidget::sendPropertySearchCounter()
 {
 	m_sendingCounter = false;
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "StudioUserAction", "PropertySearchUsed");
 }
 
 void PropertyTreeWidget::setFilter(QString filter)

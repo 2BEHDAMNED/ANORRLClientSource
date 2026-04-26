@@ -21,7 +21,6 @@
 #include "RobloxNetworkAccessManager.h"
 #include "RobloxSettings.h"
 #include "QtUtilities.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include <QWebElement>
 
@@ -53,8 +52,6 @@ void RobloxWebPage::handleFinished(QNetworkReply* reply)
 
 bool RobloxWebPage::acceptNavigationRequest ( QWebFrame * frame, const QNetworkRequest & request, NavigationType type )
 {
-    ARL::RobloxGoogleAnalytics::trackEvent("Web", "URLRequest", request.url().toString().toStdString().c_str());
-
 	if (!frame) // This is a new window request, open in default browser
 	{
 		QDesktopServices::openUrl(request.url());

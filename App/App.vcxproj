@@ -1349,7 +1349,6 @@ cmd /c "exit /b 0"</Command>
     </ClCompile>
     <ClCompile Include="util\rbxrandom.cpp" />
     <ClCompile Include="util\Region3int32.cpp" />
-    <ClCompile Include="util\RobloxGoogleAnalytics.cpp" />
     <ClCompile Include="util\Analytics.cpp" />
     <ClCompile Include="util\URL.cpp" />
     <ClCompile Include="util\Shared\Http.cpp">
@@ -4387,7 +4386,6 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\util\ProgramMemoryChecker.h" />
     <ClInclude Include="include\util\rbxrandom.h" />
     <ClInclude Include="include\util\Region3int32.h" />
-    <ClInclude Include="include\util\RobloxGoogleAnalytics.h" />
     <ClInclude Include="include\util\Analytics.h" />
     <ClInclude Include="include\util\Sound.h" />
     <ClInclude Include="include\util\SoundService.h" />

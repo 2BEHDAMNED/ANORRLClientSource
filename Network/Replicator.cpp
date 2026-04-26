@@ -98,7 +98,6 @@
 #include "Util/ScopedAssign.h"
 #include "Util/StandardOut.h"
 #include "Util/Math.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include "FastLog.h"
 #include <boost/format.hpp> 
@@ -4837,9 +4836,6 @@ void Replicator::OnInternalPacket(InternalPacket *internalPacket, unsigned frame
 			if (internalPacket->splitPacketCount > (uint32_t)DFInt::RakNetMaxSplitPacketCount)
 			{
 				ARLASSERT(internalPacket->splitPacketCount < (uint32_t)DFInt::RakNetMaxSplitPacketCount);
-				std::stringstream label;
-				label << (unsigned int)internalPacket->data[0];
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "NetworkPacketSplitCountOverThreshold", label.str().c_str());
 			}
 		}
 	}
@@ -4869,8 +4865,6 @@ void Replicator::requestDisconnect(DisconnectReason reason)
 		case DisconnectReason_CloudEditKick:        r = "CloudEditKick"; break;
 		default: break;
 		}
-
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, isServerReplicator() ? "ServerDisconnectReason" : "ClientDisconnectReason", r.c_str());
 	}
 
 	// We can't set parent to NULL in this context because we're in the middle of a Raknet Update

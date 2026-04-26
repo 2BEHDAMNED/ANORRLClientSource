@@ -152,6 +152,16 @@ namespace ARL
 			}
 		}
 
+		bool getLoadingScriptDarkModeConst() const { return loadingScriptDarkMode; }
+		bool isLoadingScriptDarkMode() { return loadingScriptDarkMode; }
+		void setLoadingScriptDarkMode(bool value)
+		{
+			if (value != loadingScriptDarkMode)
+			{
+				loadingScriptDarkMode = value;
+			}
+		}
+
 		bool inStudioMode() { return studio; }
 		void setStudioMode(bool value) 
 		{
@@ -165,18 +175,14 @@ namespace ARL
 		bool getUsedHideHudShortcut() const { return usedHideHudShortcut; }
 		void setUsedHideHudShortcut(bool value) { usedHideHudShortcut = value; }
 
-		std::string getGoogleAnalyticsClientId() const;
-		void setGoogleAnalyticsClientId(const std::string& id);
-		
 		/*override*/ void reset();
 		/*override*/ void verifySetParent(const Instance* instance) const;
 
-		void recordSettingsInGA(bool touchEnabled) const;
-
+		
 		rbx::signal<void(bool)> fullscreenChangedSignal;
 		rbx::signal<void(bool)> studioModeChangedSignal;
 		rbx::signal<void(bool)> areoChangedSignal;
-
+		
 	private:	
 		ControlMode controlMode;
 		RenderQualitySetting renderQualitySetting;
@@ -207,6 +213,7 @@ namespace ARL
 
 		bool startMaximized;
 
+		bool loadingScriptDarkMode;
 		bool aeroEnabled;
 		float masterVolume;
 		float mouseSensitivity;

@@ -48,13 +48,7 @@ namespace ARL
 		DECLARE_DATA_STRING(PrizeAssetIDs);
 		DECLARE_DATA_INT(MinNumberScriptExecutionsToGetPrize);
 		DECLARE_DATA_INT(MinPartsForOptDragging);
-		DECLARE_DATA_STRING(GoogleAnalyticsAccountPropertyID);
-		DECLARE_DATA_STRING(GoogleAnalyticsAccountPropertyIDPlayer);
-		DECLARE_DATA_INT(GoogleAnalyticsThreadPoolMaxScheduleSize);
-		DECLARE_DATA_INT(GoogleAnalyticsLoadPlayer);
-		DECLARE_DATA_INT(GoogleAnalyticsLoadStudio);
-		DECLARE_DATA_BOOL(GoogleAnalyticsInitFix);
-        DECLARE_DATA_INT(HttpUseCurlPercentageMacClient);
+	    DECLARE_DATA_INT(HttpUseCurlPercentageMacClient);
         DECLARE_DATA_INT(HttpUseCurlPercentageMacStudio);
         DECLARE_DATA_INT(HttpUseCurlPercentageWinClient);
         DECLARE_DATA_INT(HttpUseCurlPercentageWinStudio);

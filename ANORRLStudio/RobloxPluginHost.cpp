@@ -42,7 +42,6 @@
 #include "IRobloxDoc.h"
 #include "QtUtilities.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "PluginAction.h"
 
 #include "CSGOperations.h"
@@ -68,8 +67,6 @@ static const QString SmoothTerrainToolbarName = "Smooth Terrain";
 
 int RobloxPluginHost::m_NextID = 1;
 static const char* kFailedToLoadPluginIconIcon = "/textures/ui/CloseButton_dn.png";
-
-FASTFLAG(GoogleAnalyticsTrackingEnabled)
 
 static const char* kPluginFileName = "Plugin.rbxm";
 static const char* kAssetVersionJsonKey = "AssetVersion";

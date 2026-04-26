@@ -43,7 +43,6 @@ LOGVARIABLE(PhysicsSenderSleepingLog, 0);
 
 DYNAMIC_FASTFLAGVARIABLE(PhysicsSenderUseOwnerTimestamp, false)
 DYNAMIC_FASTFLAGVARIABLE(PhysicsSenderCheckPartInServiceBeforeSend, false)
-DYNAMIC_FASTFLAGVARIABLE(DebugPhysicsSenderLogCacheMissToGA, false)
 
 SYNCHRONIZED_FASTFLAG(PhysicsPacketSendWorldStepTimestamp)
 
@@ -430,13 +429,6 @@ void TopNErrorsPhysicsSender::writeAssembly(RakNet::BitStream& bitStream, const 
 				{
 					// this item should be in the cache
 					//StandardOut::singleton()->print(MESSAGE_INFO, "cache update failed");
-
-					if (DFFlag::DebugPhysicsSenderLogCacheMissToGA)
-					{
-						static boost::once_flag flag = BOOST_ONCE_INIT;
-						boost::call_once(flag, boost::bind(&Analytics::GoogleAnalytics::trackEventWithoutThrottling, "Error", "PhysicsSenderCacheMiss", 
-							ARL::Http::placeID.c_str(), 0, false));
-					}
 
 					ARLASSERT(0);
 				}

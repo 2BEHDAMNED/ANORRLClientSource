@@ -312,9 +312,6 @@
     <ClCompile Include="moc_WebDialog.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="qrc_RobloxStudio.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="ShortcutHelpDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -649,6 +646,9 @@
       <Filter>Source Files\CloudEdit</Filter>
     </ClCompile>
     <ClCompile Include="moc_RobloxTeamCreateWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qrc_ANORRLStudio.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>

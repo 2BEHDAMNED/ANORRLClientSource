@@ -15,12 +15,10 @@
 #undef HAVE_CTYPE_H
 #include "util/HTW3C.h"
 #include "util/URL.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "util/standardout.h"
 #include "util/Statistics.h"
 #include "util/ThreadPool.h"
 #include "util/Analytics.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include "rbx/TaskScheduler.h"
 
@@ -45,7 +43,6 @@ DYNAMIC_FASTINTVARIABLE(HttpDataSendDefaultTimeoutMillis, 60000)
 
 DYNAMIC_LOGVARIABLE(HttpTrace, 0)
 DYNAMIC_FASTINTVARIABLE(HttpSendStatsEveryXSeconds, 60)
-DYNAMIC_FASTINTVARIABLE(HttpGAFailureReportPercent, 1)
 DYNAMIC_FASTINTVARIABLE(HttpARLEventFailureReportHundredthsPercent, 0)
 DYNAMIC_FASTFLAGVARIABLE(DebugHttpAsyncCallsForStatsReporting, true)
 DYNAMIC_FASTINT(HttpInfluxHundredthsPercentage)
@@ -84,12 +81,6 @@ static bool inline sendHttpFailureToEvents()
 {
     static const int r = rand() % 10000;
     return r < DFInt::HttpARLEventFailureReportHundredthsPercent;
-}
-
-static bool inline sendHttpFailureToGA()
-{
-    static const int r = rand() % 100;
-    return r < DFInt::HttpGAFailureReportPercent;
 }
 
 static bool inline sendHttpInfluxEvents()
@@ -205,20 +196,6 @@ class HTTPStatistics
             break;
         default:
             break;
-        }
-
-        // Report immediately to GA, but we are assuming failure rates are
-        // low so that we don't end up with an infinite recursion when
-        // reporting failure data.
-        if (sendHttpFailureToGA())
-        {
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HTTPFailure", reason, delay);
-        }
-
-        if (sendHttpFailureToEvents())
-        {
-            int placeID = atoi(Http::placeID.c_str());
-            RobloxGoogleAnalytics::sendEventRoblox(GA_CATEGORY_GAME, "HTTPFailure", reason, placeID);
         }
     }
 
@@ -381,7 +358,7 @@ std::string Http::rbxUserAgent = "Roblox/Darwin";
 #elif defined(ARL_PLATFORM_DURANGO)
 std::string Http::rbxUserAgent = "Roblox/XboxOne";
 #elif defined (_WIN32)
-std::string Http::rbxUserAgent = "Roblox/WinInet";
+std::string Http::rbxUserAgent = "ANORRL/WinInet";
 #else
 std::string Http::rbxUserAgent;
 #endif
@@ -506,7 +483,6 @@ void Http::init()
     responseTimeoutMillis = DFInt::HttpResponseDefaultTimeoutMillis;
     sendTimeoutMillis = DFInt::HttpSendDefaultTimeoutMillis;
     dataSendTimeoutMillis = DFInt::HttpDataSendDefaultTimeoutMillis;
-    sendHttpFailureToGA(); //initializes the static random number in function
     sendHttpFailureToEvents(); //initializes the static random number in function
     sendHttpInfluxEvents(); //initializes the static random number in function
 }
@@ -1417,15 +1393,13 @@ bool Http::doHttpGetPostWithNativeFallbackForReporting(bool isPost, std::istream
 	return false;
 #endif
 
-	std::string googleAnalyticsBaseURL = RobloxGoogleAnalytics::kGoogleAnalyticsBaseURL;
 	std::string counterMultiUrl = GetCountersMultiIncrementUrl(::GetBaseURL(), ARL::Stats::countersApiKey);
 	std::string counterSingleUrl = GetCountersUrl(::GetBaseURL(), ARL::Stats::countersApiKey);
 	std::string statsURL = ARL::format("%sgame/report-stats", ::GetBaseURL().c_str());
 	std::string inFluxBaseURL = DFString::HttpInfluxURL;
 	
 
-	if((url.compare(0, googleAnalyticsBaseURL.length(), googleAnalyticsBaseURL) == 0 || 
-		url.compare(0, counterMultiUrl.length(), counterMultiUrl) == 0 ||
+	if((url.compare(0, counterMultiUrl.length(), counterMultiUrl) == 0 ||
 		url.compare(0, counterSingleUrl.length(), counterSingleUrl) == 0 ||
 		url.compare(0, statsURL.length(), statsURL) == 0 ||
 		url.compare(0, inFluxBaseURL.length(), inFluxBaseURL) == 0 ))

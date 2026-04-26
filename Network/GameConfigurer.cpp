@@ -33,7 +33,6 @@
 #include "script/CoreScript.h"
 #include "v8xml/WebParser.h"
 #include "util/ScriptInformationProvider.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "Client.h"
 #include "ClientReplicator.h"
 #include "Marker.h"
@@ -196,13 +195,6 @@ void PlayerConfigurer::showErrorWindow(const std::string& message, const std::st
 			joinResolved = true;
 			reportDuration("GameJoin", errorCategory, duration, false);
 		}
-
-		// log error to GA
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "JoinFailurePlace", ARL::format("%s_%d", errorType.c_str(), getParamInt("PlaceId")).c_str());
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "JoinFailureIP", ARL::format("%s_%s", errorType.c_str(), getParamString("MachineAddress").c_str()).c_str());
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "JoinFailureVendor", ARL::format("%s_%d", errorType.c_str(), getParamInt("VendorId")).c_str());
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "JoinFailureDataCenter", ARL::format("%s_%d", errorType.c_str(), getParamInt("DataCenterId")).c_str());
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "GameJoin", "Failure");
 
 		try
 		{
@@ -403,8 +395,7 @@ void PlayerConfigurer::onGameClose()
 	if (!connectResolved)	
     {
 		reportDuration("GameConnect", "Failure", duration, true);
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "GameJoin", "Failure");
-    }
+	}
 	else if (!loadResolved || !joinResolved)
 	{
 		if (!loadResolved)
@@ -419,7 +410,6 @@ void PlayerConfigurer::onGameClose()
 			reportDuration("GameJoin", "Cancel", duration, true);
 		}
 
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "GameJoin", "Cancel");
 	}
 	else if (!playResolved)
 	{
@@ -608,7 +598,6 @@ void PlayerConfigurer::configure(ARL::Security::Identities identity, DataModel* 
 	TeleportService::SetBrowserTrackerId(getParamString("BrowserTrackerId"));
 
 	reportCounter("GameJoinStart,GameJoinStart"+DebugSettings::singleton().osPlatform(), false);
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "GameJoin", "Start");
 	Stats::reportGameStatus("JoiningGame");
 
 	testing = (getParamString("ClientTicket").length() == 0);

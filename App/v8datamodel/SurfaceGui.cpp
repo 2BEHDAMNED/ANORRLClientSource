@@ -11,19 +11,7 @@
 
 #include "v8datamodel/PlayerGui.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
-
 FASTFLAGVARIABLE(GUIZFighterGPU, true)
-
-static void sendSurfaceGuiStats()
-{
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SurfaceGui");
-}
-
-static void sendSurfaceGUINonTextUsage()
-{
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME,"SurfaceGuiNonText");
-}
 
 namespace ARL {
 	int SurfaceGui::s_numInstances = 0;
@@ -298,22 +286,12 @@ namespace ARL {
 	{
 		Super::onAncestorChanged(event);
 		shouldRenderSetDirty();
-		if (Workspace::serverIsPresent(this))
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendSurfaceGuiStats, flag);
-		}
 	}
 
 	void SurfaceGui::onDescendantAdded(Instance* instance)
 	{
 		Super::onDescendantAdded(instance);
 		if (instance->isA<TextLabel>()) return;
-		if (Workspace::serverIsPresent(this))
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendSurfaceGUINonTextUsage, flag);
-		}
 	}
 
 	void SurfaceGui::setFace( NormalId id )

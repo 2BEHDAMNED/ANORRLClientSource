@@ -4,10 +4,8 @@
 #include "V8DataModel/DataModel.h"
 #include "v8datamodel/DataStore.h"
 #include "Network/Players.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include "util/Analytics.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 LOGGROUP(DataStore);
 
@@ -45,19 +43,6 @@ DYNAMIC_FASTFLAGVARIABLE(UseNewDataStoreRequestSetTimestampBehaviour, true)
 
 LOGVARIABLE(DataStoreBudget, 0);
 
-
-
-namespace {
-	static inline void sendDataStoreStats()
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DataStorePersistence");
-	}
-
-	static inline void sendDataStoreOldNamingSchemeStats()
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DataStoreOldNamingScheme");
-	}
-}
 	
 namespace ARL {
 	const char* const sDataStoreService = "DataStoreService";
@@ -156,7 +141,6 @@ namespace ARL {
 		if (isError)
 		{
 			msErrorAverageRequestTime.incrementValueAverage(requestDurationMilliseconds);
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DataStoreError", errorMessage.c_str());
 		}
 		else
 		{
@@ -456,11 +440,6 @@ namespace ARL {
 
 	bool DataStoreService::queueOrExecuteRequest(HttpRequest& request, std::list<HttpRequest>& queue, BudgetedThrottlingHelper& helper)
 	{
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendDataStoreStats, flag);
-		}
-
 		FASTLOG1(FLog::DataStore, "Queue suze: %u", queue.size());
 		if (request.isKeyThrottled(Time::nowFast()) || !helper.checkAndReduceBudget())
 		{
@@ -555,11 +534,6 @@ namespace ARL {
 		if(disabled != disableUrlEncoding)
 		{
 			disableUrlEncoding = disabled;
-			if(disableUrlEncoding)
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(&sendDataStoreOldNamingSchemeStats, flag);
-			}
 		}
 	}
 

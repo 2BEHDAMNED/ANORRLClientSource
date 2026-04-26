@@ -17,7 +17,6 @@
 //Roblox Headers
 #include "script/ScriptContext.h"
 #include "util/UDim.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/PhysicalProperties.h"
 
 // Roblox Studio Headers

@@ -292,7 +292,6 @@ private:
 
 	void saveDefaultApplicationState();
 
-    void trackUserActive();
     void onAnalyticTracked();
     void keepAliveAnalyticsSession();
 	void updateRecentFilesUI();

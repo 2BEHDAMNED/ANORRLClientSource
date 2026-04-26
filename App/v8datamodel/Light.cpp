@@ -4,13 +4,6 @@
 
 #include "V8DataModel/PartInstance.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
-
-static void sendLightingObjectsStats()
-{
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "LightingObjects");
-}
-
 namespace ARL {
 
 const char* const sLight = "Light";
@@ -40,8 +33,6 @@ Light::Light(const char* name)
 	, color(Color3::white())
 	, brightness(1.f)
 {
-    static boost::once_flag flag = BOOST_ONCE_INIT;
-    boost::call_once(&sendLightingObjectsStats, flag);
 }
 
 Light::~Light()

@@ -118,7 +118,6 @@
 #include "FindDialog.h"
 #include "ScriptTextEditor.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "StudioDeviceEmulator.h"
 
 #include "DiscordHandler.h"
@@ -135,9 +134,6 @@ FASTINTVARIABLE(StudioBootstrapperVersionNumber, 52886)
 FASTINTVARIABLE(StudioInsertDeletionCheckTimeMS, 8000)
 
 FASTFLAGVARIABLE(StudioCustomStatsEnabled, false)
-FASTFLAGVARIABLE(StudioSettingsGAEnabled, true)
-FASTFLAGVARIABLE(AssertOnConfigurationReportToGA, true)
-FASTFLAGVARIABLE(ReportBuildVSEditMode, true)
 FASTFLAGVARIABLE(TeamCreateEnableDownloadLocalCopy, true)
 FASTFLAGVARIABLE(StudioDoublingOnUploadFixEnabled, true)
 
@@ -145,13 +141,11 @@ FASTFLAG(StudioInSyncWebKitAuthentication)
 FASTFLAG(StudioDataModelIsStudioFix)
 FASTFLAG(StudioShowTutorialsByDefault)
 FASTFLAG(DontSwallowInputForStudioShortcuts)
-FASTFLAG(StudioSettingsGAEnabled)
 FASTFLAG(UseBuildGenericGameUrl)
 
 FASTINT(StudioWebDialogMinimumWidth)
 FASTINT(StudioWebDialogMinimumHeight)
 
-DYNAMIC_LOGGROUP(GoogleAnalyticsTracking)
 LOGGROUP(Network)
 
 FASTFLAGVARIABLE(Dep, true)
@@ -303,8 +297,7 @@ RobloxMainWindow::RobloxMainWindow(const QMap<QString, QString> argMap)
         m_pTextOutput = new RobloxTextOutputWidget(dockWidgetContents_2);
 		
 		ARL::Http robloxRequest(AuthenticationHelper::getLoggedInUserUrl().toStdString());
-		ARL::Http externalRequest("");
-
+		
 		QSettings retentionData("ANORRL", "Retention");
 
 		static const char* const kRetentionInstallDateKey = "InstallDate";
@@ -376,83 +369,25 @@ RobloxMainWindow::RobloxMainWindow(const QMap<QString, QString> argMap)
 
         ARL::Http::useDefaultTimeouts = false;
 		
-		// init google analytics
-		std::string googleAnalyticsAccountPropId = ARL::ClientAppSettings::singleton().GetValueGoogleAnalyticsAccountPropertyID();
-		if (m_BuildMode == BM_BASIC)
-		{
-			// Set the account property id to either the Build Mode production account or the test account
-			// by checking the baseURL for the company domain "roblox.com".
-			QString baseURL(RobloxSettings().getBaseURL());
-			if (baseURL.endsWith("lambda.cam", Qt::CaseInsensitive))
-				googleAnalyticsAccountPropId = "UA-43420590-4"; // Production
-			else
-				googleAnalyticsAccountPropId = "UA-43420590-5"; // Test
-		}
-
-		ARL::RobloxGoogleAnalytics::lotteryInit(googleAnalyticsAccountPropId, 
-			ARL::ClientAppSettings::singleton().GetValueGoogleAnalyticsThreadPoolMaxScheduleSize(), ARL::ClientAppSettings::singleton().GetValueGoogleAnalyticsLoadStudio(), "studio",
-			FInt::StudioRobloxAnalyticsLoad, "studioSid=");
-
 		if(StudioUtilities::isFirstTimeOpeningStudio())
 		{
 			installDate = dateString;
 			retentionData.setValue(kRetentionInstallDateKey, dateString);
-			ARL::RobloxGoogleAnalytics::trackEventWithoutThrottling("Retention-Install",
-				dateString.toStdString().c_str(), "none", 1);
 		}
 
 		QString lastRun = retentionData.value(kRetentionLastRunDateKey, "").toString();
 		if (lastRun != dateString)
 		{
 			retentionData.setValue(kRetentionLastRunDateKey, dateString);
-			ARL::RobloxGoogleAnalytics::trackEventWithoutThrottling("Retention-Run",
-				installDate.toStdString().c_str(), dateString.toStdString().c_str(), 1);
 		}
 
-		QtConcurrent::run(this, &RobloxMainWindow::checkInternetConnectionSendCounter, robloxRequest, externalRequest);
+		// think smart
+		QtConcurrent::run(this, &RobloxMainWindow::checkInternetConnectionSendCounter, robloxRequest, ARL::Http(""));
 
 		if (AuthoringSettings::singleton().getUIStyle() == AuthoringSettings::Ribbon)
         {
 			m_isRibbon = true;
-            ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_COUNTERS, "RibbonBar", "Launches", 1);
         }
-
-		if (FFlag::StudioSettingsGAEnabled)
-		{
-			ARL::Reflection::PropertyIterator iter = AuthoringSettings::singleton().properties_begin();
-			ARL::Reflection::PropertyIterator end = AuthoringSettings::singleton().properties_end();
-
-			while (iter!=end)
-			{
-				ARL::Reflection::Property property = *iter;
-                std::string valueString;
-                if (!FFlag::AssertOnConfigurationReportToGA)
-                {
-                    valueString = property.getStringValue();
-                }
-				std::string description = property.getName().str;
-				std::transform(description.begin(), description.end(), description.begin(), tolower);
-
-				if (!(description == "parent" || description == "archivable" || description == "classname" || description == "datacost" 
-					|| description == "name" || description == "robloxlocked"))
-				{
-					description += " On Start";
-                    
-                    if (FFlag::AssertOnConfigurationReportToGA)
-                    {
-                        valueString = "N/A";
-                        if (property.hasStringValue())
-                        {
-                            valueString = property.getStringValue();
-                        }
-                    }
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO_SETTINGS, description.c_str(), valueString.c_str());
-				}
-				++iter;
-			}
-
-			AuthoringSettings::singleton().setDoSettingsChangedGAEvents(true);
-		}
 
 		//check for crash
 		RobloxSettings settings;
@@ -1767,9 +1702,6 @@ void RobloxMainWindow::closeEvent(QCloseEvent* evt)
         return;
     }
 
-	if (FFlag::StudioSettingsGAEnabled)
-		AuthoringSettings::singleton().setDoSettingsChangedGAEvents(false);
-
     Studio::Intellesense::singleton().deactivate();
 
 	// cleanup Wiki search lookup table
@@ -2400,30 +2332,11 @@ void RobloxMainWindow::checkInternetConnectionSendCounter(ARL::Http& robloxReque
 
 	if (robloxAccessible)
 	{
-		if (unconnectedRuns)
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, "StudioInternetReconnection", "none", unconnectedRuns);
-		
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, "StudioInternetConnection");
-
 		settings.setValue("appNoInternet", 0);
 	}
 	else
 	{
-		bool googleAccessible;
-		try
-		{
-			externalRequest.get(result, true);
-			googleAccessible = true;
-		}
-		catch(...)
-		{
-			googleAccessible = false;
-		}
-
-		if (googleAccessible)
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, "RobloxDomainBlocked");
-		else
-			settings.setValue("appNoInternet", unconnectedRuns + 1);
+		settings.setValue("appNoInternet", unconnectedRuns + 1);
 	}
 	
 }
@@ -2514,11 +2427,6 @@ bool RobloxMainWindow::handleFileOpen(const QString &fileName, IRobloxDoc::ARLDo
 
     if ( type == IRobloxDoc::IDE && !fileToOpen.isEmpty() )
         updateRecentFile(fileToOpen);
-
-    if (FFlag::ReportBuildVSEditMode)
-    {
-        ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "EditMode", script.contains("visit.ashx") ? "Build" : "Edit");
-    }
 
 	return true;
 }
@@ -2719,8 +2627,6 @@ void RobloxMainWindow::onMinuteTimer()
         }
     }
 
-    trackUserActive();
-
     processing = false;
 }
 
@@ -2853,8 +2759,6 @@ void RobloxMainWindow::checkInsertedObjects()
 			break;
 		}
 	}
-
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, objectsStillExist ? "StudioInsertRemains" : "StudioInsertDeleted", insertedInstance.contentId.c_str());
 }
 
 void RobloxMainWindow::notifyCloudEditConnectionClosed()
@@ -3003,27 +2907,6 @@ void RobloxMainWindow::setupCustomToolButton()
 
 	advToolsToolBar->insertSeparator(materialAction);
 	advToolsToolBar->insertSeparator(smoothSurfaceAction);
-}
-
-void RobloxMainWindow::trackUserActive()
-{
-	// We want an accurate session length so we send up a special event
-	// if there is any user interaction with app that is not tracked
-	// by other metrics.
-    
-	const int eventIdleTime = 60 * 1000; // in milliseconds
-	const int stillAliveTime = 20 * 1000; // in milliseconds
-    
-	// If it has been some time (eventIdleTime) since the last event tracked.
-	if (m_lastAnalyticTrackedTime.elapsed() > eventIdleTime
-        
-        // And the user is not completely idle and some system is posting
-        // a keep alive.
-	    && m_lastAnalyticKeepAliveTime.elapsed() < stillAliveTime)
-	{
-        // Send an empty timing event.
-        ARL::RobloxGoogleAnalytics::trackUserTiming("", "", 0);
-	}
 }
 
 void RobloxMainWindow::onAnalyticTracked()

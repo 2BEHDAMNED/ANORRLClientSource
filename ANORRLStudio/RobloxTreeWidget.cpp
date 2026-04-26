@@ -41,7 +41,6 @@
 #include "UpdateUIManager.h"
 #include "RobloxIDEDoc.h"
 #include "boost/algorithm/string.hpp"
-#include "util/RobloxGoogleAnalytics.h"
 #include "RobloxSettings.h"
 #include "AuthoringSettings.h"
 
@@ -2561,6 +2560,4 @@ void RobloxExplorerWidget::sendWidgetCounter()
 	RobloxSettings settings;
 	bool previouslyFiltered = settings.value("ExplorerWidgetFilterUsed", false).toBool();
 	settings.setValue("ExplorerWidgetFilterUsed", true);
-
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, previouslyFiltered ? "ExplorerWidgetFilterUsed" : "ExplorerWidgetFilterUsed_FTU");
 }

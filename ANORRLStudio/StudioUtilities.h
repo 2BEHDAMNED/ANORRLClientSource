@@ -63,7 +63,6 @@ namespace StudioUtilities
 	std::string authenticate(std::string &domain, std::string &url, std::string &ticket);
 	void executeURLJoinScript(boost::shared_ptr<ARL::Game> pGame, std::string urlScript);
 	void executeURLScript(boost::shared_ptr<ARL::DataModel> pDataModel, std::string urlScript);
-	void reportCloudEditJoinEvent(const char* label);
 	void joinCloudEditSession(boost::shared_ptr<ARL::Game> pGame, boost::shared_ptr<EntityProperties> config);
 
 	void startMobileDevelopmentDeployer();

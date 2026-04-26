@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Script/LuaSourceContainer.h"
 #include "Network/Players.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "V8DataModel/ContentProvider.h"
 
 DYNAMIC_LOGVARIABLE(PreloadLinkedScriptsTiming, 0)
@@ -279,13 +278,6 @@ void LuaSourceContainer::updateScriptInstancesUnderWriteLock(DataModel* /*unused
 	metadata->callbackWhenDone();
 }
 
-static void reportNamedLinkedSourceUsage(DataModel* dm)
-{
-	std::string placeIdStr = format("%d", dm->getPlaceID());
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "Load Named LinkedSource",
-		placeIdStr.c_str());
-}
-
 void LuaSourceContainer::linkedSourceFetchingVisitor(shared_ptr<Instance> descendant, shared_ptr<ContentProvider> cp,
 	AsyncHttpQueue::ResultJob jobType, shared_ptr<LinkedScriptLoadData> metadata)
 {
@@ -294,11 +286,6 @@ void LuaSourceContainer::linkedSourceFetchingVisitor(shared_ptr<Instance> descen
 	{
 		if (DataModel* dm = DataModel::get(cp.get()))
 		{
-			if (out.isNamedAsset())
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&reportNamedLinkedSourceUsage, dm));
-			}
 			out.convertAssetId(cp->getBaseUrl(), dm->getUniverseId());
 			out.convertToLegacyContent(cp->getBaseUrl());
 

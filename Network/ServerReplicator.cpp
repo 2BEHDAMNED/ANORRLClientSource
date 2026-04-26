@@ -40,7 +40,6 @@
 #include "Script/ModuleScript.h"
 #include "script/script.h"
 #include "util/http.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "util/xxhash.h"
 #include "rbx/Crypt.h"
 #include "FastLog.h"
@@ -197,19 +196,6 @@ uint32_t getSecurityMask(const std::string& maskString, const char match, bool* 
         }
     }
     return result;
-}
-
-void reportConfigMaskError(const char* name)
-{
-    static bool alreadyReported = false;
-    if (!alreadyReported)
-    {
-        std::stringstream msgStream;
-        msgStream << "SecurityConfigError: ";
-        msgStream << name;
-        std::string msg = msgStream.str();
-        ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", msg.c_str());    
-    }
 }
 }
 #endif
@@ -652,9 +638,6 @@ bool ServerReplicator::isLegalReceiveProperty(Instance* instance, const Reflecti
 {
 	if (Instance::fastDynamicCast<Player>(instance))
 	{
-		if (DFFlag::LogAllPlayerPropChanges)
-			Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "PlayerPropChange", desc.name.c_str());
-
 		if (DFFlag::FilterAllPlayerPropChanges)
 			return false;
 		else
@@ -1501,7 +1484,6 @@ void CheatHandlingServerReplicator::processNetPmcResponseItem(RakNet::BitStream&
             {
                 players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "WorldEdit");
             }
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "NetPmc Error P2.");
         }
     }
 }
@@ -1603,7 +1585,6 @@ void CheatHandlingServerReplicator::decodeHashItem(PmcHashContainer& netHashes, 
     if (DFFlag::US27664p3 && ((numItems < kNumberOfHashes) || (hashInitialized && (numItems != lastHashes.size()))))
     {
         players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "jesper");
-        RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "invalid number of hashes");
         return;
     }
 
@@ -1679,7 +1660,6 @@ void CheatHandlingServerReplicator::processHashValue(const PmcHashContainer& net
         if (DFFlag::US29001p1 && !reportedRangeError)
         {
             reportedRangeError = true;
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "Range has been modified");
         }
         if (DFFlag::US29001p2)
         {
@@ -1711,7 +1691,6 @@ void CheatHandlingServerReplicator::processHashValuePost(const unsigned long lon
             if (!reportedInvalid)
             {
                 reportedInvalid = true;
-                RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "FuzzyToken Tamper, v3");
             }
             if (DFFlag::US28814)
             {
@@ -1726,11 +1705,6 @@ void CheatHandlingServerReplicator::processHashValuePost(const unsigned long lon
             && !reportedExploit && !reportedInvalid)
         {
             reportedExploit = true;
-            std::stringstream msgStream;
-            msgStream << "FuzzyToken Exploit Detection v3: ";
-            msgStream << std::hex << hackFlagsLower;
-            std::string msg = msgStream.str();
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", msg.c_str());
         }
 
         bool skippedPacket = (nonce - hashNonce == 2);
@@ -1740,10 +1714,6 @@ void CheatHandlingServerReplicator::processHashValuePost(const unsigned long lon
             // the sent previous token and the stored previous token should match
             if (!reportedApiFail && (prevApiToken != rxPrevApiToken))
             {
-                if (DFFlag::US28292p0)
-                {
-                    ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "Api FakeSkip");
-                }
                 if (DFFlag::US28292p1)
                 {
                     players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "Zek");
@@ -1903,10 +1873,6 @@ void CheatHandlingServerReplicator::processApiStats(unsigned long long apiStats)
     bool configError = false;
     if (apiStatsUpper)
     {
-        if (DFFlag::US28292p2 && !reportedApiTamper)
-        {
-            ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "Api Token Tamper");
-        }
         if (DFFlag::US28292p3)
         {
             players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "Zot");
@@ -1917,14 +1883,6 @@ void CheatHandlingServerReplicator::processApiStats(unsigned long long apiStats)
     {
         uint32_t configMask;
         configMask = getSecurityMask(DFString::US30605p3, kKickChar, &configError);
-        if (configMask & apiStatsLower)
-        {
-            std::stringstream msgStream;
-            msgStream << "ApiStats: ";
-            msgStream << std::hex << apiStatsLower;
-            std::string msg = msgStream.str();
-            ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", msg.c_str());    
-        }
         configMask |= getSecurityMask(DFString::US30605p3, kReportChar, &configError);
         if (configMask & apiStatsLower)
         {
@@ -1989,10 +1947,6 @@ void CheatHandlingServerReplicator::doRemoteSysStats(unsigned int sendStats, uns
             players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", codeName);
         }
         configMask |= getSecurityMask(configString, kReportChar, &configError);
-        if (configMask & mask)
-        {
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", details);
-        }
     }
     if (configError)
     {
@@ -2011,10 +1965,6 @@ void CheatHandlingServerReplicator::doDelayedSysStats(unsigned int sendStats, un
             kickTimeSec = Time::nowFastSec() + 60 + (rand() % 0x80);
         }
         configMask |= getSecurityMask(DFString::US30605p1, kReportChar, &configError);
-        if (configMask & mask)
-        {
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", details);
-        }
     }
     if (configError)
     {
@@ -2038,14 +1988,6 @@ void CheatHandlingServerReplicator::processHashStats(unsigned int hashStats)
             players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "hector");
         }
         mask |= getSecurityMask(DFString::US30605p2, kReportChar, &configError);
-        if (hashStats & mask)
-        {
-            std::stringstream msgStream;
-            msgStream << "MemHashError: ";
-            msgStream << std::hex << hashStats;
-            std::string msg = msgStream.str();
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", msg.c_str());
-        }
     }
     if (configError)
     {
@@ -2065,14 +2007,6 @@ void CheatHandlingServerReplicator::processGoldHashStats(unsigned int hashStats)
             players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "ghector");
         }
         mask |= getSecurityMask(DFString::US30605p2, kGoldReportChar, &configError);
-        if (hashStats & mask)
-        {
-            std::stringstream msgStream;
-            msgStream << "GoldMemHashError: ";
-            msgStream << std::hex << hashStats;
-            std::string msg = msgStream.str();
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", msg.c_str());
-        }
     }
     if (configError)
     {
@@ -2300,8 +2234,7 @@ void CheatHandlingServerReplicator::sendNetPmcChallenge()
         {
             players->onRemoteSysStats(remotePlayer->getUserID(), "1920x1200", "Guardian");
         }
-        RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SecurityException", "NetPmc Pending P7.");
-
+        
         // additional reporting
         if (!reportedNetPmcSent )
         {
@@ -2643,7 +2576,6 @@ void ServerReplicator::writeChangedRefProperty(const Instance* instance,
 	{
 		if (pendingCharaterRequest && (pendingCharaterRequest == instance) && (desc.name == "Character"))
 		{
-			RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, "ProcessRequestCharacterTime", (Time::nowFast()-pendingCharacterRequestStartTime).msec(), "Replicate");
 			pendingCharaterRequest = NULL; 
 		}
 	}

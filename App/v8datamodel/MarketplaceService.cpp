@@ -6,7 +6,6 @@
 #include "Network/Players.h"
 #include "Util/LuaWebService.h"
 #include "Util/Analytics.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "v8xml/WebParser.h"
 #include <boost/algorithm/string.hpp>
 
@@ -919,10 +918,6 @@ namespace ARL
 			{
 				currencyName = "Ticket";
 			}
-
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, 
-				mk->receiptProcessingEnabledByUser ? "BuyDeveloperProduct" : "BuyDeveloperProduct_AutoAccepted",
-				currencyName, std::max(0, currencySpent));
 		}
 	}
 

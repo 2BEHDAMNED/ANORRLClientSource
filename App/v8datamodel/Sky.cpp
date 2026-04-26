@@ -4,7 +4,6 @@
 
 #include "g3d/gimage.h"
 #include "util/standardout.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "v8datamodel/contentprovider.h"
 
 const char* const ARL::sSky = "Sky";
@@ -24,8 +23,6 @@ Reflection::BoundProp<bool> Sky::prop_CelestialBodiesShown("CelestialBodiesShown
 static void sendSkyBoxStats(const TextureId& texId)
 {
     std::string idStr = texId.getAssetId();
-    if (!idStr.empty())
-        ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SkyBox", texId.getAssetId().c_str());
 }
 
 Sky::Sky()

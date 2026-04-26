@@ -6,7 +6,6 @@
 #include "Network/Player.h"
 #include "Network/Players.h"
 #include "Util/LuaWebService.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/ScopedAssign.h"
 #include "script/ScriptContext.h"
 #include "V8DataModel/Remote.h"
@@ -98,9 +97,6 @@ namespace ARL {
 
     shared_ptr<const Reflection::ValueArray> LogService::getLogHistory()
     {
-        RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "GetLogHistory", 
-            format("%d", DataModel::get(this)->getPlaceID()).c_str());
-
         shared_ptr<Reflection::ValueArray> result = rbx::make_shared<Reflection::ValueArray>();
 
         for (size_t i = 0; i < logHistory.size(); ++i)
@@ -354,11 +350,6 @@ namespace ARL {
 		{
 			if (shared_ptr<Network::Player> p = weakPlayer.lock())
             {
-                RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SendingServerLogHistory", 
-                    format("%d", DataModel::get(logService.get())->getPlaceID()).c_str());
-                RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CreatorReadingServerLogs",
-                    format("%d", p->getUserID()).c_str());
-
                 logService->playerReceivingServerLogs = p;
 				logService->playersReceivingServerLogs.push_back(p);
 

@@ -29,7 +29,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-FASTSTRINGVARIABLE(ClientExternalBrowserUserAgent, "Roblox/WinInet")
+FASTSTRINGVARIABLE(ClientExternalBrowserUserAgent, "ANORRL/WinInet")
 
 #define ROBLOX_URL_IDENTIFIER "lambda.cam/"
 #define ROBLOXLABS_URL_IDENTIFIER ".robloxlabs.com/"

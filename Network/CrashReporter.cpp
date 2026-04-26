@@ -188,7 +188,6 @@ LONG CrashReporter::ProcessException(struct _EXCEPTION_POINTERS *ExceptionInfo, 
         analyticsPoints.addPoint("type", ARL::specialCrashType.c_str());
         analyticsPoints.addPoint("path", &dumpFilepath[startPoint]);
         analyticsPoints.report("report", 10000, true);
-        ARL::Analytics::GoogleAnalytics::trackEventWithoutThrottling("Error", "LoggableCrash", &dumpFilepath[startPoint], 0, true);
         allowSpecial = false;
     }
     else

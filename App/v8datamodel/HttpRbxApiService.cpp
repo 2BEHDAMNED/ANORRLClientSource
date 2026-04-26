@@ -7,11 +7,8 @@
 #include "v8datamodel/HttpRbxApiJob.h"
 #include "Network/Players.h"
 #include "V8Xml/WebParser.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #define HTTP_POST_COMPRESSION_LIMIT 256
-
-DYNAMIC_FASTINTVARIABLE(PercentApiRequestsRecordGoogleAnalytics, 1)
 
 DYNAMIC_FASTINTVARIABLE(HttpRbxApiClientPerMinuteRequestLimit, 300)
 DYNAMIC_FASTINTVARIABLE(HttpRbxApiMaxBudgetMultiplier, 1)
@@ -28,17 +25,6 @@ DYNAMIC_FASTINTVARIABLE(HttpRbxApiSyncRetryWaitTimeMSec, 500)
 DYNAMIC_FASTFLAG(UseR15Character)
 
 LOGVARIABLE(HttpRbxApiBudget, 0);
-
-namespace {
-	static inline void sendApiServiceDidThrottle()
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "GameHasBeenAPIThrottled");
-	}
-	static inline void sendApiServiceDidQueue()
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "GameHasBeenAPIQueued");
-	}
-}
 
 namespace ARL {
 	std::string HttpRbxApiService::StaticApiBaseUrl;
@@ -82,8 +68,6 @@ namespace ARL {
 		isPlaySolo(false),
 		totalNumOfApiCalls(0)
 	{
-		recordInGoogleAnalytics = rand() % 100 < DFInt::PercentApiRequestsRecordGoogleAnalytics;
-
 		setName(sHttpRbxApiService);
 	}
 
@@ -119,25 +103,6 @@ namespace ARL {
 	{
 		if (oldProvider)
 		{
-			if (getRecordInGoogleAnalytics())
-			{
-				if (isPlaySolo)
-				{
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "TotalHttpApiCallsInPlaySolo", totalNumOfApiCalls);
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "AvgHttpApiCallsPerSecInPlaySolo",((double)totalNumOfApiCalls)/instanceAliveTimer.delta().seconds());
-				}
-				else if(serverPresent)
-				{
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "TotalHttpApiCallsInServer",totalNumOfApiCalls);
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "AvgHttpApiCallsPerSecInServer",((double)totalNumOfApiCalls)/instanceAliveTimer.delta().seconds());
-				}
-				else if(clientPresent)
-				{
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "TotalHttpApiCallsInClient",totalNumOfApiCalls);
-					ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "AvgHttpApiCallsPerSecInClient",((double)totalNumOfApiCalls)/instanceAliveTimer.delta().seconds());
-				}
-			}
-
 			disconnectEventConnections();
 
 			serverPresent = false;
@@ -281,7 +246,7 @@ namespace ARL {
 		return false;
 	}
 
-	static bool shouldRetryRequest(std::exception* exception, HttpRbxApiService::HttpApiRequest& request, bool recordInGoogleAnalytics)
+	static bool shouldRetryRequest(std::exception* exception, HttpRbxApiService::HttpApiRequest& request)
 	{
 		bool shouldRetry = false;
 		if (exception)
@@ -290,11 +255,6 @@ namespace ARL {
 			if (ARL::http_status_error* httpError = dynamic_cast<ARL::http_status_error*>(exception))
 			{
 				statusCode = httpError->statusCode;
-			}
-
-			if (request.retryCount == 0 && recordInGoogleAnalytics)
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "RetryRequestStarted");
 			}
 
 			shouldRetry = shouldRetryFromStatusCode(statusCode, request) && (request.retryCount < DFInt::HttpRbxApiMaxRetryCount);
@@ -348,20 +308,10 @@ namespace ARL {
 	{
 		if(response)
 		{
-			if (apiService->getRecordInGoogleAnalytics() && request.retryCount > 0)
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "RetryRequestSucceeded");
-			}
-
 			resumeFunction(*response);
 		}
 		else
 		{
-			if (apiService->getRecordInGoogleAnalytics() && request.retryCount > 0)
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", "RetryRequestFailed");
-			}
-
 			errorFunction(exception->what());
 		}
 	}
@@ -370,7 +320,7 @@ namespace ARL {
 	{ 
 		if (shared_ptr<HttpRbxApiService> apiService = weakApiService.lock())
 		{
-			if (shouldRetryRequest(exception, request, apiService->getRecordInGoogleAnalytics())) // we got an error that requires retry, try to do it again
+			if (shouldRetryRequest(exception, request)) // we got an error that requires retry, try to do it again
 			{
 				DataModel::processHttpRequestResponseOnLock(
 					ARL::DataModel::get(apiService.get()),
@@ -408,10 +358,6 @@ namespace ARL {
 		{
 			// don't pass non api calls here! Use regular http functions instead unless you want to get throttled
 			ARLASSERT(false);
-			if (getRecordInGoogleAnalytics())
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", ("postAsyncNotApiRequest for " + httpRequest.url).c_str());
-			}
 		}
 
 		postAsyncInternal(httpRequest, data, content, data.size() > HTTP_POST_COMPRESSION_LIMIT, throttlePriority, resumeFunction, errorFunction);
@@ -424,11 +370,6 @@ namespace ARL {
 			// don't pass calls here with api proxy domain already in them!
 			// just pass the path, ex: adimpression/validate-request
 			ARLASSERT(false);
-
-			if (getRecordInGoogleAnalytics())
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", std::string("postAsyncUrlPathContainsDomain for " + urlPath).c_str());
-			}
 
 			fullUrl = urlPath;
 		}
@@ -534,11 +475,6 @@ namespace ARL {
 		{
 			// don't pass non api calls here! Use regular http functions instead unless you want to get throttled
 			ARLASSERT(false);
-
-			if (getRecordInGoogleAnalytics())
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpRbxApiService", std::string("getAsyncNonApiCall for " + httpRequest.url).c_str());
-			}
 		}
 
 		getAsyncInternal(httpRequest, throttlePriority, resumeFunction, errorFunction);
@@ -621,11 +557,6 @@ namespace ARL {
 
 	void HttpRbxApiService::HttpApiRequest::execute(HttpRbxApiService* apiService)
 	{
-		if (apiService->getRecordInGoogleAnalytics())
-		{
-			apiService->addToApiCallCount();
-		}
-
 		if (isPost)
 		{
 			http.post(postData, httpContentType,  (postData.size() > HTTP_POST_COMPRESSION_LIMIT), 
@@ -643,7 +574,7 @@ namespace ARL {
 				{
 					// if synchronous call fails, we have to just retry here
 					// still throw if we never get a proper response
-					if (shouldRetryRequest(&e, *this, apiService->getRecordInGoogleAnalytics()))
+					if (shouldRetryRequest(&e, *this))
 					{
 						if (!retrySyncRequest(http, syncResponse))
 						{
@@ -726,24 +657,12 @@ namespace ARL {
 		{
 			FASTLOG1F(FLog::HttpRbxApiBudget, "Throttling, budget: %f", budgetThrottler.getBudget());
 
-			if (getRecordInGoogleAnalytics())
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(&sendApiServiceDidQueue, flag);
-			}
-
 			if (throttledRequestQueue.size() < (unsigned)DFInt::HttpRbxApiMaxThrottledQueueSize)
 			{
 				throttledRequestQueue.push_back(apiRequest);
 			}
 			else
 			{
-				if (getRecordInGoogleAnalytics())
-				{
-					static boost::once_flag flag = BOOST_ONCE_INIT;
-					boost::call_once(&sendApiServiceDidThrottle, flag);
-				}
-
 				std::string throttleError = ARL::format("number of API requests/minute exceeded limit for HTTP API throttle. Please don't issue more than %i API requests/minute with server scripts and no more than %i API requests/minute with local scripts.",
 					DFInt::HttpRbxApiRequestsPerMinuteServerLimit + (DFInt::HttpRbxApiRequestsPerMinutePerPlayerInServerLimit * getPlayerNum()), DFInt::HttpRbxApiClientPerMinuteRequestLimit);
 				setErrorForAsync(throttleError, errorFunction);

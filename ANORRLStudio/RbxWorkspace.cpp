@@ -63,7 +63,6 @@
 #include "CommonInsertWidget.h"
 #include "RobloxView.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "QtUtilities.h"
 
 // Publish Selection to Roblox
@@ -396,11 +395,6 @@ std::auto_ptr<XmlElement> RbxWorkspace::writeSelectionToXml()
 		}
 	}
 	return root;
-}
-
-QString RbxWorkspace::GetStudioSessionID()
-{
-	return QString(FFlag::StudioExposeSessionID ? ARL::RobloxGoogleAnalytics::getSessionId().c_str() : "");
 }
 
 bool RbxWorkspace::Insert(const QString& urlQStr)

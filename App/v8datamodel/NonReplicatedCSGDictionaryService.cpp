@@ -6,7 +6,6 @@
 #include "V8DataModel/CSGDictionaryService.h"
 #include "../App/include/v8datamodel/PartOperation.h"
 #include "v8datamodel/Value.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 FASTFLAGVARIABLE(IgnoreBlankDataOnStore, true)
 

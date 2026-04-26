@@ -15,7 +15,6 @@
 #include "v8datamodel/HttpRbxApiService.h"
 #include "ANORRLServicesTools.h"
 #include "Util/Analytics.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include <sstream>
 
@@ -29,7 +28,6 @@ DYNAMIC_FASTSTRINGVARIABLE(UserSetsUrlPiece, "/Game/Tools/InsertAsset.ashx?nsets
 DYNAMIC_FASTSTRINGVARIABLE(AssetVersionsUrl, "/assets/%i/versions?placeId=%i")
 DYNAMIC_FASTFLAGVARIABLE(GetLastestAssetVersionEnabled, false)
 DYNAMIC_FASTFLAGVARIABLE(DisableBackendInsertConnection, false)
-DYNAMIC_FASTFLAGVARIABLE(GASendInsertRequestFail, true)
 DYNAMIC_FASTFLAGVARIABLE(InfluxSendInsertRequestFail, true)
 
 DYNAMIC_FASTFLAGVARIABLE(InsertServiceLoadModelErrorDoNotCreateEmpty, true)
@@ -464,14 +462,6 @@ void InsertService::backendInsertReady(std::string key, shared_ptr<Instance> pse
 	}
 	else
 	{
-		if (DFFlag::GASendInsertRequestFail)
-		{
-			DataModel* dm = DataModel::get(this);
-			if (dm != NULL)
-			{
-				ARL::Analytics::GoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "InsertServiceException", "PlaceID", dm->getPlaceID());
-			}
-		}
 		if (DFFlag::InfluxSendInsertRequestFail)
 		{
 			DataModel* dm = DataModel::get(this);

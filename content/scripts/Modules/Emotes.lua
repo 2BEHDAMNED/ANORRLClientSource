@@ -190,7 +190,7 @@ local function CreateEmotes()
 			
 			local angle = (i - 1) * angle_step - (math.pi / 2)
 			
-			angle = (max_angle) + math.rad(90) + angle	
+			angle = (max_angle) + angle	
 			
 			local x = offset - radius * math.cos(angle)
 			local y = offset - radius * math.sin(angle)
@@ -247,7 +247,7 @@ local function CreateEmotes()
 	end
 	
 	function this:CharacterAdded(character)
-		self.EmoteHandler = Player:FindFirstChild("HandleEmote")
+		self.EmoteHandler = Figure:WaitForChild("HandleEmote") -- what the hell was i even thinking
 		for i, v in ipairs(self.Emotes) do
 			self.EmoteHandler:Fire("register", v.id)
 		end

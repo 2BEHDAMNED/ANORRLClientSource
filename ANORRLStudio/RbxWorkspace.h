@@ -114,8 +114,6 @@ public Q_SLOTS:
 	// HTML Toolbox related JS Callback
 	bool Insert(const QString &url);
 
-	QString GetStudioSessionID();
-	
 	bool TakeThumbnail(QString selector);
 
 #ifdef ENABLE_DRAG_DROP_TOOLBOX

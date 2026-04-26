@@ -23,8 +23,8 @@ static const uint qt_meta_data_RbxWorkspace[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      30,   14, // methods
-       3,  164, // properties
+      29,   14, // methods
+       3,  159, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
@@ -45,31 +45,30 @@ static const uint qt_meta_data_RbxWorkspace[] = {
      281,  266,  138,   13, 0x0a,
      314,   13,  305,   13, 0x0a,
      335,  331,  138,   13, 0x0a,
-     359,   13,  351,   13, 0x0a,
-     389,  380,  138,   13, 0x0a,
-     412,  331,  138,   13, 0x0a,
-     431,   13,  138,   13, 0x0a,
-     482,  447,   13,   13, 0x0a,
-     539,  518,   13,   13, 0x0a,
-     562,   13,  351,   13, 0x0a,
-     600,  584,   13,   13, 0x0a,
-     635,  627,   13,   13, 0x0a,
-     656,   13,  138,   13, 0x0a,
-     705,  674,   13,   13, 0x0a,
-     754,  743,   13,   13, 0x0a,
-     772,   13,   13,   13, 0x0a,
-     803,  795,   13,   13, 0x0a,
-     834,  743,   13,   13, 0x0a,
-     857,  627,   13,   13, 0x0a,
-     874,  743,  351,   13, 0x0a,
+     360,  351,  138,   13, 0x0a,
+     383,  331,  138,   13, 0x0a,
+     402,   13,  138,   13, 0x0a,
+     453,  418,   13,   13, 0x0a,
+     510,  489,   13,   13, 0x0a,
+     541,   13,  533,   13, 0x0a,
+     579,  563,   13,   13, 0x0a,
+     614,  606,   13,   13, 0x0a,
+     635,   13,  138,   13, 0x0a,
+     684,  653,   13,   13, 0x0a,
+     733,  722,   13,   13, 0x0a,
+     751,   13,   13,   13, 0x0a,
+     782,  774,   13,   13, 0x0a,
+     813,  722,   13,   13, 0x0a,
+     836,  606,   13,   13, 0x0a,
+     853,  722,  533,   13, 0x0a,
 
  // methods: signature, parameters, type, tag, flags
-     906,  897,   13,   13, 0x02,
+     885,  876,   13,   13, 0x02,
 
  // properties: name, type, flags
-     939,  138, 0x01095001,
-     954,  138, 0x01095001,
-     967,  138, 0x01095001,
+     918,  138, 0x01095001,
+     933,  138, 0x01095001,
+     946,  138, 0x01095001,
 
        0        // eod
 };
@@ -84,16 +83,15 @@ static const char qt_meta_stringdata_RbxWorkspace[] = {
     "ticket,url,script\0StartGame(QString,QString,QString)\0"
     "recentFileName\0OpenRecentFile(QString)\0"
     "QObject*\0WriteSelection()\0url\0"
-    "Insert(QString)\0QString\0GetStudioSessionID()\0"
-    "selector\0TakeThumbnail(QString)\0"
-    "StartDrag(QString)\0OpenPicFolder()\0"
-    "doPost,postSetting,fileName,seoStr\0"
+    "Insert(QString)\0selector\0"
+    "TakeThumbnail(QString)\0StartDrag(QString)\0"
+    "OpenPicFolder()\0doPost,postSetting,fileName,seoStr\0"
     "PostImage(bool,int,QString,QString)\0"
     "assetId,assetVersion\0InstallPlugin(int,int)\0"
-    "GetInstalledPlugins()\0assetId,enabled\0"
-    "SetPluginEnabled(int,bool)\0assetId\0"
-    "UninstallPlugin(int)\0OpenVideoFolder()\0"
-    "token,doPost,postSetting,title\0"
+    "QString\0GetInstalledPlugins()\0"
+    "assetId,enabled\0SetPluginEnabled(int,bool)\0"
+    "assetId\0UninstallPlugin(int)\0"
+    "OpenVideoFolder()\0token,doPost,postSetting,title\0"
     "UploadVideo(QString,bool,int,QString)\0"
     "universeId\0OpenUniverse(int)\0"
     "PublishAsNewUniverse()\0groupId\0"
@@ -128,31 +126,29 @@ void RbxWorkspace::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             if (_a[0]) *reinterpret_cast< QObject**>(_a[0]) = _r; }  break;
         case 11: { bool _r = _t->Insert((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 12: { QString _r = _t->GetStudioSessionID();
+        case 12: { bool _r = _t->TakeThumbnail((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 13: { bool _r = _t->StartDrag((*reinterpret_cast< const QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 14: { bool _r = _t->OpenPicFolder();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 15: _t->PostImage((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
+        case 16: _t->InstallPlugin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 17: { QString _r = _t->GetInstalledPlugins();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 13: { bool _r = _t->TakeThumbnail((*reinterpret_cast< QString(*)>(_a[1])));
+        case 18: _t->SetPluginEnabled((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 19: _t->UninstallPlugin((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: { bool _r = _t->OpenVideoFolder();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 14: { bool _r = _t->StartDrag((*reinterpret_cast< const QString(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 15: { bool _r = _t->OpenPicFolder();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 16: _t->PostImage((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
-        case 17: _t->InstallPlugin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 18: { QString _r = _t->GetInstalledPlugins();
+        case 21: _t->UploadVideo((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
+        case 22: _t->OpenUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: _t->PublishAsNewUniverse(); break;
+        case 24: _t->PublishAsNewGroupUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: _t->PublishToUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: _t->ImportAsset((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: { QString _r = _t->GetGameAnimations((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 19: _t->SetPluginEnabled((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 20: _t->UninstallPlugin((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 21: { bool _r = _t->OpenVideoFolder();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 22: _t->UploadVideo((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
-        case 23: _t->OpenUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 24: _t->PublishAsNewUniverse(); break;
-        case 25: _t->PublishAsNewGroupUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 26: _t->PublishToUniverse((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 27: _t->ImportAsset((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: { QString _r = _t->GetGameAnimations((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 29: _t->onScreenShotFinished_MT((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 28: _t->onScreenShotFinished_MT((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -192,9 +188,9 @@ int RbxWorkspace::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 30)
+        if (_id < 29)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 30;
+        _id -= 29;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {

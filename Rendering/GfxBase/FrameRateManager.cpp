@@ -8,7 +8,6 @@
 #include "RbxFormat.h"
 #include "rbx/TaskScheduler.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/Math.h"
 #include "rbx/SystemUtil.h"
 
@@ -230,18 +229,7 @@ void FrameRateManager::updateMaxSettings()
 
 FrameRateManager::~FrameRateManager(void)
 {
-    SendQualityLevelStats();
-}
-
-void FrameRateManager::SendQualityLevelStats()
-{
-    float avgQuality = GetAvarageQuality();
-    if (avgQuality >= 1)
-    {
-        // Because we are reporting using timing function, we want one quality level to be 1sec (it accepts ms)
-        int reportValue = (int)(avgQuality * 1000.0f); 
-        ARL::RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, "GraphicsQualityLevel", reportValue, SystemUtil::osPlatform().c_str());
-    }
+    
 }
 
 float FrameRateManager::GetAvarageQuality()

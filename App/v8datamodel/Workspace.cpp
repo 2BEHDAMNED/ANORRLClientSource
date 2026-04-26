@@ -39,7 +39,6 @@
 #include "Util/UserInputBase.h"
 #include "Util/Profiling.h"
 #include "Util/NavKeys.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "Util/G3DCore.h"
 #include "Script/ScriptContext.h"
 #include "Script/Script.h"
@@ -64,7 +63,6 @@ DYNAMIC_FASTFLAG(FixTouchEndedReporting)
 
 // Cyclic Executive Experiment Logging (THESE NEED TO BE REMOVED IN THE FUTURE, YAY)
 DYNAMIC_FASTFLAGVARIABLE(PreventReturnOfElevatedPhysicsFPS, false)
-DYNAMIC_FASTFLAGVARIABLE(ReportElevatedPhysicsFPSToGA, true)
 
 DYNAMIC_FASTINTVARIABLE(ElevatedPhysicsFPSReportThresholdTenths, 610)
 //END CyclicExecutive Experiment Logging
@@ -83,7 +81,6 @@ FASTFLAG(PGSSolverFileDump)
 DYNAMIC_FASTFLAG(UseStarterPlayerCharacter)
 FASTFLAGVARIABLE(GamepadCursorChanges, false)
 DYNAMIC_FASTFLAG(FixFallenPartsNotDeleted)
-DYNAMIC_FASTFLAGVARIABLE(TrackPhysicalPropertiesGA, false);
 
 namespace ARL {
 
@@ -420,20 +417,8 @@ bool Workspace::forceDrawConnectors() const
 	}
 }
 
-namespace {
-	void sendNetworkFilteringStats()
-	{
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "NetworkFilteringEnabled");
-	}
-} // namespace
-
 void Workspace::setNetworkFilteringEnabled(bool value)
 {
-	if (value && Workspace::serverIsPresent(this))
-	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(&sendNetworkFilteringStats, flag);
-	}
 	bool changed = networkFilteringEnabled != value;
 	networkFilteringEnabled = value;
 
@@ -1197,17 +1182,7 @@ ContentId Workspace::getCursor()
 double Workspace::getRealPhysicsFPS(void)
 {
 	RunService* runService = ServiceProvider::create<RunService>(this);
-	double realPhysicsFPS = runService->smoothFps() * getWorld()->getEnvironmentSpeed();
-	double reportedPhysicsFPS = realPhysicsFPS;
-	if (DFFlag::ReportElevatedPhysicsFPSToGA && realPhysicsFPS > ((double)DFInt::ElevatedPhysicsFPSReportThresholdTenths / 10.0))
-	{
-		if (DFFlag::PreventReturnOfElevatedPhysicsFPS)
-		{
-			reportedPhysicsFPS = 60.0f;
-		}
-	}
-	return reportedPhysicsFPS;
-
+	return runService->smoothFps() * getWorld()->getEnvironmentSpeed(); //realPhysicsFPS
 }
 
 int Workspace::getPhysicsThrottling(void)
@@ -1676,54 +1651,10 @@ void Workspace::setExpSolverEnabled_Replicate(bool value)
 	getWorld()->setUsingPGSSolver(expSolverEnabled_Replicate && FFlag::UsePGSSolver);
 	// Master switch used for turning on the PGS solver regardless of the Workspace toggle or code FFlag - for testing purposes
 	getWorld()->setUsingPGSSolver(getWorld()->getUsingPGSSolver() || FFlag::PGSAlwaysActiveMasterSwitch);
-
-	if (expSolverEnabled_Replicate && FFlag::UsePGSSolver)
-	{
-		DataModel* dm = DataModel::get(this);
-		if (dm)
-		{
-			int placeID = dm->getPlaceID();
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(flag, boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_GAME, "PGSSolverActivated", 
-				boost::lexical_cast<std::string>(placeID).c_str(), 0, false));
-		}
-	}
 }
-
-// Calling this function CallOnce prevents unecessary logic from being run
-// multiple times after the call once is expired.
-void callGAForPhysicalProperties(const DataModel* dm, PhysicalPropertiesMode mode)
-{
-	int placeID = dm->getPlaceID();
-	std::string gaMessage = "PhysicalPropertiesMode_";
-	if (mode == PhysicalPropertiesMode_Legacy)
-	{
-		gaMessage += "Legacy";
-	}
-	else if (mode == PhysicalPropertiesMode_Default)
-	{
-		gaMessage += "Default";
-	}
-	else
-	{
-		gaMessage += "New";
-	}
-
-	RobloxGoogleAnalytics::trackEvent( GA_CATEGORY_GAME, gaMessage.c_str(), boost::lexical_cast<std::string>(placeID).c_str());
-}
-
 
 bool Workspace::getUsingNewPhysicalProperties() const
 {
-	if (DFFlag::TrackPhysicalPropertiesGA)
-	{
-		if (const DataModel* dm = DataModel::get(this))
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;				
-			boost::call_once(flag, boost::bind(&callGAForPhysicalProperties, dm, getWorld()->getPhysicalPropertiesMode()));
-		}
-	}
-
 	return getWorld()->getUsingNewPhysicalProperties();
 }
 

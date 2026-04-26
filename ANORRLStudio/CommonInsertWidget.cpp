@@ -22,7 +22,6 @@
 // Roblox Headers
 #include "RobloxSettings.h"
 #include "script/script.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "util/Math.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Workspace.h"

@@ -14,7 +14,6 @@
 #include "Script/ModuleScript.h"
 #include "Script/script.h"
 #include "Util/http.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/Statistics.h"
 #include "Util/SoundService.h"
 #include "V8DataModel/DataModel.h"
@@ -47,7 +46,6 @@ DYNAMIC_LOGGROUP(NetworkJoin)
 FASTFLAG(DebugLocalRccServerConnection)
 DYNAMIC_FASTFLAG(DebugDisableTimeoutDisconnect)
 DYNAMIC_FASTFLAGVARIABLE(RCCSupportCloudEdit, true)
-DYNAMIC_FASTFLAGVARIABLE(CloudEditGARespectsThrottling, false)
 DYNAMIC_FASTFLAGVARIABLE(CloudEditCheckClientPresent, false)
 
 using namespace ARL;
@@ -296,9 +294,6 @@ void Server::start(int port, int threadSleepTime)
    
 	DataModel *dataModel = DataModel::get(this);
 
-	int startupMillis = static_cast<int>((Time::nowFast() - dataModel->getDataModelInitTime()).msec());
-	RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, "ServerStartTime", startupMillis);
-
 	if(DFFlag::DebugDisableTimeoutDisconnect)
 		rakPeer->rawPeer()->SetTimeoutTime(10*60*1000, UNASSIGNED_SYSTEM_ADDRESS);
 
@@ -340,18 +335,6 @@ void Server::stop(int blockDuration)
 		rakPeer->rawPeer()->Shutdown(blockDuration);
 }
 
-static void reportCloudEditGA(const char* label, int value = 0)
-{
-	if (DFFlag::CloudEditGARespectsThrottling)
-	{
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CloudEdit", label, value);
-	}
-	else
-	{
-		RobloxGoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_GAME, "CloudEdit", label, value);
-	}
-}
-
 static void reportCloudEditStats(weak_ptr<Server> server)
 {
 	shared_ptr<Server> sharedServer = server.lock();
@@ -370,8 +353,6 @@ static void reportCloudEditStats(weak_ptr<Server> server)
 		players = p->numChildren();
 	}
 
-	reportCloudEditGA("5 Minute Usage", players);
-
 	dm->create<TimerService>()->delay(boost::bind(&reportCloudEditStats, server), 5*60);
 }
 
@@ -388,7 +369,6 @@ void Server::configureAsCloudEditServer()
 	initWithCloudEditSecurity();
 	rakPeer->rawPeer()->SetIncomingPassword(Network::versionB.c_str(), Network::versionB.size());
 	isCloudEditServer = true;
-	reportCloudEditGA("Server Start");
 	DataModel::get(this)->create<TimerService>()->delay(boost::bind(&reportCloudEditStats, weak_from(this)), 5*60);
 }
 
@@ -450,9 +430,6 @@ void Server::onServiceProvider(ServiceProvider* oldProvider, ServiceProvider* ne
 			TaskScheduler::singleton().add(networkOwnerJob);
 		}
 
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "PlaceID", "none", dataModel->getPlaceID());
-
-
 		if (0 == dataModel->getPlaceID())
 		{
 			onWorkspaceLoaded();
@@ -468,31 +445,7 @@ void Server::onWorkspaceLoaded()
 {
 	Workspace *workspace = ServiceProvider::find<Workspace>(this);
 
-	if (workspace->getNetworkStreamingEnabled())
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "NetworkStreamingEnabled");
-
-	{
-		MegaClusterInstance *megaCluster = Instance::fastDynamicCast<MegaClusterInstance>(workspace->getTerrain());
-		if (megaCluster && megaCluster->isAllocated())
-		{
-			char placeId[32];
-			sprintf(placeId, "%d", DataModel::get(this)->getPlaceID());
-
-            if (megaCluster->isSmooth())
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SmoothTerrain", placeId);
-			}
-			else
-			{
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "LegacyTerrain", placeId);
-			}
-		}
-	}
-
 	StarterPlayerService* sps = ServiceProvider::create<StarterPlayerService>(this);    
-	if (sps)
-		sps->recordSettingsInGA();
-	
 	if (DataModel* dataModel = DataModel::get(this))
 	{
 		dataModel->visitDescendants(boost::bind(&Server::onItemAdded, this, _1));

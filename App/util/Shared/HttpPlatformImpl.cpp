@@ -17,7 +17,6 @@
 #include "util/ThreadPool.h"
 #include "v8datamodel/Stats.h"
 #include "v8datamodel/DebugSettings.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -953,10 +952,6 @@ public:
                         ++count;
 
                         boost::mutex::scoped_lock lock(mutex);
-                        for (std::string line; std::getline(logBuffer, line); )
-                        {
-                            RobloxGoogleAnalytics::sendEventRoblox("CURLE_SSL_CONNECT_ERROR", "custom", Http::urlEncode(line).c_str());
-                        }
                     }
                     }
                 }

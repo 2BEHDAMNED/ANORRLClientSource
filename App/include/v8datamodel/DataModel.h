@@ -509,8 +509,7 @@ public:
 	std::string httpPost(std::string url, std::string data, bool synchronous, std::string optionalContentType);
 
 	void reportMeasurement(std::string id, std::string key1, std::string value1, std::string key2, std::string value2);
-	void luaReportGoogleAnalytics(std::string category, std::string action, std::string label, int value);
-
+	
 	void close();
 
 #if defined(ARL_STUDIO_BUILD) || defined(ARL_RCC_SECURITY) || defined(ARL_TEST_BUILD)

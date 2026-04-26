@@ -68,7 +68,6 @@
 #include "RobloxTreeWidget.h"
 #include "CommonInsertWidget.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "RobloxDocManager.h"
 #include "RobloxIDEDoc.h"
 

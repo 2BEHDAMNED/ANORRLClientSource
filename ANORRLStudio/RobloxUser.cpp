@@ -16,7 +16,6 @@
 #include "RobloxSettings.h"
 #include "AuthenticationHelper.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
 #include "V8DataModel/Stats.h"
 
 RobloxUser& RobloxUser::singleton()
@@ -55,9 +54,6 @@ void RobloxUser::currentUserReplied(ARL::HttpFuture future)
 		QString webKitUserIDStr(QString::fromStdString(future.get()));
 		m_webKitUserId = webKitUserIDStr.toInt();
 		ARL::Analytics::setUserId(m_webKitUserId);
-
-		// TODO: remove
-		ARL::RobloxGoogleAnalytics::setUserID(m_webKitUserId);
 	}
 	catch(std::exception&)
 	{

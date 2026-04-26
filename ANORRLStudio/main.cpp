@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
     // chance some float operation will occur.
     if (!G3D::System::hasSSE2())
     {
-        MessageBoxA(NULL, "This platform lacks SSE2 support.", "ANORL", MB_OK);
+        MessageBoxA(NULL, "This platform lacks SSE2 support.", "ANORRL", MB_OK);
         return false;
     }
     CoInitialize(NULL);
@@ -218,10 +218,10 @@ int main(int argc, char *argv[])
 #endif
         
     RobloxApplication app(argc,argv);
-    Q_INIT_RESOURCE(RobloxStudio);
+    Q_INIT_RESOURCE(ANORRLStudio);
 	
 	// Platform independent settings
-	QApplication::setOrganizationName("ANORRL");
+	QApplication::setOrganizationName("GraceRBLX");
     QApplication::setOrganizationDomain("arl.lambda.cam");
     QApplication::setApplicationName("ANORRLStudio");  
     QApplication::setApplicationVersion(RobloxSettings::getVersionString());

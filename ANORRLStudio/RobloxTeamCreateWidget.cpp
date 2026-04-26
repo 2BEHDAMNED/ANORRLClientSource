@@ -19,7 +19,6 @@
 #include "Network/Players.h"
 #include "Network/Player.h"
 #include "V8Xml/WebParser.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include "PlayersDataManager.h"
 #include "AuthenticationHelper.h"
@@ -795,8 +794,6 @@ void RobloxTeamCreateWidget::onLoginButtonClicked()
 
 	if (FFlag::TeamCreateEnablePublishOnLogin)
 		m_bLoginButtonClicked = true;
-
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create", "User login");
 }
 
 void RobloxTeamCreateWidget::onPublishButtonClicked()
@@ -826,8 +823,6 @@ void RobloxTeamCreateWidget::onPublishButtonClicked()
 			connect(pDialog, SIGNAL(finished(int)), this, SLOT(onPublishDialogFinished(int)));
 		}
 	}
-
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create", "Publish invoked");
 }
 
 void RobloxTeamCreateWidget::onTurnOnButtonClicked()
@@ -856,9 +851,6 @@ void RobloxTeamCreateWidget::onTurnOnButtonClicked()
 	std::string result = doPost(postUrl.toStdString());
 	if (result != "{}")
 	{
-		QString label = QString("Cloud Edit enable failed for %1").arg(creatorType == TEAM_USERS ? "userPlace" : "groupPlace");
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  qPrintable(label));
-
 		QMetaObject::invokeMethod(this, "updateCurrentWidgetInStack", Qt::QueuedConnection);
 		return;
 	}	
@@ -866,9 +858,6 @@ void RobloxTeamCreateWidget::onTurnOnButtonClicked()
 	// launch cloud edit
 	QMetaObject::invokeMethod(&(UpdateUIManager::Instance().getMainWindow()), 
 		                      "cloudEditStatusChanged", Qt::QueuedConnection, Q_ARG(int, m_pDataModel->getPlaceID()), Q_ARG(int, m_pDataModel->getUniverseId()));
-
-	QString label = QString("Cloud Edit turned on for %1").arg(creatorType == TEAM_USERS ? "userPlace" : "groupPlace");
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  qPrintable(label));
 }
 
 void RobloxTeamCreateWidget::onBottomMoreButtonClicked()
@@ -915,7 +904,6 @@ void RobloxTeamCreateWidget::onBottomMoreButtonClicked()
 		std::string result = doPost(postUrl.toStdString());
 		if (result == "{}")
 		{
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Cloud Edit turned off for userPlace");
 			if (FFlag::KickUsersWhenTheyLoseAccessToCloudEdit)
 			{
 				UpdateUIManager::Instance().getMainWindow().shutDownCloudEditServer();
@@ -925,10 +913,6 @@ void RobloxTeamCreateWidget::onBottomMoreButtonClicked()
 				QMetaObject::invokeMethod(&(UpdateUIManager::Instance().getMainWindow()), 
 					"cloudEditStatusChanged", Qt::QueuedConnection, Q_ARG(int, m_pDataModel->getPlaceID()), Q_ARG(int, m_pDataModel->getUniverseId()));
 			}
-		}
-		else
-		{
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Cloud Edit turned off failed for userPlace");
 		}
 	}
 	else if (resultAction == helpAction)
@@ -942,8 +926,6 @@ void RobloxTeamCreateWidget::onBottomMoreButtonClicked()
 		{
 			UpdateUIManager::Instance().getMainWindow().onlineHelpAction->trigger();
 		}
-
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Help invoked");
 	}
 	else if (resultAction == deleteUserAction)
 	{
@@ -1147,7 +1129,6 @@ void RobloxTeamCreateWidget::onFriendsInviteEditReturnPressed()
 				friendsInviteEdit->clear();
 
 			updatePlayerFriendsInfo();
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Creator added from editor");
 		}
 	}
 	else
@@ -1170,7 +1151,6 @@ void RobloxTeamCreateWidget::onCompleterPopupMenuItemClicked(const QModelIndex& 
 			m_pCreatorsListWidget->addCreatorItem(playerId, playerName, "Offline");
 
 		updatePlayerFriendsInfo();
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Creator added from popup");
 	}
 	QApplication::restoreOverrideCursor();
 
@@ -1195,7 +1175,6 @@ void RobloxTeamCreateWidget::onRemoveCloudEditConfirm()
 			delete pCreatorItem;
 
 			updatePlayerFriendsInfo();
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Creator removed");
 		}
 		if (FFlag::KickUsersWhenTheyLoseAccessToCloudEdit)
 		{
@@ -1317,7 +1296,6 @@ std::string RobloxTeamCreateWidget::doPost(const std::string& postUrl)
 	catch (const ARL::base_exception& e)
 	{
 		ARL::StandardOut::singleton()->printf(ARL::MESSAGE_ERROR, "Error: %s", e.what());
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "Team Create",  "Post error");
 		result = e.what();
 	}
 

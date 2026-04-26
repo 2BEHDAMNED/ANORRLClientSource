@@ -12,7 +12,6 @@
 #include "RBX/RbxTime.h"
 #include "Util/BinaryString.h"
 #include "Util/NormalId.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/SurfaceType.h"
 #include "Util/stringbuffer.h"
 #include "V8DataModel/PartInstance.h"
@@ -77,8 +76,7 @@ void publishPartOperations(shared_ptr<Instance> descendant, ARL::Time startTime,
 				return;
 
 			ARL::ContentId contentId = partOperation->getAssetId();
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "RemoveLeftoverCSGData", contentId.c_str());
-
+			
 			DataModel* dataModel = DataModel::get(partOperation.get());
 
 			if (CacheableContentProvider* mcp = ServiceProvider::create<SolidModelContentProvider>(dataModel))
@@ -126,7 +124,6 @@ void publishPartOperations(shared_ptr<Instance> descendant, ARL::Time startTime,
 
         if (!dictionaryService->isHashKey(meshKey.value()) || !nrDictionaryService->isHashKey(childKey.value()))
         {
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "PublishCSGFailure", "HashKeyNotFound");
             return;
         }
 
@@ -186,9 +183,7 @@ bool PartOperationAsset::publishAll(DataModel* dataModel, int timeoutMills)
     ARL::Time startPublish = ARL::Time::nowFast();
 
     dataModel->visitDescendants(boost::bind(&publishPartOperations, _1, startPublish, timeoutMills));
-
-    RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_STUDIO, "SolidModelPublishAll", static_cast<int>((ARL::Time::nowFast() - startPublish).msec()));
-
+	
 	CSGDictionaryService* dictionaryService = ServiceProvider::find< CSGDictionaryService >(dataModel);
 	NonReplicatedCSGDictionaryService* nrDictionaryService = ServiceProvider::find<NonReplicatedCSGDictionaryService>(dataModel);
 
@@ -207,8 +202,6 @@ bool PartOperationAsset::publishSelection(DataModel* dataModel, int timeoutMills
     {
         publishPartOperations(*iter, startPublish, timeoutMills);
     }
-
-    RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_STUDIO, "SolidModelPublishSelection", static_cast<int>((ARL::Time::nowFast() - startPublish).msec()));
 
 	CSGDictionaryService* dictionaryService = ServiceProvider::find< CSGDictionaryService >(dataModel);
 	NonReplicatedCSGDictionaryService* nrDictionaryService = ServiceProvider::find<NonReplicatedCSGDictionaryService>(dataModel);

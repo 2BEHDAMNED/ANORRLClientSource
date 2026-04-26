@@ -18,7 +18,6 @@
 #include "ANORRLServicesTools.h"
 
 #include "v8xml/WebParser.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 
@@ -275,11 +274,6 @@ std::string LoadABTestFromString(const std::string& responseData)
 			// -1, 0, 1 and 2 are control groups, 3+ are variations
 			int variation = std::max(value - 2, 0);
 			FLog::SetValue(it->first, ARL::StringConverter<int>::convertToString(variation));
-
- 			if(value > 0 && !locked) 
- 			{
- 				ARL::RobloxGoogleAnalytics::setExperimentVariation(it->first, value);
- 			}
 		}
 
 		if(jsonResponse->find("BrowserTrackerId") != jsonResponse->end())

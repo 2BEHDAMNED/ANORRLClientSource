@@ -55,7 +55,6 @@
 #include "util/Statistics.h"
 #include "util/Profiling.h"
 #include "util/MD5Hasher.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "util/ScopedAssign.h"
 #include "Util/LuaWebService.h"
 #include "Util/Hash.h"
@@ -452,8 +451,6 @@ bool RobloxIDEDoc::openFile(const QString& fileName, bool asNew)
 static void doCloudEditFetch(const QString& scriptArg, int placeId, shared_ptr<EntityProperties> config,
 	bool* abort, QDialog* dialog)
 {
-	StudioUtilities::reportCloudEditJoinEvent("Hitting PlaceLauncher");
-
     std::string url;
     if (FFlag::UseBuildGenericGameUrl)
     {
@@ -536,7 +533,6 @@ shared_ptr<EntityProperties> RobloxIDEDoc::cloudEditDetectionAndPlaceLaunch()
 				{
 					if (FFlag::RetryWhenCloudEditEnabledEndpointFails)
 					{
-						StudioUtilities::reportCloudEditJoinEvent("Failed universes/cloudeditenabled");
 						QtUtilities::ARLMessageBox warning;
 						warning.setText("Failed to look up place's edit mode");
 						warning.addButton("Check Again", QMessageBox::ResetRole);
@@ -559,7 +555,6 @@ shared_ptr<EntityProperties> RobloxIDEDoc::cloudEditDetectionAndPlaceLaunch()
 		}
 		else
 		{
-			StudioUtilities::reportCloudEditJoinEvent("Unable to read universeid/placeid from edit script");
 			StandardOut::singleton()->print(MESSAGE_ERROR, "Unable to determine place/universe, proceeding with Edit alone");
 			placeId = 0;
 			universeId = 0;
@@ -587,7 +582,6 @@ shared_ptr<EntityProperties> RobloxIDEDoc::cloudEditDetectionAndPlaceLaunch()
 		{
 			m_initializationScript = "";
 			abort = true;
-			StudioUtilities::reportCloudEditJoinEvent("User Aborted PlaceLauncher");
 			httpThread.join();
 		}
 	}
@@ -920,12 +914,6 @@ bool RobloxIDEDoc::openStream(const QString& fileName, std::istream* stream, boo
         }
 
         ARLASSERT(!m_bIsLocalDocument || !isRemoteEditSession);
-        if (m_bIsLocalDocument || isRemoteEditSession)
-        {
-            RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "BeginEdit",
-                m_bIsLocalDocument ? "LocalDocument" : "RemoteBackedDocument");
-        }
-
 		if (m_AnnouncementWidget)
 		{
 			displayWorkspaceMessage();
@@ -1552,20 +1540,17 @@ bool RobloxIDEDoc::saveScriptsChangedWhileTesting()
             {
                 AuthoringSettings::singleton().alwaysSaveScriptChangesWhileRunning = true;
                 ARL::GlobalAdvancedSettings::singleton()->saveState();
-                ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_COUNTERS, "LiveCoding", "SaveDialogAlways", 1);
                 saveChanges = true;
             }
 
             if (ret == QMessageBox::Yes)
             {
-                ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_COUNTERS, "LiveCoding", "SaveDialogYes", 1);
                 saveChanges = true;
             }
         }
         
         if (saveChanges)
         {
-            ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_COUNTERS, "LiveCoding", "Saves", 1);
             applyScriptChanges();
             
             ARL::DataModel::LegacyLock editLock(m_EditGame.m_Game->getDataModel(), ARL::DataModelJob::Write);
@@ -3482,19 +3467,6 @@ void RobloxIDEDoc::onWorkspacePropertyChanged(const ARL::Reflection::PropertyDes
 {
 	if (pDescriptor->name == ARL::Workspace::prop_physicalPropertiesMode.name)
 	{
-		switch (getEditDataModel()->getWorkspace()->getPhysicalPropertiesMode())
-		{
-		case PhysicalPropertiesMode_Legacy:
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Physical Properties Mode", "Legacy"); 
-			break;
-		case PhysicalPropertiesMode_Default:
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Physical Properties Mode", "Default");
-			break;
-		case PhysicalPropertiesMode_NewPartProperties:
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "Physical Properties Mode", "New");
-			break;
-		}
-
 		if (DFFlag::WorkspaceNotificationMasterEnable || DFInt::StudioWorkspaceNotificationLevel)
 			displayWorkspaceMessage();
 
@@ -4570,7 +4542,6 @@ void WorkspaceAnnouncementTooltip::showText()
 	{
 		if (!isVisible())
 		{
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "WorkspaceNotification - ShowText", getNotificationId().c_str());
 			QString customTextHyperlinkFormat;
 			QFont boldFont = toolTipLabel->font();
 			boldFont.setPointSize(10);
@@ -4609,7 +4580,6 @@ void WorkspaceAnnouncementTooltip::hideText()
 
 void WorkspaceAnnouncementTooltip::closeText()
 {
-	ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "WorkspaceNotification - CloseText", getNotificationId().c_str());
 	setVisible(false);
 	RobloxSettings().setValue(kWorkspaceNotificationMessageAlreadyClosed, getNotificationId().c_str());
 	setLastClosedMessage(getNotificationId().c_str());

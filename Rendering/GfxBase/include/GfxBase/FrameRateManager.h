@@ -151,7 +151,6 @@ private:
 	void AdjustQuality(double frameTime, double renderTime, bool adjustmentOn, double bonusTime);
 	void StepQuality(bool direction, bool isBackOff);
 	void UpdateQualitySettings();
-    void SendQualityLevelStats();
     float GetAvarageQuality();
 
 	float GetTargetFrameTime(int level) const;

@@ -1508,9 +1508,6 @@
     <ClCompile Include="v8datamodel\DataStoreService.cpp">
       <Filter>Source Files\V8DataModel Source</Filter>
     </ClCompile>
-    <ClCompile Include="util\RobloxGoogleAnalytics.cpp">
-      <Filter>Source Files\Util Source</Filter>
-    </ClCompile>
     <ClCompile Include="v8datamodel\AnimationController.cpp">
       <Filter>Source Files\V8DataModel Source\Animation</Filter>
     </ClCompile>
@@ -3402,9 +3399,6 @@
     </ClInclude>
     <ClInclude Include="include\v8datamodel\DataStoreService.h">
       <Filter>Header Files\V8DataModel Header</Filter>
-    </ClInclude>
-    <ClInclude Include="include\util\RobloxGoogleAnalytics.h">
-      <Filter>Header Files\Util Header</Filter>
     </ClInclude>
     <ClInclude Include="include\v8datamodel\AnimationController.h">
       <Filter>Header Files\V8DataModel Header\Animation</Filter>

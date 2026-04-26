@@ -23,12 +23,9 @@
 #include "QDirBoundProp.h"
 #include "MobileDevelopmentDeployer.h"
 
-#include "util/RobloxGoogleAnalytics.h"
-
 FASTFLAG(LuaDebugger)
 FASTFLAG(LuaDebuggerBreakOnError)
 
-FASTFLAG(StudioSettingsGAEnabled)
 FASTFLAG(StudioUseDraggerGrid)
 
 ARL_REGISTER_CLASS(AuthoringSettings);
@@ -214,7 +211,6 @@ AuthoringSettings::AuthoringSettings()
     ,renderThrottlePercentage(75)
 	,alwaysSaveScriptChangesWhileRunning(false)
 	,clearOutputOnStart(true)
-	,doSettingsChangedGAEvents(false)
 	,darkMode(false)
     // Script Editor
 #ifdef Q_WS_WIN32
@@ -284,20 +280,7 @@ void AuthoringSettings::configureBasedOnFastFlags()
 
 void AuthoringSettings::onPropertyChanged(const ARL::Reflection::PropertyDescriptor& pDescriptor)
 {
-	if (FFlag::StudioSettingsGAEnabled && doSettingsChangedGAEvents)
-	{
-		std::string description = pDescriptor.name.str;
-		description += " On Edit";
-		std::string valueString = pDescriptor.getStringValue(this);
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO_SETTINGS, description.c_str(), valueString.c_str());
-	}
-
 	Instance::onPropertyChanged(pDescriptor);
-}
-
-void AuthoringSettings::setDoSettingsChangedGAEvents(bool value)
-{
-	doSettingsChangedGAEvents = value;
 }
 
 void AuthoringSettings::setRuntimeUndoBehavior( ARL::ChangeHistoryService::RuntimeUndoBehavior value )

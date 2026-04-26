@@ -27,29 +27,6 @@ namespace EphemeralCounter
 	void reportCounter(const std::string& counterName, int amount, bool blocking = false);
 }
 
-namespace GoogleAnalytics
-{
-	// Allow for easy initialization based on a lottery number.
-	// Calls setCanUseAnalytics and init.
-	void lotteryInit(const std::string &accountPropertyID, int lotteryThreshold, const std::string& productName = "", int robloxAnalyticsLottery = -1, const std::string &sessionKey = "sessionID=");
-
-	// Must be called before using the singleton.
-	void init(const std::string &accountPropertyID, const std::string& productName = "");
-
-	bool getCanUse();
-	void setCanUse();
-
-	void sendEventRoblox(const char* category, const char* action = "custom", const char* label = "none", int value = 0, bool sync = false);
-
-	void trackEvent(const char *category, const char *action = "custom", const char *label = "none", int value = 0, bool sync = false);
-	void trackEventWithoutThrottling(const char *category, const char *action = "custom", const char *label = "none", int value = 0, bool sync = false);
-	void trackUserTiming(const char *category, const char *variable, int milliseconds, const char *label = "none", bool sync = false);
-
-	const std::string& getSessionId();
-
-} // namespace GoogleAnalytics
-
-
 namespace InfluxDb {
 
 	struct Point

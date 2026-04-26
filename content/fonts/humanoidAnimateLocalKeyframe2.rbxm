@@ -379,12 +379,11 @@ function playAnimation(animName, transitionTime, humanoid)
 
 end
 
-local player = game.Players.LocalPlayer
-local playEmoteEvent = player:FindFirstChild("HandleEmote")
+local playEmoteEvent = Figure:FindFirstChild("HandleEmote")
 local emotes = {}
 
 if not playEmoteEvent then
-    playEmoteEvent = Instance.new("BindableEvent", player)
+    playEmoteEvent = Instance.new("BindableEvent", Figure)
 	playEmoteEvent.Name = "HandleEmote"
 end
 

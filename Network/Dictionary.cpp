@@ -3,7 +3,6 @@
 #include "Dictionary.h"
 #include "stringcompressor.h"
 #include "streaming.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include <boost/functional/hash/hash.hpp>
 
 namespace ARL { 

@@ -161,8 +161,7 @@ namespace ARL {
 					break;
 			}
 		}
-		ARL::GameBasicSettings::singleton().recordSettingsInGA(touchEnabled);
-    }
+	}
 
 	Game::Game(Verb* lockVerb, const char* baseUrl, bool shouldShowLoadingScreen) :
 		hasShutdown(false)

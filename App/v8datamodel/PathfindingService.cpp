@@ -6,7 +6,6 @@
 #include "V8DataModel/MegaCluster.h"
 #include "V8DataModel/PartCookie.h"
 #include "v8datamodel/PathfindingService.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include "Network/Players.h"
 
@@ -718,15 +717,7 @@ namespace ARL {
 	}
 
 	void PathfindingService::computePathAsync(Vector3 start, Vector3 finish, float maxDistance, bool isSmooth, boost::function<void(shared_ptr<Instance>) > resumeFunction, boost::function<void(std::string)> errorFunction)
-	{
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			DataModel* dm = DataModel::get(this);
-			boost::call_once(flag, boost::bind(&RobloxGoogleAnalytics::trackEvent,GA_CATEGORY_GAME, "PathfindingService", 
-				ARL::StringConverter<int>::convertToString(dm->getPlaceID()).c_str(), 0,false));
-		}
-
-		
+	{	
 		if(maxDistance > DFInt::PathfindingMaxDistance) 
 		{
 			errorFunction("MaxDistance is too large");

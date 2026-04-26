@@ -43,8 +43,6 @@
 #include "RbxG3D/RbxTime.h"
 #include "rbx/rbxTime.h"
 
-#include "Util/RobloxGoogleAnalytics.h"
-
 #include <boost/lexical_cast.hpp>
 
 #include <lobject.h>
@@ -2456,11 +2454,6 @@ int ScriptContext::loadfile(lua_State *L)
 	return load_aux(L, LuaVM::load(L, verifiedSource, ("=" + contentId.toString()).c_str()));
 }
 
-static void sendLoadStringStats(int placeId)
-{
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "loadstring", format("%d", placeId).c_str());
-}
-
 int ScriptContext::loadstring(lua_State *L)
 {
 	ScriptContext& context = ScriptContext::getContext(L);
@@ -2473,12 +2466,7 @@ int ScriptContext::loadstring(lua_State *L)
         {
             ServerScriptService* sss = ServiceProvider::find<ServerScriptService>(dm);
 
-            if (sss && sss->getLoadStringEnabled())
-            {
-                static boost::once_flag flag = BOOST_ONCE_INIT;
-                boost::call_once(flag, boost::bind(sendLoadStringStats, dm->getPlaceID()));
-            }
-            else
+            if (!(sss && sss->getLoadStringEnabled()))
             {
                 throw std::runtime_error("loadstring() is not available");
             }

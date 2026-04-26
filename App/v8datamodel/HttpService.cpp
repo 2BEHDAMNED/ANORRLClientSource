@@ -7,16 +7,8 @@
 #include "V8Xml/WebParser.h"
 #include "Network/Players.h"
 #include "Util/Http.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 DYNAMIC_FASTINTVARIABLE(UserHttpRequestsPerMinuteLimit, 500)
-
-namespace {
-	static inline void sendHttpServiceStats(int placeId)
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "HttpService", ARL::StringConverter<int>::convertToString(placeId).c_str());
-	}
-}
 
 namespace ARL {
 	const char* const sHttpService = "HttpService";
@@ -94,12 +86,6 @@ namespace ARL {
 		{
 			errorFunction("Number of requests exceeded limit");
 			return false;
-		}
-
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			DataModel* dm = DataModel::get(this);
-			boost::call_once(flag, boost::bind(&sendHttpServiceStats,dm->getPlaceID()));
 		}
 
 		return true;

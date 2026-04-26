@@ -27,7 +27,6 @@
 #include "rbx/TaskScheduler.h"
 #include "rbx/ProcessPerfCounter.h"
 #include "Util/standardout.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/Statistics.h"
 #include "NetworkSettings.h"
 #include "RenderSettingsItem.h"

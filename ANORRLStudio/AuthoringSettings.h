@@ -31,7 +31,6 @@ public:
 	
     AuthoringSettings(void);
     void configureBasedOnFastFlags();
-	void setDoSettingsChangedGAEvents(bool);
 	
 	typedef enum { 
 		Game, 
@@ -237,7 +236,6 @@ private:
 	UIStyle uiStyle;
 	TestServerAudioBehavior testServerAudioBehavior;
 	bool dragMultiPartsAsSinglePart;
-	bool doSettingsChangedGAEvents;
 
 protected:
 	void onPropertyChanged(const ARL::Reflection::PropertyDescriptor& pDescriptor);

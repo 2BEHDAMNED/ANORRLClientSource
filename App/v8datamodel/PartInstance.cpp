@@ -28,7 +28,6 @@
 #include "AppDraw/HitTest.h"
 #include "Util/Math.h"
 #include "Util/Color.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "Network/NetworkOwner.h"
 #include "G3D/CollisionDetection.h"
 #include "v8datamodel/PartCookie.h"
@@ -619,25 +618,12 @@ bool PartInstance::partIsLegacyCustomPhysProperties(const PartInstance* part)
 			 !Math::fuzzyEq(part->getElasticity(), PartInstance::defaultElasticity(), Math::epsilonf())));
 }
 
-
-void convertPartsToNewGANotify(DataModel* dataModel)
-{
-	RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "PartInstance_ConvertToNewPhysicalProp", 	
-				boost::lexical_cast<std::string>(dataModel->getPlaceID()).c_str(), 0, false);
-}
-
 void PartInstance::convertToNewPhysicalPropRecursive(ARL::Instance* instance)
 {
 	if (PartInstance* part = Instance::fastDynamicCast<PartInstance>(instance)) 
 	{
 		if (partIsLegacyCustomPhysProperties(part))
 		{
-			if (DataModel* dm = DataModel::get(part))
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&convertPartsToNewGANotify, dm));
-			}
-
 			PhysicalProperties defaultProperty = MaterialProperties::getPrimitivePhysicalProperties(part->getPartPrimitive());
 			PhysicalProperties physicalProperty = PhysicalProperties(defaultProperty.getDensity(), part->getFriction(), part->getElasticity());
 			part->setPhysicalProperties(physicalProperty);
@@ -2533,18 +2519,6 @@ void PartInstance::setNetworkOwnerScript(shared_ptr<Instance> playerInstance)
 			// Do nothing, PLAY SOLO
 			return;
 		}
-		if (DataModel* dm = DataModel::get(this))
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(flag, boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_GAME, "PartInstance_SetNetworkOwnerScript", 
-				boost::lexical_cast<std::string>(dm->getPlaceID()).c_str(), 0, false));
-
-			if (!player)
-			{
-				boost::call_once(flag, boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_GAME, "PartInstance_SetNetworkOwnerScript_TOSERVER", 
-					boost::lexical_cast<std::string>(dm->getPlaceID()).c_str(), 0, false));
-			}
-		}
 
 		ARL::SystemAddress ownerAddress;
 		if (player)
@@ -2577,13 +2551,6 @@ shared_ptr<Instance> PartInstance::getNetworkOwnerScript()
 	{
 		if(Network::Players::serverIsPresent(this))
 		{
-			if (DataModel* dm = DataModel::get(this))
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_GAME, "PartInstance_GetNetworkOwnerScript", 
-					boost::lexical_cast<std::string>(dm->getPlaceID()).c_str(), 0, false));
-			}
-
 			ARL::SystemAddress networkOwner = rootPrim->getNetworkOwner();
 			shared_ptr<Instance> player = Network::Players::findPlayerWithAddress(networkOwner, this);
 			return player;

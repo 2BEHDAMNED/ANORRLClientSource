@@ -59,7 +59,6 @@
 #include "ANORRLServicesTools.h"
 #include "util/Utilities.h"
 #include "Network/ChatFilter.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "network/WebChatFilter.h"
 
 #include "CountersClient.h"
@@ -182,10 +181,6 @@ public:
 	DECLARE_DATA_STRING(MacMD5);
 	DECLARE_DATA_INT(SecurityDataTimer);
 	DECLARE_DATA_INT(ClientSettingsTimer);
-	DECLARE_DATA_STRING(GoogleAnalyticsAccountPropertyID);
-	DECLARE_DATA_INT(GoogleAnalyticsThreadPoolMaxScheduleSize);
-	DECLARE_DATA_INT(GoogleAnalyticsLoad);
-	DECLARE_DATA_BOOL(GoogleAnalyticsInitFix);
 	DECLARE_DATA_INT(HttpUseCurlPercentageRCC);
 	END_DATA_MAP();
 };
@@ -367,10 +362,6 @@ IMPL_DATA(MacMD5, "");
 IMPL_DATA(WindowsPlayerBetaMD5, "");
 IMPL_DATA(SecurityDataTimer, 300);	// in seconds, default 5 min
 IMPL_DATA(ClientSettingsTimer, 120);	// 2 min
-IMPL_DATA(GoogleAnalyticsAccountPropertyID, "UA-43420590-13"); // Google Analytics Game Server Analytics Test account
-IMPL_DATA(GoogleAnalyticsThreadPoolMaxScheduleSize, 500); // max items to be scheduled at any one time by the G.A. threadpool
-IMPL_DATA(GoogleAnalyticsLoad, 10); // percent probability of using google analytics
-IMPL_DATA(GoogleAnalyticsInitFix, true);
 IMPL_DATA(HttpUseCurlPercentageRCC, 0); // do not use CURL by default
 DATA_MAP_IMPL_END()
 
@@ -930,23 +921,6 @@ public:
 			FASTLOGS(FLog::RCCDataModelInit, "Creating Data Model, Windows Player Beta MD5: %s", rccSettings.GetValueWindowsPlayerBetaMD5());
 			players->setGoldenHashes(rccSettings.GetValueWindowsMD5(), rccSettings.GetValueMacMD5(), rccSettings.GetValueWindowsPlayerBetaMD5());
 
-			if (rccSettings.GetValueGoogleAnalyticsInitFix())
-			{
-				ARL::Analytics::GoogleAnalytics::lotteryInit(rccSettings.GetValueGoogleAnalyticsAccountPropertyID(), rccSettings.GetValueGoogleAnalyticsLoad());
-			}
-			else
-			{
-				int lottery = rand() % 100;
-				FASTLOG1(FLog::RCCDataModelInit, "Google analytics lottery number = %d", lottery);
-				if (lottery < rccSettings.GetValueGoogleAnalyticsLoad())
-				{
-					FASTLOG1(FLog::RCCDataModelInit, "Setting Google Analytics ThreadPool Max Schedule Size: %d", rccSettings.GetValueGoogleAnalyticsThreadPoolMaxScheduleSize());
-					FASTLOGS(FLog::RCCDataModelInit, "Setting Google Analytics Account Property ID: %s", rccSettings.GetValueGoogleAnalyticsAccountPropertyID());
-					ARL::RobloxGoogleAnalytics::setCanUseAnalytics();
-					ARL::RobloxGoogleAnalytics::init(rccSettings.GetValueGoogleAnalyticsAccountPropertyID(), rccSettings.GetValueGoogleAnalyticsThreadPoolMaxScheduleSize());
-				}
-			}
-
 			ARL::DataModel::LegacyLock lock(dataModel, ARL::DataModelJob::Write);
 			dataModel->create<ARL::Network::WebChatFilter>();
 		}
@@ -1436,24 +1410,6 @@ void CWebService::LoadClientSettings(std::string& clientDest, std::string& thumb
     bool invalidThumbnailerSettings = (thumbnailDest.empty() && isThumbnailer);
 	if (invalidClientSettings || invalidThumbnailerSettings)
 	{
-		// hack: we want to log failure to load client settings in GA, but GA init require client setting...
-		// so just init GA with default settings, which points to "test" account
-		ARL::RobloxGoogleAnalytics::setCanUseAnalytics();
-		ARL::RobloxGoogleAnalytics::init(rccSettings.GetValueGoogleAnalyticsAccountPropertyID(), rccSettings.GetValueGoogleAnalyticsThreadPoolMaxScheduleSize());
-
-		TCHAR computerName[1024];
-		DWORD size = 1024;
-		GetComputerName(computerName, &size);
-
-        if (invalidClientSettings)
-        {
-		    ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, key.length() ? "Empty settings string" : "Empty settings key", computerName);
-        }
-        else
-        {
-		    ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, "Empty thumbnailer settings string", computerName);
-        }
-
 		if (DFFlag::DebugCrashOnFailToLoadClientSettings)
 			ARLCRASH();
 	}

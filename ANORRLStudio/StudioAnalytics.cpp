@@ -3,7 +3,6 @@
 #include "LuaSourceBuffer.h"
 
 #include "util/Utilities.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 #include "v8datamodel/Remote.h"
 #include "v8datamodel/PartInstance.h"
@@ -55,13 +54,7 @@ void StudioAnalytics::reportPersistentVariables()
 		int value = storage.value(name).toInt() + (*it)->getAccumulatedValue();
 		FASTLOGS(FLog::StudioAnalytics, "Reporting variable %s", name);
 		FASTLOG1(FLog::StudioAnalytics, "Value: %i", value);
-		ARL::RobloxGoogleAnalytics::trackEvent("UsageFeatures", name, robloxUserId.c_str(), value);
 	}
-}
-
-void StudioAnalytics::reportEvent(const char* name, int value /* = 0 */, const char* label /* = "" */, const char* category /* = "UsageFeatures" */)
-{
-	ARL::RobloxGoogleAnalytics::trackEvent(category, name, label, value);
 }
 
 struct PublishFeatures
@@ -137,10 +130,6 @@ void StudioAnalytics::reportPublishStats(ARL::DataModel* dm)
 	if (featuresText.rdbuf()->in_avail() == 0)
 		featuresText << "None";
 
-	std::string placeId = ARL::StringConverter<int>::convertToString(dm->getPlaceID());
-	reportEvent(featuresText.str().c_str(), 0, placeId.c_str(), "PublishFeatures");
-
-	reportEvent("PublishPartCount", features.partCount, placeId.c_str());
 	FASTLOG5(FLog::StudioAnalytics, "Report on publish, part count: %u, DataStore: %i, Teleports: %i, MarketPlace: %i, Remote: %i", 
 		features.partCount, features.hasDataStoreService, features.hasTeleportService, features.hasMarketPlaceService, features.hasRemoteFunctions);
 }

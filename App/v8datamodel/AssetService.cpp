@@ -5,7 +5,6 @@
 #include "V8DataModel/MarketplaceService.h"
 #include "v8datamodel/HttpRbxApiService.h"
 #include "Network/Players.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/standardout.h"
 #include "Util/LuaWebService.h"
 
@@ -141,17 +140,6 @@ namespace ARL {
 			errorFunction(ARL::format("Http exception occurred %s", httpException->what())); 
 		}
 	}
-
-	namespace {
-		static void sendCreatePlaceStats()
-		{
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CreatePlace");
-		}
-		static void sendCreatePlaceInPlayerInventoryStats()
-		{
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CreatePlaceInPlayerInventory");
-		}
-	} // namespace
 
 	static void CreatePlaceSuccessHelper(weak_ptr<DataModel> dm, const std::string& response, boost::function<void(int)> resumeFunction, boost::function<void(std::string)> errorFunction)
 	{
@@ -311,19 +299,7 @@ namespace ARL {
 		std::string playerParameter = "";
 		if(player)
 			playerParameter = ARL::format("&playerId=%i", player->getUserID());
-
-		if (player)
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendCreatePlaceInPlayerInventoryStats, flag);
-		} 
-		else
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(&sendCreatePlaceStats, flag);
-		}
 		
-
 		try
 		{
 			if (ARL::HttpRbxApiService* apiService = ARL::ServiceProvider::find<ARL::HttpRbxApiService>(this))
@@ -344,13 +320,6 @@ namespace ARL {
 			errorFunction( ARL::format("Game:CreatePlace failed because %s",e.what()) );
 		}
 	}
-
-	namespace {
-		static void sendSavePlaceStats()
-		{
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "SavePlace");
-		}
-	} // namespace
 
 	void AssetService::savePlaceAsync(boost::function<void()> resumeFunction, boost::function<void(std::string)> errorFunction)
 	{
@@ -383,11 +352,6 @@ namespace ARL {
 					errorFunction("Studio API access is not enabled. Enable it by going to the Game Settings page.");
 					return;
 				}
-			}
-
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(&sendSavePlaceStats, flag);
 			}
 
 			// construct the url

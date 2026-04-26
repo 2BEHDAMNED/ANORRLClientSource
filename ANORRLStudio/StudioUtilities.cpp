@@ -21,7 +21,6 @@
 #include "script/ScriptContext.h"
 #include "util/FileSystem.h"
 #include "util/Hash.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "util/RunStateOwner.h"
 #include "util/Statistics.h"
 #include "v8datamodel/Camera.h"
@@ -319,22 +318,9 @@ namespace StudioUtilities
 		}
 	}
 
-	void reportCloudEditJoinEvent(const char* label)
-	{
-		if (DFFlag::CloudEditGARespectsThrottling)
-		{
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_STUDIO, "CloudEdit", label);
-		}
-		else
-		{
-			ARL::RobloxGoogleAnalytics::trackEventWithoutThrottling(GA_CATEGORY_STUDIO, "CloudEdit", label);
-		}
-	}
-
 	static void notifyCloudEditConnectionClosed(const char* category, std::string message)
 	{
 		std::string label = ARL::format("Connection Closed: %s | %s", category, message.c_str());
-		reportCloudEditJoinEvent(label.c_str());
 		QMetaObject::invokeMethod(&(UpdateUIManager::Instance().getMainWindow()),
 			"notifyCloudEditConnectionClosed",
 			Qt::QueuedConnection);
@@ -385,7 +371,6 @@ namespace StudioUtilities
 	static void onConnectionAccepted(int placeId, std::string url, shared_ptr<ARL::Instance> replicator)
 	{
 		using namespace ARL;
-		reportCloudEditJoinEvent("Connection Accepted");
 		try 
 		{
 			boost::shared_ptr<Network::ClientReplicator> rep = Instance::fastSharedDynamicCast<Network::ClientReplicator>(replicator);
@@ -409,8 +394,6 @@ namespace StudioUtilities
 			DataModel::LegacyLock lock(dataModel, DataModelJob::Write);
 			if (dataModel->isClosed())
 				return;
-
-			reportCloudEditJoinEvent("Attempt To Connect");
 
 			Security::Impersonator impersonate(Security::COM);
 			
@@ -496,7 +479,6 @@ namespace StudioUtilities
 				{
 					if (RobloxIDEDoc::displayAskConvertPlaceToNewMaterialsIfInsertNewModel())
 					{
-						ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, "PhysicalProperties: Insert - Conversion", "Workspace->PhysicalPropertiesMode_New");
 						workspace->setPhysicalPropertiesMode(ARL::PhysicalPropertiesMode_NewPartProperties);
 						ARL::PartInstance::convertToNewPhysicalPropRecursive(ARL::DataModel::get(workspace));
 					}
@@ -576,8 +558,6 @@ namespace StudioUtilities
 		{			
 			spWorkspace->insertInstances(instances, requestedParent, insertMode, promptMode);
 
-			ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ACTION, insertInto ? "insertIntoFromFileComplete" : "insertModelComplete");
-			
 			boost::shared_ptr<ARL::RunService> runService = shared_from(pDataModel->create<ARL::RunService>());
 			// If we're not playing a game then select the content
 			if (runService->getRunState() == ARL::RS_STOPPED)

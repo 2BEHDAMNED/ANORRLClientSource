@@ -293,6 +293,14 @@
     </Item>
     <Item class="ReflectionMetadataClass">
       <Properties>
+        <string name="Name">Attachment</string>
+        <string name="ClassCategory">Physics</string>
+        <string name="ExplorerOrder">3</string>
+        <string name="ExplorerImageIndex">81</string>
+      </Properties>
+    </Item>
+    <Item class="ReflectionMetadataClass">
+      <Properties>
         <string name="Name">Mouse</string>
         <string name="summary">Used to receive input from the user. Actually tracks mouse events and keyboard events.</string>
       </Properties>

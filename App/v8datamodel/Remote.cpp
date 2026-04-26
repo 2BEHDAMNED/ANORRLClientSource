@@ -6,22 +6,7 @@
 #include "Network/Players.h"
 #include "FastLog.h"
 
-#include "util/RobloxGoogleAnalytics.h"
-
 DYNAMIC_FASTINTVARIABLE(RemoteDelayedQueueLimit, 256)
-
-namespace {
-	static void sendRemoteFunctionStatsOnServer(const char* function)
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "RemoteFunction", function);
-	}
-
-	static void sendRemoteEventStatsOnServer(const char* function)
-	{
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "RemoteEvent", function);
-	}
-
-} // namespace
 
 namespace ARL {
 
@@ -157,11 +142,6 @@ namespace ARL {
             args[1] = arguments;
 
             raiseEventInvocation(event_RemoteOnInvokeClient, args, &target);
-
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&sendRemoteFunctionStatsOnServer, "invokeClient"));
-			}
         }
         else
         {
@@ -289,11 +269,6 @@ namespace ARL {
                 errorFunction("Remote function invocation queue exhausted for " + getFullName() + "; did you forget to implement OnServerInvoke?");
 
 			return;
-		}
-
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			boost::call_once(flag, boost::bind(&sendRemoteFunctionStatsOnServer, "invokeServer"));
 		}
 
         onServerInvoke(player, arguments, resumeFunction, errorFunction);
@@ -432,11 +407,6 @@ namespace ARL {
             args[0] = arguments;
 
             raiseEventInvocation(event_OnClientEvent, args, &target);
-
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&sendRemoteEventStatsOnServer, "fireClient"));
-			}
         }
         else
         {
@@ -458,11 +428,6 @@ namespace ARL {
             args[0] = arguments;
 
             raiseEventInvocation(event_OnClientEvent, args, NULL);
-
-			{
-				static boost::once_flag flag = BOOST_ONCE_INIT;
-				boost::call_once(flag, boost::bind(&sendRemoteEventStatsOnServer, "fireAllClients"));
-			}
         }
         else
         {
@@ -504,11 +469,6 @@ namespace ARL {
             if (isPlayerValid(player.get(), source))
             {
                 EventSource::processRemoteEvent(descriptor, args, source);
-
-                {
-                    static boost::once_flag flag = BOOST_ONCE_INIT;
-                    boost::call_once(flag, boost::bind(&sendRemoteEventStatsOnServer, "fireServer"));
-                }
             }
             else
             {

@@ -64,7 +64,6 @@
 #include "script/script.h"
 #include "rbx/Log.h"
 #include "tool/ToolsArrow.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "GeometryGenerator.h"
 #include "../CSG/CSGKernel.h"
 #include "ANORRLServicesTools.h"

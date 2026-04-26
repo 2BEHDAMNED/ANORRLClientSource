@@ -9,17 +9,6 @@
 #include "V8DataModel/TextButton.h"
 #include "V8DataModel/TextBox.h"
 #include "Network/Players.h"
-#include "Util/RobloxGoogleAnalytics.h"
-
-namespace {
-	static inline void sendDataPersistenceStats(int placeId)
-	{
-		std::ostringstream ss;
-		ss << placeId;
-		ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "DataPersistence", ss.str().c_str());
-	}
-
-}
 
 namespace ARL { namespace Network {
 
@@ -75,13 +64,6 @@ PersistentDataStore::PersistentDataStore(const Reflection::ValueMap* input, cons
 		valueMap = (*input);
 		leaderboardDirty = true;
 		std::for_each(valueMap.begin(), valueMap.end(), boost::bind(&computeValueMapLimit, _1, &complexity));
-
-		if (valueMap.size() > 0)
-		{
-			static boost::once_flag flag = BOOST_ONCE_INIT;
-			const DataModel* dm = DataModel::get(players);
-			boost::call_once(boost::bind(&sendDataPersistenceStats, dm ? dm->getPlaceID() : 0), flag);
-		}
 	}
 	
 }

@@ -174,13 +174,7 @@ namespace ARL
 		IMPL_DATA(PrizeAssetIDs, "");
 		IMPL_DATA(MinNumberScriptExecutionsToGetPrize, 500);
 		IMPL_DATA(MinPartsForOptDragging, 200);
-		IMPL_DATA(GoogleAnalyticsAccountPropertyID, "UA-43420590-2");
-		IMPL_DATA(GoogleAnalyticsAccountPropertyIDPlayer, "UA-43420590-13");
-		IMPL_DATA(GoogleAnalyticsThreadPoolMaxScheduleSize, 500);
-		IMPL_DATA(GoogleAnalyticsLoadPlayer, 1); // percent probability of using google analytics
-        IMPL_DATA(GoogleAnalyticsLoadStudio, 100); // percent probability of using google analytics
-		IMPL_DATA(GoogleAnalyticsInitFix, true);
-        IMPL_DATA(HttpUseCurlPercentageMacClient, 0);
+		IMPL_DATA(HttpUseCurlPercentageMacClient, 0);
         IMPL_DATA(HttpUseCurlPercentageMacStudio, 0);
         IMPL_DATA(HttpUseCurlPercentageWinClient, 0);
         IMPL_DATA(HttpUseCurlPercentageWinStudio, 0);

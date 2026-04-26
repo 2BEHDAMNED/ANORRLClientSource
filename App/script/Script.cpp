@@ -2,7 +2,6 @@
 #include "script/script.h"
 #include "v8datamodel/ContentProvider.h"
 #include "Util/AsyncHttpQueue.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/ScriptInformationProvider.h"
 #include "Util/MD5Hasher.h"
 #include "v8datamodel/Tool.h"

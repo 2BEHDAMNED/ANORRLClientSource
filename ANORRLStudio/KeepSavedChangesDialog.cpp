@@ -12,7 +12,6 @@
 #include "RobloxIDEDoc.h"
 #include "V8DataModel/DataModel.h"
 #include "RobloxMainWindow.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 // Qt Headers
 #include <QMessageBox>
@@ -82,7 +81,6 @@ void KeepSavedChangesDialog::onSave()
     catch (std::exception&)
     {
         RobloxMainWindow::sendCounterEvent("QTStudioPublishSaveFailure");
-        ARL::RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_ERROR, "StudioPublishSaveFailure");
         dialogResult = Fail;
     }
     dialogResult = Save;

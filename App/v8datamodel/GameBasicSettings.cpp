@@ -1,7 +1,6 @@
 #include "stdafx.h"
 
 #include "V8DataModel/GameBasicSettings.h"
-#include "Util/RobloxGoogleAnalytics.h"
 
 using namespace ARL;
 
@@ -35,7 +34,8 @@ Reflection::PropDescriptor<GameBasicSettings, float> GameBasicSettings::prop_mas
 static Reflection::PropDescriptor<GameBasicSettings, float> prop_mouseSensitivity("MouseSensitivity",category_Data, &GameBasicSettings::getMouseSensitivity, &GameBasicSettings::setMouseSensitivity);
 
 static const Reflection::PropDescriptor<GameBasicSettings, bool> prop_isFullscreen("Fullscreen", category_Data, &GameBasicSettings::getFullScreenConst, &GameBasicSettings::setFullScreen, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
-static const Reflection::PropDescriptor<GameBasicSettings, bool> prop_isAeroEnabled("AeroEnabled",category_Data, &GameBasicSettings::getIsAeroEnabledConst, &GameBasicSettings::setAeroEnabled, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
+static const Reflection::PropDescriptor<GameBasicSettings, bool> prop_isAeroEnabled("AeroEnabled", category_Data, &GameBasicSettings::getIsAeroEnabledConst, &GameBasicSettings::setAeroEnabled, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
+static const Reflection::PropDescriptor<GameBasicSettings, bool> prop_loadingScriptDarkMode("LoadingScriptDarkMode",category_Data, &GameBasicSettings::getLoadingScriptDarkModeConst, &GameBasicSettings::setLoadingScriptDarkMode, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
 static const Reflection::BoundFuncDesc<GameBasicSettings, bool()> func_isAeroEnabled(&GameBasicSettings::isAeroEnabled, "IsAeroEnabled", Security::None);
 static const Reflection::BoundFuncDesc<GameBasicSettings, bool()> func_inFullscreenMode(&GameBasicSettings::getFullScreen, "InFullScreen", Security::None);
 static Reflection::BoundFuncDesc<GameBasicSettings, bool()> func_inStudioMode(&GameBasicSettings::inStudioMode, "InStudioMode", Security::None);
@@ -45,7 +45,6 @@ static Reflection::EventDesc<GameBasicSettings, void(bool)> event_FullscreenChan
 static Reflection::EventDesc<GameBasicSettings, void(bool)> event_AeroChanged(&GameBasicSettings::areoChangedSignal, "AeroChanged", "isAero", Security::None);
 
 static const Reflection::EnumPropDescriptor<GameBasicSettings, GameSettings::UploadSetting> prop_uploadScreenshots("ImageUploadPromptBehavior", "Screenshots", &GameBasicSettings::getPostImageSetting, &GameBasicSettings::setPostImageSetting, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
-static Reflection::PropDescriptor<GameBasicSettings, std::string> prop_googleAnalyticsClientId("gaID", "Configuration", &GameBasicSettings::getGoogleAnalyticsClientId, &GameBasicSettings::setGoogleAnalyticsClientId, Reflection::PropertyDescriptor::CLUSTER, Security::RobloxScript); // TODO: change CLUSTER to more generic name
 
 static const Reflection::PropDescriptor<GameBasicSettings, bool> prop_usedHideHudShortcut("UsedHideHudShortcut",category_Data, &GameBasicSettings::getUsedHideHudShortcut, &GameBasicSettings::setUsedHideHudShortcut, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
 
@@ -250,11 +249,6 @@ void GameBasicSettings::setCameraMode(CameraMode setting)
 			label = "CustomCameraModeClassic";
 		}
 
-		if ( RobloxGoogleAnalytics::isInitialized() )
-		{
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "CustomCameraMode", label);
-		}
-
 		cameraMode = setting;
 		raisePropertyChanged(prop_cameraMode);
 	}
@@ -283,9 +277,6 @@ void GameBasicSettings::setTouchCameraMovementMode(TouchCameraMovementMode setti
 				label = "TouchCameraMoveModeClassic";
 				break;
 		}
-		
-		if (RobloxGoogleAnalytics::isInitialized())
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchCameraMoveMode", label);
 
 		touchCameraMovementMode = setting;
 		raisePropertyChanged(prop_touchCameraMovementMode);
@@ -326,9 +317,6 @@ void GameBasicSettings::setComputerCameraMovementMode(ComputerCameraMovementMode
 				break;
 		}
 		
-		if (RobloxGoogleAnalytics::isInitialized())
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerCameraMoveMode", label);
-
 		computerCameraMovementMode = setting;
 		raisePropertyChanged(prop_computerCameraMovementMode);
 		setComputerCameraMovementModeModified(true);
@@ -374,9 +362,7 @@ void GameBasicSettings::setTouchMovementMode(TouchMovementMode setting)
 				label = "TouchMovementModeClickToMove";
 				break;
 		}
-		if (RobloxGoogleAnalytics::isInitialized())
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchMovementMode", label);
-
+		
 		touchMoveMode = setting;
 		raisePropertyChanged(prop_touchMovementMode);
 		setTouchMovementModeModified(true);
@@ -416,9 +402,7 @@ void GameBasicSettings::setComputerMovementMode(ComputerMovementMode setting)
 				label = "ComputerMovementModeClickToMove";
 				break;
 		}
-		if (RobloxGoogleAnalytics::isInitialized())
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerMovementMode", label);
-
+		
 		computerMoveMode = setting;
 		raisePropertyChanged(prop_computerMovementMode);
 		setComputerMovementModeModified(true);
@@ -608,16 +592,6 @@ void GameBasicSettings::setMouseSensitivity(float value)
 	}
 }
 
-std::string GameBasicSettings::getGoogleAnalyticsClientId() const
-{
-	return googleAnalyticsClientId;
-}
-
-void GameBasicSettings::setGoogleAnalyticsClientId(const std::string& id)
-{
-	googleAnalyticsClientId = id;
-}
-
 void GameBasicSettings::reset()
 {
 	setControlMode(CONTROL_CLASSIC);
@@ -647,88 +621,6 @@ void GameBasicSettings::reset()
 	}
 
 	Super::verifySetParent(instance);
-}
-
-void GameBasicSettings::recordSettingsInGA(bool touchEnabled) const
-{
-	const char *CameraMovement = NULL;
-	const char *CharacterMovement = NULL;
-
-	if (touchEnabled) {
-		switch (touchCameraMovementMode) {
-			case TOUCH_CAMERA_MOVEMENT_MODE_CLASSIC:
-				CameraMovement = "TouchCameraMoveModeClassic";
-				break;
-			case TOUCH_CAMERA_MOVEMENT_MODE_FOLLOW:
-				CameraMovement = "TouchCameraMoveModeFollow";
-				break;
-			case TOUCH_CAMERA_MOVEMENT_MODE_DEFAULT:
-			default:
-				CameraMovement = "TouchCameraMoveModeDefault";
-				break;
-		}
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchCameraMove", CameraMovement);
-		if (touchCameraMovementModeModified) {
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchCameraMoveModified", CameraMovement);
-		}
-
-		switch (touchMoveMode) {
-		case TOUCH_MOVEMENT_MODE_THUMBSTICK:
-			CharacterMovement = "TouchMovementModeThumbStick";
-			break;
-		case TOUCH_MOVEMENT_MODE_DPAD:
-			CharacterMovement = "TouchMovementModeDPad";
-			break;
-		case TOUCH_MOVEMENT_MODE_THUMBPAD:
-			CharacterMovement = "TouchMovementModeThumbpad";
-			break;
-		case TOUCH_MOVEMENT_MODE_CLICK_TO_MOVE:
-			CharacterMovement = "TouchMovementModeClickToMove";
-			break;
-		case TOUCH_MOVEMENT_MODE_DEFAULT:
-		default:
-			CharacterMovement = "TouchMovementModeDefault";
-			break;
-		}
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchMovement", CharacterMovement);
-		if (touchMoveModeModeModified) {
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "TouchMovementModified", CharacterMovement);
-		}
-	} else {
-		switch (computerCameraMovementMode) {
-			case COMPUTER_CAMERA_MOVEMENT_MODE_CLASSIC:
-				CameraMovement = "ComputerCameraMoveModeClassic";
-				break;
-			case COMPUTER_CAMERA_MOVEMENT_MODE_FOLLOW:
-				CameraMovement = "ComputerCameraMoveModeFollow";
-				break;
-			case COMPUTER_CAMERA_MOVEMENT_MODE_DEFAULT:
-			default:
-				CameraMovement = "ComputerCameraMoveModeDefault";
-				break;
-		}
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerCameraMove", CameraMovement);
-		if (computerCameraMovementModeModified) {
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerCameraMoveModified", CameraMovement);
-		}
-
-		switch (computerMoveMode) {
-		case COMPUTER_MOVEMENT_MODE_KBD_MOUSE:
-			CharacterMovement = "ComputerMovementModeKbdMouse";
-			break;
-		case COMPUTER_MOVEMENT_MODE_CLICK_TO_MOVE:
-			CharacterMovement = "ComputerMovementModeClickToMove";
-			break;
-		case COMPUTER_MOVEMENT_MODE_DEFAULT:
-		default:
-			CharacterMovement = "ComputerMovementModeDefault";
-			break;
-		}
-		RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerMovement", CharacterMovement);
-		if (computerMoveModeModeModified) {
-			RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ComputerMovementModified", CharacterMovement);
-		}
-	}
 }
 
 // Randomized Locations for hackflags

@@ -9,7 +9,6 @@
 #include "Server.h"
 #include "Streaming.h"
 #include "Util.h"
-#include "util/RobloxGoogleAnalytics.h"
 
 #include "WebChatFilter.h"
 #include "RakPeerInterface.h"
@@ -1976,14 +1975,6 @@ void Players::disconnectPlayer(int userId, int reason)
 {
 	if (Server* server = ServiceProvider::find<Server>(this))
 	{
-		if (DataModel* dm = DataModel::get(this))
-		{
-			if (reason == Replicator::DisconnectReason_LuaKick)
-			{
-				int placeID = dm->getPlaceID();
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "ServerLuaKick", boost::lexical_cast<std::string>(placeID).c_str());
-			}
-		}
 		disconnectPlayer(*server, userId, reason);
 	}
 }
@@ -1992,14 +1983,6 @@ void Players::disconnectPlayerLocal(int userId, int reason)
 {
 	if (Client* client = ServiceProvider::find<Client>(this))
 	{
-		if (DataModel* dm = DataModel::get(this))
-		{
-			if (reason == Replicator::DisconnectReason_LuaKick)
-			{
-				int placeID = dm->getPlaceID();
-				RobloxGoogleAnalytics::trackEvent(GA_CATEGORY_GAME, "LocalLuaKick", boost::lexical_cast<std::string>(placeID).c_str());
-			}
-		}
 		disconnectPlayer(*client, userId, reason);
 	}
 }

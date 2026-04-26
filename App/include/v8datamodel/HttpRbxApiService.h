@@ -7,8 +7,6 @@
 #include "Util/Http.h"
 #include "Util/DoubleEndedVector.h"
 
-DYNAMIC_FASTINT(PercentApiRequestsRecordGoogleAnalytics)
-
 namespace ARL {
 
 	class HttpRbxApiJob;
@@ -105,8 +103,6 @@ namespace ARL {
 		unsigned int totalNumOfApiCalls;
 		ARL::Timer<ARL::Time::Fast> instanceAliveTimer;
 
-		bool recordInGoogleAnalytics;
-
 		//////////////////////////////////////////////////////////////////////
 		// METHODS
 		//////////////////////////////////////////////////////////////////////
@@ -156,8 +152,7 @@ namespace ARL {
 
 		// Google analytics helpers
 		void addToApiCallCount() { totalNumOfApiCalls++; }
-		bool getRecordInGoogleAnalytics() const { return recordInGoogleAnalytics; }
-
+		
 		// Throttling Functions
 		void addThrottlingBudgets(float timeDeltaMinutes);
 		void executeThrottledRequests();

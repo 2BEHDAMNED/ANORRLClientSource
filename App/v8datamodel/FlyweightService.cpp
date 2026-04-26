@@ -3,7 +3,6 @@
 
 #include "V8DataModel/FlyweightService.h"
 #include "v8datamodel/Value.h"
-#include "Util/RobloxGoogleAnalytics.h"
 #include "Util/MD5Hasher.h"
 #include "Network/Players.h"
 
@@ -35,9 +34,6 @@ namespace ARL
 
 	void FlyweightService::onChildAdded(shared_ptr<ARL::Instance> childInstance)
 	{
-		static boost::once_flag flag = BOOST_ONCE_INIT;
-		boost::call_once(boost::bind(&RobloxGoogleAnalytics::trackEvent, GA_CATEGORY_GAME, "UsingCSG", "none", 0, false), flag);
-
 		if (shared_ptr<ARL::BinaryStringValue> strValue = ARL::Instance::fastSharedDynamicCast<ARL::BinaryStringValue>(childInstance))
 		{
 			std::string key = createHashKey(strValue->getValue().value());
