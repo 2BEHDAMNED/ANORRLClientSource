@@ -53,7 +53,6 @@ EnumDesc<TextService::Font>::EnumDesc()
 	addPair(TextService::FONT_HIGHWAY, "Highway");
 	addPair(TextService::FONT_SCIFI, "SciFi");
 	addPair(TextService::FONT_FINGERPAINT, "Fingerpaint");
-
 	addPair(TextService::FONT_COMICSANS, "ComicSans");
 	addPair(TextService::FONT_SILKSCREEN, "SilkScreen");
 	addPair(TextService::FONT_PROXIMANOVA, "ProximaNova");

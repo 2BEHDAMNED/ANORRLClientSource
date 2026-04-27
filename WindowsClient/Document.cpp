@@ -7,7 +7,6 @@
 #include "resource.h"
 #include "script/ScriptContext.h"
 #include "util/Statistics.h"
-#include "util/RobloxGoogleAnalytics.h"
 #include "v8datamodel/ContentProvider.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/DebugSettings.h"
@@ -44,9 +43,6 @@ void Document::Start(HttpFuture& scriptResult, const SharedLauncher::LaunchMode 
 
 	// TODO: VMProtect this section 
 	executeScript(scriptResult, launchMode, vrDevice);
-
-	if (!isTeleport)
-		RobloxGoogleAnalytics::trackUserTiming(GA_CATEGORY_GAME, GA_CLIENT_START, Time::nowFast().timestampSeconds() * 1000, "Join script executed");
 }
 
 static void setUiMessageImpl(shared_ptr<DataModel> dm, const std::string& message)

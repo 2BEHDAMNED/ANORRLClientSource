@@ -17,13 +17,11 @@
 #include "View.h"
 #include "format_string.h"
 
-#include "util/RobloxGoogleAnalytics.h"
 #include "rbx/SystemUtil.h"
 
 LOGGROUP(PlayerShutdownLuaTimeoutSeconds)
 LOGGROUP(RobloxWndInit)
 FASTFLAGVARIABLE(DirectX11Enable, false)
-FASTFLAGVARIABLE(GraphicsReportingInitErrorsToGAEnabled,true)
 FASTFLAGVARIABLE(UseNewAppBridgeInputWindows, false)
 
 DYNAMIC_FASTFLAGVARIABLE(FullscreenRefocusingFix, false)
