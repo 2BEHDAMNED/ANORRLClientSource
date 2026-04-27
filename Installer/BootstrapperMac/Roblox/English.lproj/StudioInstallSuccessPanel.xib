@@ -26,7 +26,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Y8u-TI-Ynf">
                         <rect key="frame" x="205" y="160" width="90" height="90"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_robloxstudio" id="txD-ni-YnK"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_anorrlstudio" id="txD-ni-YnK"/>
                     </imageView>
                     <button focusRingType="none" id="GLh-IM-AaY" userLabel="Ok Button" customClass="CustomImageButton">
                         <rect key="frame" x="185" y="26" width="130" height="44"/>
@@ -64,7 +64,7 @@
     </objects>
     <resources>
         <image name="btn_launchstudio" width="130" height="44"/>
-        <image name="logo_robloxstudio" width="90" height="90"/>
+        <image name="logo_anorrlstudio" width="90" height="90"/>
         <image name="txt_backto" width="110" height="14"/>
         <image name="txt_success-studio" width="450" height="48"/>
     </resources>

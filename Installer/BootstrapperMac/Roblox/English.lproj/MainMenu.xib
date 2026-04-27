@@ -46,7 +46,7 @@
 				<array class="NSMutableArray" key="NSMenuItems">
 					<object class="NSMenuItem" id="694149608">
 						<reference key="NSMenu" ref="649796088"/>
-						<string key="NSTitle">Roblox</string>
+						<string key="NSTitle">ANORRL</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -61,11 +61,11 @@
 						<string key="NSAction">submenuAction:</string>
 						<reference key="NSTarget" ref="110575045"/>
 						<object class="NSMenu" key="NSSubmenu" id="110575045">
-							<string key="NSTitle">Roblox</string>
+							<string key="NSTitle">ANORRL</string>
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="632727374">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Quit Roblox</string>
+									<string key="NSTitle">Quit ANORRL</string>
 									<string key="NSKeyEquiv">q</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -84,7 +84,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{479, 324}, {500, 320}}</string>
 				<int key="NSWTFlags">880282624</int>
-				<string key="NSWindowTitle">Roblox</string>
+				<string key="NSWindowTitle">ANORRL</string>
 				<string key="NSWindowClass">SplashScreenPanel</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
@@ -149,7 +149,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="526696423">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">138413056</int>
-								<string key="NSContents">Configuring ROBLOX...</string>
+								<string key="NSContents">Configuring ANORRL...</string>
 								<object class="NSFont" key="NSSupport">
 									<bool key="IBIsSystemFont">YES</bool>
 									<double key="NSSize">16</double>

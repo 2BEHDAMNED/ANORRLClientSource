@@ -7,9 +7,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>RobloxStudio.icns</string>
+	<string>ANORRLStudio.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Roblox.${BUNDLE_IDENTIFIER:rfc1034identifier}</string>
+	<string>com.anorrl.${BUNDLE_IDENTIFIER:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,9 +31,9 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SetupServer</key>
-	<string>http://setup.roblox.com/mac/</string>
+	<string>http://setup.lambda.cam/mac/</string>
 	<key>BaseServer</key>
-	<string>http://www.roblox.com/</string>
+	<string>http://arl.lambda.cam/</string>
 	<key>NSUIElement</key>
 	<string>1</string>
 	<key>CFBundleURLTypes</key>
@@ -42,10 +42,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>Roblox Studio URL</string>
+			<string>ANORRL Studio URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>roblox-studio</string>
+				<string>anorrl-studio</string>
 			</array>
 		</dict>
 	</array>
