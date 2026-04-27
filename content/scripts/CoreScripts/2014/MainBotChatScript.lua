@@ -106,31 +106,31 @@ end
 function styleMainFrame(tone)
 	if tone == Enum.DialogTone.Neutral then
 		mainFrame.Style = Enum.FrameStyle.ChatBlue
-		mainFrame.Tail.Image = "rbxasset://textures/chatBubble_botBlue_tailRight.png"
+		mainFrame.Tail.Image = "arlasset://textures/chatBubble_botBlue_tailRight.png"
 	elseif tone == Enum.DialogTone.Friendly then
 		mainFrame.Style = Enum.FrameStyle.ChatGreen
-		mainFrame.Tail.Image = "rbxasset://textures/chatBubble_botGreen_tailRight.png"
+		mainFrame.Tail.Image = "arlasset://textures/chatBubble_botGreen_tailRight.png"
 	elseif tone == Enum.DialogTone.Enemy then
 		mainFrame.Style = Enum.FrameStyle.ChatRed
-		mainFrame.Tail.Image = "rbxasset://textures/chatBubble_botRed_tailRight.png"
+		mainFrame.Tail.Image = "arlasset://textures/chatBubble_botRed_tailRight.png"
 	end
 	
 	styleChoices(tone)
 end
 function setChatNotificationTone(gui, purpose, tone)
 	if tone == Enum.DialogTone.Neutral then
-		gui.Image.Image = "rbxasset://textures/chatBubble_botBlue_notify_bkg.png"
+		gui.Image.Image = "arlasset://textures/chatBubble_botBlue_notify_bkg.png"
 	elseif tone == Enum.DialogTone.Friendly then
-		gui.Image.Image = "rbxasset://textures/chatBubble_botGreen_notify_bkg.png"
+		gui.Image.Image = "arlasset://textures/chatBubble_botGreen_notify_bkg.png"
 	elseif tone == Enum.DialogTone.Enemy then
-		gui.Image.Image = "rbxasset://textures/chatBubble_botRed_notify_bkg.png"
+		gui.Image.Image = "arlasset://textures/chatBubble_botRed_notify_bkg.png"
 	end
 	if purpose == Enum.DialogPurpose.Quest then
-		gui.Image.Button.Image = "rbxasset://textures/chatBubble_bot_notify_bang.png"
+		gui.Image.Button.Image = "arlasset://textures/chatBubble_bot_notify_bang.png"
 	elseif purpose == Enum.DialogPurpose.Help then
-		gui.Image.Button.Image = "rbxasset://textures/chatBubble_bot_notify_question.png"
+		gui.Image.Button.Image = "arlasset://textures/chatBubble_bot_notify_question.png"
 	elseif purpose == Enum.DialogPurpose.Shop then
-		gui.Image.Button.Image = "rbxasset://textures/chatBubble_bot_notify_money.png"
+		gui.Image.Button.Image = "arlasset://textures/chatBubble_bot_notify_money.png"
 	end
 end
 
@@ -319,7 +319,7 @@ function initialize(parent)
 	imageLabel.Name = "Tail"
 	imageLabel.Size = UDim2.new(0,62,0,53)
 	imageLabel.Position = UDim2.new(1,8,0.25)
-	imageLabel.Image = "rbxasset://textures/chatBubble_botBlue_tailRight.png"
+	imageLabel.Image = "arlasset://textures/chatBubble_botBlue_tailRight.png"
 	imageLabel.BackgroundTransparency = 1
    imageLabel.RobloxLocked = true
 	imageLabel.Parent = mainFrame

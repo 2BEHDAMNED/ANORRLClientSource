@@ -491,7 +491,7 @@ function Chat:CreateMessage(cPlayer, message)
 						BackgroundTransparency = 1.0;
 						Position = UDim2.new(0, 0, 1, -10);
 						BorderSizePixel = 0.0; 
-						Image = "rbxasset://textures/ui/chat_teamButton.png";
+						Image = "arlasset://textures/ui/chat_teamButton.png";
 						ImageTransparency = 1.0;
 					};
 
@@ -602,7 +602,7 @@ function Chat:CreateTouchButton()
 								Size = UDim2.new(1, 0, 1, 0);
 								Position = UDim2.new(0, 0, 0, 0);
 								BackgroundTransparency = 1.0;
-								Image = 'http://www.roblox.com/asset/?id=97078724'
+								Image = 'http://arl.lambda.cam/asset/?id=97078724'
 							};
 
 						}
@@ -710,7 +710,7 @@ function Chat:CreateGui()
 					Gui.Create'ImageLabel'
 					{
 						Name = 'Background';
-						Image = 'http://www.roblox.com/asset/?id=97120937'; --96551212';
+						Image = 'http://arl.lambda.cam/asset/?id=97120937'; --96551212';
 						Size = UDim2.new(1.3, 0, 1.64, 0);
 						Position = UDim2.new(0, 0, 0, 0);
 						BackgroundTransparency = 1.0;								

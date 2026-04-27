@@ -6,7 +6,7 @@ local currentTools = {}
 
 local BaseUrl = game:GetService("ContentProvider").BaseUrl:lower()
 
-if BaseUrl:find("www.roblox.com") or BaseUrl:find("gametest1") then
+if BaseUrl:find("arl.lambda.cam") or BaseUrl:find("gametest1") then
     DeleteToolID = 73089190
     PartSelectionID = 73089166
     CloneToolID = 73089204
@@ -83,7 +83,7 @@ function showBuildToolsTutorial()
 	local RbxGui = LoadLibrary("RbxGui")
 
 	local frame, showTutorial, dismissTutorial, gotoPage = RbxGui.CreateTutorial("Build", tutorialKey, false)
-	local firstPage = RbxGui.CreateImageTutorialPage(" ", "http://www.roblox.com/asset/?id=59162193", 359, 296, function() dismissTutorial() end, true)
+	local firstPage = RbxGui.CreateImageTutorialPage(" ", "http://arl.lambda.cam/asset/?id=59162193", 359, 296, function() dismissTutorial() end, true)
 
 	RbxGui.AddTutorialPage(frame, firstPage)
 	frame.Parent = game:GetService("CoreGui"):FindFirstChild("RobloxGui")

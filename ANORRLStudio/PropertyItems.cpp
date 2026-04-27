@@ -2375,7 +2375,7 @@ public:
 			pLineEdit->text().toInt(&ok);
 
 			if (ok)
-				pLineEdit->setText(QString("rbxassetid://%1").arg(pLineEdit->text()));
+				pLineEdit->setText(QString("arlassetid://%1").arg(pLineEdit->text()));
 			
 			if (ARL::ContentProvider::isUrl(pLineEdit->text().toStdString()) || pLineEdit->text().isEmpty())
 			{

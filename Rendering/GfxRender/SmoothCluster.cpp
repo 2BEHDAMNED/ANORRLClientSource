@@ -238,13 +238,13 @@ static void setupTextures(VisualEngine* visualEngine, Technique& technique)
 
 	int lodIndex = technique.getLodIndex();
 
-	technique.setTexture(0, tm->load(ContentId("rbxasset://terrain/diffuse" + kTextureExtension), TextureManager::Fallback_White), lodIndex < 2 ? SamplerState::Filter_Anisotropic : SamplerState::Filter_Linear);
+	technique.setTexture(0, tm->load(ContentId("arlasset://terrain/diffuse" + kTextureExtension), TextureManager::Fallback_White), lodIndex < 2 ? SamplerState::Filter_Anisotropic : SamplerState::Filter_Linear);
 
 	if (lodIndex < 1)
-		technique.setTexture(1, tm->load(ContentId("rbxasset://terrain/normal" + kTextureExtension), TextureManager::Fallback_NormalMap), SamplerState::Filter_Linear);
+		technique.setTexture(1, tm->load(ContentId("arlasset://terrain/normal" + kTextureExtension), TextureManager::Fallback_NormalMap), SamplerState::Filter_Linear);
 
 	if (lodIndex < 2)
-		technique.setTexture(2, tm->load(ContentId("rbxasset://terrain/specular" + kTextureExtension), TextureManager::Fallback_Black), SamplerState::Filter_Linear);
+		technique.setTexture(2, tm->load(ContentId("arlasset://terrain/specular" + kTextureExtension), TextureManager::Fallback_Black), SamplerState::Filter_Linear);
 
 	technique.setTexture(3, sceneManager->getEnvMap()->getTexture(), SamplerState::Filter_Linear);
 

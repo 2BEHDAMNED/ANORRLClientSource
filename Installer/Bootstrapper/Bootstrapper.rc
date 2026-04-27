@@ -125,7 +125,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,6,4,323
+ FILEVERSION 1,6,5,156
  PRODUCTVERSION 1,6,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
@@ -143,7 +143,7 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "GraceRBLX"
             VALUE "FileDescription", "ANORRL"
-            VALUE "FileVersion", "1, 6, 4, 323"
+            VALUE "FileVersion", "1, 6, 5, 156"
             VALUE "LegalCopyright", "(C) 2026 GraceRBLX.  All rights reserved."
             VALUE "OriginalFilename", "ANORRL.exe"
             VALUE "ProductName", "ANORRL Bootstrapper"

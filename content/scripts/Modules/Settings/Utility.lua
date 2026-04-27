@@ -9,10 +9,10 @@
 local SELECTED_COLOR = Color3.new(135/255,0,1)
 local NON_SELECTED_COLOR = Color3.new(78/255,84/255,96/255)
 
-local SELECTED_LEFT_IMAGE = "rbxasset://textures/ui/Settings/Slider/SelectedBarLeft.png"
-local NON_SELECTED_LEFT_IMAGE = "rbxasset://textures/ui/Settings/Slider/BarLeft.png"
-local SELECTED_RIGHT_IMAGE = "rbxasset://textures/ui/Settings/Slider/SelectedBarRight.png"
-local NON_SELECTED_RIGHT_IMAGE= "rbxasset://textures/ui/Settings/Slider/BarRight.png"
+local SELECTED_LEFT_IMAGE = "arlasset://textures/ui/Settings/Slider/SelectedBarLeft.png"
+local NON_SELECTED_LEFT_IMAGE = "arlasset://textures/ui/Settings/Slider/BarLeft.png"
+local SELECTED_RIGHT_IMAGE = "arlasset://textures/ui/Settings/Slider/SelectedBarRight.png"
+local NON_SELECTED_RIGHT_IMAGE= "arlasset://textures/ui/Settings/Slider/BarRight.png"
 
 local CONTROLLER_SCROLL_DELTA = 0.2
 local CONTROLLER_THUMBSTICK_DEADZONE = 0.8
@@ -333,7 +333,7 @@ local function MakeButton(name, text, size, clickFunc, pageRef, hubRef)
 	local button = Util.Create'ImageButton'
 	{
 		Name = name .. "Button",
-		Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
+		Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(8,6,46,44),
 		AutoButtonColor = false,
@@ -378,7 +378,7 @@ local function MakeButton(name, text, size, clickFunc, pageRef, hubRef)
 		end
 
 		if (hub and hub.Active or hub == nil) then
-			button.Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButtonSelected.png"
+			button.Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuButtonSelected.png"
 			
 			if clickFunc then
 				couldBeFunc = clickFunc
@@ -395,7 +395,7 @@ local function MakeButton(name, text, size, clickFunc, pageRef, hubRef)
 	end
 
 	local function deselectButton()
-		button.Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButton.png"
+		button.Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuButton.png"
 		if clickFunc and couldBeFunc == clickFunc then
 			couldBeFunc = nil
 		end
@@ -513,7 +513,7 @@ local function CreateDropDown(dropDownStringTable, startPosition, settingsHub)
 	local DropDownSelectionFrame = Util.Create'ImageLabel'
 	{
 		Name = "DropDownSelectionFrame",
-		Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
+		Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(8,6,46,44),
 		BackgroundTransparency = 1,
@@ -597,7 +597,7 @@ local function CreateDropDown(dropDownStringTable, startPosition, settingsHub)
 	local dropDownImage = Util.Create'ImageLabel'
 	{
 		Name = "DropDownImage",
-		Image = "rbxasset://textures/ui/Settings/DropDown/DropDown.png",
+		Image = "arlasset://textures/ui/Settings/DropDown/DropDown.png",
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0,15,0,10),
 		Position = UDim2.new(1, -45,0.5,-7),
@@ -877,7 +877,7 @@ local function CreateSelector(selectionStringTable, startPosition)
 		BackgroundTransparency = 1,
 		Position = UDim2.new(1,-24,0.5,-15),
 		Size =  UDim2.new(0,18,0,30),
-		Image =  "rbxasset://textures/ui/Settings/Slider/Left.png",
+		Image =  "arlasset://textures/ui/Settings/Slider/Left.png",
 		ZIndex = 2,
 		Active = true,
 		Parent = leftButton
@@ -888,7 +888,7 @@ local function CreateSelector(selectionStringTable, startPosition)
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0,6,0.5,-15),
 		Size =  UDim2.new(0,18,0,30),
-		Image =  "rbxasset://textures/ui/Settings/Slider/Right.png",
+		Image =  "arlasset://textures/ui/Settings/Slider/Right.png",
 		ZIndex = 2,
 		Parent = rightButton
 	};
@@ -1145,7 +1145,7 @@ local function ShowAlert(alertMessage, okButtonText, settingsHub, okPressedFunc,
 	local AlertViewBacking = Util.Create'ImageLabel'
 	{
 		Name = "AlertViewBacking",
-		Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
+		Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuButton.png",
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(8,6,46,44),
 		BackgroundTransparency = 1,
@@ -1312,7 +1312,7 @@ local function CreateNewSlider(numOfSteps, startStep, minStep)
 		BackgroundTransparency = 1,
 		Position = UDim2.new(1,-24,0.5,-15),
 		Size =  UDim2.new(0,18,0,30),
-		Image =  "rbxasset://textures/ui/Settings/Slider/Left.png",
+		Image =  "arlasset://textures/ui/Settings/Slider/Left.png",
 		ZIndex = 2,
 		Parent = leftButton
 	};
@@ -1322,7 +1322,7 @@ local function CreateNewSlider(numOfSteps, startStep, minStep)
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0,6,0.5,-15),
 		Size =  UDim2.new(0,18,0,30),
-		Image =  "rbxasset://textures/ui/Settings/Slider/Right.png",
+		Image =  "arlasset://textures/ui/Settings/Slider/Right.png",
 		ZIndex = 2,
 		Parent = rightButton
 	};

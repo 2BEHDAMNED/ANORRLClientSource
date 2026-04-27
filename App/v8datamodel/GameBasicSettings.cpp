@@ -603,7 +603,6 @@ void GameBasicSettings::reset()
 	freeLook = false;
 	setUploadVideoSetting(GameSettings::ASK);
 	setPostImageSetting(GameSettings::ASK);
-	googleAnalyticsClientId = std::string();
 }
 
 /*override*/ void GameBasicSettings::verifySetParent(const Instance* instance) const

@@ -761,7 +761,7 @@ QString ImagePickerWidget::getImageUrl(const QString& lastValue, const QPoint& l
 		QFrame* widget = new QFrame();
 		widget->setLayout(new QHBoxLayout());
 
-		QString url = QString("rbxgameasset://%1").arg(imageNames[i]);
+		QString url = QString("arlgameasset://%1").arg(imageNames[i]);
 		QLabel* image = new QLabel();
 
 		if (shared_ptr<const std::string> data =
@@ -852,7 +852,7 @@ void ImagePickerWidget::handleListItemClicked(QListWidgetItem* item)
 		if (created)
 		{
 			hasUrl = true;
-			url = QString("rbxgameasset://%1").arg(newName);
+			url = QString("arlgameasset://%1").arg(newName);
 		}
 	}
 

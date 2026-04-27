@@ -16,7 +16,7 @@ namespace ARL
 
     CustomParticleEmitter::CustomParticleEmitter()
     : DescribedCreatable<CustomParticleEmitter, Instance, sParticleEmitter>("ParticleEmitter")
-    , texture("rbxasset://textures/particles/sparkles_main.dds")
+    , texture("arlasset://textures/particles/sparkles_main.dds")
     , color( Color3(1,1,1) )
     , transparency(0)
     , size( 1 )

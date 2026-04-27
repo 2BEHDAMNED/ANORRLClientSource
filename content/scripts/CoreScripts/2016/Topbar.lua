@@ -150,7 +150,7 @@ local function CreateTopBar()
 	};
 
 	if GameSettings:IsAeroEnabled() then
-		topbarContainer.Image = "rbxasset://textures/ui/TopBar/aero.png";
+		topbarContainer.Image = "arlasset://textures/ui/TopBar/aero.png";
 		topbarContainer.ImageTransparency = 0.5;
 	end
 
@@ -158,7 +158,7 @@ local function CreateTopBar()
 		Name = "TopBarShadow";
 		Size = UDim2.new(1, 0, 0, 3);
 		Position = UDim2.new(0, 0, 1, 0);
-		Image = "rbxasset://textures/ui/TopBar/dropshadow.png";
+		Image = "arlasset://textures/ui/TopBar/dropshadow.png";
 		BackgroundTransparency = 1;
 		Active = false;
 		Visible = false;
@@ -695,9 +695,9 @@ local function CreateSettingsIcon(topBarInstance)
 			add = "Down"
 		end
 		if GameSettings:IsAeroEnabled() then
-			return "rbxasset://textures/ui/aero/Menu/Hamburger"..add..".png"
+			return "arlasset://textures/ui/aero/Menu/Hamburger"..add..".png"
 		else
-			return "rbxasset://textures/ui/boring/Menu/Hamburger"..add..".png"
+			return "arlasset://textures/ui/boring/Menu/Hamburger"..add..".png"
 		end
 	end
 
@@ -774,7 +774,7 @@ local function CreateUnreadMessagesNotifier(ChatModule)
 		Size = UDim2.new(0, 18, 0, 18);
 		Position = UDim2.new(1, -12, 0, -4);
 		BackgroundTransparency = 1;
-		Image = "rbxasset://textures/ui/Chat/MessageCounter.png";
+		Image = "arlasset://textures/ui/Chat/MessageCounter.png";
 		Visible = false;
 	};
 
@@ -854,9 +854,9 @@ local function CreateChatIcon()
 	
 	local function getPath(image)
 		if GameSettings:IsAeroEnabled() then
-			return "rbxasset://textures/ui/aero/Chat/"..image..".png"
+			return "arlasset://textures/ui/aero/Chat/"..image..".png"
 		else
-			return "rbxasset://textures/ui/boring/Chat/"..image..".png"
+			return "arlasset://textures/ui/boring/Chat/"..image..".png"
 		end
 	end
 
@@ -998,7 +998,7 @@ local function CreateMobileHideChatIcon()
 		Size = UDim2.new(0, 28, 0, 27);
 		Position = UDim2.new(0.5, -14, 0.5, -13);
 		BackgroundTransparency = 1;
-		Image = "rbxasset://textures/ui/Chat/ToggleChat.png";
+		Image = "arlasset://textures/ui/Chat/ToggleChat.png";
 		Parent = chatHideIconButton;
 	};
 
@@ -1007,9 +1007,9 @@ local function CreateMobileHideChatIcon()
 
 	local function updateIcon(down)
 		if down then
-			chatIconImage.Image = "rbxasset://textures/ui/Chat/ToggleChatDown.png";
+			chatIconImage.Image = "arlasset://textures/ui/Chat/ToggleChatDown.png";
 		else
-			chatIconImage.Image = "rbxasset://textures/ui/Chat/ToggleChat.png";
+			chatIconImage.Image = "arlasset://textures/ui/Chat/ToggleChat.png";
 		end
 	end
 
@@ -1054,9 +1054,9 @@ local function CreateBackpackIcon()
 			add = "Down"
 		end
 		if GameSettings:IsAeroEnabled() then
-			return "rbxasset://textures/ui/aero/Backpack/Backpack"..add..".png"
+			return "arlasset://textures/ui/aero/Backpack/Backpack"..add..".png"
 		else
-			return "rbxasset://textures/ui/boring/Backpack/Backpack"..add..".png"
+			return "arlasset://textures/ui/boring/Backpack/Backpack"..add..".png"
 		end
 	end
 
@@ -1146,9 +1146,9 @@ local function CreateEmotesIcon()
 		end
 		
 		if GameSettings:IsAeroEnabled() then
-			return "rbxasset://textures/ui/aero/Emotes/EmotesIcon"..add..".png"
+			return "arlasset://textures/ui/aero/Emotes/EmotesIcon"..add..".png"
 		else
-			return "rbxasset://textures/ui/boring/Emotes/EmotesIcon"..add..".png"
+			return "arlasset://textures/ui/boring/Emotes/EmotesIcon"..add..".png"
 		end
 	end
 
@@ -1231,7 +1231,7 @@ local function CreateStopRecordIcon()
 		Size = UDim2.new(0, 28, 0, 28);
 		Position = UDim2.new(0.5, -14, 0.5, -14);
 		BackgroundTransparency = 1;
-		Image = "rbxasset://textures/ui/RecordDown.png";
+		Image = "arlasset://textures/ui/RecordDown.png";
 		Parent = stopRecordIconButton;
 	};
 
@@ -1256,7 +1256,7 @@ local function CreateShiftLockIcon()
 		Size = UDim2.new(0, 31, 0, 31);
 		Position = UDim2.new(0.5, -15, 0.5, -15);
 		BackgroundTransparency = 1;
-		Image = "rbxasset://textures/ui/ShiftLock/ShiftLock.png";
+		Image = "arlasset://textures/ui/ShiftLock/ShiftLock.png";
 		Parent = shiftlockIconButton;
 	};
 
@@ -1264,10 +1264,10 @@ local function CreateShiftLockIcon()
 	shiftlockIconButton.MouseButton1Click:connect(function()
 		if shiftlockActive == false then
 			shiftlockActive = true
-			shiftlockIconLabel.Image = "rbxasset://textures/ui/ShiftLock/ShiftLockDown.png";
+			shiftlockIconLabel.Image = "arlasset://textures/ui/ShiftLock/ShiftLockDown.png";
 		else
 			shiftlockActive = false
-			shiftlockIconLabel.Image = "rbxasset://textures/ui/ShiftLock/ShiftLock.png";
+			shiftlockIconLabel.Image = "arlasset://textures/ui/ShiftLock/ShiftLock.png";
 		end
 	end)
 
@@ -1311,7 +1311,7 @@ local function UpdateAeroLook(active)
 	local topbar = TopBar:GetInstance()
 	if active then
 		topbar.ImageTransparency = 0.5
-		topbar.Image = "rbxasset://textures/ui/TopBar/aero.png"
+		topbar.Image = "arlasset://textures/ui/TopBar/aero.png"
 	else
 		topbar.ImageTransparency = 1
 		topbar.Image = ""

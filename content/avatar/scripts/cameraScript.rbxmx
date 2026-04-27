@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 <Item class="LocalScript" referent="RBX3C5D0BEBF6ED413EA31B5A5E9C0B72A7">
@@ -3911,9 +3911,9 @@ if not UserInputService.TouchEnabled then	-- TODO: Remove when safe on mobile
 end
 
 --[[ Constants ]]--
-local SHIFT_LOCK_OFF = 'rbxasset://textures/ui/mouseLock_off.png'
-local SHIFT_LOCK_ON = 'rbxasset://textures/ui/mouseLock_on.png'
-local SHIFT_LOCK_CURSOR = 'rbxasset://textures/MouseLockedCursor.png'
+local SHIFT_LOCK_OFF = 'arlasset://textures/ui/mouseLock_off.png'
+local SHIFT_LOCK_ON = 'arlasset://textures/ui/mouseLock_on.png'
+local SHIFT_LOCK_CURSOR = 'arlasset://textures/MouseLockedCursor.png'
 
 --[[ Local Functions ]]--
 local function onShiftLockToggled()
@@ -4289,4 +4289,4 @@ return CreateTransparencyController
 		</Properties>
 	</Item>
 </Item>
-</roblox>
+</anorrl>

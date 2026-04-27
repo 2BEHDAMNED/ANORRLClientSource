@@ -23,7 +23,7 @@ DYNAMIC_FASTFLAGVARIABLE(UrlReconstructRejectInvalidSchemes, false);
 
 namespace
 {			
-	const char* kNamedUniverseAssetBase = "rbxgameasset://";
+	const char* kNamedUniverseAssetBase = "arlgameasset://";
 	const char* kNamedUniverseAssetAssetNameParam = "assetName=";
 
 	const char* kValidAssetPaths[] =
@@ -157,7 +157,7 @@ namespace ARL
 	{
 		boost::scoped_array<char> url(new char[id.length()+1]);
 
-		// remove any spaces since HTParse stops parsing at the first space and we need to handle "http://www.roblox.com/asset/?id= 1818"
+		// remove any spaces since HTParse stops parsing at the first space and we need to handle "http://arl.lambda.cam/asset/?id= 1818"
 		char* urlIter = url.get();
 		for (size_t i = 0; i < id.length(); ++i)
 		{
@@ -175,7 +175,7 @@ namespace ARL
 
             // As of 2016-02-09 ContentId::id strings may have following forms:
             // - http://host/path?query -- a valid HTTP URL
-            // - rbxasset://something/file
+            // - arlasset://something/file
             // - /asset/?query -- these should not be valid
             
             // Only HTTP URLs are subject for reconstruction
@@ -373,7 +373,7 @@ namespace ARL
 	}
 
 	ContentId ContentId::fromAssets(const char* filePath) {
-		std::string header("rbxasset://");
+		std::string header("arlasset://");
 		return ContentId(header + filePath);
 	}
 

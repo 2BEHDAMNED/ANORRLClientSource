@@ -43,28 +43,28 @@ local function getButtonForCoreGuiType(coreGuiType)
 end
 
 local function getImagesForSlot(slot)
-	if slot == 1 then		return "rbxasset://textures/ui/Settings/Radial/Top.png", "rbxasset://textures/ui/Settings/Radial/TopSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/Menu.png",
+	if slot == 1 then		return "arlasset://textures/ui/Settings/Radial/Top.png", "arlasset://textures/ui/Settings/Radial/TopSelected.png",
+									"arlasset://textures/ui/Settings/Radial/Menu.png",
 									UDim2.new(0.5,-26,0,18), UDim2.new(0,52,0,41),
 									UDim2.new(0,150,0,100), UDim2.new(0.5,-75,0,0)
-	elseif slot == 2 then	return "rbxasset://textures/ui/Settings/Radial/TopRight.png", "rbxasset://textures/ui/Settings/Radial/TopRightSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/PlayerList.png",
+	elseif slot == 2 then	return "arlasset://textures/ui/Settings/Radial/TopRight.png", "arlasset://textures/ui/Settings/Radial/TopRightSelected.png",
+									"arlasset://textures/ui/Settings/Radial/PlayerList.png",
 									UDim2.new(1,-90,0,90), UDim2.new(0,52,0,52),
 									UDim2.new(0,108,0,150), UDim2.new(1,-110,0,50)
-	elseif slot == 3 then	return "rbxasset://textures/ui/Settings/Radial/BottomRight.png", "rbxasset://textures/ui/Settings/Radial/BottomRightSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/Alert.png",
+	elseif slot == 3 then	return "arlasset://textures/ui/Settings/Radial/BottomRight.png", "arlasset://textures/ui/Settings/Radial/BottomRightSelected.png",
+									"arlasset://textures/ui/Settings/Radial/Alert.png",
 									UDim2.new(1,-85,1,-150), UDim2.new(0,42,0,58),
 									UDim2.new(0,120,0,150), UDim2.new(1,-120,1,-200)
-	elseif slot == 4 then 	return "rbxasset://textures/ui/Settings/Radial/Bottom.png", "rbxasset://textures/ui/Settings/Radial/BottomSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/Leave.png",
+	elseif slot == 4 then 	return "arlasset://textures/ui/Settings/Radial/Bottom.png", "arlasset://textures/ui/Settings/Radial/BottomSelected.png",
+									"arlasset://textures/ui/Settings/Radial/Leave.png",
 									UDim2.new(0.5,-20,1,-62), UDim2.new(0,55,0,46),
 									UDim2.new(0,150,0,100), UDim2.new(0.5,-75,1,-100)
-	elseif slot == 5 then	return "rbxasset://textures/ui/Settings/Radial/BottomLeft.png", "rbxasset://textures/ui/Settings/Radial/BottomLeftSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/Backpack.png",
+	elseif slot == 5 then	return "arlasset://textures/ui/Settings/Radial/BottomLeft.png", "arlasset://textures/ui/Settings/Radial/BottomLeftSelected.png",
+									"arlasset://textures/ui/Settings/Radial/Backpack.png",
 									UDim2.new(0,40,1,-150), UDim2.new(0,44,0,56),
 									UDim2.new(0,110,0,150), UDim2.new(0,0,0,205)
-	elseif slot == 6 then	return "rbxasset://textures/ui/Settings/Radial/TopLeft.png", "rbxasset://textures/ui/Settings/Radial/TopLeftSelected.png",
-									"rbxasset://textures/ui/Settings/Radial/Chat.png",
+	elseif slot == 6 then	return "arlasset://textures/ui/Settings/Radial/TopLeft.png", "arlasset://textures/ui/Settings/Radial/TopLeftSelected.png",
+									"arlasset://textures/ui/Settings/Radial/Chat.png",
 									UDim2.new(0,35,0,100), UDim2.new(0,56,0,53),
 									UDim2.new(0,110,0,150), UDim2.new(0,0,0,50)
 	end
@@ -99,11 +99,11 @@ local function setButtonEnabled(button, enabled)
 	end
 	
 	if enabled then
-		button.Image = string.gsub(button.Image, "rbxasset://textures/ui/Settings/Radial/Empty", "rbxasset://textures/ui/Settings/Radial/")
+		button.Image = string.gsub(button.Image, "arlasset://textures/ui/Settings/Radial/Empty", "arlasset://textures/ui/Settings/Radial/")
 		button.ImageTransparency = 0
 		button.RadialIcon.ImageTransparency = 0
 	else
-		button.Image = string.gsub(button.Image, "rbxasset://textures/ui/Settings/Radial/", "rbxasset://textures/ui/Settings/Radial/Empty")
+		button.Image = string.gsub(button.Image, "arlasset://textures/ui/Settings/Radial/", "arlasset://textures/ui/Settings/Radial/Empty")
 		button.ImageTransparency = 0
 		button.RadialIcon.ImageTransparency = 1
 	end
@@ -134,7 +134,7 @@ local function createRadialButton(name, text, slot, disabled, coreGuiType, activ
 		Parent = gamepadSettingsFrame
 	};
 	if disabled then
-		radialButton.Image = string.gsub(radialButton.Image, "rbxasset://textures/ui/Settings/Radial/", "rbxasset://textures/ui/Settings/Radial/Empty")
+		radialButton.Image = string.gsub(radialButton.Image, "arlasset://textures/ui/Settings/Radial/", "arlasset://textures/ui/Settings/Radial/Empty")
 	end
 
 	local selectedRadial = utility:Create'ImageLabel'
@@ -186,7 +186,7 @@ local function createRadialButton(name, text, slot, disabled, coreGuiType, activ
 		Size = UDim2.new(1,0,1,0),
 		Position = UDim2.new(0,0,0,2),
 		BackgroundTransparency = 1,
-		Image = "rbxasset://textures/ui/Settings/Radial/RadialLabel@2x.png",
+		Image = "arlasset://textures/ui/Settings/Radial/RadialLabel@2x.png",
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(24,4,130,42),
 		ZIndex = 2,
@@ -315,11 +315,11 @@ local function createGamepadMenuGui()
 		Position = UDim2.new(1,10,1,10),
 		Size = UDim2.new(0,60,0,60),
 		BackgroundTransparency = 1,
-		Image = "rbxasset://textures/ui/Settings/Help/BButtonDark.png",
+		Image = "arlasset://textures/ui/Settings/Help/BButtonDark.png",
 		Parent = gamepadSettingsFrame
 	}
 	if isTenFootInterface then
-		closeHintImage.Image = "rbxasset://textures/ui/Settings/Help/BButtonDark@2x.png"
+		closeHintImage.Image = "arlasset://textures/ui/Settings/Help/BButtonDark@2x.png"
 		closeHintImage.Size =  UDim2.new(0,90,0,90)
 	end
 
@@ -349,7 +349,7 @@ local function createGamepadMenuGui()
 		Position = UDim2.new(0,-100,1,10),
 		Size = UDim2.new(0,61,0,61),
 		BackgroundTransparency = 1,
-		Image = "rbxasset://textures/ui/Settings/Help/YButtonDark.png",
+		Image = "arlasset://textures/ui/Settings/Help/YButtonDark.png",
 		Visible = recordPage:IsRecording(),
 		Parent = gamepadSettingsFrame
 	}

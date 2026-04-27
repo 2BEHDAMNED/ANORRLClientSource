@@ -21,7 +21,7 @@ local ADMINS =
 	zeuxcg = 1,
 	concol2 = 1,
 	reesemcblox = 1,
-	jeditkacheff = 'http://www.roblox.com/asset/?id=134032333',
+	jeditkacheff = 'http://arl.lambda.cam/asset/?id=134032333',
 	whkm1980 = 1,
 	chiefjustus = 1,
 	ellissar = 1,
@@ -43,7 +43,7 @@ local ADMINS =
 	bellavour = 1,
 	['david.baszucki'] = 1,
 	ibanez2189 = 1,
-	sorcus = 'http://www.roblox.com/asset/?id=113059239',
+	sorcus = 'http://arl.lambda.cam/asset/?id=113059239',
 	deeana00 = 1,
 	thelorekt = 1,
 	niquemonster = 1,
@@ -71,7 +71,7 @@ local ADMINS =
 	jaykorean = 1,
 	foyle = 1,
 	majortom4321 = 1,
-	shedletsky = 'http://www.roblox.com/asset/?id=105897927',
+	shedletsky = 'http://arl.lambda.cam/asset/?id=105897927',
 	supernovacaine = 1,
 	ffjosh = 1,
 	sickenedmonkey = 1,
@@ -115,7 +115,7 @@ local ADMINS =
 	nobledragon = 1,
 	squidcod = 1,
 	raeglyn = 1,
-	robloxsai = 'http://www.roblox.com/asset/?id=161078086',
+	robloxsai = 'http://arl.lambda.cam/asset/?id=161078086',
 	briarroze = 1,
 	hawkeyebandit = 1,
 	dapperbuffalo = 1,
@@ -238,18 +238,18 @@ end
 function getMembershipTypeIcon(membershipType,playerName)
 	if ADMINS[string.lower(playerName)]~=nil then
 		if ADMINS[string.lower(playerName)] == 1 then
-			return "http://www.roblox.com/asset/?id=99727663"
+			return "http://arl.lambda.cam/asset/?id=99727663"
 		else
 			return ADMINS[string.lower(playerName)]
 		end
 	elseif membershipType == Enum.MembershipType.None then
 		return ""
 	elseif membershipType == Enum.MembershipType.BuildersClub then
-		return "rbxasset://textures/ui/TinyBcIcon.png"
+		return "arlasset://textures/ui/TinyBcIcon.png"
 	elseif membershipType == Enum.MembershipType.TurboBuildersClub then
-		return "rbxasset://textures/ui/TinyTbcIcon.png"
+		return "arlasset://textures/ui/TinyTbcIcon.png"
 	elseif membershipType == Enum.MembershipType.OutrageousBuildersClub then
-		return "rbxasset://textures/ui/TinyObcIcon.png"
+		return "arlasset://textures/ui/TinyObcIcon.png"
 	else
 		error("Unknown membershipType" .. membershipType)
 	end	
@@ -259,11 +259,11 @@ local function getFriendStatusIcon(friendStatus)
 	if friendStatus == Enum.FriendStatus.Unknown or friendStatus == Enum.FriendStatus.NotFriend then
 		return ""
 	elseif friendStatus == Enum.FriendStatus.Friend then
-		return "http://www.roblox.com/asset/?id=99749771"
+		return "http://arl.lambda.cam/asset/?id=99749771"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestSent then
-		return "http://www.roblox.com/asset/?id=99776888"
+		return "http://arl.lambda.cam/asset/?id=99776888"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestReceived then
-		return "http://www.roblox.com/asset/?id=99776838"
+		return "http://arl.lambda.cam/asset/?id=99776838"
 	else
 		error("Unknown FriendStatus: " .. friendStatus)
 	end
@@ -376,7 +376,7 @@ local HeaderFrame = Obj.Create"Frame"
 	Position = UDim2.new(0,0,0,0),
 	Size = UDim2.new(1, 0, .07, 0),
 	Parent = MainFrame,
-	MakeBackgroundGuiObj('http://www.roblox.com/asset/?id=94692054'),
+	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=94692054'),
 }
 	local HeaderFrameHeight = HeaderFrame.Size.Y.Scale
 	local MaximizeButton = Obj.Create"ImageButton"
@@ -455,7 +455,7 @@ local BottomShiftFrame = Obj.Create"Frame"
 			Name = 'extendTab',
 			Active = true,
 			BackgroundTransparency = 1,
-			Image = 'rbxasset://textures/ui/expandPlayerList.png',
+			Image = 'arlasset://textures/ui/expandPlayerList.png',
 			Position = UDim2.new(.608, 0, .3, 0),
 			Size = UDim2.new(0,27,0,11),
 			Parent = BottomFrame,
@@ -627,7 +627,7 @@ local MiddleBGTemplate = Obj.Create"Frame"
 	BackgroundTransparency = 1,
 	Position = UDim2.new(100,0,.07,0),
 	Size = UDim2.new(.5, 0, .025, 0),--UDim2.new(1, 0, .03, 0),
-	MakeBackgroundGuiObj('http://www.roblox.com/asset/?id=94692025'),
+	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=94692025'),
 	
 }
 
@@ -662,7 +662,7 @@ local AbuseSettingsFrame = Obj.Create"Frame"
 	Size = UDim2.new(1, 0, 1, 0),
 	Active = true,
 	BackgroundTransparency = 1,
-	MakeBackgroundGuiObj('http://www.roblox.com/asset/?id=96488767'), -- 96480351'),
+	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96488767'), -- 96480351'),
 	Obj.Create"TextLabel"
 	{
 		Name = "Title",
@@ -749,7 +749,7 @@ local SubmitReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(.5, - 200, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = false,
-	Image = 'http://www.roblox.com/asset/?id=96502438', -- 96501119',
+	Image = 'http://arl.lambda.cam/asset/?id=96502438', -- 96501119',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -760,7 +760,7 @@ local CancelReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(0.5, 50, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = true,
-	Image = 'http://www.roblox.com/asset/?id=96500683',
+	Image = 'http://arl.lambda.cam/asset/?id=96500683',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -799,7 +799,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position=UDim2.new(0.25, 0, 0.300000012, 0),
 	Size=UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://www.roblox.com/asset/?id=96506233'),
+	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -835,7 +835,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://www.roblox.com/asset/?id=96507959',
+		Image = 'http://arl.lambda.cam/asset/?id=96507959',
 	}
 }
 local NormalAbuseBox = Obj.Create'Frame'
@@ -844,7 +844,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position = UDim2.new(0.25, 0, 0.300000012, 0),
 	Size = UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://www.roblox.com/asset/?id=96506233'),
+	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -880,7 +880,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://www.roblox.com/asset/?id=96507959',
+		Image = 'http://arl.lambda.cam/asset/?id=96507959',
 	},
 }
 
@@ -960,7 +960,7 @@ local DefaultEntriesOnScreen = 8
 
 
 for _,i in pairs(Images) do
-	Game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id="..i)
+	Game:GetService("ContentProvider"):Preload("http://arl.lambda.cam/asset/?id="..i)
 end
 
  -- ordered array of 'score data', each entry has:
@@ -1239,20 +1239,20 @@ end
 	player		Player to check for rank on
 --]]
 function HighlightMyRank(player,BanPlayerButton,VisitorButton,MemberButton,AdminButton)
-	BanPlayerButton.Image= 'http://www.roblox.com/asset/?id='..Images['LightPopupMid']
-	VisitorButton.Image= 'http://www.roblox.com/asset/?id='..Images['DarkPopupMid']
-	MemberButton.Image= 'http://www.roblox.com/asset/?id='..Images['LightPopupMid']
-	AdminButton.Image= 'http://www.roblox.com/asset/?id='..Images['DarkPopupBottom']
+	BanPlayerButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['LightPopupMid']
+	VisitorButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkPopupMid']
+	MemberButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['LightPopupMid']
+	AdminButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkPopupBottom']
 	
 	local rank=player.PersonalServerRank
 	if rank <= PrivilegeLevel['Banned'] then
-		BanPlayerButton.Image='http://www.roblox.com/asset/?id='..Images['LightBluePopupMid']
+		BanPlayerButton.Image='http://arl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Visitor'] then
-		VisitorButton.Image='http://www.roblox.com/asset/?id='..Images['DarkBluePopupMid']
+		VisitorButton.Image='http://arl.lambda.cam/asset/?id='..Images['DarkBluePopupMid']
 	elseif rank <= PrivilegeLevel['Member'] then
-		MemberButton.Image='http://www.roblox.com/asset/?id='..Images['LightBluePopupMid']
+		MemberButton.Image='http://arl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Admin'] then
-		AdminButton.Image= 'http://www.roblox.com/asset/?id='..Images['DarkBluePopupBottom']
+		AdminButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkBluePopupBottom']
 	end
 end
 
@@ -1298,7 +1298,7 @@ end
 function CloseAbuseDialog()
 	AbuseName = nil
 	SubmitReportButton.Active = false
-	SubmitReportButton.Image = 'http://www.roblox.com/asset/?id=96502438' -- 96501119',
+	SubmitReportButton.Image = 'http://arl.lambda.cam/asset/?id=96502438' -- 96501119',
 	AbuseDescriptionBox:Destroy()
 	CalmingAbuseBox.Parent = nil
 	NormalAbuseBox.Parent = nil
@@ -1315,7 +1315,7 @@ function InitReportAbuse()
 		AbuseName = abuseText 
 		if AbuseName and SelectedPlayer then
 			SubmitReportButton.Active = true
-			SubmitReportButton.Image = 'http://www.roblox.com/asset/?id=96501119'
+			SubmitReportButton.Image = 'http://arl.lambda.cam/asset/?id=96501119'
 		end
 	end
 	
@@ -1718,7 +1718,7 @@ function UpdateMinimize()
 		BottomClipFrame.Position = UDim2.new(0,0,-1,0)
 		BottomFrame.Position = UDim2.new(0,0,0,0)
 		FocusFrame.Size=UDim2.new(1,0,HeaderFrameHeight,0)
-		ExtendTab.Image = 'rbxasset://textures/ui/expandPlayerList.png'
+		ExtendTab.Image = 'arlasset://textures/ui/expandPlayerList.png'
 	else
 		if not IsMaximized.Value then
 			MainFrame.Size = NormalBounds
@@ -1732,7 +1732,7 @@ function UpdateMinimize()
 		local bottomPositon = (DefaultBottomClipPos+BottomClipFrame.Size.Y.Scale)
 		BottomFrame.Position=UDim2.new(0,0,bottomPositon,0)
 		FocusFrame.Size=UDim2.new(1,0,bottomPositon + HeaderFrameHeight,0)
-		ExtendTab.Image = 'rbxasset://textures/ui/expandPlayerList.png' 
+		ExtendTab.Image = 'arlasset://textures/ui/expandPlayerList.png' 
 	end
 end
 

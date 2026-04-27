@@ -53,12 +53,12 @@ namespace ARL {
 		std::string getUnConvertedAssetName() const;
 
 		bool isNull() const { return id.size()==0; }
-		bool isAsset() const { return id.compare(0, 11, "rbxasset://") == 0; }
-		bool isAssetId() const { return id.compare(0, 13, "rbxassetid://") == 0; }
+		bool isAsset() const { return id.compare(0, 11, "arlasset://") == 0; }
+		bool isAssetId() const { return id.compare(0, 13, "arlassetid://") == 0; }
 		bool isHttp() const { return id.compare(0, 4, "http") == 0; }
 		bool isFile() const { return id.compare(0, 7, "file://") == 0; }
-		bool isRbxHttp() const { return id.compare(0, 10, "rbxhttp://") == 0; }
-		bool isAppContent() const { return id.compare(0, 9, "rbxapp://") == 0; }
+		bool isRbxHttp() const { return id.compare(0, 10, "arlhttp://") == 0; }
+		bool isAppContent() const { return id.compare(0, 9, "arlapp://") == 0; }
 		bool isNamedAsset() const;
 		bool isConvertedNamedAsset() const;
 

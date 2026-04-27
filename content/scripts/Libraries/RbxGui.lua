@@ -124,13 +124,13 @@ t.CreateStyledMessageDialog = function(title, message, style, buttons)
 	styleImage.Position = UDim2.new(0,5,0,15)
 	if style == "error" or style == "Error" then
 		styleImage.Size = UDim2.new(0, 71, 0, 71)
-		styleImage.Image = "http://www.roblox.com/asset/?id=42565285"
+		styleImage.Image = "http://arl.lambda.cam/asset/?id=42565285"
 	elseif style == "notify" or style == "Notify" then
 		styleImage.Size = UDim2.new(0, 71, 0, 71)
-		styleImage.Image = "http://www.roblox.com/asset/?id=42604978"
+		styleImage.Image = "http://arl.lambda.cam/asset/?id=42604978"
 	elseif style == "confirm" or style == "Confirm" then
 		styleImage.Size = UDim2.new(0, 74, 0, 76)
-		styleImage.Image = "http://www.roblox.com/asset/?id=42557901"
+		styleImage.Image = "http://arl.lambda.cam/asset/?id=42557901"
 	else
 		return t.CreateMessageDialog(title,message,buttons)
 	end
@@ -250,7 +250,7 @@ t.CreateScrollingDropDownMenu = function(onSelectedCallback, size, position, bas
 	icon.Name = "DropDownIcon"
 	icon.Size = UDim2.new(0, 16, 0, 12)
 	icon.Position = UDim2.new(1, -17, 0.5, -6)
-	icon.Image = 'rbxasset://textures/ui/dropdown_arrow.png'
+	icon.Image = 'arlasset://textures/ui/dropdown_arrow.png'
 	icon.BackgroundTransparency = 1
 	icon.ZIndex = baseZIndex
 	icon.Parent = currentSelectionName
@@ -360,9 +360,9 @@ t.CreateScrollingDropDownMenu = function(onSelectedCallback, size, position, bas
 		listMenu.ZIndex = baseZIndex + 2
 		listMenu.Visible = false
 		listMenu.Active = true
-		listMenu.BottomImage = 'rbxasset://textures/ui/scroll-bottom.png'
-		listMenu.MidImage = 'rbxasset://textures/ui/scroll-middle.png'
-		listMenu.TopImage = 'rbxasset://textures/ui/scroll-top.png'
+		listMenu.BottomImage = 'arlasset://textures/ui/scroll-bottom.png'
+		listMenu.MidImage = 'arlasset://textures/ui/scroll-middle.png'
+		listMenu.TopImage = 'arlasset://textures/ui/scroll-top.png'
 		listMenu.ScrollBarThickness = 0
 		listMenu.Parent = frame
 
@@ -471,11 +471,11 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 	dropDownIcon.Name = "Icon"
 	dropDownIcon.Active = false
 	if (whiteSkin) then
-		dropDownIcon.Image = "rbxasset://textures/ui/dropdown_arrow.png"
+		dropDownIcon.Image = "arlasset://textures/ui/dropdown_arrow.png"
 		dropDownIcon.Size = UDim2.new(0,16,0,12)
 		dropDownIcon.Position = UDim2.new(1,-17,0.5, -6)
 	else
-		dropDownIcon.Image = "http://www.roblox.com/asset/?id=45732894"
+		dropDownIcon.Image = "http://arl.lambda.cam/asset/?id=45732894"
 		dropDownIcon.Size = UDim2.new(0,11,0,6)
 		dropDownIcon.Position = UDim2.new(1,-11,0.5, -2)
 	end
@@ -670,7 +670,7 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 		scrollUpButton = Instance.new("ImageButton")
 		scrollUpButton.Name = "ScrollUpButton"
 		scrollUpButton.BackgroundTransparency = 1
-		scrollUpButton.Image = "rbxasset://textures/ui/scrollbuttonUp.png"
+		scrollUpButton.Image = "arlasset://textures/ui/scrollbuttonUp.png"
 		scrollUpButton.Size = UDim2.new(0,17,0,17) 
 		scrollUpButton.Position = UDim2.new(1,-11,(1*.8)/((dropDownItemCount+1)*.8),0)
 		scrollUpButton.MouseButton1Click:connect(
@@ -701,7 +701,7 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 		scrollDownButton = Instance.new("ImageButton")
 		scrollDownButton.Name = "ScrollDownButton"
 		scrollDownButton.BackgroundTransparency = 1
-		scrollDownButton.Image = "rbxasset://textures/ui/scrollbuttonDown.png"
+		scrollDownButton.Image = "arlasset://textures/ui/scrollbuttonDown.png"
 		scrollDownButton.Size = UDim2.new(0,17,0,17) 
 		scrollDownButton.Position = UDim2.new(1,-11,1,-11)
 		scrollDownButton.Parent = droppedDownMenu
@@ -730,7 +730,7 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 
 		local scrollbar = Instance.new("ImageLabel")
 		scrollbar.Name = "ScrollBar"
-		scrollbar.Image = "rbxasset://textures/ui/scrollbar.png"
+		scrollbar.Image = "arlasset://textures/ui/scrollbar.png"
 		scrollbar.BackgroundTransparency = 1
 		scrollbar.Size = UDim2.new(0, 18, (dropDownItemCount*.8)/((dropDownItemCount+1)*.8), -(17) - 11 - 4)
 		scrollbar.Position = UDim2.new(1,-11,(1*.8)/((dropDownItemCount+1)*.8),17+2)
@@ -1037,7 +1037,7 @@ t.CreateSlider = function(steps,width,position)
 	local slider = Instance.new("ImageButton")
 	slider.Name = "Slider"
 	slider.BackgroundTransparency = 1
-	slider.Image = "rbxasset://textures/ui/Slider.png"
+	slider.Image = "arlasset://textures/ui/Slider.png"
 	slider.Position = UDim2.new(0,0,0.5,-10)
 	slider.Size = UDim2.new(0,20,0,20)
 	slider.ZIndex = 3
@@ -1122,7 +1122,7 @@ t.CreateSliderNew = function(steps,width,position)
 
 	local bar = Instance.new("ImageButton")
 	bar.BackgroundTransparency = 1
-	bar.Image = "rbxasset://textures/ui/Slider-BKG-Center.png"
+	bar.Image = "arlasset://textures/ui/Slider-BKG-Center.png"
 	bar.Name = "Bar"
 	local displayWidth = 200
 	if type(width) == "number" then
@@ -1139,7 +1139,7 @@ t.CreateSliderNew = function(steps,width,position)
 
 	local barLeft = bar:clone()
 	barLeft.Name = "BarLeft"
-	barLeft.Image = "rbxasset://textures/ui/Slider-BKG-Left-Cap.png"
+	barLeft.Image = "arlasset://textures/ui/Slider-BKG-Left-Cap.png"
 	barLeft.Size = UDim2.new(0, sliderBarCapImgWidth, 0, sliderBarImgHeight)
 	barLeft.Position = UDim2.new(position.X.Scale, position.X.Offset - sliderBarCapImgWidth, position.Y.Scale, position.Y.Offset)
 	barLeft.Parent = sliderGui	
@@ -1147,19 +1147,19 @@ t.CreateSliderNew = function(steps,width,position)
 
 	local barRight = barLeft:clone()
 	barRight.Name = "BarRight"
-	barRight.Image = "rbxasset://textures/ui/Slider-BKG-Right-Cap.png"
+	barRight.Image = "arlasset://textures/ui/Slider-BKG-Right-Cap.png"
 	barRight.Position = UDim2.new(position.X.Scale, position.X.Offset + displayWidth, position.Y.Scale, position.Y.Offset)
 	barRight.Parent = sliderGui	
 
 	local fillLeft = barLeft:clone()
 	fillLeft.Name = "FillLeft"
-	fillLeft.Image = "rbxasset://textures/ui/Slider-Fill-Left-Cap.png"
+	fillLeft.Image = "arlasset://textures/ui/Slider-Fill-Left-Cap.png"
 	fillLeft.Parent = sliderGui	
 	fillLeft.ZIndex = 4
 
 	local fill = fillLeft:clone()
 	fill.Name = "Fill"
-	fill.Image = "rbxasset://textures/ui/Slider-Fill-Center.png"
+	fill.Image = "arlasset://textures/ui/Slider-Fill-Center.png"
 	fill.Parent = bar	
 	fill.ZIndex = 4
 	fill.Position = UDim2.new(0, 0, 0, 0)
@@ -1171,7 +1171,7 @@ t.CreateSliderNew = function(steps,width,position)
 	local slider = Instance.new("ImageButton")
 	slider.Name = "Slider"
 	slider.BackgroundTransparency = 1
-	slider.Image = "rbxasset://textures/ui/slider_new_tab.png"
+	slider.Image = "arlasset://textures/ui/slider_new_tab.png"
 	slider.Position = UDim2.new(0,0,0.5,-14)
 	slider.Size = UDim2.new(0,28,0,28)
 	slider.ZIndex = 5
@@ -1718,26 +1718,26 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 	local scrollUpButton = Instance.new("ImageButton")
 	scrollUpButton.Name = "ScrollUpButton"
 	scrollUpButton.BackgroundTransparency = 1
-	scrollUpButton.Image = "rbxasset://textures/ui/scrollbuttonUp.png"
+	scrollUpButton.Image = "arlasset://textures/ui/scrollbuttonUp.png"
 	scrollUpButton.Size = UDim2.new(0,17,0,17) 
 
 	
 	local scrollDownButton = Instance.new("ImageButton")
 	scrollDownButton.Name = "ScrollDownButton"
 	scrollDownButton.BackgroundTransparency = 1
-	scrollDownButton.Image = "rbxasset://textures/ui/scrollbuttonDown.png"
+	scrollDownButton.Image = "arlasset://textures/ui/scrollbuttonDown.png"
 	scrollDownButton.Size = UDim2.new(0,17,0,17) 
 	
 	local scrollbar = Instance.new("ImageButton")
 	scrollbar.Name = "ScrollBar"
-	scrollbar.Image = "rbxasset://textures/ui/scrollbar.png"
+	scrollbar.Image = "arlasset://textures/ui/scrollbar.png"
 	scrollbar.BackgroundTransparency = 1
 	scrollbar.Size = UDim2.new(0, 18, 0, 150)
 
 	local scrollStamp = 0
 		
 	local scrollDrag = Instance.new("ImageButton")
-	scrollDrag.Image = "http://www.roblox.com/asset/?id=61367186"
+	scrollDrag.Image = "http://arl.lambda.cam/asset/?id=61367186"
 	scrollDrag.Size = UDim2.new(1, 0, 0, 16)
 	scrollDrag.BackgroundTransparency = 1
 	scrollDrag.Name = "ScrollDrag"
@@ -2537,15 +2537,15 @@ local function CreateBasicTutorialPage(name, handleResize, skipTutorial, giveDon
 	skipButton.Name = "SkipButton"
 	skipButton.AutoButtonColor = false
 	skipButton.BackgroundTransparency = 1
-	skipButton.Image = "rbxasset://textures/ui/closeButton.png"
+	skipButton.Image = "arlasset://textures/ui/closeButton.png"
 	skipButton.MouseButton1Click:connect(function()
 		skipTutorial()
 	end)
 	skipButton.MouseEnter:connect(function()
-		skipButton.Image = "rbxasset://textures/ui/closeButton_dn.png"
+		skipButton.Image = "arlasset://textures/ui/closeButton_dn.png"
 	end)
 	skipButton.MouseLeave:connect(function()
-		skipButton.Image = "rbxasset://textures/ui/closeButton.png"
+		skipButton.Image = "arlasset://textures/ui/closeButton.png"
 	end)
 	skipButton.Size = UDim2.new(0, 25, 0, 25)
 	skipButton.Position = UDim2.new(1, -25, 0, 0)
@@ -3017,7 +3017,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 				local cancelImage = Instance.new("ImageLabel")
 				cancelImage.Name = "CancelImage"
 				cancelImage.BackgroundTransparency = 1
-				cancelImage.Image = "http://www.roblox.com/asset/?id=54135717"
+				cancelImage.Image = "http://arl.lambda.cam/asset/?id=54135717"
 				cancelImage.Position = UDim2.new(0,-2,0,-2)
 				cancelImage.Size = UDim2.new(0,16,0,16)
 				cancelImage.ZIndex = 6
@@ -3219,7 +3219,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 	local function createDropDownMenuButton(parent)
 		local dropDownButton = Instance.new("ImageButton")
 		dropDownButton.Name = "DropDownButton"
-		dropDownButton.Image = "http://www.roblox.com/asset/?id=67581509"
+		dropDownButton.Image = "http://arl.lambda.cam/asset/?id=67581509"
 		dropDownButton.BackgroundTransparency = 1
 		dropDownButton.Size = UDim2.new(0,16,0,16)
 		dropDownButton.Position = UDim2.new(1,-24,0,6)
@@ -3651,24 +3651,24 @@ t.CreateTerrainMaterialSelector = function(size,position)
 	-- we so need a better way to do this
 	for i,v in pairs(materialNames) do
 		materialToImageMap[v] = {}
-		if v == "Grass" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=56563112"
-		elseif v == "Sand" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=62356652"
-		elseif v == "Brick" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=65961537"
-		elseif v == "Granite" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532153"
-		elseif v == "Asphalt" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532038"
-		elseif v == "Iron" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532093"
-		elseif v == "Aluminum" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67531995"
-		elseif v == "Gold" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532118"
-		elseif v == "Plastic (red)" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67531848"
-		elseif v == "Plastic (blue)" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67531924"
-		elseif v == "Plank" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532015"
-		elseif v == "Log" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532051"
-		elseif v == "Gravel" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532206"
-		elseif v == "Cinder Block" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532103"
-		elseif v == "Stone Wall" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67531804"
-		elseif v == "Concrete" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=67532059"
-		elseif v == "Water" then materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=81407474"
-		else materialToImageMap[v].Regular = "http://www.roblox.com/asset/?id=66887593" -- fill in the rest here!!
+		if v == "Grass" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=56563112"
+		elseif v == "Sand" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=62356652"
+		elseif v == "Brick" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=65961537"
+		elseif v == "Granite" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532153"
+		elseif v == "Asphalt" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532038"
+		elseif v == "Iron" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532093"
+		elseif v == "Aluminum" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67531995"
+		elseif v == "Gold" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532118"
+		elseif v == "Plastic (red)" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67531848"
+		elseif v == "Plastic (blue)" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67531924"
+		elseif v == "Plank" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532015"
+		elseif v == "Log" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532051"
+		elseif v == "Gravel" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532206"
+		elseif v == "Cinder Block" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532103"
+		elseif v == "Stone Wall" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67531804"
+		elseif v == "Concrete" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=67532059"
+		elseif v == "Water" then materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=81407474"
+		else materialToImageMap[v].Regular = "http://arl.lambda.cam/asset/?id=66887593" -- fill in the rest here!!
 		end
 	end
 
@@ -3771,7 +3771,7 @@ t.CreateTerrainMaterialSelector = function(size,position)
 end
 
 t.CreateLoadingFrame = function(name,size,position)
-	game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id=35238053")
+	game:GetService("ContentProvider"):Preload("http://arl.lambda.cam/asset/?id=35238053")
 
 	local loadingFrame = Instance.new("Frame")
 	loadingFrame.Name = "LoadingFrame"
@@ -3792,7 +3792,7 @@ t.CreateLoadingFrame = function(name,size,position)
 
 		local loadingGreenBar = Instance.new("ImageLabel")
 		loadingGreenBar.Name = "LoadingGreenBar"
-		loadingGreenBar.Image = "http://www.roblox.com/asset/?id=35238053"
+		loadingGreenBar.Image = "http://arl.lambda.cam/asset/?id=35238053"
 		loadingGreenBar.Position = UDim2.new(0,0,0,0)
 		loadingGreenBar.Size = UDim2.new(0,0,1,0)
 		loadingGreenBar.Visible = false

@@ -258,7 +258,7 @@ local function CreateSettingsHub()
 			BorderSizePixel = 0,
 			BackgroundColor3 = Color3.new(78/255, 84/255, 96/255),
 			BackgroundTransparency = 1,
-			Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuBackground.png",
+			Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuBackground.png",
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(4,4,6,6),
 			Parent = this.Shield
@@ -363,7 +363,7 @@ local function CreateSettingsHub()
 
 			if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
 				local function createInviteButton()
-					addBottomBarButton("InviteToGame", "Send Game Invites", "rbxasset://textures/ui/Settings/Help/XButtonLight" .. buttonImageAppend .. ".png",
+					addBottomBarButton("InviteToGame", "Send Game Invites", "arlasset://textures/ui/Settings/Help/XButtonLight" .. buttonImageAppend .. ".png",
 						"", UDim2.new(0.5,isTenFootInterface and -160 or -130,0.5,-25),
 						inviteToGameFunc, {Enum.KeyCode.ButtonX})
 				end
@@ -381,16 +381,16 @@ local function CreateSettingsHub()
 					createInviteButton()
 				end
 			else
-				addBottomBarButton("LeaveGame", "Leave Game", "rbxasset://textures/ui/Settings/Help/XButtonLight" .. buttonImageAppend .. ".png",
-					"rbxasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5,isTenFootInterface and -160 or -130,0.5,-25),
+				addBottomBarButton("LeaveGame", "Leave Game", "arlasset://textures/ui/Settings/Help/XButtonLight" .. buttonImageAppend .. ".png",
+					"arlasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5,isTenFootInterface and -160 or -130,0.5,-25),
 					leaveGameFunc, {Enum.KeyCode.L, Enum.KeyCode.ButtonX})
 			end
 
-			addBottomBarButton("ResetCharacter", "    Reset Character", "rbxasset://textures/ui/Settings/Help/YButtonLight" .. buttonImageAppend .. ".png",
-				"rbxasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5,isTenFootInterface and -550 or -400,0.5,-25),
+			addBottomBarButton("ResetCharacter", "    Reset Character", "arlasset://textures/ui/Settings/Help/YButtonLight" .. buttonImageAppend .. ".png",
+				"arlasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5,isTenFootInterface and -550 or -400,0.5,-25),
 				resetCharFunc, {Enum.KeyCode.R, Enum.KeyCode.ButtonY})
-			addBottomBarButton("Resume", "Resume Game", "rbxasset://textures/ui/Settings/Help/BButtonLight" .. buttonImageAppend .. ".png",
-				"rbxasset://textures/ui/Settings/Help/EscapeIcon.png", UDim2.new(0.5,isTenFootInterface and 200 or 140,0.5,-25),
+			addBottomBarButton("Resume", "Resume Game", "arlasset://textures/ui/Settings/Help/BButtonLight" .. buttonImageAppend .. ".png",
+				"arlasset://textures/ui/Settings/Help/EscapeIcon.png", UDim2.new(0.5,isTenFootInterface and 200 or 140,0.5,-25),
 				resumeFunc, {Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart})
 		end
 
@@ -801,9 +801,9 @@ local function CreateSettingsHub()
 			sound.PlayOnRemove = true
 			sound.Volume = 5
 			if not this.Visible then
-				sound.SoundId = "rbxasset://sounds/aero/minimize.mp3"
+				sound.SoundId = "arlasset://sounds/aero/minimize.mp3"
 			else
-				sound.SoundId = "rbxasset://sounds/aero/restore.mp3"
+				sound.SoundId = "arlasset://sounds/aero/restore.mp3"
 			end
 			
 			sound.Ended:Connect(function()

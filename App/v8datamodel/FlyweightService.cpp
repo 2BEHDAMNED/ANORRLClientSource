@@ -301,7 +301,7 @@ namespace ARL
 	bool FlyweightService::isChildData(shared_ptr<ARL::Instance> childData)
 	{
 		if (shared_ptr<ARL::BinaryStringValue> bStrValue = ARL::Instance::fastSharedDynamicCast<ARL::BinaryStringValue>(childData))
-			if (strncmp(bStrValue->getValue().value().c_str(), "<roblox", 6) == 0)
+			if (strncmp(bStrValue->getValue().value().c_str(), "<anorrl", 6) == 0)
 				return true;
 		return false;
 	}

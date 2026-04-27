@@ -52,7 +52,7 @@ popupImage.Parent = popupFrame
 local backing = Instance.new("ImageLabel")
 backing.BackgroundTransparency = 1
 backing.Size = UDim2.new(1,0,1,0)
-backing.Image = "http://www.roblox.com/asset/?id=47574181"
+backing.Image = "http://arl.lambda.cam/asset/?id=47574181"
 backing.Name = "Backing"
 backing.ZIndex = 2
 backing.Parent = popupImage

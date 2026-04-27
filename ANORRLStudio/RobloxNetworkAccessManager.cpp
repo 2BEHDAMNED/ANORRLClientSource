@@ -16,7 +16,7 @@
 RobloxNetworkAccessManager::RobloxNetworkAccessManager()
 : QNetworkAccessManager()
 {
-	// When we enable the Cookie Persistence, logging into mail.roblox.com stops working, but works fine for www.roblox.com with persistence
+	// When we enable the Cookie Persistence, logging into mail.roblox.com stops working, but works fine for arl.lambda.cam with persistence
 	setCookieJar(new RobloxCookieJar());
 }
 void RobloxNetworkAccessManager::initUserAgent()

@@ -131,14 +131,14 @@ local function CreateEmotes()
 		background.BackgroundTransparency = 1
 		background.Position = UDim2.new(0,0,0,0)
 		background.Size = UDim2.new(1,0,1,0)
-		background.Image = "rbxasset://textures/ui/Emotes/Wheel/CircleBackground@2x.png"
+		background.Image = "arlasset://textures/ui/Emotes/Wheel/CircleBackground@2x.png"
 		background.Name = "Background"
 		
 		local segments = Instance.new("ImageLabel", whole_frame)
 		segments.BackgroundTransparency = 1
 		segments.Position = UDim2.new(0,0,0,0)
 		segments.Size = UDim2.new(1,0,1,0)
-		segments.Image = "rbxasset://textures/ui/Emotes/Wheel/SegmentedCircle@2x.png"
+		segments.Image = "arlasset://textures/ui/Emotes/Wheel/SegmentedCircle@2x.png"
 		segments.Name = "Segments"
 		segments.ZIndex = 5
 		
@@ -151,7 +151,7 @@ local function CreateEmotes()
 		frame.Position = UDim2.new(x, 0, y, 0)
 		frame.Size = UDim2.new(0, 100, 0, 100)
 		frame.ZIndex = 10
-		frame.Image = "rbxasset://textures/ui/Emotes/EmoteIcon.png"
+		frame.Image = "arlasset://textures/ui/Emotes/EmoteIcon.png"
 		frame.BackgroundColor3 = Color3.new(255,255,255)
 		frame.BackgroundTransparency = 1
 		
@@ -237,7 +237,7 @@ local function CreateEmotes()
 		
 		local gradient = Instance.new("ImageLabel", frame)
 		gradient.BackgroundTransparency = 1
-		gradient.Image = "rbxasset://textures/ui/Emotes/Wheel/SelectedGradient@2x.png"
+		gradient.Image = "arlasset://textures/ui/Emotes/Wheel/SelectedGradient@2x.png"
 		gradient.ZIndex = 2
 		gradient.Position = UDim2.new(0.5,0,0.5,-53)
 		gradient.Size = UDim2.new(0,138,0,106)
@@ -271,12 +271,12 @@ local function CreateEmotes()
                 self.slot = self:selectSlot()
 				local newEmote = self.LoadedEmotes[self.slot]
 				if oldEmote and oldEmote ~= newEmote then
-					oldEmote.EmoteFrame.Image = "rbxasset://textures/ui/Emotes/EmoteIcon.png"
+					oldEmote.EmoteFrame.Image = "arlasset://textures/ui/Emotes/EmoteIcon.png"
 				end
 				if self.slot == 0 or (not newEmote) then
 					self.EmoteNameLabel.Text = #self.Emotes > 0 and "" or "You have no emotes!"
 				else
-					newEmote.EmoteFrame.Image = "rbxasset://textures/ui/Emotes/EmoteIconHover.png"
+					newEmote.EmoteFrame.Image = "arlasset://textures/ui/Emotes/EmoteIconHover.png"
 					this.EmoteNameLabel.Text = newEmote.name
 				end
             end
@@ -327,7 +327,7 @@ local function CreateEmotes()
 		
 		if GameSettings:IsAeroEnabled() then
 			local sound = Instance.new("Sound", game.CoreGui)
-			sound.SoundId = "rbxasset://sounds/aero/menu_command.mp3"
+			sound.SoundId = "arlasset://sounds/aero/menu_command.mp3"
 			sound.Volume = 5
 			sound.Ended:connect(function()
 				sound:Remove()

@@ -215,7 +215,7 @@ shared_ptr<KeyframeSequence> KeyframeSequenceProvider::privateGetKeyframeSequenc
 	{
 		std::string url = ""; 
 		std::string assetString(assetId.c_str()); 		
-		unsigned pos = 12; // this is the size of the AssetId header "rbxassetid://"
+		unsigned pos = 12; // this is the size of the AssetId header "arlassetid://"
 		if (!assetId.isAssetId()) 
 		{
 			pos = assetString.find_last_of("=");  // if it's not an AssetId, find the id in the string

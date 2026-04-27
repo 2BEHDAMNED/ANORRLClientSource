@@ -102,9 +102,21 @@ local function Initialize()
 		this.GraphicsQualityLabel,
 		this.GraphicsQualitySlider = utility:AddNewRow(this, "Graphics Quality", "Slider", GRAPHICS_QUALITY_LEVELS, 1)
 		this.GraphicsQualitySlider:SetMinStep(1)
+		
+		------------------ uhmmm loading script dark mode yeah ---------------------
+		
+		local darkModeIndex = 1
+		
+		if GameSettings.LoadingScriptDarkMode then
+			darkModeIndex = 2
+		end 
+		
+		this.DarkModeEnablerFrame, 
+		this.DarkModeEnablerLabel,
+		this.DarkModeEnablerEnabler = utility:AddNewRow(this, "Loading Screen Dark Mode", "Selector", {"Off", "On"}, darkModeIndex)
 
 		------------------------- Connection Setup ----------------------------
-		settings().Rendering.EnableFRM = true
+		settings().Rendering.EnableFRM = false
 
 		function SetGraphicsQuality(newValue, automaticSettingAllowed)
 			local percentage = newValue/GRAPHICS_QUALITY_LEVELS
@@ -168,7 +180,11 @@ local function Initialize()
 				setGraphicsToManual( this.GraphicsQualitySlider:GetValue() )
 			end
 		end)
-
+		
+		this.DarkModeEnablerEnabler.IndexChanged:connect(function(newIndex)
+			GameSettings.LoadingScriptDarkMode = newIndex == 2
+		end)
+		
 		-- initialize the slider position
 		if GameSettings.SavedQualityLevel == Enum.SavedQualitySetting.Automatic then
 			this.GraphicsQualitySlider:SetValue(5)
@@ -484,7 +500,7 @@ local function Initialize()
 		
 		local volumeSound = Instance.new("Sound", game.CoreGui.RobloxGui.Sounds)
 		volumeSound.Name = "VolumeChangeSound"
-		volumeSound.SoundId = "rbxasset://sounds/uuhhh.mp3"
+		volumeSound.SoundId = "arlasset://sounds/uuhhh.mp3"
 
 		this.VolumeSlider.ValueChanged:connect(function(newValue)
 			local soundPercent = newValue/10
@@ -602,13 +618,13 @@ local function Initialize()
 	------ TAB CUSTOMIZATION -------
 	this.TabHeader.Name = "GameSettingsTab"
 
-	this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/GameSettingsTab.png"
+	this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/GameSettingsTab.png"
 	if utility:IsSmallTouchScreen() then
 		this.TabHeader.Icon.Size = UDim2.new(0,34,0,34)
 		this.TabHeader.Icon.Position = UDim2.new(this.TabHeader.Icon.Position.X.Scale,this.TabHeader.Icon.Position.X.Offset,0.5,-17)
 		this.TabHeader.Size = UDim2.new(0,125,1,0)
 	elseif isTenFootInterface then
-		this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/GameSettingsTab@2x.png"
+		this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/GameSettingsTab@2x.png"
 		this.TabHeader.Icon.Size = UDim2.new(0,90,0,90)
 		this.TabHeader.Icon.Position = UDim2.new(0,0,0.5,-43)
 		this.TabHeader.Size = UDim2.new(0,280,1,0)

@@ -428,7 +428,7 @@ static Reflection::PropDescriptor<ImageHandleAdornment, TextureId> prop_imageLoc
 ImageHandleAdornment::ImageHandleAdornment()
 	: DescribedCreatable<ImageHandleAdornment, HandleAdornment, sImageHandleAdornment>(sImageHandleAdornment)
 	, size(Vector2(1.0f, 1.0f))
-	, image("rbxasset://textures/SurfacesDefault.png")
+	, image("arlasset://textures/SurfacesDefault.png")
 {
 	color = BrickColor::brickWhite().color3();
 }

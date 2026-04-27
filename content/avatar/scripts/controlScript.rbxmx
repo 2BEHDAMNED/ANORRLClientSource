@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 <Item class="LocalScript" referent="RBX45966e4432354a8391b7bc068c91e900">
@@ -871,7 +871,7 @@ local TouchObject = nil
 local OnInputEnded = nil		-- defined in Create()
 
 --[[ Constants ]]--
-local DPAD_SHEET = "rbxasset://textures/ui/DPadSheet.png"
+local DPAD_SHEET = "arlasset://textures/ui/DPadSheet.png"
 local COMPASS_DIR = {
 	Vector3.new(1, 0, 0),			-- E
 	Vector3.new(1, 0, 1).unit,		-- SE
@@ -1430,8 +1430,8 @@ local OnTouchEndedCn = nil
 local currentMoveVector = Vector3.new(0,0,0)
 
 --[[ Constants ]]--
-local DPAD_SHEET = "rbxasset://textures/ui/DPadSheet.png"
-local TOUCH_CONTROL_SHEET = "rbxasset://textures/ui/TouchControlsSheet.png"
+local DPAD_SHEET = "arlasset://textures/ui/DPadSheet.png"
+local TOUCH_CONTROL_SHEET = "arlasset://textures/ui/TouchControlsSheet.png"
 
 --[[ Local Functions ]]--
 local function createArrowLabel(name, parent, position, size, rectOffset, rectSize)
@@ -1653,7 +1653,7 @@ local OnTouchEndedCn = nil
 local currentMoveVector = Vector3.new(0,0,0)
 
 --[[ Constants ]]--
-local TOUCH_CONTROL_SHEET = "rbxasset://textures/ui/TouchControlsSheet.png"
+local TOUCH_CONTROL_SHEET = "arlasset://textures/ui/TouchControlsSheet.png"
 
 --[[ Public API ]]--
 function Thumbstick:Enable()
@@ -1822,7 +1822,7 @@ local JumpButton = nil
 local OnInputEnded = nil		-- defined in Create()
 
 --[[ Constants ]]--
-local TOUCH_CONTROL_SHEET = "rbxasset://textures/ui/TouchControlsSheet.png"
+local TOUCH_CONTROL_SHEET = "arlasset://textures/ui/TouchControlsSheet.png"
 
 --[[ Public API ]]--
 function TouchJump:Enable()
@@ -2061,4 +2061,4 @@ return VehicleController
 	</Item>
 </Item>
 </Item>
-</roblox>
+</anorrl>

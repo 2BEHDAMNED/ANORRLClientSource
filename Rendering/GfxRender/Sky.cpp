@@ -130,8 +130,8 @@ Sky::Sky(VisualEngine* visualEngine)
         loadSkyBoxDefault(skyBox);
 
     // preload sun/mon
-	sun = visualEngine->getTextureManager()->load(ContentId("rbxasset://sky/sun.jpg"), TextureManager::Fallback_BlackTransparent);
-	moon = visualEngine->getTextureManager()->load(ContentId("rbxasset://sky/moon.jpg"), TextureManager::Fallback_BlackTransparent);
+	sun = visualEngine->getTextureManager()->load(ContentId("arlasset://sky/sun.jpg"), TextureManager::Fallback_BlackTransparent);
+	moon = visualEngine->getTextureManager()->load(ContentId("arlasset://sky/moon.jpg"), TextureManager::Fallback_BlackTransparent);
 }
 
 Sky::~Sky()

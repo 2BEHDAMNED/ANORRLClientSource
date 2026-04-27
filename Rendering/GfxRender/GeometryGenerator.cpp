@@ -252,7 +252,7 @@ namespace Graphics
 	{
 		// Note that bevel, roundness and bulge are unique enough to determine the cylinder/block variant, so we'll use just that
 	#define LOOKUP(ifBevel, ifRoundness, ifBulge, head) \
-		if (G3D::fuzzyEq(bevel, ifBevel) && G3D::fuzzyEq(roundness, ifRoundness) && G3D::fuzzyEq(bulge, ifBulge)) return MeshId("rbxasset://avatar/meshes/heads/" head ".mesh")
+		if (G3D::fuzzyEq(bevel, ifBevel) && G3D::fuzzyEq(roundness, ifRoundness) && G3D::fuzzyEq(bulge, ifBulge)) return MeshId("arlasset://avatar/meshes/heads/" head ".mesh")
 	
 		if (specialShape)
 		{
@@ -261,12 +261,12 @@ namespace Graphics
 				if (shape->getMeshType() == SpecialShape::HEAD_MESH)
 				{
 					// Return the default head; scaling is taken care of in getMeshScale
-					return MeshId("rbxasset://avatar/meshes/head.mesh");
+					return MeshId("arlasset://avatar/meshes/head.mesh");
 				}
 				else if (shape->getMeshType() == SpecialShape::SPHERE_MESH)
 				{
 					// Return the sphere head; scaling is taken care of in getMeshScale
-					return MeshId("rbxasset://avatar/meshes/heads/L.mesh");
+					return MeshId("arlasset://avatar/meshes/heads/L.mesh");
 				}
 			}
 			else if (CylinderMesh* shape = specialShape->fastDynamicCast<CylinderMesh>())
@@ -296,7 +296,7 @@ namespace Graphics
 		}
 		
 		// fallback for all other head types
-		return MeshId("rbxasset://avatar/meshes/head.mesh");
+		return MeshId("arlasset://avatar/meshes/head.mesh");
 		
 	#undef LOOKUP
 	}
@@ -306,15 +306,15 @@ namespace Graphics
 		if (CharacterMesh* charmesh = hi.getRelevantMesh(part))
 			return charmesh->getMeshId();
 		else if (part == hi.torso && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
-			return MeshId("rbxasset://avatar/meshes/torso.mesh");
+			return MeshId("arlasset://avatar/meshes/torso.mesh");
 		else if (part == hi.leftArm && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
-			return MeshId("rbxasset://avatar/meshes/leftarm.mesh");
+			return MeshId("arlasset://avatar/meshes/leftarm.mesh");
 		else if (part == hi.rightArm && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
-			return MeshId("rbxasset://avatar/meshes/rightarm.mesh");
+			return MeshId("arlasset://avatar/meshes/rightarm.mesh");
 		else if (part == hi.leftLeg && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
-			return MeshId("rbxasset://avatar/meshes/leftleg.mesh");
+			return MeshId("arlasset://avatar/meshes/leftleg.mesh");
 		else if (part == hi.rightLeg && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
-			return MeshId("rbxasset://avatar/meshes/rightleg.mesh");
+			return MeshId("arlasset://avatar/meshes/rightleg.mesh");
 		else if (part == hi.head && (flags & GeometryGenerator::Resource_SubstituteBodyParts))
 			return getHeadMeshId(part, specialShape);
 		else
@@ -2321,7 +2321,7 @@ namespace Graphics
 		if (part->getCookie() & PartCookie::HAS_HEADMESH)
 		{
 			// Return the default head; scaling is taken care of in getMeshScale
-            boost::shared_ptr<FileMeshData> fileMeshData = fetchMesh<MeshContentProvider, FileMeshData, MeshId>(MeshId("rbxasset://avatar/meshes/head.mesh"), part, asyncResult);
+            boost::shared_ptr<FileMeshData> fileMeshData = fetchMesh<MeshContentProvider, FileMeshData, MeshId>(MeshId("arlasset://avatar/meshes/head.mesh"), part, asyncResult);
             return Resources(fileMeshData ? fileMeshData : kDummyMeshData);
 		}
 

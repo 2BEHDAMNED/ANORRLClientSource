@@ -253,8 +253,8 @@ namespace ARL {
 			verifyScriptSignature(source, required);
             
             // search for the asset header
-            // looks like "--rbxassetid%1818%"
-            const char* assetHeader = "--rbxassetid%";
+            // looks like "--arlassetid%1818%"
+            const char* assetHeader = "--arlassetid%";
             const char* idInScript = strstr(script, assetHeader); // will find first occurrence, which should be safe
             if (idInScript)
             {
@@ -289,8 +289,8 @@ namespace ARL {
 		try
 		{
             // sig can be behind a Lua comment
-            // looks like "--rbxsig%MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtfLLFT36v5r9bNP7STBteDU5a%"
-            const char* sigHeader = "--rbxsig%";
+            // looks like "--arlsig%MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtfLLFT36v5r9bNP7STBteDU5a%"
+            const char* sigHeader = "--arlsig%";
             if (strncmp(script, sigHeader, strlen(sigHeader)) == 0)
             {
                 const char* sigStart = script + strlen(sigHeader);
@@ -803,9 +803,9 @@ namespace ARL {
 	{
 		if (isHttpUrl(s))
 			return true;
-		if (s.find("rbxasset://")==0 && s.length() > std::string("rbxasset://").length())
+		if (s.find("arlasset://")==0 && s.length() > std::string("arlasset://").length())
 			return true;
-        if (s.find("rbxassetid://")==0 && s.length() > std::string("rbxassetid://").length())
+        if (s.find("arlassetid://")==0 && s.length() > std::string("arlassetid://").length())
             return true;
 		if (ContentId(s).isNamedAsset())
 			return true;

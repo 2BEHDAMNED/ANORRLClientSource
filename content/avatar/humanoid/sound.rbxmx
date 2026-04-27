@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 	<Item class="Script" referent="RBX440EE2113E074565A1C69E447652B15D">
@@ -29,17 +29,17 @@ end
 
 -- declarations
 
-local sGettingUp = newSound("GettingUp", "rbxasset://sounds/action_get_up.mp3")
-local sDied = newSound("Died", "rbxasset://sounds/uuhhh.mp3") 
-local sFreeFalling = newSound("FreeFalling", "rbxasset://sounds/action_falling.mp3")
-local sJumping = newSound("Jumping", "rbxasset://sounds/action_jump.mp3")
-local sLanding = newSound("Landing", "rbxasset://sounds/action_jump_land.mp3")
-local sSplash = newSound("Splash", "rbxasset://sounds/impact_water.mp3")
-local sRunning = newSound("Running", "rbxasset://sounds/action_footsteps_plastic.mp3")
+local sGettingUp = newSound("GettingUp", "arlasset://sounds/action_get_up.mp3")
+local sDied = newSound("Died", "arlasset://sounds/uuhhh.mp3") 
+local sFreeFalling = newSound("FreeFalling", "arlasset://sounds/action_falling.mp3")
+local sJumping = newSound("Jumping", "arlasset://sounds/action_jump.mp3")
+local sLanding = newSound("Landing", "arlasset://sounds/action_jump_land.mp3")
+local sSplash = newSound("Splash", "arlasset://sounds/impact_water.mp3")
+local sRunning = newSound("Running", "arlasset://sounds/action_footsteps_plastic.mp3")
 sRunning.Looped = true
-local sSwimming = newSound("Swimming", "rbxasset://sounds/action_swim.mp3")
+local sSwimming = newSound("Swimming", "arlasset://sounds/action_swim.mp3")
 sSwimming.Looped = true
-local sClimbing = newSound("Climbing", "rbxasset://sounds/action_footsteps_plastic.mp3")
+local sClimbing = newSound("Climbing", "arlasset://sounds/action_footsteps_plastic.mp3")
 sClimbing.Looped = true
 
 local Figure = script.Parent
@@ -314,4 +314,4 @@ end)
 			</Properties>
 		</Item>
 	</Item>
-</roblox>
+</anorrl>

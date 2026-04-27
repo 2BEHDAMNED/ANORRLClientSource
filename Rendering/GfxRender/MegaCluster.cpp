@@ -1378,10 +1378,10 @@ static unsigned int countQuads(const VoxelStore* store, const SpatialRegion::Id&
 
 const Vector3int16 MegaCluster::kMinCellOffset(-2,-1,-2);
 
-const std::string MegaCluster::kTerrainTexClose    = "rbxasset://textures/terrain/diffuse";
-const std::string MegaCluster::kTerrainTexFar      = "rbxasset://textures/terrain/diffusefar";
-const std::string MegaCluster::kTerrainTexNormals  = "rbxasset://textures/terrain/normal";
-const std::string MegaCluster::kTerrainTexSpecular = "rbxasset://textures/terrain/specular";
+const std::string MegaCluster::kTerrainTexClose    = "arlasset://textures/terrain/diffuse";
+const std::string MegaCluster::kTerrainTexFar      = "arlasset://textures/terrain/diffusefar";
+const std::string MegaCluster::kTerrainTexNormals  = "arlasset://textures/terrain/normal";
+const std::string MegaCluster::kTerrainTexSpecular = "arlasset://textures/terrain/specular";
 
 MegaCluster::MegaCluster(VisualEngine* visualEngine, const boost::shared_ptr<PartInstance>& part)
     : visualEngine(visualEngine)

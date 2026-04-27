@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 	<Item class="Model" referent="RBXFF48B6F5FC3A49258275900CE593573C">
@@ -162,8 +162,8 @@ end
 
 Adorn.setWorkplaneAccessor(getWorkplane)
 
-game:GetService("ContentProvider"):Preload("rbxassetid://232196030")
-game:GetService("ContentProvider"):Preload("rbxassetid://233257118")
+game:GetService("ContentProvider"):Preload("arlassetid://232196030")
+game:GetService("ContentProvider"):Preload("arlassetid://233257118")
 
 --handleDeclaration
 local H_NONE = 0
@@ -4993,14 +4993,14 @@ local shadowTransparency = 0.7
 local shadowTransparencyHover = 0.2
 --local gridSphere = nil
 
-local oneDegrees = "rbxasset://textures/transformOneDegree.png"
-local fiveDegrees = "rbxasset://textures/transformFiveDegrees.png"
-local oneEigthDegrees = "rbxasset://textures/transformTwentyTwoDegrees.png"
-local ninetyDegrees = "rbxasset://textures/transformNinetyDegrees.png"
-local planeImage = "rbxasset://textures/whiteCircle.png"
-local rotationArrow = "rbxasset://textures/rotationArrow.png"--"rbxassetid://232196030"
-local gradient = "rbxasset://textures/gradient.png"
---local planeImage = "rbxasset://textures/planeImage.png"
+local oneDegrees = "arlasset://textures/transformOneDegree.png"
+local fiveDegrees = "arlasset://textures/transformFiveDegrees.png"
+local oneEigthDegrees = "arlasset://textures/transformTwentyTwoDegrees.png"
+local ninetyDegrees = "arlasset://textures/transformNinetyDegrees.png"
+local planeImage = "arlasset://textures/whiteCircle.png"
+local rotationArrow = "arlasset://textures/rotationArrow.png"--"arlassetid://232196030"
+local gradient = "arlasset://textures/gradient.png"
+--local planeImage = "arlasset://textures/planeImage.png"
 
 --duplicate - please consolidate
 local H_NONE = 0
@@ -6753,4 +6753,4 @@ return module
 			</Properties>
 		</Item>
 	</Item>
-</roblox>
+</anorrl>

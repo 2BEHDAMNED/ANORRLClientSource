@@ -35,7 +35,7 @@ local function Initialize()
 
 	local playerLabelFakeSelection = Instance.new('ImageLabel')
 	playerLabelFakeSelection.BackgroundTransparency = 1
-	--[[playerLabelFakeSelection.Image = 'rbxasset://textures/ui/SelectionBox.png'
+	--[[playerLabelFakeSelection.Image = 'arlasset://textures/ui/SelectionBox.png'
 	playerLabelFakeSelection.ScaleType = 'Slice'
 	playerLabelFakeSelection.SliceCenter = Rect.new(31,31,31,31)]]
 	playerLabelFakeSelection.Image = ''
@@ -44,13 +44,13 @@ local function Initialize()
 	------ TAB CUSTOMIZATION -------
 	this.TabHeader.Name = "PlayersTab"
 
-	this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/PlayersTabIcon.png"
+	this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/PlayersTabIcon.png"
 	if utility:IsSmallTouchScreen() then
 		this.TabHeader.Icon.Size = UDim2.new(0,34,0,28)
 		this.TabHeader.Icon.Position = UDim2.new(this.TabHeader.Icon.Position.X.Scale,this.TabHeader.Icon.Position.X.Offset,0.5,-14)
 		this.TabHeader.Size = UDim2.new(0,115,1,0)
 	elseif isTenFootInterface then
-		this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/PlayersTabIcon@2x.png"
+		this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/PlayersTabIcon@2x.png"
 		this.TabHeader.Icon.Size = UDim2.new(0,88,0,74)
 		this.TabHeader.Icon.Position = UDim2.new(0,0,0.5,-43)
 		this.TabHeader.Size = UDim2.new(0,280,1,0)
@@ -236,7 +236,7 @@ local function Initialize()
 				-- create label (frame) for this player index if one does not exist
 				if not frame or not frame.Parent then
 					frame = Instance.new('ImageLabel')
-					frame.Image = "rbxasset://textures/ui/dialog_white.png"
+					frame.Image = "arlasset://textures/ui/dialog_white.png"
 					frame.ScaleType = 'Slice'
 					frame.SliceCenter = Rect.new(10,10,10,10)
 					frame.Size = UDim2.new(1,0,0,60)

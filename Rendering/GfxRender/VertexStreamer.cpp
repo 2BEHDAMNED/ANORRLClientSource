@@ -16,7 +16,6 @@
 #include "rbx/Profiler.h"
 
 FASTFLAG(GUIZFighterGPU)
-FASTFLAG(UseDynamicTypesetterUTF8)
 
 namespace ARL
 {
@@ -218,8 +217,8 @@ void VertexStreamer::renderInternal(DeviceContext* context, CoordinateSpace coor
                 currentTextureType = currChunk.batchTextureType;
             }
 
-            if (currChunk.batchTextureType == BatchTextureType_Font && FFlag::UseDynamicTypesetterUTF8)
-                context->bindTexture(0, texture ? texture : defaultTexture.get(), wrapSamplerState);
+            if (currChunk.batchTextureType == BatchTextureType_Font)
+				context->bindTexture(0, texture ? texture : defaultTexture.get(), wrapSamplerState);
             else
                 context->bindTexture(0, texture ? texture : defaultTexture.get(), defaultSamplerState);
         }

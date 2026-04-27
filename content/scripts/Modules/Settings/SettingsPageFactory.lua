@@ -91,7 +91,7 @@ local function Initialize()
 	local tabSelection = utility:Create'ImageLabel'
 	{
 		Name = "TabSelection",
-		Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuSelection.png",
+		Image = "arlasset://textures/ui/Settings/MenuBarAssets/MenuSelection.png",
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(3,1,4,5),
 		Visible = false,

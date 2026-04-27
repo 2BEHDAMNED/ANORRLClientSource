@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 	<Item class="Model" referent="RBX3F9EDB07622E42D797B3F001F3E09746">
@@ -448,7 +448,7 @@ return module
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">0</int>
-						<Content name="BottomImage"><url>rbxasset://textures/ui/studs.png</url></Content>
+						<Content name="BottomImage"><url>arlasset://textures/ui/studs.png</url></Content>
 						<Vector2 name="CanvasPosition">
 							<X>0</X>
 							<Y>0</Y>
@@ -461,7 +461,7 @@ return module
 						</UDim2>
 						<bool name="ClipsDescendants">true</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="MidImage"><url>rbxasset://textures/ui/smooth.png</url></Content>
+						<Content name="MidImage"><url>arlasset://textures/ui/smooth.png</url></Content>
 						<string name="Name">ScrollingFrame</string>
 						<Ref name="NextSelectionDown">null</Ref>
 						<Ref name="NextSelectionLeft">null</Ref>
@@ -485,7 +485,7 @@ return module
 							<YO>-75</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
-						<Content name="TopImage"><url>rbxasset://textures/ui/studs.png</url></Content>
+						<Content name="TopImage"><url>arlasset://textures/ui/studs.png</url></Content>
 						<bool name="Visible">false</bool>
 						<int name="ZIndex">1</int>
 					</Properties>
@@ -719,7 +719,7 @@ return module
 						<int name="BorderSizePixel">0</int>
 						<bool name="ClipsDescendants">false</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="Image"><url>rbxassetid://358274726</url></Content>
+						<Content name="Image"><url>arlassetid://358274726</url></Content>
 						<Color3 name="ImageColor3">4294967295</Color3>
 						<Vector2 name="ImageRectOffset">
 							<X>0</X>
@@ -779,7 +779,7 @@ return module
 						<int name="BorderSizePixel">0</int>
 						<bool name="ClipsDescendants">false</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="Image"><url>rbxassetid://320903644</url></Content>
+						<Content name="Image"><url>arlassetid://320903644</url></Content>
 						<Color3 name="ImageColor3">4294967295</Color3>
 						<Vector2 name="ImageRectOffset">
 							<X>0</X>
@@ -832,4 +832,4 @@ return module
 			</Item>
 		</Item>
 	</Item>
-</roblox>
+</anorrl>

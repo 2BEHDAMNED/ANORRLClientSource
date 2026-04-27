@@ -42,7 +42,7 @@ local renderSteppedConnection = nil
 
 -- user facing images
 local assetUrls = {}
-local assetUrl = "http://www.roblox.com/Asset/?id=" 
+local assetUrl = "http://arl.lambda.cam/Asset/?id=" 
 local errorImageUrl = assetUrl .. "42557901" table.insert(assetUrls, errorImageUrl)
 local buyImageUrl = assetUrl .. "142494143" table.insert(assetUrls,buyImageUrl)
 local cancelButtonImageUrl = assetUrl .. "142494219" table.insert(assetUrls, cancelButtonImageUrl)
@@ -799,7 +799,7 @@ function canPurchaseItem()
 
 	if (currentProductInfo["IsLimited"] == true or currentProductInfo["IsLimitedUnique"] == true) and
 		(currentProductInfo["Remaining"] == "" or currentProductInfo["Remaining"] == 0 or currentProductInfo["Remaining"] == nil) then
-			descText = "All copies of this item have been sold out! Try buying from other users on www.roblox.com." 			
+			descText = "All copies of this item have been sold out! Try buying from other users on arl.lambda.cam." 			
 			return true, nil, nil, true, descText 
 	end	
 
@@ -811,7 +811,7 @@ function canPurchaseItem()
 	if insufficientFunds then
 		-- if this is a ticket only time and we don't have enough, tell the user to get more tix
 		if currentProductIsTixOnly() then
-			descText = "This item costs more tickets than you currently have! Try trading currency on www.roblox.com to get more tickets." 			
+			descText = "This item costs more tickets than you currently have! Try trading currency on arl.lambda.cam to get more tickets." 			
 			return true, nil, nil, true, descText 
 		end
 	end

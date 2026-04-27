@@ -230,9 +230,9 @@ void ParticleEmitter::applySettings()
         if (emitter)
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/sparkles_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/sparkles_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/sparkles_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/sparkles_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_CrazySparkles;
             a.blendCode = Emitter::Blend_PremultipliedAlpha;
@@ -271,9 +271,9 @@ void ParticleEmitter::applySettings()
         if (secondary)
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/sparkles_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/sparkles_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/sparkles_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/sparkles_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_CrazySparkles;
             a.blendCode = Emitter::Blend_PremultipliedAlpha;
@@ -327,9 +327,9 @@ void ParticleEmitter::applySettings()
             Vector4 c1(Color4(smk->getColor(), 0.0f));
 
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/smoke_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/smoke_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/smoke_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/smoke_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Modulate;
             a.blendCode = Emitter::Blend_AlphaBlend;
@@ -373,9 +373,9 @@ void ParticleEmitter::applySettings()
         if (emitter)
         {
             Emitter::Appearance a = {};
-            a.mainTexture       = "rbxasset://textures/particles/fire_main.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/fire_color.dds";
-            a.alphaStripTexture = "rbxasset://textures/particles/fire_alpha.dds";
+            a.mainTexture       = "arlasset://textures/particles/fire_main.dds";
+            a.colorStripTexture = "arlasset://textures/particles/fire_color.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/fire_alpha.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Crazy;
             a.blendCode = Emitter::Blend_PremultipliedAlpha;
@@ -414,9 +414,9 @@ void ParticleEmitter::applySettings()
             float growth2 = -size2/life2;
 
             Emitter::Appearance a = {};
-            a.mainTexture       = "rbxasset://textures/particles/fire_sparks_main.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/fire_sparks_color.dds";
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
+            a.mainTexture       = "arlasset://textures/particles/fire_sparks_main.dds";
+            a.colorStripTexture = "arlasset://textures/particles/fire_sparks_color.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Add;
             a.blendCode = Emitter::Blend_Additive;
@@ -453,9 +453,9 @@ void ParticleEmitter::applySettings()
         if (emitter) // vortex
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/forcefield_vortex_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/forcefield_vortex_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/forcefield_vortex_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/forcefield_vortex_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Add;
             a.blendCode = Emitter::Blend_AlphaOne;
@@ -488,9 +488,9 @@ void ParticleEmitter::applySettings()
         if (secondary) // stars
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/forcefield_vortex_color.dds";
-            a.mainTexture       = "rbxasset://textures/sparkle.png";
+            a.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/forcefield_vortex_color.dds";
+            a.mainTexture       = "arlasset://textures/sparkle.png";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Add;
             a.blendCode = Emitter::Blend_AlphaOne;
@@ -522,9 +522,9 @@ void ParticleEmitter::applySettings()
         if (tertiary) // glow
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/forcefield_glow_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/forcefield_glow_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/forcefield_glow_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/forcefield_glow_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/forcefield_glow_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/forcefield_glow_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Crazy;
             a.blendCode = Emitter::Blend_PremultipliedAlpha;
@@ -565,9 +565,9 @@ void ParticleEmitter::applySettings()
         if (emitter)
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/explosion_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/explosion_color.dds";
-            a.mainTexture       = "rbxasset://textures/particles/sparkles_main.dds";
+            a.alphaStripTexture = "arlasset://textures/particles/explosion_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/explosion_color.dds";
+            a.mainTexture       = "arlasset://textures/particles/sparkles_main.dds";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Modulate;
             a.blendCode = Emitter::Blend_AlphaOne;
@@ -596,9 +596,9 @@ void ParticleEmitter::applySettings()
         if (secondary)
         {
             Emitter::Appearance a = {};
-            a.alphaStripTexture = "rbxasset://textures/particles/explosion_alpha.dds";
-            a.colorStripTexture = "rbxasset://textures/particles/explosion_color.dds";
-            a.mainTexture       = "rbxasset://textures/explosion.png";
+            a.alphaStripTexture = "arlasset://textures/particles/explosion_alpha.dds";
+            a.colorStripTexture = "arlasset://textures/particles/explosion_color.dds";
+            a.mainTexture       = "arlasset://textures/explosion.png";
             a.colorStripBaseline = -1;
             a.shader = Emitter::Shader_Modulate;
             a.blendCode = Emitter::Blend_AlphaBlend;

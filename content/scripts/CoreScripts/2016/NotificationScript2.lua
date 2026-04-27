@@ -64,8 +64,8 @@ local TWEEN_TIME = 0.35
 local DEFAULT_NOTIFICATION_DURATION = 5
 
 --[[ Images ]]--
-local PLAYER_POINTS_IMG = 'http://www.roblox.com/asset?id=206410433'
-local BADGE_IMG = 'http://www.roblox.com/asset?id=206410289'
+local PLAYER_POINTS_IMG = 'http://arl.lambda.cam/asset?id=206410433'
+local BADGE_IMG = 'http://arl.lambda.cam/asset?id=206410289'
 local FRIEND_IMAGE = 'http://arl.lambda.cam/thumbs/avatar.ashx?userId='
 
 --[[ Gui Creation ]]--

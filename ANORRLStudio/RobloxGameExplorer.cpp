@@ -3297,8 +3297,8 @@ void RobloxGameExplorer::checkRowForNameUpdate(EntityCategory category, QStandar
 					if (RobloxIDEDoc* ideDoc = RobloxDocManager::Instance().getPlayDoc())
 					{
 						QStringList list;
-						list.push_back(QString("rbxgameasset://%1").arg(QString::fromStdString(oldName.get())));
-						list.push_back(QString("rbxgameasset://%1").arg(newName));
+						list.push_back(QString("arlgameasset://%1").arg(QString::fromStdString(oldName.get())));
+						list.push_back(QString("arlgameasset://%1").arg(newName));
 						ideDoc->forceReloadImages(list);
 					}
 				}

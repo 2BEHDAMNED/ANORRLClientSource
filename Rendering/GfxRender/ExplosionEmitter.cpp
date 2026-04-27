@@ -210,9 +210,9 @@ void ExplosionEmitter::applySettings()
         Emitter::Appearance a = {};
         a.shader = Emitter::Shader_Crazy;
         a.blendCode = Emitter::Blend_PremultipliedAlpha;
-        a.alphaStripTexture = "rbxasset://textures/particles/explosion01_core_alpha.png";
-        a.colorStripTexture = "rbxasset://textures/particles/explosion_color.dds";
-        a.mainTexture       = "rbxasset://textures/particles/explosion01_core_main.dds";
+        a.alphaStripTexture = "arlasset://textures/particles/explosion01_core_alpha.png";
+        a.colorStripTexture = "arlasset://textures/particles/explosion_color.dds";
+        a.mainTexture       = "arlasset://textures/particles/explosion01_core_main.dds";
         a.colorStripBaseline = -1;
 
         emitter->setAppearance( a );
@@ -247,9 +247,9 @@ void ExplosionEmitter::applySettings()
         Emitter::Appearance a = {};
         a.shader = Emitter::Shader_Crazy;
         a.blendCode = Emitter::Blend_PremultipliedAlpha;
-        a.alphaStripTexture = "rbxasset://textures/particles/explosion01_core_alpha.png";
-        a.colorStripTexture = "rbxasset://textures/particles/explosion_color.dds";
-        a.mainTexture       = "rbxasset://textures/particles/explosion01_core_main.dds";
+        a.alphaStripTexture = "arlasset://textures/particles/explosion01_core_alpha.png";
+        a.colorStripTexture = "arlasset://textures/particles/explosion_color.dds";
+        a.mainTexture       = "arlasset://textures/particles/explosion01_core_main.dds";
         a.colorStripBaseline = -1;
 
         emitter->setAppearance( a );
@@ -285,9 +285,9 @@ void ExplosionEmitter::applySettings()
         Emitter::Appearance a = {};
         a.shader = Emitter::Shader_Add;
         a.blendCode = Emitter::Blend_AlphaOne;
-        a.alphaStripTexture = "rbxasset://textures/particles/explosion01_core_alpha.png";
-        a.colorStripTexture = "rbxasset://textures/particles/smoke_color.dds";
-        a.mainTexture       = "rbxasset://textures/particles/explosion01_shockwave_main.dds";
+        a.alphaStripTexture = "arlasset://textures/particles/explosion01_core_alpha.png";
+        a.colorStripTexture = "arlasset://textures/particles/smoke_color.dds";
+        a.mainTexture       = "arlasset://textures/particles/explosion01_shockwave_main.dds";
         a.colorStripBaseline = 0;
 
         emitter->setAppearance( a );
@@ -322,9 +322,9 @@ void ExplosionEmitter::applySettings()
         Emitter::Appearance a = {};
         a.shader = Emitter::Shader_Modulate;
         a.blendCode = Emitter::Blend_AlphaBlend;
-        a.alphaStripTexture = "rbxasset://textures/particles/explosion01_smoke_alpha.dds";
-        a.colorStripTexture = "rbxasset://textures/particles/explosion01_smoke_color_new.dds";
-        a.mainTexture       = "rbxasset://textures/particles/explosion01_core_main.dds";
+        a.alphaStripTexture = "arlasset://textures/particles/explosion01_smoke_alpha.dds";
+        a.colorStripTexture = "arlasset://textures/particles/explosion01_smoke_color_new.dds";
+        a.mainTexture       = "arlasset://textures/particles/explosion01_core_main.dds";
         a.colorStripBaseline = 0;
 
         emitter->setAppearance( a );
@@ -360,9 +360,9 @@ void ExplosionEmitter::applySettings()
         Emitter::Appearance a = {};
         a.shader = Emitter::Shader_Add;
         a.blendCode = Emitter::Blend_Additive;
-        a.alphaStripTexture = "rbxasset://textures/particles/explosion01_core_alpha.png";
-        a.colorStripTexture = "rbxasset://textures/particles/explosion01_implosion_color.png";
-        a.mainTexture       = "rbxasset://textures/particles/explosion01_implosion_main.dds";
+        a.alphaStripTexture = "arlasset://textures/particles/explosion01_core_alpha.png";
+        a.colorStripTexture = "arlasset://textures/particles/explosion01_implosion_color.png";
+        a.mainTexture       = "arlasset://textures/particles/explosion01_implosion_main.dds";
         a.colorStripBaseline = 0;
 
         emitter->setAppearance( a );

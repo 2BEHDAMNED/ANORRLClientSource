@@ -60,7 +60,7 @@ local currentMaterial = 1
 -- load our libraries
 local RbxGui = LoadLibrary("RbxGui")
 local RbxUtil = LoadLibrary("RbxUtility")
-game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id=82741829")
+game:GetService("ContentProvider"):Preload("http://arl.lambda.cam/asset/?id=82741829")
 
 
 ------------------------- OBJECT DEFINITIONS ---------------------
@@ -141,7 +141,7 @@ function MouseHighlighter.Create(mouseUse)
 	imageLabel.BackgroundTransparency = 1
 	imageLabel.Size = UDim2.new(1,0,1,0)
 	imageLabel.Position = UDim2.new(-0.35,0,-0.5,0)
-	imageLabel.Image = "http://www.roblox.com/asset/?id=82741829"
+	imageLabel.Image = "http://arl.lambda.cam/asset/?id=82741829"
 
 	local lastTweenChange = nil
 
@@ -531,7 +531,7 @@ function LoadProgressBar(text)
 		spinnerImage.Size = UDim2.new(0, 16, 0, 16)
 		spinnerImage.Position = UDim2.new(.5+.3*math.cos(math.rad(45*spinnerNum)), -8, .5+.3*math.sin(math.rad(45*spinnerNum)), -8)
 		spinnerImage.BackgroundTransparency = 1
-	   spinnerImage.Image = "http://www.roblox.com/Asset/?id=45880710"
+	   spinnerImage.Image = "http://arl.lambda.cam/Asset/?id=45880710"
 		spinnerImage.Parent = spinnerFrame
 
 	   spinnerIcons[spinnerNum] = spinnerImage
@@ -546,9 +546,9 @@ function LoadProgressBar(text)
 
 			while pos < 8 do
 				if pos == spinPos or pos == ((spinPos+1)%8) then
-					spinnerIcons[pos+1].Image = "http://www.roblox.com/Asset/?id=45880668"
+					spinnerIcons[pos+1].Image = "http://arl.lambda.cam/Asset/?id=45880668"
 				else
-					spinnerIcons[pos+1].Image = "http://www.roblox.com/Asset/?id=45880710"
+					spinnerIcons[pos+1].Image = "http://arl.lambda.cam/Asset/?id=45880710"
 				end
 				
 				pos = pos + 1

@@ -15,7 +15,7 @@ namespace ARL
 /* A class for parsing and assembling URLs with focus mostly on HTTP-specific subset of RFC3986.
  *
  * Works with strings having the following form:
- * https://www.roblox.com/very/long/path?query&arg=value#fragment
+ * https://ar.lambda.cam/very/long/path?query&arg=value#fragment
  * \___/   \____________/\_____________/ \_____________/ \______/
  *   |           |             |                |           |
  * scheme       host          path            query      fragment

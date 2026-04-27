@@ -3,7 +3,6 @@
 #include "V8DataModel/TextService.h"
 
 FASTFLAGVARIABLE(TypesettersReleaseResources, true);
-FASTFLAGVARIABLE(UseDynamicTypesetterUTF8, false)
 
 namespace ARL
 {
@@ -43,6 +42,21 @@ EnumDesc<TextService::Font>::EnumDesc()
 	addPair(TextService::FONT_SOURCESANSBOLD, "SourceSansBold");
 	addPair(TextService::FONT_SOURCESANSLIGHT, "SourceSansLight");
 	addPair(TextService::FONT_SOURCESANSITALIC, "SourceSansItalic");
+	addPair(TextService::FONT_PAINTBALL, "Paintball");
+	addPair(TextService::FONT_ANTIQUE, "Antique");
+	addPair(TextService::FONT_ARCADE, "Arcade");
+	addPair(TextService::FONT_BODONI, "Bodoni");
+	addPair(TextService::FONT_CARTOON, "Cartoon");
+	addPair(TextService::FONT_CODE, "Code");
+	addPair(TextService::FONT_FANTASY, "Fantasy");
+	addPair(TextService::FONT_GARAMOND, "Garamond");
+	addPair(TextService::FONT_HIGHWAY, "Highway");
+	addPair(TextService::FONT_SCIFI, "SciFi");
+	addPair(TextService::FONT_FINGERPAINT, "Fingerpaint");
+
+	addPair(TextService::FONT_COMICSANS, "ComicSans");
+	addPair(TextService::FONT_SILKSCREEN, "SilkScreen");
+	addPair(TextService::FONT_PROXIMANOVA, "ProximaNova");
 }
 
 template<>
@@ -89,6 +103,21 @@ TextService::Font TextService::FromTextFont(Text::Font font)
 	case Text::FONT_SOURCESANSBOLD:	return FONT_SOURCESANSBOLD;
 	case Text::FONT_SOURCESANSLIGHT:	return FONT_SOURCESANSLIGHT;
 	case Text::FONT_SOURCESANSITALIC:	return FONT_SOURCESANSITALIC;
+	case Text::FONT_PAINTBALL:	return FONT_PAINTBALL;
+	case Text::FONT_ANTIQUE:	return FONT_ANTIQUE;
+	case Text::FONT_ARCADE:	return FONT_ARCADE;
+	case Text::FONT_BODONI:	return FONT_BODONI;
+	case Text::FONT_CARTOON:	return FONT_CARTOON;
+	case Text::FONT_CODE:	return FONT_CODE;
+	case Text::FONT_FANTASY:	return FONT_FANTASY;
+	case Text::FONT_GARAMOND:	return FONT_GARAMOND;
+	case Text::FONT_HIGHWAY:	return FONT_HIGHWAY;
+	case Text::FONT_SCIFI:	return FONT_SCIFI;
+	case Text::FONT_FINGERPAINT:	return FONT_FINGERPAINT;
+
+	case Text::FONT_COMICSANS:	return FONT_COMICSANS;
+	case Text::FONT_SILKSCREEN:	return FONT_SILKSCREEN;
+	case Text::FONT_PROXIMANOVA:	return FONT_PROXIMANOVA;
 	default:
 		ARLASSERT(0);
 		return FONT_LEGACY;
@@ -105,6 +134,21 @@ Text::Font TextService::ToTextFont(Font font)
 	case FONT_SOURCESANSBOLD:	return Text::FONT_SOURCESANSBOLD;
 	case FONT_SOURCESANSLIGHT:	return Text::FONT_SOURCESANSLIGHT;
 	case FONT_SOURCESANSITALIC:	return Text::FONT_SOURCESANSITALIC;
+	case FONT_PAINTBALL:	return Text::FONT_PAINTBALL;
+	case FONT_ANTIQUE:	return Text::FONT_ANTIQUE;
+	case FONT_ARCADE:	return Text::FONT_ARCADE;
+	case FONT_BODONI:	return Text::FONT_BODONI;
+	case FONT_CARTOON:	return Text::FONT_CARTOON;
+	case FONT_CODE:	return Text::FONT_CODE;
+	case FONT_FANTASY:	return Text::FONT_FANTASY;
+	case FONT_GARAMOND:	return Text::FONT_GARAMOND;
+	case FONT_HIGHWAY:	return Text::FONT_HIGHWAY;
+	case FONT_SCIFI:	return Text::FONT_SCIFI;
+	case FONT_FINGERPAINT:	return Text::FONT_FINGERPAINT;
+	case FONT_COMICSANS:	return Text::FONT_COMICSANS;
+	case FONT_SILKSCREEN:	return Text::FONT_SILKSCREEN;
+	case FONT_PROXIMANOVA:	return Text::FONT_PROXIMANOVA;
+
 	default:
 		ARLASSERT(0);
 		return Text::FONT_LEGACY;

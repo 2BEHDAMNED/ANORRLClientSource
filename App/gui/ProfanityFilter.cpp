@@ -27,7 +27,7 @@ WordList::WordList()
 	
 	*/
 
-	std::string filename = ContentProvider::getAssetFile("Fonts\\diogenes.fnt");
+	std::string filename = ContentProvider::getAssetFile("configs/diogenes.fnt");
 	
 	std::ifstream infile(utf8_decode(filename).c_str());
 	std::string line;

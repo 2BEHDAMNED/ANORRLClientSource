@@ -208,7 +208,7 @@ function createChatBubbleMain(filePrefix, sliceRect)
 	chatBubbleMain.Name = "ChatBubble"
 	chatBubbleMain.ScaleType = Enum.ScaleType.Slice
 	chatBubbleMain.SliceCenter = sliceRect
-	chatBubbleMain.Image = "rbxasset://textures/" .. tostring(filePrefix) .. ".png"
+	chatBubbleMain.Image = "arlasset://textures/" .. tostring(filePrefix) .. ".png"
 	chatBubbleMain.BackgroundTransparency = 1
 	chatBubbleMain.BorderSizePixel = 0
 	chatBubbleMain.Size = UDim2.new(1.0, 0, 1.0, 0)
@@ -220,7 +220,7 @@ end
 function createChatBubbleTail(position, size)
 	local chatBubbleTail = Instance.new("ImageLabel")
 	chatBubbleTail.Name = "ChatBubbleTail"
-	chatBubbleTail.Image = "rbxasset://textures/ui/dialog_tail.png"
+	chatBubbleTail.Image = "arlasset://textures/ui/dialog_tail.png"
 	chatBubbleTail.BackgroundTransparency = 1
 	chatBubbleTail.BorderSizePixel = 0
 	chatBubbleTail.Position = position
@@ -258,7 +258,7 @@ end
 function createChatImposter(filePrefix, dotDotDot, yOffset)
 	local result = Instance.new("ImageLabel")
 	result.Name = "DialogPlaceholder"
-	result.Image = "rbxasset://textures/" .. tostring(filePrefix) .. ".png"
+	result.Image = "arlasset://textures/" .. tostring(filePrefix) .. ".png"
 	result.BackgroundTransparency = 1
 	result.BorderSizePixel = 0
 	result.Position = UDim2.new(0, 0, -1.25, 0)
@@ -266,7 +266,7 @@ function createChatImposter(filePrefix, dotDotDot, yOffset)
 
 	local image = Instance.new("ImageLabel")
 	image.Name = "DotDotDot"
-	image.Image = "rbxasset://textures/" .. tostring(dotDotDot) .. ".png"
+	image.Image = "arlasset://textures/" .. tostring(dotDotDot) .. ".png"
 	image.BackgroundTransparency = 1
 	image.BorderSizePixel = 0
 	image.Position = UDim2.new(0.001, 0, yOffset, 0)

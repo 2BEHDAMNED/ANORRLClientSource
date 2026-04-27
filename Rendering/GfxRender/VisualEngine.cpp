@@ -39,7 +39,6 @@
 LOGGROUP(Graphics)
 
 FASTFLAGVARIABLE(CancelPendingTextureLoads, true)
-FASTFLAG(UseDynamicTypesetterUTF8)
 
 FASTFLAG(CameraVR)
 
@@ -95,35 +94,36 @@ VisualEngine::VisualEngine(Device* device, CRenderSettings* settings)
     lightGrid.reset(lgrid);
     
     // load fonts
-    if (FFlag::UseDynamicTypesetterUTF8)
-    {
-        glyphAtlas.reset(new TextureAtlas(this, 2048, 2048));
-        for (Text::Font font = Text::FONT_LEGACY; font != Text::FONT_LAST; font=Text::Font(font+1))
-        {
-            static const char* kFontTTFPaths[] = {
-                "fonts/arial.ttf", "fonts/arial.ttf", "fonts/arialbd.ttf", "fonts/SourceSansPro-Regular.ttf", "fonts/SourceSansPro-Bold.ttf", "fonts/SourceSansPro-Light.ttf", "fonts/SourceSansPro-It.ttf"
-            };
+	glyphAtlas.reset(new TextureAtlas(this, 2048, 2048));
+	for (Text::Font font = Text::FONT_LEGACY; font != Text::FONT_LAST; font = Text::Font(font + 1))
+	{
+		static const char* kFontTTFPaths[] = {
+			"fonts/arial.ttf",
+			"fonts/arial.ttf",
+			"fonts/arialbd.ttf",
+			"fonts/SourceSansPro-Regular.ttf",
+			"fonts/SourceSansPro-Bold.ttf",
+			"fonts/SourceSansPro-Light.ttf",
+			"fonts/SourceSansPro-It.ttf",
+			"fonts/Paintball.ttf",
+			"fonts/RomanAntique.otf",
+			"fonts/PressStart2P-Regular.ttf",
+			"fonts/AccanthisADFStd-Regular.otf",
+			"fonts/ComicNeue-Angular-Bold.ttf",
+			"fonts/Inconsolata-Regular.ttf",
+			"fonts/Balthazar-Regular.ttf",
+			"fonts/Guru-Regular.otf",
+			"fonts/HWYGOTH.ttf",
+			"fonts/zekton_rg.ttf",
+			"fonts/FingerPaint-Regular.ttf",
+			"fonts/ComicSans.ttf",
+			"fonts/silkscreen.ttf",
+			"fonts/ProximaNova.ttf",
+		};
 
-            float legacyHeightScale = (font == Text::FONT_LEGACY) ? 1.5f : 1.f;
-            typesetters[font].reset(new TypesetterDynamic(glyphAtlas.get(), textureManager.get(), ContentProvider::assetFolder() + kFontTTFPaths[font], legacyHeightScale, (unsigned)font, device->getCaps().retina));
-        }
-    }
-    else
-    {
-        for (Text::Font font = Text::FONT_LEGACY; font != Text::FONT_LAST; font=Text::Font(font+1))
-        {
-            static const char* kFontPaths[Text::FONT_LAST] =
-            {
-                "fonts/Arial.font", "fonts/Arial.font", "fonts/ArialBold.font", "fonts/SourceSans.font", "fonts/SourceSansBold.font",
-                "fonts/SourceSansLight.font", "fonts/SourceSansItalic.font",
-            };
-
-            static const char* kTexturePath = "rbxasset://fonts/fonts.dds";
-
-            float legacyHeightScale = (font == Text::FONT_LEGACY) ? 1.5f : 1.f;
-            typesetters[font].reset(new TypesetterBitmap(getTextureManager(), ContentProvider::assetFolder() + kFontPaths[font], kTexturePath, legacyHeightScale, device->getCaps().retina));
-        }
-    }
+		float legacyHeightScale = (font == Text::FONT_LEGACY) ? 1.5f : 1.f;
+		typesetters[font].reset(new TypesetterDynamic(glyphAtlas.get(), textureManager.get(), ContentProvider::assetFolder() + kFontTTFPaths[font], legacyHeightScale, (unsigned)font, device->getCaps().retina));
+	}
 
     materialGenerator.reset(new MaterialGenerator(this));
 
@@ -310,9 +310,9 @@ static void reloadMaterialTable(MegaClusterInstance* mci)
 
 void VisualEngine::immediateAssetReload(const std::string& filePath)
 {
-	if (filePath.find("rbxasset://") == 0 || filePath.find("rbxgameasset://") == 0 || filePath.find("rbxapp://") == 0)
+	if (filePath.find("arlasset://") == 0 || filePath.find("arlgameasset://") == 0 || filePath.find("arlapp://") == 0)
 	{
-		if (filePath == "rbxasset://terrain/materials.json")
+		if (filePath == "arlasset://terrain/materials.json")
 		{
 			if (MegaClusterInstance* mci = Instance::fastDynamicCast<MegaClusterInstance>(sceneUpdater->getDataModel()->getWorkspace()->getTerrain()))
 				DataModel::get(mci)->submitTask(boost::bind(reloadMaterialTable, mci), DataModelJob::Write);

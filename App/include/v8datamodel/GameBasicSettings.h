@@ -220,8 +220,6 @@ namespace ARL
 
 		std::map<std::string, bool> tutorialState;
 		bool allTutorialsDisabled;
-
-		std::string googleAnalyticsClientId;
 	};
 
 }

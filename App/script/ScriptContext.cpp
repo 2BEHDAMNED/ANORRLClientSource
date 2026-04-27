@@ -2387,7 +2387,7 @@ int ScriptContext::requireModuleScriptFromAssetId(lua_State* L, int assetId)
 		}
 		else
 		{
-			contentId = ContentId(ARL::format("rbxassetid://%d", assetId));
+			contentId = ContentId(ARL::format("arlassetid://%d", assetId));
 		}
 
 		contentProvider->loadContent(

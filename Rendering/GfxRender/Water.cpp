@@ -289,7 +289,7 @@ const shared_ptr<Material>& Water::getLegacyMaterial()
         Technique technique(program, 3);
 
         TextureManager* tm = visualEngine->getTextureManager();
-        technique.setTexture(0, tm->load(ContentId("rbxasset://textures/water_Subsurface.dds"), TextureManager::Fallback_White), SamplerState::Filter_Linear);
+        technique.setTexture(0, tm->load(ContentId("arlasset://textures/water_Subsurface.dds"), TextureManager::Fallback_White), SamplerState::Filter_Linear);
 
         legacyMaterial->addTechnique(technique);
     }
@@ -339,7 +339,7 @@ const shared_ptr<Material>& Water::getSmoothMaterial()
         Technique technique(program, 3);
 
         TextureManager* tm = visualEngine->getTextureManager();
-        technique.setTexture(0, tm->load(ContentId("rbxasset://textures/water_Subsurface.dds"), TextureManager::Fallback_White), SamplerState::Filter_Linear);
+        technique.setTexture(0, tm->load(ContentId("arlasset://textures/water_Subsurface.dds"), TextureManager::Fallback_White), SamplerState::Filter_Linear);
 
         smoothMaterial->addTechnique(technique);
     }
@@ -354,7 +354,7 @@ const TextureRef& Water::getNormalMap(unsigned int frame)
 	if (!normalMaps[frame].getTexture())
 	{
         char id[256];
-        sprintf( id, "rbxasset://textures/water/normal_%02d.%s", frame+1, kTextureExt );
+        sprintf( id, "arlasset://textures/water/normal_%02d.%s", frame+1, kTextureExt );
 		normalMaps[frame] = visualEngine->getTextureManager()->load(ContentId(id), TextureManager::Fallback_NormalMap);
 	}
 

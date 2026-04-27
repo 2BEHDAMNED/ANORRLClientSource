@@ -31,8 +31,8 @@ local TOOLTIP_BUFFER = 6
 local TOOLTIP_HEIGHT = 16
 local TOOLTIP_OFFSET = -25 -- From top
 
-local ARROW_IMAGE_OPEN = 'rbxasset://textures/ui/Backpack_Open.png'
-local ARROW_IMAGE_CLOSE = 'rbxasset://textures/ui/Backpack_Close.png'
+local ARROW_IMAGE_OPEN = 'arlasset://textures/ui/Backpack_Open.png'
+local ARROW_IMAGE_CLOSE = 'arlasset://textures/ui/Backpack_Close.png'
 local ARROW_SIZE = UDim2.new(0, 14, 0, 9)
 local ARROW_HOTKEY = Enum.KeyCode.Backquote.Value --TODO: Hookup '~' too?
 local ARROW_HOTKEY_STRING = '`'
@@ -1240,9 +1240,9 @@ local function resizeGamepadHintsFrame()
 	end
 end
 
-addGamepadHint("rbxasset://textures/ui/Settings/Help/XButtonDark.png", "rbxasset://textures/ui/Settings/Help/XButtonDark@2x.png", "Remove From Hotbar")
-addGamepadHint("rbxasset://textures/ui/Settings/Help/AButtonDark.png", "rbxasset://textures/ui/Settings/Help/AButtonDark@2x.png", "Select/Swap")
-addGamepadHint("rbxasset://textures/ui/Settings/Help/BButtonDark.png", "rbxasset://textures/ui/Settings/Help/BButtonDark@2x.png", "Close Backpack")
+addGamepadHint("arlasset://textures/ui/Settings/Help/XButtonDark.png", "arlasset://textures/ui/Settings/Help/XButtonDark@2x.png", "Remove From Hotbar")
+addGamepadHint("arlasset://textures/ui/Settings/Help/AButtonDark.png", "arlasset://textures/ui/Settings/Help/AButtonDark@2x.png", "Select/Swap")
+addGamepadHint("arlasset://textures/ui/Settings/Help/BButtonDark.png", "arlasset://textures/ui/Settings/Help/BButtonDark@2x.png", "Close Backpack")
 
 do -- Search stuff
 	local searchFrame = NewGui('Frame', 'Search')
@@ -1449,7 +1449,7 @@ do -- Make the Inventory expand/collapse arrow (unless TopBar)
 		else
 			if GameSettings:IsAeroEnabled() then
 				local sound = Instance.new("Sound", game.CoreGui)
-				sound.SoundId = "rbxasset://sounds/aero/menu_command.mp3"
+				sound.SoundId = "arlasset://sounds/aero/menu_command.mp3"
 				sound.Volume = 5
 				sound.Ended:connect(function()
 					sound:Remove()

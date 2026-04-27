@@ -64,12 +64,12 @@ namespace ARL
 	
 	void Frame::render2d(Adorn* adorn) 
 	{
-		static const TextureId sBlue =			TextureId("rbxasset://textures/ui/dialog_blue.png");
-		static const TextureId sGreen =			TextureId("rbxasset://textures/ui/dialog_green.png");
-		static const TextureId sRed =			TextureId("rbxasset://textures/ui/dialog_red.png");
-		static const TextureId sBlackSquare =	TextureId("rbxasset://textures/blackBkg_square.png");
-		static const TextureId sBlackRound =	TextureId("rbxasset://textures/blackBkg_round.png");
-		static const TextureId sNewSquare =		TextureId("rbxasset://textures/ui/newBkg_square.png");
+		static const TextureId sBlue =			TextureId("arlasset://textures/ui/dialog_blue.png");
+		static const TextureId sGreen =			TextureId("arlasset://textures/ui/dialog_green.png");
+		static const TextureId sRed =			TextureId("arlasset://textures/ui/dialog_red.png");
+		static const TextureId sBlackSquare =	TextureId("arlasset://textures/blackBkg_square.png");
+		static const TextureId sBlackRound =	TextureId("arlasset://textures/blackBkg_round.png");
+		static const TextureId sNewSquare =		TextureId("arlasset://textures/ui/newBkg_square.png");
 
 		GuiObject* clippingObject = firstAncestorClipping();
 

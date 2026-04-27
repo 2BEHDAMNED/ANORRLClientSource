@@ -41,7 +41,7 @@ BasePlayerGui::BasePlayerGui()
 	, mouseWasOverGui(false)
 {
 	defaultSelectionImage = ARL::Creatable<Instance>::create<ImageLabel>();
-	defaultSelectionImage->setImage( TextureId("rbxasset://textures/ui/SelectionBox.png") );
+	defaultSelectionImage->setImage( TextureId("arlasset://textures/ui/SelectionBox.png") );
 	defaultSelectionImage->setBackgroundTransparency(1);
 	defaultSelectionImage->setSliceCenter(Rect2D::xyxy(19,19,43,43));
 	defaultSelectionImage->setImageScale(GuiObject::SCALE_SLICED);

@@ -34,10 +34,10 @@ local healthChangedConnection = nil
 local humanoidDiedConnection = nil
 local characterAddedConnection = nil
 
-local greenBarImage = "rbxasset://textures/ui/Health-BKG-Center.png"
-local greenBarImageLeft = "rbxasset://textures/ui/Health-BKG-Left-Cap.png"
-local greenBarImageRight = "rbxasset://textures/ui/Health-BKG-Right-Cap.png"
-local hurtOverlayImage = "http://www.roblox.com/asset/?id=34854607"
+local greenBarImage = "arlasset://textures/ui/Health-BKG-Center.png"
+local greenBarImageLeft = "arlasset://textures/ui/Health-BKG-Left-Cap.png"
+local greenBarImageRight = "arlasset://textures/ui/Health-BKG-Right-Cap.png"
+local hurtOverlayImage = "http://arl.lambda.cam/asset/?id=34854607"
 
 game:GetService("ContentProvider"):Preload(greenBarImage)
 game:GetService("ContentProvider"):Preload(hurtOverlayImage)

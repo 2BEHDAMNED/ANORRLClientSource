@@ -91,7 +91,6 @@ FASTFLAGVARIABLE(RenderThumbModelReflectionsFix,false);
 
 FASTINTVARIABLE(RenderShadowIntensity, 75)
 
-FASTFLAG(UseDynamicTypesetterUTF8)
 FASTFLAG(FramerateVisualizerShow)
 FASTFLAG(TaskSchedulerCyclicExecutive)
 
@@ -1419,8 +1418,7 @@ void RenderView::renderPerformImpl(double timeJobStart, Framebuffer* mainFramebu
     Adorn* adorn = visualEngine->getAdorn();
 
     // update glyph atlas
-    if (FFlag::UseDynamicTypesetterUTF8)
-        visualEngine->getGlyphAtlas()->upload();
+    visualEngine->getGlyphAtlas()->upload();
 
     adorn->prepareRenderPass();
 

@@ -1,7 +1,7 @@
 local PURPOSE_DATA = {
-	[Enum.DialogPurpose.Quest] = {"rbxasset://textures/DialogQuest.png", Vector2.new(10, 34)},
-	[Enum.DialogPurpose.Help] = {"rbxasset://textures/DialogHelp.png", Vector2.new(20, 35)},
-	[Enum.DialogPurpose.Shop] = {"rbxasset://textures/ui/DialogShop.png", Vector2.new(22, 43)},
+	[Enum.DialogPurpose.Quest] = {"arlasset://textures/DialogQuest.png", Vector2.new(10, 34)},
+	[Enum.DialogPurpose.Help] = {"arlasset://textures/DialogHelp.png", Vector2.new(20, 35)},
+	[Enum.DialogPurpose.Shop] = {"arlasset://textures/ui/DialogShop.png", Vector2.new(22, 43)},
 }
 local TEXT_HEIGHT = 24 -- Pixel height of one row
 local FONT_SIZE = Enum.FontSize.Size24
@@ -150,7 +150,7 @@ function createChatNotificationGui()
 	activationButton.Name = "ActivationButton"
 	activationButton.Position = UDim2.new(-0.3, 0, -0.4, 0)
 	activationButton.Size = UDim2.new(.8, 0, .8*(PROMPT_SIZE.X/PROMPT_SIZE.Y), 0)
-	activationButton.Image = "rbxasset://textures/ui/Settings/Help/XButtonDark.png"
+	activationButton.Image = "arlasset://textures/ui/Settings/Help/XButtonDark.png"
 	activationButton.BackgroundTransparency = 1
 	activationButton.Visible = false
 	activationButton.RobloxLocked = true
@@ -187,11 +187,11 @@ function styleMainFrame(tone)
 end
 function setChatNotificationTone(gui, purpose, tone)
 	if tone == Enum.DialogTone.Neutral then
-		gui.Background.Image = "rbxasset://textures/ui/chatBubble_blue_notify_bkg.png"
+		gui.Background.Image = "arlasset://textures/ui/chatBubble_blue_notify_bkg.png"
 	elseif tone == Enum.DialogTone.Friendly then
-		gui.Background.Image = "rbxasset://textures/ui/chatBubble_green_notify_bkg.png"
+		gui.Background.Image = "arlasset://textures/ui/chatBubble_green_notify_bkg.png"
 	elseif tone == Enum.DialogTone.Enemy then
-		gui.Background.Image = "rbxasset://textures/ui/chatBubble_red_notify_bkg.png"
+		gui.Background.Image = "arlasset://textures/ui/chatBubble_red_notify_bkg.png"
 	end
 
 	local newIcon, size = unpack(PURPOSE_DATA[purpose])
@@ -360,7 +360,7 @@ function newChoice()
 	selectionButton.Name = "RBXchatDialogSelectionButton"
 	selectionButton.Position = UDim2.new(0, 0, 0.5, -33/2)
 	selectionButton.Size = UDim2.new(0, 33, 0, 33)
-	selectionButton.Image = "rbxasset://textures/ui/Settings/Help/AButtonLightSmall.png"
+	selectionButton.Image = "arlasset://textures/ui/Settings/Help/AButtonLightSmall.png"
 	selectionButton.BackgroundTransparency = 1
 	selectionButton.Visible = false
 	selectionButton.RobloxLocked = true

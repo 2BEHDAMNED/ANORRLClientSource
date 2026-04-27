@@ -382,7 +382,7 @@ function DeveloperConsole.new(screenGui, permissions, messagesAndStats)
 	end
 	
 	do -- Create top right exit button
-		local exitButton, exitButtonImage = createCornerButton('Exit', 1, 0, 'rbxasset://textures/devconsole/close.png', 2/3)
+		local exitButton, exitButtonImage = createCornerButton('Exit', 1, 0, 'arlasset://textures/devconsole/close.png', 2/3)
 		exitButton.AutoButtonColor = false
 		
 		local buttonEffectFunction = devConsole:CreateButtonEffectFunction(exitButton)
@@ -412,7 +412,7 @@ function DeveloperConsole.new(screenGui, permissions, messagesAndStats)
 	do -- Repositioning and Resizing
 		
 		do -- Create bottom right window resize button and activate resize dragging
-			local resizeButton, resizeButtonImage = createCornerButton('Resize', 1, 1, 'rbxasset://textures/devconsole/resize.png', 1)
+			local resizeButton, resizeButtonImage = createCornerButton('Resize', 1, 1, 'arlasset://textures/devconsole/resize.png', 1)
 			resizeButtonImage.Position = UDim2_new(0, 0, 0, 0)
 			resizeButtonImage.Size = UDim2_new(1, 0, 1, 0)
 
@@ -500,7 +500,7 @@ function DeveloperConsole.new(screenGui, permissions, messagesAndStats)
 		local offset = (tabHeight - gearSize) / 2
 		optionsButton.Size = UDim2_new(0, Style.GearSize, 0, Style.GearSize)
 		optionsButton.Position = UDim2_new(1, -(Style.GearSize + offset + Style.HandleHeight), 0, Style.HandleHeight + offset)
-		local gear = Primitives.InvisibleImageLabel(optionsButton, 'Image', 'rbxasset://textures/devconsole/options.png')
+		local gear = Primitives.InvisibleImageLabel(optionsButton, 'Image', 'arlasset://textures/devconsole/options.png')
 		--gear.ZIndex = ZINDEX + 1
 		local animationToggle = devConsole:GenerateOptionButtonAnimationToggle(interiorFrame, optionsButton, gear, tabContainer, optionsClippingFrame, optionsFrame)
 		local open = false
@@ -1196,7 +1196,7 @@ do -- This doesn't support multiple windows very well
 		label.BackgroundTransparency = 1
 		label.BorderSizePixel = 0
 		label.Size = UDim2.new(0, 64, 0, 64)
-		label.Image = "rbxasset://Textures/ArrowFarCursor.png"
+		label.Image = "arlasset://Textures/ArrowFarCursor.png"
 		label.Name = "BackupMouse"
 		label.ZIndex = ZINDEX + 2
 		
@@ -2371,14 +2371,14 @@ function Methods.CreateScrollbar(devConsole, rotation)
 		frame2.Visible = not visible
 	end
 	
-	local buttonUp = Primitives.ImageButton(frame, 'Up', 'rbxasset://textures/devconsole/arrow.png')
+	local buttonUp = Primitives.ImageButton(frame, 'Up', 'arlasset://textures/devconsole/arrow.png')
 	scrollbar.ButtonUp = buttonUp
 	buttonUp.Size = UDim2_new(1, 0, 0, Style.HandleHeight)
 	buttonUp.Position = UDim2_new(0, 0, 0, -Style.HandleHeight - 1)
 	buttonUp.AutoButtonColor = false
 	devConsole:ConnectButtonHover(buttonUp, devConsole:CreateButtonEffectFunction(buttonUp))
 	
-	local buttonDown = Primitives.ImageButton(frame, 'Down', 'rbxasset://textures/devconsole/arrow.png')
+	local buttonDown = Primitives.ImageButton(frame, 'Down', 'arlasset://textures/devconsole/arrow.png')
 	scrollbar.ButtonDown = buttonDown
 	buttonDown.Size = UDim2_new(1, 0, 0, Style.HandleHeight)
 	buttonDown.Position = UDim2_new(0, 0, 1, 1)
@@ -2393,7 +2393,7 @@ function Methods.CreateScrollbar(devConsole, rotation)
 	
 	bar.AutoButtonColor = false
 	
-	local grip = Primitives.InvisibleImageLabel(bar, 'Image', 'rbxasset://textures/devconsole/grip.png')
+	local grip = Primitives.InvisibleImageLabel(bar, 'Image', 'arlasset://textures/devconsole/grip.png')
 	grip.Size = UDim2_new(0, 16, 0, 16)
 	grip.Position = UDim2_new(0.5, -8, 0.5, -8)
 

@@ -105,7 +105,7 @@ static shared_ptr<Scale9Frame> createChatBubbleMain(const std::string& filePrefi
 	shared_ptr<Scale9Frame> chatBubbleMain = Creatable<Instance>::create<Scale9Frame>();
 	chatBubbleMain->setName("ChatBubble");
 	chatBubbleMain->setScaleEdgeSize(Vector2int16(8,8));
-	chatBubbleMain->setSlicePrefix("rbxasset://textures/"+filePrefix+".png");
+	chatBubbleMain->setSlicePrefix("arlasset://textures/"+filePrefix+".png");
 	chatBubbleMain->setBackgroundTransparency(0.0f);
 	chatBubbleMain->setBorderSizePixel(0);
 	chatBubbleMain->setSize(UDim2(1.0f, 0, 1.0f, 0));
@@ -120,7 +120,7 @@ static shared_ptr<Scale9Frame> createChatBubbleWithTail(const std::string& fileP
 	chatBubbleMain = createChatBubbleMain(filePrefix);
 	shared_ptr<ImageLabel> chatBubbleTail = Creatable<Instance>::create<ImageLabel>();
 	chatBubbleTail->setName("ChatBubbleTail");
-	chatBubbleTail->setImage("rbxasset://textures/ui/dialog_tail.png");
+	chatBubbleTail->setImage("arlasset://textures/ui/dialog_tail.png");
 	chatBubbleTail->setBackgroundTransparency(1.0f);
 	chatBubbleTail->setBorderSizePixel(0);
 	chatBubbleTail->setPosition(position);
@@ -145,7 +145,7 @@ static shared_ptr<Scale9Frame> createScaledChatBubbleWithTail(const std::string&
 
 	shared_ptr<ImageLabel> chatBubbleTail = Creatable<Instance>::create<ImageLabel>();
 	chatBubbleTail->setName("ChatBubbleTail");
-	chatBubbleTail->setImage("rbxasset://textures/ui/dialog_tail.png");
+	chatBubbleTail->setImage("arlasset://textures/ui/dialog_tail.png");
 	chatBubbleTail->setBackgroundTransparency(1.0f);
 	chatBubbleTail->setBorderSizePixel(0);
 	chatBubbleTail->setPosition(position);
@@ -159,7 +159,7 @@ static shared_ptr<GuiObject> createChatImposter(const std::string& filePrefix, c
 {
 	shared_ptr<ImageLabel> result = Creatable<Instance>::create<ImageLabel>();
 	result->setName("DialogPlaceholder");
-	result->setImage("rbxasset://textures/" + filePrefix + ".png");
+	result->setImage("arlasset://textures/" + filePrefix + ".png");
 	result->setBackgroundTransparency(1.0f);
 	result->setBorderSizePixel(0);
 	result->setPosition(UDim2(0, 0, -1.25, 0));
@@ -167,7 +167,7 @@ static shared_ptr<GuiObject> createChatImposter(const std::string& filePrefix, c
 
 	shared_ptr<ImageLabel> image = Creatable<Instance>::create<ImageLabel>();
 	image->setName("DotDotDot");
-	image->setImage("rbxasset://textures/"+dotDotDot+".png");
+	image->setImage("arlasset://textures/"+dotDotDot+".png");
 	image->setBackgroundTransparency(1.0f);
 	image->setBorderSizePixel(0);
 	image->setPosition(UDim2(0.001, 0, yOffset, 0));

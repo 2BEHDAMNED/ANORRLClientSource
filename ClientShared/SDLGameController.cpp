@@ -26,7 +26,7 @@ void SDLGameController::initSDL()
 		return;
 	}
 
-	ARL::ContentId gameControllerDb = ARL::ContentId::fromAssets("fonts/gamecontrollerdb.txt");
+	ARL::ContentId gameControllerDb = ARL::ContentId::fromAssets("configs/gamecontrollerdb.txt");
 	std::string filePath = ARL::ContentProvider::findAsset(gameControllerDb);
 
 	if (SDL_GameControllerAddMappingsFromFile(filePath.c_str()) == -1)

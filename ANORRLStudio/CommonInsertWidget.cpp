@@ -476,7 +476,7 @@ void InsertObjectWidget::SetObjectDefaultValues(boost::shared_ptr<ARL::Instance>
 		ARL::TextService::FontSize defaultFontSize = ARL::TextService::SIZE_14;
 		ARL::TextService::Font defaultFont = ARL::TextService::FONT_SOURCESANS;
 
-		std::string defaultImage = "rbxassetid://133293265";
+		std::string defaultImage = "arlassetid://133293265";
 
 		// have to check for text/image elements separately (no inheritance is being used, only macros....)
 		// trying to get rid of macros leads to diamond inheritance, needs to spend some time on that
@@ -518,7 +518,7 @@ void InsertObjectWidget::SetObjectDefaultValues(boost::shared_ptr<ARL::Instance>
 		spawnLocation->setSurfaceType(ARL::NORM_Y, ARL::NO_SURFACE);
 		// create default decal
 		boost::shared_ptr<ARL::Decal> decal = ARL::Creatable<ARL::Instance>::create<ARL::Decal>();
-		decal->setTexture("rbxasset://Textures/SpawnLocation.png");
+		decal->setTexture("arlasset://Textures/SpawnLocation.png");
 		decal->setFace(ARL::NORM_Y);
 		decal->setParent(spawnLocation);
 	}

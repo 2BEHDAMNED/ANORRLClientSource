@@ -204,15 +204,15 @@ local function Initialize()
 	end
 
 	local function createGamepadHelp(parentFrame)
-		local gamepadImage = "rbxasset://textures/ui/Settings/Help/GenericController.png"
+		local gamepadImage = "arlasset://textures/ui/Settings/Help/GenericController.png"
 		local imageSize = UDim2.new(0,650,0,239)
 		local imagePosition = UDim2.new(0.5,-imageSize.X.Offset/2,0.5,-imageSize.Y.Offset/2)
 		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne or UserInputService:GetPlatform() == Enum.Platform.XBox360 then
-			gamepadImage = "rbxasset://textures/ui/Settings/Help/XboxController.png"
+			gamepadImage = "arlasset://textures/ui/Settings/Help/XboxController.png"
 			imageSize = UDim2.new(0,1334,0,570)
 			imagePosition = UDim2.new(0.5, (-imageSize.X.Offset/2) - 50, 0.5, -imageSize.Y.Offset/2)
 		elseif UserInputService:GetPlatform() == Enum.Platform.PS4 or UserInputService:GetPlatform() == Enum.Platform.PS3 then
-			gamepadImage = "rbxasset://textures/ui/Settings/Help/PSController.png"
+			gamepadImage = "arlasset://textures/ui/Settings/Help/PSController.png"
 		end
 
 		local gamepadImageLabel = utility:Create'ImageLabel'
@@ -247,7 +247,7 @@ local function Initialize()
 
 		local textVerticalSize = (gamepadFontSize == Enum.FontSize.Size36) and 36 or 24
 
-		if gamepadImage == "rbxasset://textures/ui/Settings/Help/XboxController.png" then
+		if gamepadImage == "arlasset://textures/ui/Settings/Help/XboxController.png" then
 			createGamepadLabel("Switch Tool", UDim2.new(0,50,0,-textVerticalSize/2), UDim2.new(0,100,0,textVerticalSize))
 			createGamepadLabel("Game Menu Toggle", UDim2.new(0,-38,0.15,-textVerticalSize/2), UDim2.new(0,164,0,textVerticalSize))
 			createGamepadLabel("Move", UDim2.new(0,-80,0.31,-textVerticalSize/2), UDim2.new(0,46,0,textVerticalSize))
@@ -289,7 +289,7 @@ local function Initialize()
 			Name = "AButtonImage",
 			Size = UDim2.new(0,55,0,55),
 			Position = UDim2.new(0,5,0.5,-28),
-			Image = "rbxasset://textures/ui/Settings/Help/AButtonDark.png",
+			Image = "arlasset://textures/ui/Settings/Help/AButtonDark.png",
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Parent = devConsoleButton
@@ -330,7 +330,7 @@ local function Initialize()
 				Size = UDim2.new(1,0,1,0),
 				Position = UDim2.new(0,0,0,2),
 				BackgroundTransparency = 1,
-				Image = "rbxasset://textures/ui/Settings/Radial/RadialLabel.png",
+				Image = "arlasset://textures/ui/Settings/Radial/RadialLabel.png",
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(12,2,65,21),
 				ZIndex = 2,
@@ -367,11 +367,11 @@ local function Initialize()
 		if not smallScreen then equipLabel.Position = UDim2.new(0.5,-60,0.95,0) end
 
 		local zoomLabel = createTouchLabel("Zoom In/Out", UDim2.new(0.15,-60,0.02,0), UDim2.new(0,120,0,ySize), parentFrame)
-		createTouchGestureImage("ZoomImage", "rbxasset://textures/ui/Settings/Help/ZoomGesture.png", UDim2.new(0.5,-26,1,3), UDim2.new(0,53,0,59), zoomLabel)
+		createTouchGestureImage("ZoomImage", "arlasset://textures/ui/Settings/Help/ZoomGesture.png", UDim2.new(0.5,-26,1,3), UDim2.new(0,53,0,59), zoomLabel)
 		local rotateLabel = createTouchLabel("Rotate Camera", UDim2.new(0.5,-60,0.02,0), UDim2.new(0,120,0,ySize), parentFrame)
-		createTouchGestureImage("RotateImage", "rbxasset://textures/ui/Settings/Help/RotateCameraGesture.png", UDim2.new(0.5,-32,1,3), UDim2.new(0,65,0,48), rotateLabel)
+		createTouchGestureImage("RotateImage", "arlasset://textures/ui/Settings/Help/RotateCameraGesture.png", UDim2.new(0.5,-32,1,3), UDim2.new(0,65,0,48), rotateLabel)
 		local useToolLabel = createTouchLabel("Use Tool", UDim2.new(0.85,-60,0.02,0), UDim2.new(0,120,0,ySize), parentFrame)
-		createTouchGestureImage("ToolImage", "rbxasset://textures/ui/Settings/Help/UseToolGesture.png", UDim2.new(0.5,-19,1,3), UDim2.new(0,38,0,52), useToolLabel)
+		createTouchGestureImage("ToolImage", "arlasset://textures/ui/Settings/Help/UseToolGesture.png", UDim2.new(0.5,-19,1,3), UDim2.new(0,38,0,52), useToolLabel)
 
 	end
 
@@ -426,14 +426,14 @@ local function Initialize()
 	------ TAB CUSTOMIZATION -------
 	this.TabHeader.Name = "HelpTab"
 
-	this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/HelpTab.png"
+	this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/HelpTab.png"
 	
 	if utility:IsSmallTouchScreen() then
 		this.TabHeader.Icon.Size = UDim2.new(0,33,0,33)
 		this.TabHeader.Icon.Position = UDim2.new(this.TabHeader.Icon.Position.X.Scale,this.TabHeader.Icon.Position.X.Offset,0.5,-16)
 		this.TabHeader.Size = UDim2.new(0,100,1,0)
 	elseif isTenFootInterface then
-		this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/HelpTab@2x.png"
+		this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/HelpTab@2x.png"
 		this.TabHeader.Icon.Size = UDim2.new(0,90,0,90)
 		this.TabHeader.Icon.Position = UDim2.new(0,0,0.5,-43)
 		this.TabHeader.Size = UDim2.new(0,210,1,0)

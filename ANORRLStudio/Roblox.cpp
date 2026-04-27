@@ -154,7 +154,7 @@ void Roblox::globalInit(const QString& urlArg, const QString& ticketArg, ARL::Ht
 	{
 		AuthenticationHelper::Instance().waitForHttpAuthentication();
 
-		QSettings retentionData("Roblox", "Retention");
+		QSettings retentionData("ANORRL", "Retention");
 		static const char* const kBrowserTrackerId = "BrowserTrackerId";
 		QString browserTrackerId = retentionData.value(kBrowserTrackerId, "").toString();
 

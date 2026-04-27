@@ -28,6 +28,10 @@ local COLORS = {
 	ERROR = Color3.new(253/255,68/255,72/255)
 }
 
+if isDarkModeEnabled then
+	COLORS.COOLERBLACK = COLORS.WHITE
+end
+
 local function getViewportSize()
 	while not game.Workspace.CurrentCamera do
 		game.Workspace.Changed:wait()
@@ -57,6 +61,8 @@ local platform = UIS:GetPlatform()
 
 local useGameLoadedSuccess, useGameLoadedFlagValue = pcall(function() return settings():GetFFlag("UseGameLoadedInLoadingScript") end)
 local useGameLoadedToWait = (useGameLoadedSuccess and useGameLoadedFlagValue == true)
+
+local isDarkModeEnabled = UserSettings().GameSettings.LoadingScriptDarkMode
 
 local function IsConvertMyPlaceNameInXboxAppEnabled()
 	if UIS:GetPlatform() == Enum.Platform.XBoxOne then
@@ -169,11 +175,16 @@ function MainGui:tileBackgroundTexture(frameToFill)
 		local backgroundTextureSize = Vector2.new(512, 512)
 		for i = 0, math.ceil(frameToFill.AbsoluteSize.X/backgroundTextureSize.X) do
 			for j = 0, math.ceil(frameToFill.AbsoluteSize.Y/backgroundTextureSize.Y) do
+				local backgroundTexture = 'rbxasset://textures/loading/loadingTexture.png'
+				if isDarkModeEnabled then
+					backgroundTexture = 'rbxasset://textures/loading/darkLoadingTexture.png'
+				end
+			
 				create 'ImageLabel' {
 					Name = 'BackgroundTextureImage',
 					BackgroundTransparency = 1,
 					ImageTransparency = backgroundImageTransparency,
-					Image = 'rbxasset://textures/loading/loadingTexture.png',
+					Image = backgroundTexture,
 					Position = UDim2.new(0, i*backgroundTextureSize.X, 0, j*backgroundTextureSize.Y),
 					Size = UDim2.new(0, backgroundTextureSize.X, 0, backgroundTextureSize.Y),
 					ZIndex = 1,

@@ -26,7 +26,7 @@ const XmlTag& tag_xmlnsxsi = Name::declare("xmlns:xsi");
 // TODO: Put these in a file that knows about the Roblox schema
 const XmlTag& name_root = Name::declare("root");
 const XmlTag& name_referent = Name::declare("referent");
-const XmlTag& tag_roblox = Name::declare("roblox");
+const XmlTag& tag_roblox = Name::declare("anorrl");
 const XmlTag& tag_version = Name::declare("version");
 const XmlTag& tag_assettype = Name::declare("assettype");
 const XmlTag& tag_External = Name::declare("External");

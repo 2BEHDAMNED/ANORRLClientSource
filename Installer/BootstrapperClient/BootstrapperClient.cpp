@@ -70,7 +70,7 @@ BootstrapperClient::BootstrapperClient(HINSTANCE hInstance)
 	//so if you ever change this guy make sure that plugins code is updates as well
 	_regSubPath = _T("ANORRL");
 	_regPath = _T("SOFTWARE\\") + _regSubPath;
-	_versionFileName = _T("ANORRLVersion.txt");
+	_versionFileName = _T("ANORRLClientVersion.txt");
 	_versionGuidName = _T(VERSIONGUIDNAMEPLAYER);
 
 	SYSTEMTIME sysTime = {0};
@@ -1054,30 +1054,35 @@ void BootstrapperClient::DeployComponents(bool isUpdating, bool commitData)
 {
 	std::vector<std::pair<std::wstring, std::wstring> > files;
 	createDirectory((programDirectory() + _T("content")).c_str());
+	createDirectory((programDirectory() + _T("content\\avatar")).c_str());
+	createDirectory((programDirectory() + _T("content\\configs")).c_str());
 	createDirectory((programDirectory() + _T("content\\fonts")).c_str());
-	createDirectory((programDirectory() + _T("content\\music")).c_str());
 	createDirectory((programDirectory() + _T("content\\particles")).c_str());
+	createDirectory((programDirectory() + _T("content\\retros")).c_str());
 	createDirectory((programDirectory() + _T("content\\sky")).c_str());
 	createDirectory((programDirectory() + _T("content\\sounds")).c_str());
 	createDirectory((programDirectory() + _T("content\\textures")).c_str());
+	
 	createDirectory((programDirectory() + _T("PlatformContent")).c_str());
 	createDirectory((programDirectory() + _T("PlatformContent\\pc")).c_str());
 	createDirectory((programDirectory() + _T("PlatformContent\\pc\\textures")).c_str());
 	createDirectory((programDirectory() + _T("PlatformContent\\pc\\terrain")).c_str());
+	
 	createDirectory((programDirectory() + _T("shaders")).c_str());
 
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("redist.zip"), _T("")));
-	files.push_back(std::pair<std::wstring, std::wstring>(_T("ANORRLApp.zip"), _T("")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("ANORRLPlayer.zip"), _T("")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("Libraries.zip"), _T("")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-avatar.zip"), _T("content\\avatar\\")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-configs.zip"), _T("content\\configs\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-fonts.zip"), _T("content\\fonts\\")));
-	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-music.zip"), _T("content\\music\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-particles.zip"), _T("content\\particles\\")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-retros.zip"), _T("content\\retros\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-sky.zip"), _T("content\\sky\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-sounds.zip"), _T("content\\sounds\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-textures.zip"), _T("content\\textures\\")));
-	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-textures2.zip"), _T("content\\textures\\")));
-	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-textures3.zip"), _T("PlatformContent\\pc\\textures\\")));
-	files.push_back(std::pair<std::wstring, std::wstring>(_T("content-terrain.zip"), _T("PlatformContent\\pc\\terrain\\")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("platformcontent-textures.zip"), _T("PlatformContent\\pc\\textures\\")));
+	files.push_back(std::pair<std::wstring, std::wstring>(_T("platformcontent-terrain.zip"), _T("PlatformContent\\pc\\terrain\\")));
 	files.push_back(std::pair<std::wstring, std::wstring>(_T("shaders.zip"), _T("shaders\\")));
 
 	DoDeployComponents(files, isUpdating, commitData);

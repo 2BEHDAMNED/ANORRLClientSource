@@ -225,9 +225,9 @@ Emitter::Emitter(VisualEngine* ve, bool enableCurves_, const std::string& contex
     Appearance def = {};
     def.blendCode = Blend_AlphaBlend;
     def.shader    = Shader_Modulate;
-    def.mainTexture = "rbxasset://textures/particles/sparkles_main.dds";
-    def.colorStripTexture = "rbxasset://textures/particles/sparkles_color.dds";
-    def.alphaStripTexture = "rbxasset://textures/particles/common_alpha.dds";
+    def.mainTexture = "arlasset://textures/particles/sparkles_main.dds";
+    def.colorStripTexture = "arlasset://textures/particles/sparkles_color.dds";
+    def.alphaStripTexture = "arlasset://textures/particles/common_alpha.dds";
     def.colorStripBaseline = -1;
 
     modulateColor = Vector4(1,1,1,1);

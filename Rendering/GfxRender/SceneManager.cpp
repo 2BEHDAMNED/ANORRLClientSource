@@ -564,7 +564,7 @@ SceneManager::SceneManager(VisualEngine* visualEngine)
 
 	shadowRenderQueue.reset(new RenderQueue());
 
-	shadowMask = visualEngine->getTextureManager()->load(ContentId("rbxasset://textures/shadowmask.png"), TextureManager::Fallback_Black);
+	shadowMask = visualEngine->getTextureManager()->load(ContentId("arlasset://textures/shadowmask.png"), TextureManager::Fallback_Black);
 
 	try
 	{

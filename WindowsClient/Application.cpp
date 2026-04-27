@@ -1305,7 +1305,7 @@ void Application::validateBootstrapperVersion()
 			if (pos == std::string::npos)
 				return;
 
-			// from www.roblox.com or www.gametest1.robloxlabs.com to setup.roblox.com or setup.gametest1.robloxlabs.com, etc...
+			// from arl.lambda.cam or www.gametest1.robloxlabs.com to setup.roblox.com or setup.gametest1.robloxlabs.com, etc...
 			installHost = "http://setup" + baseUrl.substr(pos+3);
 
 			{

@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 	<Item class="Model" referent="RBX3CC71DDB17D842A3B313B465F8D61360">
@@ -65,7 +65,7 @@ local plugins = {
 		button = utilityModule:GetUsingAsPlugin() and buttonCreator:CreateButton(
 			'Generate',									--button title
 			'Generate landscapes of terrain.',			--hover text
-			'rbxasset://textures/terrain/generate.png'	--button image
+			'arlasset://textures/terrain/generate.png'	--button image
 		),
 		studioOnly = true,
 	},
@@ -73,7 +73,7 @@ local plugins = {
 		button = buttonCreator:CreateButton(
 			'Add',
 			'Click and hold to add terrain.',
-			'rbxasset://textures/terrain/add.png'
+			'arlasset://textures/terrain/add.png'
 		),
 		usesMaterials = true,
 	},
@@ -81,14 +81,14 @@ local plugins = {
 		button = buttonCreator:CreateButton(
 			'Subtract',
 			'Click and hold to remove terrain.',
-			'rbxasset://textures/terrain/generate.png'
+			'arlasset://textures/terrain/generate.png'
 		),
 	},
 	{name = 'Paint',
 		button = buttonCreator:CreateButton(
 			'Paint',
 			'Paint the material of the terrain.',
-			'rbxasset://textures/terrain/paint.png'
+			'arlasset://textures/terrain/paint.png'
 		),
 		usesMaterials = true,
 	},
@@ -96,7 +96,7 @@ local plugins = {
 		button = buttonCreator:CreateButton(
 			'Grow',
 			'Click and hold to grow and expand terrain.',
-			'rbxasset://textures/terrain/grow.png'
+			'arlasset://textures/terrain/grow.png'
 		),
 		usesMaterials = true,
 	},
@@ -104,21 +104,21 @@ local plugins = {
 		button = buttonCreator:CreateButton(
 			'Erode',
 			'Click and hold to erode and remove terrain.',
-			'rbxasset://textures/terrain/erode.png'
+			'arlasset://textures/terrain/erode.png'
 		),
 	},
 	{name = 'Smooth',
 		button = buttonCreator:CreateButton(
 			'Smooth',
 			'Brush to smooth out rough or jagged terrain.',
-			'rbxasset://textures/terrain/smooth.png'
+			'arlasset://textures/terrain/smooth.png'
 		),
 	},
 	{name = 'Region Editor',
 		button = buttonCreator:CreateButton(
 			'Regions',
 			'Manipulate regions of smooth terrain.',
-			'rbxasset://textures/terrain/smooth.png'
+			'arlasset://textures/terrain/smooth.png'
 		),
 	},
 }
@@ -178,14 +178,14 @@ function FirstTimeSetUp()
 		['Sphere'] = {
 			name = 'Sphere',
 			button = guiFrame:WaitForChild('ShapeButton1'),
-			image = 'rbxassetid://225799533',
-			selectedImage = 'rbxassetid://225801914',
+			image = 'arlassetid://225799533',
+			selectedImage = 'arlassetid://225801914',
 		},
 		['Box'] = {
 			name = 'Box',
 			button = guiFrame:WaitForChild('ShapeButton2'),
-			image = 'rbxassetid://225799696',
-			selectedImage = 'rbxassetid://225802254',
+			image = 'arlassetid://225799696',
+			selectedImage = 'arlassetid://225802254',
 		},
 	}
 	----------------
@@ -1309,7 +1309,7 @@ local currentTool = 'Create'
 regionEditButton = toolBar:CreateButton(
 	'Region Edit',	--button title
 	'Manipulate regions of smoothterrain.',	--hover text
-	'rbxassetid://180084957'	--icon
+	'arlassetid://180084957'	--icon
 )
 regionEditButton.Click:connect(function()
 	if not on then
@@ -3458,21 +3458,21 @@ return initialiseUtility]]></ProtectedString>
 
 
 local materialsTable = {	--Interface order is defined by order here
-	{enum = Enum.Material.Grass, image = 'rbxassetid://225314676'},
-	{enum = Enum.Material.Sand, image = 'rbxassetid://225315607'},
-	{enum = Enum.Material.Rock, image = 'rbxassetid://225315178'},
-	{enum = Enum.Material.Water, image = 'rbxassetid://225315529', forceIgnoreWater = true, forceIgnoreWaterTo = false},
-	{enum = Enum.Material.Ground, image = 'rbxassetid://254542189'},
-	{enum = Enum.Material.Sandstone, image = 'rbxassetid://254541350'},
-	{enum = Enum.Material.Slate, image = 'rbxassetid://225315290'},
-	{enum = Enum.Material.Snow, image = 'rbxassetid://254541898'},
-	{enum = Enum.Material.Mud, image = 'rbxassetid://254541862'},
-	{enum = Enum.Material.Brick, image = 'rbxassetid://225315419', forceSnapToGrid = true},
-	{enum = Enum.Material.Concrete, image = 'rbxassetid://225314983'},
-	{enum = Enum.Material.Glacier, image = 'rbxassetid://254541572'},
-	{enum = Enum.Material.WoodPlanks, image = 'rbxassetid://225315705', forceSnapToGrid = true},
-	{enum = Enum.Material.CrackedLava, image = 'rbxassetid://254541726'},
-	{enum = Enum.Material.Basalt, image = 'rbxassetid://254542066'},
+	{enum = Enum.Material.Grass, image = 'arlassetid://225314676'},
+	{enum = Enum.Material.Sand, image = 'arlassetid://225315607'},
+	{enum = Enum.Material.Rock, image = 'arlassetid://225315178'},
+	{enum = Enum.Material.Water, image = 'arlassetid://225315529', forceIgnoreWater = true, forceIgnoreWaterTo = false},
+	{enum = Enum.Material.Ground, image = 'arlassetid://254542189'},
+	{enum = Enum.Material.Sandstone, image = 'arlassetid://254541350'},
+	{enum = Enum.Material.Slate, image = 'arlassetid://225315290'},
+	{enum = Enum.Material.Snow, image = 'arlassetid://254541898'},
+	{enum = Enum.Material.Mud, image = 'arlassetid://254541862'},
+	{enum = Enum.Material.Brick, image = 'arlassetid://225315419', forceSnapToGrid = true},
+	{enum = Enum.Material.Concrete, image = 'arlassetid://225314983'},
+	{enum = Enum.Material.Glacier, image = 'arlassetid://254541572'},
+	{enum = Enum.Material.WoodPlanks, image = 'arlassetid://225315705', forceSnapToGrid = true},
+	{enum = Enum.Material.CrackedLava, image = 'arlassetid://254541726'},
+	{enum = Enum.Material.Basalt, image = 'arlassetid://254542066'},
 }
 
 return materialsTable
@@ -3897,7 +3897,7 @@ return materialsTable
 						<int name="BorderSizePixel">0</int>
 						<bool name="ClipsDescendants">false</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="Image"><url>rbxassetid://225799533</url></Content>
+						<Content name="Image"><url>arlassetid://225799533</url></Content>
 						<Color3 name="ImageColor3">4294967295</Color3>
 						<Vector2 name="ImageRectOffset">
 							<X>0</X>
@@ -3957,7 +3957,7 @@ return materialsTable
 						<int name="BorderSizePixel">0</int>
 						<bool name="ClipsDescendants">false</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="Image"><url>rbxassetid://225799696</url></Content>
+						<Content name="Image"><url>arlassetid://225799696</url></Content>
 						<Color3 name="ImageColor3">4294967295</Color3>
 						<Vector2 name="ImageRectOffset">
 							<X>0</X>
@@ -4954,7 +4954,7 @@ return materialsTable
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">0</int>
-						<Content name="BottomImage"><url>rbxasset://textures/ui/studs.png</url></Content>
+						<Content name="BottomImage"><url>arlasset://textures/ui/studs.png</url></Content>
 						<Vector2 name="CanvasPosition">
 							<X>0</X>
 							<Y>0</Y>
@@ -4967,7 +4967,7 @@ return materialsTable
 						</UDim2>
 						<bool name="ClipsDescendants">true</bool>
 						<bool name="Draggable">false</bool>
-						<Content name="MidImage"><url>rbxasset://textures/ui/smooth.png</url></Content>
+						<Content name="MidImage"><url>arlasset://textures/ui/smooth.png</url></Content>
 						<string name="Name">ScrollingFrame</string>
 						<Ref name="NextSelectionDown">null</Ref>
 						<Ref name="NextSelectionLeft">null</Ref>
@@ -4991,7 +4991,7 @@ return materialsTable
 							<YO>-115</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
-						<Content name="TopImage"><url>rbxasset://textures/ui/studs.png</url></Content>
+						<Content name="TopImage"><url>arlasset://textures/ui/studs.png</url></Content>
 						<bool name="Visible">true</bool>
 						<int name="ZIndex">2</int>
 					</Properties>
@@ -5549,7 +5549,7 @@ return materialsTable
 							<int name="BorderSizePixel">0</int>
 							<bool name="ClipsDescendants">false</bool>
 							<bool name="Draggable">false</bool>
-							<Content name="Image"><url>rbxassetid://67599350</url></Content>
+							<Content name="Image"><url>arlassetid://67599350</url></Content>
 							<Color3 name="ImageColor3">4278248807</Color3>
 							<Vector2 name="ImageRectOffset">
 								<X>0</X>
@@ -5916,7 +5916,7 @@ return materialsTable
 							<int name="BorderSizePixel">0</int>
 							<bool name="ClipsDescendants">false</bool>
 							<bool name="Draggable">false</bool>
-							<Content name="Image"><url>rbxasset://textures/ui/dropdown_arrow.png</url></Content>
+							<Content name="Image"><url>arlasset://textures/ui/dropdown_arrow.png</url></Content>
 							<Color3 name="ImageColor3">4294967295</Color3>
 							<Vector2 name="ImageRectOffset">
 								<X>0</X>
@@ -6861,4 +6861,4 @@ return {
 			</Properties>
 		</Item>
 	</Item>
-</roblox>
+</anorrl>

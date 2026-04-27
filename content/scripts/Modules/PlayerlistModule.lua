@@ -130,15 +130,15 @@ if isTenFootInterface then
 	TEXT_STROKE_TRANSPARENCY = 1
 	TILE_SPACING = 5
 end
-local SHADOW_IMAGE = 'rbxasset://textures/ui/PlayerList/TileShadowMissingTop.png'--'http://www.roblox.com/asset?id=286965900'
+local SHADOW_IMAGE = 'arlasset://textures/ui/PlayerList/TileShadowMissingTop.png'--'http://arl.lambda.cam/asset?id=286965900'
 local SHADOW_SLICE_SIZE = 5
 local SHADOW_SLICE_RECT = Rect.new(SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE*2-1, SHADOW_SLICE_SIZE*2-1)
 
 local ADMINS = {	-- Admins with special icons
-    ['7210880'] = 'http://www.roblox.com/asset/?id=134032333', -- Jeditkacheff
-    ['13268404'] = 'http://www.roblox.com/asset/?id=113059239', -- Sorcus
-    ['261'] = 'http://www.roblox.com/asset/?id=105897927', -- shedlestky
-    ['20396599'] = 'http://www.roblox.com/asset/?id=161078086', -- Robloxsai
+    ['7210880'] = 'http://arl.lambda.cam/asset/?id=134032333', -- Jeditkacheff
+    ['13268404'] = 'http://arl.lambda.cam/asset/?id=113059239', -- Sorcus
+    ['261'] = 'http://arl.lambda.cam/asset/?id=105897927', -- shedlestky
+    ['20396599'] = 'http://arl.lambda.cam/asset/?id=161078086', -- Robloxsai
 	['1'] = 'http://arl.lambda.cam/asset/?id=899',
 	['36'] = 'http://arl.lambda.cam/asset/?id=2309',
 	['41'] = 'http://arl.lambda.cam/asset/?id=2827',
@@ -165,22 +165,22 @@ local FOLLOWER_STATUS = {
 }
 
 --[[ Images ]]--
-local CHAT_ICON = 'rbxasset://textures/ui/chat_teamButton.png'
-local ADMIN_ICON = 'rbxasset://textures/ui/icon_admin-16.png'
-local PLACE_OWNER_ICON = 'rbxasset://textures/ui/icon_placeowner.png'
-local BC_ICON = 'rbxasset://textures/ui/icon_BC-16.png'
-local TBC_ICON = 'rbxasset://textures/ui/icon_TBC-16.png'
-local OBC_ICON = 'rbxasset://textures/ui/icon_OBC-16.png'
-local BLOCKED_ICON = 'rbxasset://textures/ui/PlayerList/BlockedIcon.png'
-local FRIEND_ICON = 'rbxasset://textures/ui/icon_friends_16.png'
-local FRIEND_REQUEST_ICON = 'rbxasset://textures/ui/icon_friendrequestsent_16.png'
-local FRIEND_RECEIVED_ICON = 'rbxasset://textures/ui/icon_friendrequestrecieved-16.png'
+local CHAT_ICON = 'arlasset://textures/ui/chat_teamButton.png'
+local ADMIN_ICON = 'arlasset://textures/ui/icon_admin-16.png'
+local PLACE_OWNER_ICON = 'arlasset://textures/ui/icon_placeowner.png'
+local BC_ICON = 'arlasset://textures/ui/icon_BC-16.png'
+local TBC_ICON = 'arlasset://textures/ui/icon_TBC-16.png'
+local OBC_ICON = 'arlasset://textures/ui/icon_OBC-16.png'
+local BLOCKED_ICON = 'arlasset://textures/ui/PlayerList/BlockedIcon.png'
+local FRIEND_ICON = 'arlasset://textures/ui/icon_friends_16.png'
+local FRIEND_REQUEST_ICON = 'arlasset://textures/ui/icon_friendrequestsent_16.png'
+local FRIEND_RECEIVED_ICON = 'arlasset://textures/ui/icon_friendrequestrecieved-16.png'
 
-local FOLLOWER_ICON = 'rbxasset://textures/ui/icon_follower-16.png'
-local FOLLOWING_ICON = 'rbxasset://textures/ui/icon_following-16.png'
-local MUTUAL_FOLLOWING_ICON = 'rbxasset://textures/ui/icon_mutualfollowing-16.png'
+local FOLLOWER_ICON = 'arlasset://textures/ui/icon_follower-16.png'
+local FOLLOWING_ICON = 'arlasset://textures/ui/icon_following-16.png'
+local MUTUAL_FOLLOWING_ICON = 'arlasset://textures/ui/icon_mutualfollowing-16.png'
 
-local CHARACTER_BACKGROUND_IMAGE = 'rbxasset://textures/ui/PlayerList/CharacterBackgroundImage.png'
+local CHARACTER_BACKGROUND_IMAGE = 'arlasset://textures/ui/PlayerList/CharacterBackgroundImage.png'
 
 --[[ Helper Functions ]]--
 local function clamp(value, min, max)
@@ -309,7 +309,7 @@ local function setAvatarIconAsync(player, iconImage)
 	end
 
 	if not isFinalSuccess then
-		iconImage.Image = 'rbxasset://textures/ui/Shell/Icons/DefaultProfileIcon.png'
+		iconImage.Image = 'arlasset://textures/ui/Shell/Icons/DefaultProfileIcon.png'
 	end
 end
 
@@ -409,9 +409,9 @@ ScrollList.BackgroundColor3 = Color3.new()
 ScrollList.BorderSizePixel = 0
 ScrollList.CanvasSize = UDim2.new(0, 0, 0, 0)	-- NOTE: Look into if x needs to be set to anything
 ScrollList.ScrollBarThickness = 6
-ScrollList.BottomImage = 'rbxasset://textures/ui/scroll-bottom.png'
-ScrollList.MidImage = 'rbxasset://textures/ui/scroll-middle.png'
-ScrollList.TopImage = 'rbxasset://textures/ui/scroll-top.png'
+ScrollList.BottomImage = 'arlasset://textures/ui/scroll-bottom.png'
+ScrollList.MidImage = 'arlasset://textures/ui/scroll-middle.png'
+ScrollList.TopImage = 'arlasset://textures/ui/scroll-top.png'
 ScrollList.SelectionImageObject = noSelectionObject
 ScrollList.Parent = Container
 
@@ -1538,7 +1538,7 @@ Players.ChildAdded:connect(function(child)
 		if GameSettings:IsAeroEnabled() then
 			local sound = Instance.new("Sound", game.CoreGui)
 			sound.PlayOnRemove = true
-			sound.SoundId = "rbxasset://sounds/aero/feed_discovered.mp3"
+			sound.SoundId = "arlasset://sounds/aero/feed_discovered.mp3"
 			sound.Volume = 5
 			sound:Remove()
 		end
@@ -1682,7 +1682,7 @@ Playerlist.ToggleVisibility = function(name, inputState, inputObject)
 	
 	if GameSettings:IsAeroEnabled() then
 		local sound = Instance.new("Sound", game.CoreGui)
-		sound.SoundId = "rbxasset://sounds/aero/menu_command.mp3"
+		sound.SoundId = "arlasset://sounds/aero/menu_command.mp3"
 		sound.Volume = 5
 		sound.Ended:connect(function()
 			sound:Remove()

@@ -774,7 +774,7 @@ local function CreatePlayerChatMessage(settings, playerChatType, sendingPlayer, 
 					BackgroundTransparency = 1;
 					Position = UDim2.new(0, 0, 0, math.max(0, ((playerNameSize and playerNameSize.Y or 0) - 14)/2) + 2);
 					BorderSizePixel = 0;
-					Image = "rbxasset://textures/ui/chat_teamButton.png";
+					Image = "arlasset://textures/ui/chat_teamButton.png";
 					ImageColor3 = playerColor;
 					Parent = container;
 				}
@@ -1065,7 +1065,7 @@ local function CreateChatBarWidget(settings)
 		
 		if GameSettings:IsAeroEnabled() then
 			local sound = Instance.new("Sound", game.CoreGui)
-			sound.SoundId = "rbxasset://sounds/aero/menu_command.mp3"
+			sound.SoundId = "arlasset://sounds/aero/menu_command.mp3"
 			sound.Volume = 5
 			sound.Ended:connect(function()
 				sound:Remove()
@@ -1916,9 +1916,9 @@ local function CreateChatWindowWidget(settings)
 				ZIndex = 1;
 				BackgroundColor3 = Color3.new(0, 0, 0);
 				BackgroundTransparency = 1;
-				BottomImage = "rbxasset://textures/ui/scroll-bottom.png";
-				MidImage = "rbxasset://textures/ui/scroll-middle.png";
-				TopImage = "rbxasset://textures/ui/scroll-top.png";
+				BottomImage = "arlasset://textures/ui/scroll-bottom.png";
+				MidImage = "arlasset://textures/ui/scroll-middle.png";
+				TopImage = "arlasset://textures/ui/scroll-top.png";
 				ScrollBarThickness = 0;
 				BorderSizePixel = 0;
 				ScrollingEnabled = false;

@@ -28,7 +28,7 @@ local function Initialize()
 	------ TAB CUSTOMIZATION -------
 	this.TabHeader.Name = "HomeTab"
 
-	this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/HomeTab.png"
+	this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/HomeTab.png"
 	this.TabHeader.Icon.Size = UDim2.new(0,32,0,30)
 	this.TabHeader.Icon.Position = UDim2.new(0,5,0.5,-15)
 

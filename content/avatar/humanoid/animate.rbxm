@@ -1,4 +1,4 @@
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
 	<Item class="LocalScript" referent="RBXC49238CC391A40B0B08D3C0989F85A53">
@@ -436,7 +436,7 @@ playEmoteEvent.Event:connect(function(cmd, id)
 		if (not emotes[id]) then
 			print("registering" , id)
 			local anim = Instance.new("Animation", script)
-			anim.AnimationId = "rbxassetid://"..id
+			anim.AnimationId = "arlassetid://"..id
 			emotes[id] = anim
 			--Humanoid:LoadAnimation(anim) -- big hack to preload
 		end
@@ -850,4 +850,4 @@ end
 			</Item>
 		</Item>
 	</Item>
-</roblox>
+</anorrl>

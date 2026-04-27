@@ -90,7 +90,7 @@ TextureId CharacterMesh::getBaseTextureId() const
 {
 	if(baseTextureAssetId != 0)
 	{
-		return TextureId(ARL::format("rbxassetid://%d", baseTextureAssetId));
+		return TextureId(ARL::format("arlassetid://%d", baseTextureAssetId));
 	}
 	else
 	{
@@ -101,7 +101,7 @@ TextureId CharacterMesh::getOverlayTextureId() const
 {
 	if(overlayTextureAssetId != 0)
 	{
-		return TextureId(ARL::format("rbxassetid://%d", overlayTextureAssetId));
+		return TextureId(ARL::format("arlassetid://%d", overlayTextureAssetId));
 	}
 	else
 	{
@@ -112,7 +112,7 @@ MeshId CharacterMesh::getMeshId() const
 {
 	if(meshAssetId != 0)
 	{
-		return MeshId(ARL::format("rbxassetid://%d", meshAssetId));
+		return MeshId(ARL::format("arlassetid://%d", meshAssetId));
 	}
 	else
 	{

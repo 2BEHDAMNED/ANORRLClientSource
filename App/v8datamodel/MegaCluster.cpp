@@ -39,7 +39,7 @@ using namespace Voxel;
 const Vector3int16 kLegacyChunkCount(16, 4, 16);
 const Vector3int16 kLegacyChunkOffset(8, 0, 8);
 
-static const ContentId kSmoothTerrainMaterials("rbxasset://terrain/materials.json");
+static const ContentId kSmoothTerrainMaterials("arlasset://terrain/materials.json");
 
 namespace Reflection
 {

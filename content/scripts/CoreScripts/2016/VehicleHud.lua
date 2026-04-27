@@ -24,9 +24,9 @@ local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled
 
 
 --[[ Images ]]--
-local VEHICLE_HUD_BG = 'rbxasset://textures/ui/Vehicle/SpeedBarBKG.png'
-local SPEED_BAR_EMPTY = 'rbxasset://textures/ui/Vehicle/SpeedBarEmpty.png'
-local SPEED_BAR = 'rbxasset://textures/ui/Vehicle/SpeedBar.png'
+local VEHICLE_HUD_BG = 'arlasset://textures/ui/Vehicle/SpeedBarBKG.png'
+local SPEED_BAR_EMPTY = 'arlasset://textures/ui/Vehicle/SpeedBarEmpty.png'
+local SPEED_BAR = 'arlasset://textures/ui/Vehicle/SpeedBar.png'
 
 --[[ Constants ]]--
 local BOTTOM_OFFSET = (isTenFootInterface and 100 or 70)

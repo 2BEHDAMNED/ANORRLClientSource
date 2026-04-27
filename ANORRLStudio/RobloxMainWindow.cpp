@@ -226,7 +226,7 @@ RobloxMainWindow::RobloxMainWindow(const QMap<QString, QString> argMap)
 
 			srand(time(NULL)); // call just once or explode or something
 
-			int randSplashNumber = rand()%30;
+			int randSplashNumber = rand()%37;
 			if (randSplashNumber <= 0) {
 				randSplashNumber = 1;
 			}
@@ -727,7 +727,7 @@ void RobloxMainWindow::parseCommandLineOptions(const QMap<QString, QString> argM
 	QString sWidth	= argMap[StudioUtilities::StudioWidthArgument];
 	QString sHeight	= argMap[StudioUtilities::StudioHeightArgument];
 
-	// convert loadfile('http://www.roblox.com/game/join.ashx')() to just the url
+	// convert loadfile('http://arl.lambda.cam/game/join.ashx')() to just the url
 	if (StudioUtilities::containsJoinScript(scriptArg) && scriptArg.contains("loadfile("))
 	{
 		int urlBegin = scriptArg.indexOf("(")+2; // skip over the qoute

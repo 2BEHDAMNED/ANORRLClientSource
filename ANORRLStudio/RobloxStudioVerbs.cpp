@@ -974,7 +974,7 @@ void PublishToRobloxAsVerb::doIt(ARL::IDataState*)
 		initDialog();
 	else
 	{
-		// "http://www.roblox.com/IDE/Upload.aspx"
+		// "http://arl.lambda.cam/IDE/Upload.aspx"
 		QString initialUrl = QString("%1/IDE/Upload.aspx").arg(RobloxSettings::getBaseURL());
 
 		if (!m_dlg)
@@ -1141,7 +1141,7 @@ void PublishSelectionToRobloxVerb::doIt(ARL::IDataState*)
 		}
 	}
 
-	// "http://www.roblox.com/UI/Save.aspx"
+	// "http://arl.lambda.cam/UI/Save.aspx"
 	QString initialUrl;
 	if(isScript)
 		initialUrl = QString("%1/UI/Save.aspx?type=Lua").arg(RobloxSettings::getBaseURL());
@@ -1502,7 +1502,7 @@ void PlaySoloVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://www.roblox.com/game/visit.ashx')()
+	// loadfile('http://arl.lambda.cam/game/visit.ashx')()
 	QString script;
 	script = QString("loadfile(\"%1/game/visit.ashx?IsPlaySolo=1&placeId=%2&universeId=%3\")()\n")
 		.arg(RobloxSettings::getBaseURL())
@@ -1623,7 +1623,7 @@ void StartServerVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://www.roblox.com/game/gameserver.ashx')(<placeid>, 53640)
+	// loadfile('http://arl.lambda.cam/game/gameserver.ashx')(<placeid>, 53640)
 	QString script;
 	script = QString(
 		"loadfile(\"%1/game/gameserver.ashx\")("
@@ -1648,7 +1648,7 @@ StartPlayerVerb::StartPlayerVerb(ARL::VerbContainer* pVerbContainer)
 
 void StartPlayerVerb::doIt(ARL::IDataState*)
 {
-    // loadfile('http://www.roblox.com//game/join.ashx?UserID=0&serverPort=53640')()
+    // loadfile('http://arl.lambda.cam//game/join.ashx?UserID=0&serverPort=53640')()
 	QString script;
 	script = QString("loadfile(\"%1/game/join.ashx?UserID=0&serverPort=53640&universeId=%2\")()\n")
 		.arg(RobloxSettings::getBaseURL())

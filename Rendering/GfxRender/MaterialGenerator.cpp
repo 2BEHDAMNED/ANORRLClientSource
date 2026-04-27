@@ -266,25 +266,25 @@ static MeshId getExtraSlotMeshId(PartInstance* part, const HumanoidIdentifier& h
     int slotId = getExtraSlot(part, hi, accoutrements);
     ARLASSERT(slotId >= 0);
     
-    return MeshId(format("rbxasset://avatar/meshes/composit/extra/Slot%d.mesh", slotId));
+    return MeshId(format("arlasset://avatar/meshes/composit/extra/Slot%d.mesh", slotId));
 }
 
 static void prepareHumanoidTextureCompositing(TextureCompositingDescription& desc, const HumanoidIdentifier& hi, const AccoutrementMeshes& accoutrements, CharacterMesh* mesh)
 {
     if (hi.torso)
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/base/Torso.mesh"), hi.torso->getColor());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/base/Torso.mesh"), hi.torso->getColor());
         
     if (hi.leftArm)
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/base/LeftArm.mesh"), hi.leftArm->getColor());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/base/LeftArm.mesh"), hi.leftArm->getColor());
         
     if (hi.rightArm)
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/base/RightArm.mesh"), hi.rightArm->getColor());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/base/RightArm.mesh"), hi.rightArm->getColor());
         
     if (hi.leftLeg)
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/base/LeftLeg.mesh"), hi.leftLeg->getColor());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/base/LeftLeg.mesh"), hi.leftLeg->getColor());
         
     if (hi.rightLeg)
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/base/RightLeg.mesh"), hi.rightLeg->getColor());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/base/RightLeg.mesh"), hi.rightLeg->getColor());
         
     if (hi.head)
     {
@@ -308,19 +308,19 @@ static void prepareHumanoidTextureCompositing(TextureCompositingDescription& des
     }
     
     if (mesh && !mesh->getBaseTextureId().isNull())
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/fullatlas/BaseTexture.mesh"), mesh->getBaseTextureId());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/fullatlas/BaseTexture.mesh"), mesh->getBaseTextureId());
         
     if (!hi.pants.isNull())
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/clothing/PantsTemplate.mesh"), hi.pants);
+        desc.add(MeshId("arlasset://avatar/meshes/composit/clothing/PantsTemplate.mesh"), hi.pants);
         
     if (!hi.shirt.isNull())
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/clothing/ShirtTemplate.mesh"), hi.shirt);
+        desc.add(MeshId("arlasset://avatar/meshes/composit/clothing/ShirtTemplate.mesh"), hi.shirt);
         
     if (!hi.shirtGraphic.isNull())
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/clothing/TShirt.mesh"), hi.shirtGraphic);
+        desc.add(MeshId("arlasset://avatar/meshes/composit/clothing/TShirt.mesh"), hi.shirtGraphic);
         
     if (mesh && !mesh->getOverlayTextureId().isNull())
-        desc.add(MeshId("rbxasset://avatar/meshes/composit/fullatlas/OverlayTexture.mesh"), mesh->getOverlayTextureId());
+        desc.add(MeshId("arlasset://avatar/meshes/composit/fullatlas/OverlayTexture.mesh"), mesh->getOverlayTextureId());
         
     for (size_t i = 0; i < kTextureCompositAccoutrementCount; ++i)
     {
@@ -577,9 +577,9 @@ static void setupTechnique(Technique& technique, unsigned int flags, bool hasGlo
 static void setupPlasticTextures(VisualEngine* visualEngine, Technique& technique)
 {
     TextureManager* tm = visualEngine->getTextureManager();
-	technique.setTexture(5, tm->load(ContentId("rbxasset://textures/plastic/diffuse.dds"), TextureManager::Fallback_Gray), SamplerState::Filter_Anisotropic);
-	technique.setTexture(6, tm->load(ContentId("rbxasset://textures/plastic/normal.dds"), TextureManager::Fallback_NormalMap), SamplerState::Filter_Anisotropic);
-	technique.setTexture(8, tm->load(ContentId("rbxasset://textures/plastic/normaldetail" + kTextureExtension), TextureManager::Fallback_NormalMap), SamplerState::Filter_Linear);
+	technique.setTexture(5, tm->load(ContentId("arlasset://textures/plastic/diffuse.dds"), TextureManager::Fallback_Gray), SamplerState::Filter_Anisotropic);
+	technique.setTexture(6, tm->load(ContentId("arlasset://textures/plastic/normal.dds"), TextureManager::Fallback_NormalMap), SamplerState::Filter_Anisotropic);
+	technique.setTexture(8, tm->load(ContentId("arlasset://textures/plastic/normaldetail" + kTextureExtension), TextureManager::Fallback_NormalMap), SamplerState::Filter_Linear);
 }
 
 static void setupSmoothPlasticTextures(VisualEngine* visualEngine, Technique& technique)
@@ -592,7 +592,7 @@ static void setupSmoothPlasticTextures(VisualEngine* visualEngine, Technique& te
 static void setupComplexMaterialTextures(VisualEngine* visualEngine, Technique& technique, const std::string& materialName, const TextureRef* wangTileTex)
 {
     TextureManager* tm = visualEngine->getTextureManager();
-    std::string texturePath = "rbxasset://textures/" + materialName + "/";
+    std::string texturePath = "arlasset://textures/" + materialName + "/";
 
 	safeToLower(texturePath);
 
@@ -609,7 +609,7 @@ static void setupComplexMaterialTextures(VisualEngine* visualEngine, Technique& 
 static void setupLQMaterialTextures(VisualEngine* visualEngine, Technique& technique, const std::string& materialName, const TextureRef* wangTileTex)
 {
     TextureManager* tm = visualEngine->getTextureManager();
-    std::string texturePath = "rbxasset://textures/" + materialName + "/";
+    std::string texturePath = "arlasset://textures/" + materialName + "/";
 
     safeToLower(texturePath);
 
@@ -659,7 +659,7 @@ MaterialGenerator::MaterialGenerator(VisualEngine* visualEngine)
     : visualEngine(visualEngine)
     , compositCache(NULL, TextureCompositor::JobHandle())
 {
-    wangTilesTex = visualEngine->getTextureManager()->load(ContentId("rbxasset://textures/wangIndex.dds"), TextureManager::Fallback_Black);
+    wangTilesTex = visualEngine->getTextureManager()->load(ContentId("arlasset://textures/wangIndex.dds"), TextureManager::Fallback_Black);
 }
 
 shared_ptr<Material> MaterialGenerator::createBaseMaterial(unsigned int flags)
@@ -749,7 +749,7 @@ shared_ptr<Material> MaterialGenerator::createRenderMaterial(unsigned int flags,
     // Create material
     shared_ptr<Material> material(new Material());
     
-    ContentId studs("rbxasset://textures/studs.dds");
+    ContentId studs("arlasset://textures/studs.dds");
 
 	TextureManager* tm = visualEngine->getTextureManager();
 

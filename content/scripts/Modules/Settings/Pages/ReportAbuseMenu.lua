@@ -85,7 +85,7 @@ local function Initialize()
 	------ TAB CUSTOMIZATION -------
 	this.TabHeader.Name = "ReportAbuseTab"
 
-	this.TabHeader.Icon.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/ReportAbuseTab.png"
+	this.TabHeader.Icon.Image = "arlasset://textures/ui/Settings/MenuBarIcons/ReportAbuseTab.png"
 	if utility:IsSmallTouchScreen() then
 		this.TabHeader.Icon.Size = UDim2.new(0,27,0,32)
 		this.TabHeader.Size = UDim2.new(0,120,1,0)

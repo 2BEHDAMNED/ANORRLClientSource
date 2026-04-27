@@ -2208,17 +2208,17 @@ void GuiButton::setSelected(bool value)
 
 void GuiButton::render2dButtonImpl(Adorn* adorn, Rect2D& rect)
 {
-	static const TextureId sGreyTransp =	TextureId("rbxasset://textures/ui/btn_greyTransp.png");
-	static const TextureId sGrey =			TextureId("rbxasset://textures/ui/btn_grey.png");
-	static const TextureId sWhite =			TextureId("rbxasset://textures/ui/btn_white.png");
-	static const TextureId sRed	=			TextureId("rbxasset://textures/ui/btn_red.png");
-	static const TextureId sRedGlow =		TextureId("rbxasset://textures/ui/btn_redGlow.png");
-	static const TextureId sNewGrey	=		TextureId("rbxasset://textures/ui/btn_newGrey.png");
-	static const TextureId sNewGreyGlow =	TextureId("rbxasset://textures/ui/btn_newGreyGlow.png");
-	static const TextureId sNewBlue	=		TextureId("rbxasset://textures/ui/btn_newBlue.png");
-	static const TextureId sNewBlueGlow =	TextureId("rbxasset://textures/ui/btn_newBlueGlow.png");
-	static const TextureId sNewWhite	=	TextureId("rbxasset://textures/ui/btn_newWhite.png");
-	static const TextureId sNewWhiteGlow =	TextureId("rbxasset://textures/ui/btn_newWhiteGlow.png");
+	static const TextureId sGreyTransp =	TextureId("arlasset://textures/ui/btn_greyTransp.png");
+	static const TextureId sGrey =			TextureId("arlasset://textures/ui/btn_grey.png");
+	static const TextureId sWhite =			TextureId("arlasset://textures/ui/btn_white.png");
+	static const TextureId sRed	=			TextureId("arlasset://textures/ui/btn_red.png");
+	static const TextureId sRedGlow =		TextureId("arlasset://textures/ui/btn_redGlow.png");
+	static const TextureId sNewGrey	=		TextureId("arlasset://textures/ui/btn_newGrey.png");
+	static const TextureId sNewGreyGlow =	TextureId("arlasset://textures/ui/btn_newGreyGlow.png");
+	static const TextureId sNewBlue	=		TextureId("arlasset://textures/ui/btn_newBlue.png");
+	static const TextureId sNewBlueGlow =	TextureId("arlasset://textures/ui/btn_newBlueGlow.png");
+	static const TextureId sNewWhite	=	TextureId("arlasset://textures/ui/btn_newWhite.png");
+	static const TextureId sNewWhiteGlow =	TextureId("arlasset://textures/ui/btn_newWhiteGlow.png");
 
 	GuiObject* clippingObject = firstAncestorClipping();
 

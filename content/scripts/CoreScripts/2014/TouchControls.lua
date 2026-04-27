@@ -45,8 +45,8 @@ if isSmallScreenDevice() then
 	thumbstickSize = 70
 end
 
-local touchControlsSheet = "rbxasset://textures/ui/TouchControlsSheet.png"
-local DPadSheet = "rbxasset://textures/ui/DPadSheet.png"
+local touchControlsSheet = "arlasset://textures/ui/TouchControlsSheet.png"
+local DPadSheet = "arlasset://textures/ui/DPadSheet.png"
 local ThumbstickDeadZone = 5
 local ThumbstickMaxPercentGive = 0.92
 local thumbstickTouches = {}
@@ -317,7 +317,7 @@ function createDPad()
 	DPadFrame.Position = UDim2.new(0,10,1,-230)
 	DPadFrame.BackgroundTransparency = 1
 
-	-- local image = "rbxassetid://133293265"
+	-- local image = "arlassetid://133293265"
 	local image = DPadSheet
 	local bigSize = UDim2.new(0,64,0,64)
 	local smallSize = UDim2.new(0,23,0,23)

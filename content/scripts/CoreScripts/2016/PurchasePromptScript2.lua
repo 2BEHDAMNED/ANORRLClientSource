@@ -56,20 +56,20 @@ local BASE_URL = game:GetService('ContentProvider').BaseUrl:lower()
 BASE_URL = string.gsub(BASE_URL, "/m.", "/www.")
 local THUMBNAIL_URL = BASE_URL.."thumbs/asset.ashx?assetid="
 -- Images
-local BG_IMAGE = 'rbxasset://textures/ui/Modal.png'
-local PURCHASE_BG = 'rbxasset://textures/ui/LoadingBKG.png'
-local BUTTON_LEFT = 'rbxasset://textures/ui/ButtonLeft.png'
-local BUTTON_LEFT_DOWN = 'rbxasset://textures/ui/ButtonLeftDown.png'
-local BUTTON_RIGHT = 'rbxasset://textures/ui/ButtonRight.png'
-local BUTTON_RIGHT_DOWN = 'rbxasset://textures/ui/ButtonRightDown.png'
-local BUTTON = 'rbxasset://textures/ui/SingleButton.png'
-local BUTTON_DOWN = 'rbxasset://textures/ui/SingleButtonDown.png'
-local ROBUX_ICON = 'rbxasset://textures/ui/RobuxIcon.png'
-local TIX_ICON = 'rbxasset://textures/ui/TixIcon.png'
-local ERROR_ICON = 'rbxasset://textures/ui/ErrorIcon.png'
-local A_BUTTON = "rbxasset://textures/ui/Settings/Help/AButtonDark.png"
-local B_BUTTON = "rbxasset://textures/ui/Settings/Help/BButtonDark.png"
-local DEFAULT_XBOX_IMAGE = 'rbxasset://textures/ui/Shell/Icons/ROBUXIcon@1080.png'
+local BG_IMAGE = 'arlasset://textures/ui/Modal.png'
+local PURCHASE_BG = 'arlasset://textures/ui/LoadingBKG.png'
+local BUTTON_LEFT = 'arlasset://textures/ui/ButtonLeft.png'
+local BUTTON_LEFT_DOWN = 'arlasset://textures/ui/ButtonLeftDown.png'
+local BUTTON_RIGHT = 'arlasset://textures/ui/ButtonRight.png'
+local BUTTON_RIGHT_DOWN = 'arlasset://textures/ui/ButtonRightDown.png'
+local BUTTON = 'arlasset://textures/ui/SingleButton.png'
+local BUTTON_DOWN = 'arlasset://textures/ui/SingleButtonDown.png'
+local ROBUX_ICON = 'arlasset://textures/ui/RobuxIcon.png'
+local TIX_ICON = 'arlasset://textures/ui/TixIcon.png'
+local ERROR_ICON = 'arlasset://textures/ui/ErrorIcon.png'
+local A_BUTTON = "arlasset://textures/ui/Settings/Help/AButtonDark.png"
+local B_BUTTON = "arlasset://textures/ui/Settings/Help/BButtonDark.png"
+local DEFAULT_XBOX_IMAGE = 'arlasset://textures/ui/Shell/Icons/ROBUXIcon@1080.png'
 --Context Actions
 local CONTROLLER_CONFIRM_ACTION_NAME = "CoreScriptPurchasePromptControllerConfirm"
 local CONTROLLER_CANCEL_ACTION_NAME = "CoreScriptPurchasePromptControllerCancel"

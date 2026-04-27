@@ -989,7 +989,7 @@ void RobloxIDEDoc::handleFileAction(FW::WatchID watchid, const FW::String& dir, 
     std::string pathStr;
 
     if (absoluteDir.find(contentFolder) == 0 || absoluteDir.find(platformContentFolder) == 0)
-        pathStr = "rbxasset://" + simpleFilename;
+        pathStr = "arlasset://" + simpleFilename;
     else
         pathStr = simpleFilename;
 

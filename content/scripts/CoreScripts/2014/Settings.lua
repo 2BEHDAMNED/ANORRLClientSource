@@ -29,8 +29,8 @@ local updateSmartCameraDropDownSelection = nil
 local updateTouchMovementDropDownSelection = nil
 local tweenTime = 0.2
 
-local mouseLockLookScreenUrl = "http://www.roblox.com/asset?id=54071825"
-local classicLookScreenUrl = "http://www.roblox.com/Asset?id=45915798"
+local mouseLockLookScreenUrl = "http://arl.lambda.cam/asset?id=54071825"
+local classicLookScreenUrl = "http://arl.lambda.cam/Asset?id=45915798"
 
 local hasGraphicsSlider = true
 local GraphicsQualityLevels = 10 -- how many levels we allow on graphics slider
@@ -370,17 +370,17 @@ local function createHelpDialog(baseZIndex)
 	buttons[2] = {}
 	buttons[2].Text = "Move"
 	buttons[2].Function = function() 
-		image.Image = "http://www.roblox.com/Asset?id=45915811"
+		image.Image = "http://arl.lambda.cam/Asset?id=45915811"
 	end 
 	buttons[3] = {}
 	buttons[3].Text = "Gear"
 	buttons[3].Function = function() 
-		image.Image = "http://www.roblox.com/Asset?id=45917596"
+		image.Image = "http://arl.lambda.cam/Asset?id=45917596"
 	end
 	buttons[4] = {}
 	buttons[4].Text = "Zoom"
 	buttons[4].Function = function() 	
-		image.Image = "http://www.roblox.com/Asset?id=45915825"
+		image.Image = "http://arl.lambda.cam/Asset?id=45915825"
 	end 
 
 	CreateTextButtons(buttonRow, buttons, UDim.new(0, 0), UDim.new(1,0))
@@ -659,7 +659,7 @@ local function createGameMainMenu(baseZIndex, shield)
 	local stopRecordButton = Instance.new("ImageButton")
 	stopRecordButton.Name = "StopRecordButton"
 	stopRecordButton.BackgroundTransparency = 1
-	stopRecordButton.Image = "rbxasset://textures/ui/RecordStop.png"
+	stopRecordButton.Image = "arlasset://textures/ui/RecordStop.png"
 	stopRecordButton.Size = UDim2.new(0,59,0,27)
 	stopRecordButton:SetVerb("RecordToggle")
 	
@@ -1489,7 +1489,7 @@ if UserSettings then
 		if settingsButton == nil then
 			settingsButton = Instance.new("ImageButton")
 			settingsButton.Name = "SettingsButton"
-			settingsButton.Image = "rbxasset://textures/ui/homeButton.png"
+			settingsButton.Image = "arlasset://textures/ui/homeButton.png"
 			settingsButton.BackgroundTransparency = 1
 			settingsButton.Active = false
 			settingsButton.Size = UDim2.new(0,36,0,28)
@@ -1901,7 +1901,7 @@ local createSaveDialogs = function()
 		spinnerImage.Size = UDim2.new(0, 16, 0, 16)
 		spinnerImage.Position = UDim2.new(.5+.3*math.cos(math.rad(45*spinnerNum)), -8, .5+.3*math.sin(math.rad(45*spinnerNum)), -8)
 		spinnerImage.BackgroundTransparency = 1
-	    spinnerImage.Image = "http://www.roblox.com/Asset?id=45880710"
+	    spinnerImage.Image = "http://arl.lambda.cam/Asset?id=45880710"
 		spinnerImage.ZIndex = baseZIndex+3
 		spinnerImage.Parent = spinnerFrame
 
@@ -1923,9 +1923,9 @@ local createSaveDialogs = function()
 
 				while pos < 8 do
 					if pos == spinPos or pos == ((spinPos+1)%8) then
-						spinnerIcons[pos+1].Image = "http://www.roblox.com/Asset?id=45880668"
+						spinnerIcons[pos+1].Image = "http://arl.lambda.cam/Asset?id=45880668"
 					else
-						spinnerIcons[pos+1].Image = "http://www.roblox.com/Asset?id=45880710"
+						spinnerIcons[pos+1].Image = "http://arl.lambda.cam/Asset?id=45880710"
 					end
 					
 					pos = pos + 1

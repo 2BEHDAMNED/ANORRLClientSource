@@ -182,7 +182,7 @@ function showBackpack()
 		backpackOpenEvent:Fire(currentTab)
 		canToggle = true
 		readyForNextEvent = true
-		backpackButton.Image = "rbxasset://textures/ui/Backpack_Close.png"
+		backpackButton.Image = "arlasset://textures/ui/Backpack_Close.png"
 		backpackButton.Position = UDim2.new(0.5, -7, 1, -backpackSize.Y.Offset - 108)
 	end)
 end
@@ -202,7 +202,7 @@ function toggleBackpack()
 	else		
 		backpackButton.Position = UDim2.new(0.5, -7, 1, -55)
 		backpackButton.Selected = false		
-		backpackButton.Image = "rbxasset://textures/ui/Backpack_Open.png"
+		backpackButton.Image = "arlasset://textures/ui/Backpack_Open.png"
 		hideBackpack()
 
 		
