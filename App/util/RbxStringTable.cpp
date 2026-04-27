@@ -14,10 +14,9 @@ static const char *stringsTable[] =
 		"Unable to create new thread", //EnableToCreateNewThread
 		"Script", //ScriptStr
 		"rocky", //Rocky
-		"Game passes can only be queried by a Script running on a ROBLOX game server", //HasGamePassLuaWarning
-		"Teleporting while using ROBLOX Studio is not permitted.", //NoTeleportInStudio
-		"fonts/LoadingScript.lua" //LoadingScreenScriptPath
-    };
+		"Game passes can only be queried by a Script running on a ANORRL game server", //HasGamePassLuaWarning
+		"Teleporting while using ANORRL Studio is not permitted.", //NoTeleportInStudio
+	};
 
 const char* getStringById(int id)
 {

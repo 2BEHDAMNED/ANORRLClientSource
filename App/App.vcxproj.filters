@@ -1790,9 +1790,6 @@
     <ClCompile Include="v8datamodel\PostEffect.cpp">
       <Filter>Source Files\V8DataModel</Filter>
     </ClCompile>
-    <ClCompile Include="v8datamodel\MeshPart.cpp">
-      <Filter>Source Files\V8DataModel</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lua-5.1.4\src\lapi.h">
@@ -3680,9 +3677,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\v8datamodel\PostEffect.h">
-      <Filter>Header Files\V8DataModel</Filter>
-    </ClInclude>
-    <ClInclude Include="include\v8datamodel\MeshPart.h">
       <Filter>Header Files\V8DataModel</Filter>
     </ClInclude>
   </ItemGroup>

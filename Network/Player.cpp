@@ -1954,29 +1954,24 @@ void Player::loadCharacter(bool inGame, std::string preferedSpawnName)
 	{
 		Instances instances;
 
-		if (useR15) 
-		{
-			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/characterR15.rbxm"), instances);
-		} else {
-			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/character3.rbxm"), instances);
-		}
+		ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("avatar/character.rbxm"), instances);
 
 		if (instances.size() != 1){
-			FASTLOG(FLog::Error, "Player:LoadCharacter - Could not load character3.rbxm");
-			throw std::runtime_error("character3.rbxm should contain a Character model");
+			FASTLOG(FLog::Error, "Player:LoadCharacter - Could not load character.rbxm");
+			throw std::runtime_error("character.rbxm should contain a Character model");
 		}
 
 		model = Instance::fastSharedDynamicCast<ModelInstance>(instances.front());
 		pModel = model.get();
 		if (!pModel){
-			throw std::runtime_error("character3.rbxm should contain a Character model");
+			throw std::runtime_error("character.rbxm should contain a Character model");
 		}
 	}
 
 
 	Humanoid* humanoid = Humanoid::modelIsCharacter(pModel);
 	if (!DFFlag::UseStarterPlayerCharacter && !humanoid){
-		throw std::runtime_error("character3.rbxm should contain a humanoid");
+		throw std::runtime_error("character.rbxm should contain a humanoid");
 	} else {
 		if (DFFlag::UseStarterPlayerHumanoid) {
 			if(StarterPlayerService* starterPlayerService = ServiceProvider::create<StarterPlayerService>(this)) {
@@ -2041,25 +2036,20 @@ void Player::loadCharacter(bool inGame, std::string preferedSpawnName)
 			{
 				// Load up the special script that adds sounds to the character
 				Instances extraSound;
-				ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidSoundNewLocal.rbxmx"), extraSound);
+				ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("avatar/humanoid/sound.rbxmx"), extraSound);
 				std::for_each(extraSound.begin(), extraSound.end(), boost::bind(&addChild, model, _1));
 			}
 
 			if (inGame && !overrideHealthScript)
 			{
 				// new rbxm (storing in humanoidHealthRegenScript.rbxm to make turning flag on easy) only contains server script that does humanoid health regen (gui script is now core script)
-				ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("fonts/humanoidHealthRegenScript.rbxm"), ContentProvider::PRIORITY_SCRIPT, boost::bind(&CharacterLoadHelper, model, _1, _2), AsyncHttpQueue::AsyncWrite);
+				ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/humanoid/healthRegenScript.rbxm"), ContentProvider::PRIORITY_SCRIPT, boost::bind(&CharacterLoadHelper, model, _1, _2), AsyncHttpQueue::AsyncWrite);
 			}
 
 			if (!overrideAnimateScript)
 			{
 				Instances extraAnimate;
-				if (useR15)
-				{
-					ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidAnimateR15.rbxm"), extraAnimate);
-				} else {
-					ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidAnimateLocalKeyframe2.rbxm"), extraAnimate);
-				}
+				ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("avatar/humanoid/animate.rbxm"), extraAnimate);
 				std::for_each(extraAnimate.begin(), extraAnimate.end(), boost::bind(&addChild, model, _1));
 			}
 
@@ -2068,23 +2058,18 @@ void Player::loadCharacter(bool inGame, std::string preferedSpawnName)
 		// Load up the special script that adds sounds to the character
 		{
 			Instances extraSound;
-			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidSoundNewLocal.rbxmx"), extraSound);
+			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("avatar/humanoid/sound.rbxmx"), extraSound);
 			std::for_each(extraSound.begin(), extraSound.end(), boost::bind(&addChild, model, _1));
 		}
 
 		if(inGame)
 		{
 			// new rbxm (storing in humanoidHealthRegenScript.rbxm to make turning flag on easy) only contains server script that does humanoid health regen (gui script is now core script)
-			ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("fonts/humanoidHealthRegenScript.rbxm"), ContentProvider::PRIORITY_SCRIPT, boost::bind(&CharacterLoadHelper, model, _1, _2), AsyncHttpQueue::AsyncWrite);
+			ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/humanoid/healthRegenScript.rbxm"), ContentProvider::PRIORITY_SCRIPT, boost::bind(&CharacterLoadHelper, model, _1, _2), AsyncHttpQueue::AsyncWrite);
 		}
 
 		Instances extraAnimate;
-		if (useR15)
-		{
-			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidAnimateR15.rbxm"), extraAnimate);
-		} else {
-			ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("fonts/humanoidAnimateLocalKeyframe2.rbxm"), extraAnimate);
-		}
+		ServiceProvider::create<ContentProvider>(this)->blockingLoadInstances(ContentId::fromAssets("avatar/humanoid/animate.rbxm"), extraAnimate);
 		std::for_each(extraAnimate.begin(), extraAnimate.end(), boost::bind(&addChild, model, _1));
 	}
 

@@ -249,6 +249,7 @@ local function CreateEmotes()
 	function this:CharacterAdded(character)
 		self.EmoteHandler = character:WaitForChild("HandleEmote") -- what the hell was i even thinking
 		for i, v in ipairs(self.Emotes) do
+			print("registering")
 			self.EmoteHandler:Fire("register", v.id)
 		end
 	end
@@ -289,6 +290,7 @@ local function CreateEmotes()
             if inputType == Enum.UserInputType.MouseButton1 or inputType == Enum.UserInputType.Touch then
 				local emote = self.LoadedEmotes[self.slot]
 				if emote then
+					print("tryna play emote")
 					this:PlayEmote(emote.id)
 				end
 			end
@@ -304,7 +306,7 @@ local function CreateEmotes()
 	end
 	
 	function this:PlayEmote(id)
-		if self.EmoteHandler and self.EmoteHandler.Parent == Player then
+		if self.EmoteHandler and self.EmoteHandler.Parent == Player.Character then
 			self.EmoteHandler:Fire("play", id)
 			this:ToggleVisibility()
 		end

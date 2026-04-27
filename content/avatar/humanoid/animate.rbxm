@@ -434,6 +434,7 @@ end
 playEmoteEvent.Event:connect(function(cmd, id)
 	if (cmd == "register") then
 		if (not emotes[id]) then
+			print("registering" , id)
 			local anim = Instance.new("Animation", script)
 			anim.AnimationId = "rbxassetid://"..id
 			emotes[id] = anim

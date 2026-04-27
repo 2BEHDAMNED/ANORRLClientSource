@@ -1540,7 +1540,6 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="v8datamodel\Light.cpp" />
     <ClCompile Include="v8datamodel\LoginService.cpp" />
     <ClCompile Include="v8datamodel\LogService.cpp" />
-    <ClCompile Include="v8datamodel\MeshPart.cpp" />
     <ClCompile Include="v8datamodel\NonReplicatedCSGDictionaryService.cpp" />
     <ClCompile Include="v8datamodel\NotificationService.cpp" />
     <ClCompile Include="v8datamodel\NumberRange.cpp" />
@@ -4418,7 +4417,6 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\v8datamodel\Light.h" />
     <ClInclude Include="include\v8datamodel\LoginService.h" />
     <ClInclude Include="include\v8datamodel\LogService.h" />
-    <ClInclude Include="include\v8datamodel\MeshPart.h" />
     <ClInclude Include="include\v8datamodel\NonReplicatedCSGDictionaryService.h" />
     <ClInclude Include="include\v8datamodel\NotificationService.h" />
     <ClInclude Include="include\v8datamodel\NumberSequence.h" />
