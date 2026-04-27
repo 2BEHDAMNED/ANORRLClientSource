@@ -2606,6 +2606,75 @@
         <string name="summary">A container whose contents should be scripts. Scripts that are added to the container are run on the server.</string>
       </Properties>
     </Item>
+	
+	<Item class="ReflectionMetadataClass">
+      <Properties>
+        <string name="Name">PostEffect</string>
+        <string name="ExplorerImageIndex">82</string>
+        <string name="summary"></string>
+      </Properties>
+	</Item>
+
+    <Item class="ReflectionMetadataClass">
+      <Properties>
+        <string name="Name">BlurEffect</string>
+        <string name="ExplorerOrder">3</string>
+        <string name="ExplorerImageIndex">82</string>
+        <string name="summary">Ohhhh im blurring it !!!</string>
+      </Properties>
+      <Item class="ReflectionMetadataProperties">
+        <Item class="ReflectionMetadataMember">
+          <Properties>
+            <string name="Name">Size</string>
+            <string name="summary"></string>
+            <double name="UIMinimum">0</double>
+            <double name="UIMaximum">56</double>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    
+    <Item class="ReflectionMetadataClass">
+      <Properties>
+        <string name="Name">ColorCorrectionEffect</string>
+        <string name="ExplorerOrder">3</string>
+        <string name="ExplorerImageIndex">82</string>
+        <string name="summary">Ohhhh im colorcorrecting it !!!</string>
+      </Properties>
+      <Item class="ReflectionMetadataProperties">
+        <Item class="ReflectionMetadataMember">
+          <Properties>
+            <string name="Name">Brightness</string>
+            <string name="summary"></string>
+            <double name="UIMinimum">-1</double>
+            <double name="UIMaximum">1</double>
+          </Properties>
+        </Item>
+        <Item class="ReflectionMetadataMember">
+          <Properties>
+            <string name="Name">Contrast</string>
+            <string name="summary"></string>
+            <double name="UIMinimum">-1</double>
+            <double name="UIMaximum">1</double>
+          </Properties>
+        </Item>
+        <Item class="ReflectionMetadataMember">
+          <Properties>
+            <string name="Name">Saturation</string>
+            <string name="summary"></string>
+            <double name="UIMinimum">-1</double>
+            <double name="UIMaximum">1</double>
+          </Properties>
+        </Item>
+        <Item class="ReflectionMetadataMember">
+          <Properties>
+            <string name="Name">TintColor</string>
+            <string name="summary"></string>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+
 
     <Item class="ReflectionMetadataClass">
       <Properties>

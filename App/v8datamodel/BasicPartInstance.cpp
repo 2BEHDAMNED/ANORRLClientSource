@@ -63,8 +63,8 @@ void FormFactorPart::setFormFactorXml(FormFactor value)
 void FormFactorPart::setFormFactorUi(FormFactor value)
 {
 	validateFormFactor(value);
-	// Deprication of FormFactor
-	ARL::StandardOut::singleton()->printf(ARL::MESSAGE_WARNING,"FormFactor is deprecated. You should no longer use this property.");
+	// Deprecation of FormFactor
+	//ARL::StandardOut::singleton()->printf(ARL::MESSAGE_WARNING,"FormFactor is deprecated. You should no longer use this property.");
 
 	if (value != formFactor) {
 		destroyJoints();

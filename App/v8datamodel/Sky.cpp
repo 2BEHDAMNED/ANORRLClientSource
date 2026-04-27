@@ -20,11 +20,6 @@ Reflection::PropDescriptor<Sky, TextureId> Sky::prop_SkyDn("SkyboxDn", category_
 Reflection::PropDescriptor<Sky, int> Sky::prop_StarCount("StarCount", category_Appearance, &Sky::getNumStars, &Sky::setNumStars);
 Reflection::BoundProp<bool> Sky::prop_CelestialBodiesShown("CelestialBodiesShown", category_Appearance, &Sky::drawCelestialBodies);
 
-static void sendSkyBoxStats(const TextureId& texId)
-{
-    std::string idStr = texId.getAssetId();
-}
-
 Sky::Sky()
 :drawCelestialBodies(true)
 ,numStars(3000)
@@ -100,8 +95,5 @@ void Sky::setSkyboxFt(const TextureId&  texId)
     {
         skyFt = texId;    
         raisePropertyChanged(prop_SkyFt);
-
-        static boost::once_flag flag = BOOST_ONCE_INIT;
-        boost::call_once(flag, &sendSkyBoxStats, texId);
-    }
+	}
 }

@@ -9,6 +9,7 @@
 #include "V8DataModel/PartInstance.h"
 #include "V8DataModel/Workspace.h"
 #include "V8DataModel/Sky.h"
+#include "V8DataModel/PostEffect.h"
 #include "V8DataModel/ContentProvider.h"
 #include "V8DataModel/MeshContentProvider.h"
 #include "V8DataModel/Camera.h"
@@ -503,6 +504,39 @@ void RenderView::updateLighting(Lighting* lighting)
             // Update clear color for time-of-day
             lighting->setClearColor(lighting->getSkyParameters().skyAmbient);
         }
+
+		float brightnessIntensity = 0.0f;
+		float contrastIntensity = 0.0f;
+		float saturationIntensity = 0.0f;
+		float blurIntensity = 0.0f;
+		G3D::Color3 tintColorIntensity = G3D::Color3::white();
+
+		// this is fine
+		if (Instance* inst = lighting->findFirstChildOfType("BlurEffect")) {
+
+			// oh my god what am i doing
+			if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
+				if (blur->isEnabled())
+					blurIntensity = (blur->getSize()/56.f)*15.f;
+			}
+		}
+		
+		if (Instance* inst = lighting->findFirstChildOfType("ColorCorrectionEffect")) {
+
+			// oh my god what am i doing
+			if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
+				if (colorCorrection->isEnabled()) {
+					brightnessIntensity = colorCorrection->getBrightness();
+					contrastIntensity = colorCorrection->getContrast();
+					saturationIntensity = colorCorrection->getSaturation();
+					tintColorIntensity = colorCorrection->getTintColor();
+				}
+					
+			}
+		}
+
+		// yep
+		smgr->setPostProcess(brightnessIntensity, contrastIntensity, -saturationIntensity, blurIntensity, tintColorIntensity);
 
         // Lighting
         presetLighting(lighting);

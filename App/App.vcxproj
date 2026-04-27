@@ -1540,6 +1540,7 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="v8datamodel\Light.cpp" />
     <ClCompile Include="v8datamodel\LoginService.cpp" />
     <ClCompile Include="v8datamodel\LogService.cpp" />
+    <ClCompile Include="v8datamodel\MeshPart.cpp" />
     <ClCompile Include="v8datamodel\NonReplicatedCSGDictionaryService.cpp" />
     <ClCompile Include="v8datamodel\NotificationService.cpp" />
     <ClCompile Include="v8datamodel\NumberRange.cpp" />
@@ -1561,6 +1562,7 @@ cmd /c "exit /b 0"</Command>
     </ClCompile>
     <ClCompile Include="v8datamodel\PlayerScripts.cpp" />
     <ClCompile Include="v8datamodel\PointsService.cpp" />
+    <ClCompile Include="v8datamodel\PostEffect.cpp" />
     <ClCompile Include="v8datamodel\ReplicatedFirst.cpp" />
     <ClCompile Include="v8datamodel\RobloxReplicatedStorage.cpp" />
     <ClCompile Include="v8datamodel\ScrollingFrame.cpp" />
@@ -4416,6 +4418,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\v8datamodel\Light.h" />
     <ClInclude Include="include\v8datamodel\LoginService.h" />
     <ClInclude Include="include\v8datamodel\LogService.h" />
+    <ClInclude Include="include\v8datamodel\MeshPart.h" />
     <ClInclude Include="include\v8datamodel\NonReplicatedCSGDictionaryService.h" />
     <ClInclude Include="include\v8datamodel\NotificationService.h" />
     <ClInclude Include="include\v8datamodel\NumberSequence.h" />
@@ -4427,6 +4430,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\v8datamodel\PlatformService.h" />
     <ClInclude Include="include\v8datamodel\PlayerScripts.h" />
     <ClInclude Include="include\v8datamodel\PointsService.h" />
+    <ClInclude Include="include\v8datamodel\PostEffect.h" />
     <ClInclude Include="include\v8datamodel\ReplicatedFirst.h" />
     <ClInclude Include="include\v8datamodel\RobloxReplicatedStorage.h" />
     <ClInclude Include="include\v8datamodel\ScrollingFrame.h" />

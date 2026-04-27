@@ -220,7 +220,7 @@
 #include "v8datamodel/NumberRange.h"
 #include "v8datamodel/ColorSequence.h"
 
-
+#include "v8datamodel/PostEffect.h"
 
 using namespace ARL;
 
@@ -568,6 +568,9 @@ ARL_REGISTER_CLASS(Soundscape::SoundChannel);
 ARL_REGISTER_CLASS(GamepadService);
 ARL_REGISTER_CLASS(LuaSourceContainer);
 ARL_REGISTER_CLASS(HapticService);
+ARL_REGISTER_CLASS(PostEffect);
+ARL_REGISTER_CLASS(BlurEffect);
+ARL_REGISTER_CLASS(ColorCorrectionEffect);
 
 // Xbox
 #if defined(ARL_PLATFORM_DURANGO)
