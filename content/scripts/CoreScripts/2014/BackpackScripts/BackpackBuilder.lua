@@ -303,7 +303,7 @@ Backpack.Active = true
 			XImage.RobloxLocked = true
 			XImage.Name = "XImage"
 			game:GetService("ContentProvider"):Preload("http://arl.lambda.cam/asset/?id=75547445")
-			XImage.Image = "http://arl.lambda.cam/asset/?id=75547445"  --TODO: move to rbxasset
+			XImage.Image = "http://arl.lambda.cam/asset/?id=75547445"  --TODO: move to arlasset
 			XImage.BackgroundTransparency = 1
 			XImage.Position = UDim2.new(-.25,-1,-.25,-1)
 			XImage.Size = UDim2.new(1.5,2,1.5,2)

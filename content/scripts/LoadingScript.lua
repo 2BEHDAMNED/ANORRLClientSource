@@ -175,9 +175,9 @@ function MainGui:tileBackgroundTexture(frameToFill)
 		local backgroundTextureSize = Vector2.new(512, 512)
 		for i = 0, math.ceil(frameToFill.AbsoluteSize.X/backgroundTextureSize.X) do
 			for j = 0, math.ceil(frameToFill.AbsoluteSize.Y/backgroundTextureSize.Y) do
-				local backgroundTexture = 'rbxasset://textures/loading/loadingTexture.png'
+				local backgroundTexture = 'arlasset://textures/loading/loadingTexture.png'
 				if isDarkModeEnabled then
-					backgroundTexture = 'rbxasset://textures/loading/darkLoadingTexture.png'
+					backgroundTexture = 'arlasset://textures/loading/darkLoadingTexture.png'
 				end
 			
 				create 'ImageLabel' {
@@ -203,7 +203,7 @@ local function createTenfootCancelGui()
 		Size = UDim2.new(0, 83, 0, 83);
 		Position = UDim2.new(1, -32 - 83, 0, 32);
 		BackgroundTransparency = 1;
-		Image = 'rbxasset://textures/ui/Shell/ButtonIcons/BButton.png';
+		Image = 'arlasset://textures/ui/Shell/ButtonIcons/BButton.png';
 	}
 	local cancelText = create'TextLabel'
 	{
@@ -277,7 +277,7 @@ function MainGui:GenerateMain()
 
 		local closeButton =	create 'ImageButton' {
 			Name = 'CloseButton',
-			Image = 'rbxasset://textures/loading/cancelButton.png',
+			Image = 'arlasset://textures/loading/cancelButton.png',
 			ImageTransparency = 1,
 			BackgroundTransparency = 1,
 			Position = UDim2.new(1, -37, 0, 5),
@@ -300,7 +300,7 @@ function MainGui:GenerateMain()
 			local loadingImage = create 'ImageLabel' {
 				Name = 'LoadingImage',
 				BackgroundTransparency = 1,
-				Image = 'rbxasset://textures/loading/loadingCircle.png',
+				Image = 'arlasset://textures/loading/loadingCircle.png',
 				Position = UDim2.new(0, 0, 0, 0),
 				Size = UDim2.new(1, 0, 1, 0),
 				ZIndex = 2,
@@ -396,7 +396,7 @@ function MainGui:GenerateMain()
 					Size = UDim2.new(0, 30, 0, 30),
 					Position = UDim2.new(0, 38, 0, 80),
 					ImageTransparency = 0,
-					Image = 'rbxasset://textures/ui/Shell/Icons/RobloxIcon32.png',
+					Image = 'arlasset://textures/ui/Shell/Icons/RobloxIcon32.png',
 					ZIndex = 2,
 					Visible = false,
 					Parent = infoFrame,
@@ -613,7 +613,7 @@ guiService.ErrorMessageChanged:connect(function()
 			currScreenGui.ErrorFrame.ErrorText.Size = UDim2.new(.4, 0, 0, 144)
 			if errorImage == nil then
 				errorImage = Instance.new("ImageLabel")
-				errorImage.Image = "rbxasset://textures/ui/ErrorIconSmall.png"
+				errorImage.Image = "arlasset://textures/ui/ErrorIconSmall.png"
 				errorImage.Size = UDim2.new(0, 96, 0, 79)
 				errorImage.Position = UDim2.new(0.228125, 0, 0, 32)
 				errorImage.ZIndex = 9

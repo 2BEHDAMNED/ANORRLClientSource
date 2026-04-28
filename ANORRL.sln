@@ -102,6 +102,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib\win\zlib.vcxpr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2B01FC36-180F-47D4-853F-06909E449FB9}"
 	ProjectSection(SolutionItems) = preProject
+		content\scripts\LoadingScript.lua = content\scripts\LoadingScript.lua
 		content\scripts\ServerStarterScript.lua = content\scripts\ServerStarterScript.lua
 		content\scripts\StarterScript.lua = content\scripts\StarterScript.lua
 	EndProjectSection

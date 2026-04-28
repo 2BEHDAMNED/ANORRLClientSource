@@ -55,7 +55,7 @@ Determining the content folder (in order of priority):
 ----------------------------------------------------------
 Determining CrashReport (in order of priority):
 
-	1) HKEY_CURRENT_USER\Software\GraceRBLX\Grace	CrashReport (REG_DWORD)
+	1) HKEY_CURRENT_USER\Software\GraceRBLX\ANORRL	CrashReport (REG_DWORD)
 	
 	2) TRUE
 
@@ -63,7 +63,7 @@ Determining CrashReport (in order of priority):
 ----------------------------------------------------------
 Determining SilentCrashReport (in order of priority):
 
-	1) HKEY_CURRENT_USER\Software\GraceRBLX\Grace	SilentCrashReport (REG_DWORD)
+	1) HKEY_CURRENT_USER\Software\GraceRBLX\ANORRL	SilentCrashReport (REG_DWORD)
 	
     2) AppSettings.xml:   Settings->SilentCrashReport
 

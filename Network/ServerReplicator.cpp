@@ -1890,10 +1890,6 @@ void CheatHandlingServerReplicator::processApiStats(unsigned long long apiStats)
         }
         apiStatsMask |= apiStatsLower;
     }
-    if (configError)
-    {
-        reportConfigMaskError("US30605p3");
-    }
 }
 #endif
 
@@ -1948,10 +1944,6 @@ void CheatHandlingServerReplicator::doRemoteSysStats(unsigned int sendStats, uns
         }
         configMask |= getSecurityMask(configString, kReportChar, &configError);
     }
-    if (configError)
-    {
-        reportConfigMaskError(configString.c_str());
-    }
 }
 void CheatHandlingServerReplicator::doDelayedSysStats(unsigned int sendStats, unsigned int mask, const char* codeName, const char* details)
 {
@@ -1965,10 +1957,6 @@ void CheatHandlingServerReplicator::doDelayedSysStats(unsigned int sendStats, un
             kickTimeSec = Time::nowFastSec() + 60 + (rand() % 0x80);
         }
         configMask |= getSecurityMask(DFString::US30605p1, kReportChar, &configError);
-    }
-    if (configError)
-    {
-        reportConfigMaskError("US30605p1");
     }
 }
 #endif
@@ -1989,10 +1977,6 @@ void CheatHandlingServerReplicator::processHashStats(unsigned int hashStats)
         }
         mask |= getSecurityMask(DFString::US30605p2, kReportChar, &configError);
     }
-    if (configError)
-    {
-        reportConfigMaskError("US30605p2");
-    }
 }
 
 void CheatHandlingServerReplicator::processGoldHashStats(unsigned int hashStats)
@@ -2008,11 +1992,6 @@ void CheatHandlingServerReplicator::processGoldHashStats(unsigned int hashStats)
         }
         mask |= getSecurityMask(DFString::US30605p2, kGoldReportChar, &configError);
     }
-    if (configError)
-    {
-        reportConfigMaskError("US30605p2");
-    }
-
 }
 #endif
 
