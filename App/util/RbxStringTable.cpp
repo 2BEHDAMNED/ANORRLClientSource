@@ -5,8 +5,8 @@ static const char *stringsTable[] =
 		"arg", //ArgStringID
 		"Lua",//LuaStringStringId
 		"> %s",//CommandOutStringId
-		"loadfile('%s/game/studio.ashx')()",//StudioASHXFmt
-		"Studio.ashx",//StudioASHX
+		"loadfile('%s/game/studio.slua')()",//StudioASHXFmt
+		"Studio.slua",//StudioASHX
 		"Running script %s",//RunningScript
 		"Execute script in new thread, name: %s, identity: %u", //ExecScriptNewThread
 		"Full script code:\n %s", //FullScriptCode

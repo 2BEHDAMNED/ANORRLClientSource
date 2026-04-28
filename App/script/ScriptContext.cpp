@@ -351,7 +351,7 @@ LuaProfiler::StringCache LuaProfiler::stringCache;
 static rbx::atomic<int> contextCount;
 
 REFLECTION_BEGIN();
-//LocalUser permissions (including Studio.ashx execution)
+//LocalUser permissions (including Studio.slua execution)
 Reflection::BoundFuncDesc<ScriptContext, void(int)> func_AddStarterScript(&ScriptContext::addStarterScript, "AddStarterScript", "assetId", Security::LocalUser);
 
 //RobloxScript permissions
@@ -2778,7 +2778,7 @@ void ScriptContext::setAdminScriptPath(const std::string& newPath)
 
 void ScriptContext::addStarterScript(int assetId)
 {
-    // Hack required to have PBS work; we should change web code in gameserver.ashx...
+    // Hack required to have PBS work; we should change web code in gameserver.slua...
     if (assetId == 124885177)
         return addCoreScriptLocal("CoreScripts/BuildToolsScripts/PersonalServerScript", shared_from(this));
 
@@ -2802,7 +2802,7 @@ void ScriptContext::addCoreScriptLocal(std::string name, shared_ptr<Instance> pa
 
 void ScriptContext::addCoreScript(int assetId, shared_ptr<Instance> parent, std::string name)
 {
-    // Hack required to have build mode work; we should change web code in visit.ashx...
+    // Hack required to have build mode work; we should change web code in visit.slua...
     if (assetId == 59431535)
         return addCoreScriptLocal("CoreScripts/BuildToolsScripts/BuildToolsScript", shared_from(this));
 

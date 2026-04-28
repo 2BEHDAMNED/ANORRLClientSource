@@ -623,7 +623,7 @@ bool RobloxIDEDoc::openStream(const QString& fileName, std::istream* stream, boo
 		}
 
 #ifdef STUDIO_ADMIN_BUILD
-		if (fileName.indexOf("Join.ashx") != -1)
+		if (fileName.indexOf("Join.slua") != -1)
 		{
 			m_EditGame.m_Game.reset(new ARL::SecurePlayerGame(NULL, baseUrl.toStdString().c_str(), false));
 		}
@@ -1286,11 +1286,11 @@ bool RobloxIDEDoc::loadFromStream(std::istream* stream)
 
 	// For live games, the gameserver script sets the place id and universe id
 	// before calling game:Load(placeid). loadFromStream() is taking the place of
-	// game:Load(), and game loading needs to happen before gameserver.ashx finishes,
+	// game:Load(), and game loading needs to happen before gameserver.slua finishes,
 	// so as a workaround we use this attempt at url parsing to pull the place and
 	// universe id out of the gameserver script request so that they are set in the
 	// data model before we attempt load linked scripts.
-	QRegExp universeIdInGameServer(".*gameserver\\.ashx.*\\((\\d+).*(\\d+)\\).*");
+	QRegExp universeIdInGameServer(".*gameserver\\.slua.*\\((\\d+).*(\\d+)\\).*");
 	universeIdInGameServer.setCaseSensitivity(Qt::CaseInsensitive);
 	if (universeIdInGameServer.indexIn(m_initializationScript) != -1)
 	{
@@ -3124,7 +3124,7 @@ void RobloxIDEDoc::onIdeRun(bool play)
     QString scriptStr;
     if (FFlag::UseBuildGenericGameUrl)
     {
-        QString pathStr = QString("game/visit.ashx?IsPlaySolo=1&UserID=%1&PlaceID=%2&universeId=%3")
+        QString pathStr = QString("game/visit.slua?IsPlaySolo=1&UserID=%1&PlaceID=%2&universeId=%3")
             .arg(RobloxUser::singleton().getUserId())
             .arg(dataModel->getPlaceID())
             .arg(dataModel->getUniverseId());
@@ -3134,7 +3134,7 @@ void RobloxIDEDoc::onIdeRun(bool play)
     }
     else
     {
-        scriptStr = QString("loadfile(\"%1/game/visit.ashx?IsPlaySolo=1&UserID=%2&PlaceID=%3&universeId=%4\")()\n")
+        scriptStr = QString("loadfile(\"%1/game/visit.slua?IsPlaySolo=1&UserID=%2&PlaceID=%3&universeId=%4\")()\n")
             .arg(RobloxSettings::getBaseURL())
             .arg(RobloxUser::singleton().getUserId())
             .arg(dataModel->getPlaceID())

@@ -20,10 +20,8 @@
 
 #include <boost/algorithm/string.hpp>
 
-FASTFLAGVARIABLE(NewInGameDevConsole, false)
 DYNAMIC_FASTFLAG(EnableShowStatsLua)
 FASTFLAGVARIABLE(UseGameLoadedInLoadingScript, true)
-FASTFLAGVARIABLE(UseUserListMenu, false)
 FASTFLAGVARIABLE(EnableSetCoreTopbarEnabled, false)
 FASTFLAGVARIABLE(Durango3DBackground, true)     // this is Xbox flag. Defined here so it is accessible in studio and xbox client
 

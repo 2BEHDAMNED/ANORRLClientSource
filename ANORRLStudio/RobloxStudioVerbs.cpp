@@ -1500,9 +1500,9 @@ void PlaySoloVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://anorrl.lambda.cam/game/visit.ashx')()
+	// loadfile('http://anorrl.lambda.cam/game/visit.slua')()
 	QString script;
-	script = QString("loadfile(\"%1/game/visit.ashx?IsPlaySolo=1&placeId=%2&universeId=%3\")()\n")
+	script = QString("loadfile(\"%1/game/visit.slua?IsPlaySolo=1&placeId=%2&universeId=%3\")()\n")
 		.arg(RobloxSettings::getBaseURL())
 		.arg(m_pDataModel->getPlaceID())
 		.arg(m_pDataModel->getUniverseId());
@@ -1621,10 +1621,10 @@ void StartServerVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://anorrl.lambda.cam/game/gameserver.ashx')(<placeid>, 53640)
+	// loadfile('http://anorrl.lambda.cam/game/gameserver.slua')(<placeid>, 53640)
 	QString script;
 	script = QString(
-		"loadfile(\"%1/game/gameserver.ashx\")("
+		"loadfile(\"%1/game/gameserver.slua\")("
 		"%2, 53640, nil, nil, nil, "
 		"\"%1\", nil, nil, nil, nil, "
 		"nil, nil, nil, nil, nil, "
@@ -1646,9 +1646,9 @@ StartPlayerVerb::StartPlayerVerb(ARL::VerbContainer* pVerbContainer)
 
 void StartPlayerVerb::doIt(ARL::IDataState*)
 {
-    // loadfile('http://anorrl.lambda.cam//game/join.ashx?UserID=0&serverPort=53640')()
+    // loadfile('http://anorrl.lambda.cam//game/join.slua?UserID=0&serverPort=53640')()
 	QString script;
-	script = QString("loadfile(\"%1/game/join.ashx?UserID=0&serverPort=53640&universeId=%2\")()\n")
+	script = QString("loadfile(\"%1/game/join.slua?UserID=0&serverPort=53640&universeId=%2\")()\n")
 		.arg(RobloxSettings::getBaseURL())
 		.arg(m_pDataModel->getUniverseId());
 	

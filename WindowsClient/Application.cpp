@@ -271,7 +271,7 @@ Application::RequestPlaceInfoResult Application::requestPlaceInfo(const std::str
 
 bool Application::requestPlaceInfo(int placeId, std::string& authenticationUrl, std::string& ticket, std::string& scriptUrl) const
 {
-	std::string url = ARL::format("%sGame/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true",
+	std::string url = ARL::format("%sgame/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true",
 		GetBaseURL().c_str(), placeId);
 
 	int retries = FInt::RequestPlaceInfoRetryCount;

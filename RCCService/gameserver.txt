@@ -57,11 +57,11 @@ if url~=nil then
 	game:GetService("InsertService"):SetAssetUrl(url .. "/Asset/?id=%d")
 	game:GetService("InsertService"):SetAssetVersionUrl(url .. "/Asset/?assetversionid=%d")
 	
-	pcall(function() loadfile(url .. "/Game/LoadPlaceInfo.ashx?PlaceId=" .. placeId)() end)
+	pcall(function() loadfile(url .. "/Game/LoadPlaceInfo.slua?PlaceId=" .. placeId)() end)
 	
 	-- pcall(function() 
 	--			if access then
-	--				loadfile(url .. "/Game/PlaceSpecificScript.ashx?PlaceId=" .. placeId .. "&" .. access)()
+	--				loadfile(url .. "/Game/PlaceSpecificScript.slua?PlaceId=" .. placeId .. "&" .. access)()
 	--			end
 	--		end)
 end

@@ -14,7 +14,7 @@ public:
 	virtual void doTeleport(const std::string& url, const std::string& ticket,
 		const std::string& script) = 0;
     virtual bool isTeleportEnabled() const = 0;
-    virtual std::string xBox_getGamerTag() const { return ""; } // needed for placeLauncher.ashx when connecting from xbox client
+    virtual std::string xBox_getGamerTag() const { return ""; } // needed for placeLauncher.slua when connecting from xbox client
 };
  
 }  // namespace ARL

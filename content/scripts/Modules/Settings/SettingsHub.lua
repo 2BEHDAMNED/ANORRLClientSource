@@ -37,9 +37,7 @@ local ToggleDevConsoleBindableFunc = ControlFrame:WaitForChild('ToggleDevConsole
 local lastInputChangedCon = nil
 local emotesWasVisible = false
 local chatWasVisible = false
-local userlistSuccess, userlistFlagValue = pcall(function() return settings():GetFFlag("UseUserListMenu") end)
-local useUserList = (userlistSuccess and userlistFlagValue == true)
-
+local useUserList = true
 
 local function IsPlayMyPlaceEnabled()
 	if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then

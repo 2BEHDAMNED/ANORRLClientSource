@@ -2106,7 +2106,7 @@ void RobloxGameExplorer::openPlace(int placeId)
 	{
 		UpdateUIManager::Instance().getMainWindow().handleFileOpen("", IRobloxDoc::IDE, QString::fromStdString(
 			formatUrl(
-				"%WEB_BASE%/Game/edit.ashx?PlaceID=%ITEM_ID%&upload=%ITEM_ID%&testmode=false&universeId=%UNIVERSE_ID%",
+				"%WEB_BASE%/game/edit.slua?PlaceID=%ITEM_ID%&upload=%ITEM_ID%&testmode=false&universeId=%UNIVERSE_ID%",
 				currentGameId, placeId)));
 	}
 	else

@@ -37,10 +37,10 @@ namespace
 		"thumbs/staticimage",
 		"game/tools/thumbnailasset.ashx",
 		// scripts
-		"game/edit.ashx",
-		"game/gameserver.ashx",
-		"game/join.ashx",
-		"game/visit.ashx"
+		"game/edit.slua",
+		"game/gameserver.slua",
+		"game/join.slua",
+		"game/visit.slua"
 	};
 
 	void createIdUrl(std::string& result, const std::string& baseUrl, const std::string& id)

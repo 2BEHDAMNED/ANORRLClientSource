@@ -148,22 +148,22 @@ namespace StudioUtilities
 
 	bool containsEditScript(const QString& url)
 	{
-		return url.contains("edit.ashx", Qt::CaseInsensitive);
+		return url.contains("edit.slua", Qt::CaseInsensitive);
 	}
 
 	bool containsJoinScript(const QString& url)
 	{
-		return url.contains("join.ashx", Qt::CaseInsensitive);
+		return url.contains("join.slua", Qt::CaseInsensitive);
 	}
 
 	bool containsVisitScript(const QString& url)
 	{
-		return url.contains("visit.ashx", Qt::CaseInsensitive);
+		return url.contains("visit.slua", Qt::CaseInsensitive);
 	}
     
     bool containsGameServerScript(const QString& url)
     {
-        return url.contains("gameserver.ashx", Qt::CaseInsensitive);
+        return url.contains("gameserver.slua", Qt::CaseInsensitive);
     }
 
 	std::string authenticate(std::string &domain, std::string &url, std::string &ticket)

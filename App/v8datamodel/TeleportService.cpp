@@ -198,7 +198,7 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
 				// to-instance teleport
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "Game/PlaceLauncher.ashx?request=RequestGameJob&placeId=%d&gameId=%s&isPartyLeader=false&gender=&isTeleport=true%s", teleportInfo->at("placeId").get<int>(), teleportInfo->at("instanceId").get<std::string>().c_str(), extraStuff);
+				sprintf_s(urlBuf, 2048, "game/PlaceLauncher.ashx?request=RequestGameJob&placeId=%d&gameId=%s&isPartyLeader=false&gender=&isTeleport=true%s", teleportInfo->at("placeId").get<int>(), teleportInfo->at("instanceId").get<std::string>().c_str(), extraStuff);
 				url = BuildGenericGameUrl(_baseUrl, urlBuf);
 			}
 			else if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToPlace)
@@ -206,7 +206,7 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
 				// to-place teleport
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "Game/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true%s", teleportInfo->at("placeId").get<int>(), extraStuff);
+				sprintf_s(urlBuf, 2048, "game/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true%s", teleportInfo->at("placeId").get<int>(), extraStuff);
 				url = BuildGenericGameUrl(_baseUrl, urlBuf);
 			}
 			else if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToReservedServer)
@@ -214,7 +214,7 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
 				// to-reserved server teleport
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "Game/PlaceLauncher.ashx?request=RequestPrivateGame&placeId=%d&accessCode=%s&linkCode=&privateGameMode=ReservedServer%s", teleportInfo->at("placeId").get<int>(), ARL::Http::urlEncode(teleportInfo->at("reservedServerAccessCode").get<std::string>()).c_str(), extraStuff);
+				sprintf_s(urlBuf, 2048, "game/PlaceLauncher.ashx?request=RequestPrivateGame&placeId=%d&accessCode=%s&linkCode=&privateGameMode=ReservedServer%s", teleportInfo->at("placeId").get<int>(), ARL::Http::urlEncode(teleportInfo->at("reservedServerAccessCode").get<std::string>()).c_str(), extraStuff);
 				url = BuildGenericGameUrl(_baseUrl, urlBuf);
 			}
 		}
@@ -224,7 +224,7 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
 			{
 				// to-instance teleport
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "%s/Game/PlaceLauncher.ashx?request=RequestGameJob&placeId=%d&gameId=%s&isPartyLeader=false&gender=&isTeleport=true%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), teleportInfo->at("instanceId").get<std::string>().c_str(), extraStuff);
+				sprintf_s(urlBuf, 2048, "%s/game/PlaceLauncher.ashx?request=RequestGameJob&placeId=%d&gameId=%s&isPartyLeader=false&gender=&isTeleport=true%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), teleportInfo->at("instanceId").get<std::string>().c_str(), extraStuff);
 				url = urlBuf;
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 			}
@@ -233,14 +233,14 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
 				// to-place teleport
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "%s/Game/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), extraStuff);
+				sprintf_s(urlBuf, 2048, "%s/game/PlaceLauncher.ashx?request=RequestGame&placeId=%d&isPartyLeader=false&gender=&isTeleport=true%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), extraStuff);
 				url = urlBuf;
 			}
 			else if (teleportInfo->at("teleportType").get<TeleportType>() == TeleportType_ToReservedServer)
 			{
 				// to-reserved server teleport
 				char urlBuf[2048] = {0};
-				sprintf_s(urlBuf, 2048, "%s/Game/PlaceLauncher.ashx?request=RequestPrivateGame&placeId=%d&accessCode=%s&linkCode=&privateGameMode=ReservedServer%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), ARL::Http::urlEncode(teleportInfo->at("reservedServerAccessCode").get<std::string>()).c_str(), extraStuff);
+				sprintf_s(urlBuf, 2048, "%s/game/PlaceLauncher.ashx?request=RequestPrivateGame&placeId=%d&accessCode=%s&linkCode=&privateGameMode=ReservedServer%s", _baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), ARL::Http::urlEncode(teleportInfo->at("reservedServerAccessCode").get<std::string>()).c_str(), extraStuff);
 				url = urlBuf;
 				_spawnName = teleportInfo->at("spawnName").get<std::string>();
 			}
@@ -367,13 +367,13 @@ void TeleportService::TeleportThreadImpl(shared_ptr<const Reflection::ValueTable
                         char urlBuf[2048] = {0};
 						if (FFlag::UseBuildGenericGameUrl)
 						{
-							sprintf_s(urlBuf, 2048, "Game/Visit.ashx?placeID=%d&IsPlaySolo=1&FromTeleport=1&universeId=%d",
+							sprintf_s(urlBuf, 2048, "game/visit.slua?placeID=%d&IsPlaySolo=1&FromTeleport=1&universeId=%d",
 								teleportInfo->at("placeId").get<int>(), universeId);
 							script = BuildGenericGameUrl(_baseUrl, urlBuf);
 						}
 						else
 						{
-							sprintf_s(urlBuf, 2048, "%s/Game/Visit.ashx?placeID=%d&IsPlaySolo=1&FromTeleport=1&universeId=%d",
+							sprintf_s(urlBuf, 2048, "%s/game/visit.slua?placeID=%d&IsPlaySolo=1&FromTeleport=1&universeId=%d",
 								_baseUrl.c_str(), teleportInfo->at("placeId").get<int>(), universeId);
 							script = urlBuf;
 						}

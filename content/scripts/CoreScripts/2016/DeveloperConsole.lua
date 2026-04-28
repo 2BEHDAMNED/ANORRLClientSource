@@ -1,8 +1,5 @@
 
-local useNewConsole = false
-pcall(function()
-	useNewConsole = settings():GetFFlag("NewInGameDevConsole")
-end)
+local useNewConsole = true
 
 if useNewConsole then
 	local DeveloperConsoleModule;

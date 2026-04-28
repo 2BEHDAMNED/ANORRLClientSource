@@ -322,7 +322,7 @@ RobloxMainWindow::RobloxMainWindow(const QMap<QString, QString> argMap)
 		// Following are the different modes launched from website 
 		// (this is required since website conveys 'only' to be launched from Studio but doesn't specify the mode
 		// 1) Build mode: BuildArgument == True (default mode set)
-		// 2) Edit mode: BuildArgument == True && ScriptArgument has edit.ashx
+		// 2) Edit mode: BuildArgument == True && ScriptArgument has edit.slua
 		// 3) Start Page mode: BuildArgument == True && ScriptArgument is empty
 		if (StudioUtilities::containsEditScript(argMap[SharedLauncher::ScriptArgument])
 			|| ((argMap[SharedLauncher::BuildArgument]=="TRUE") && argMap[SharedLauncher::ScriptArgument].isEmpty()))
@@ -727,7 +727,7 @@ void RobloxMainWindow::parseCommandLineOptions(const QMap<QString, QString> argM
 	QString sWidth	= argMap[StudioUtilities::StudioWidthArgument];
 	QString sHeight	= argMap[StudioUtilities::StudioHeightArgument];
 
-	// convert loadfile('http://anorrl.lambda.cam/game/join.ashx')() to just the url
+	// convert loadfile('http://anorrl.lambda.cam/game/join.slua')() to just the url
 	if (StudioUtilities::containsJoinScript(scriptArg) && scriptArg.contains("loadfile("))
 	{
 		int urlBegin = scriptArg.indexOf("(")+2; // skip over the qoute
@@ -2828,12 +2828,12 @@ void RobloxMainWindow::cloudEditStatusChanged(int placeId, int universeId)
 	QString initScript;
 	if (FFlag::UseBuildGenericGameUrl)
 	{
-		QString pathStr = QString("Game/edit.ashx?PlaceID=%1&upload=%1&testmode=false&universeId=%2").arg(placeId).arg(universeId);
+		QString pathStr = QString("game/edit.slua?PlaceID=%1&upload=%1&testmode=false&universeId=%2").arg(placeId).arg(universeId);
 		initScript = QString::fromStdString(BuildGenericGameUrl(RobloxSettings::getBaseURL().toStdString(), pathStr.toStdString()));
 	}
 	else
 	{
-		initScript = QString("%1/Game/edit.ashx?PlaceID=%2&upload=%2&testmode=false&universeId=%3").arg(RobloxSettings::getBaseURL()).arg(placeId).arg(universeId);
+		initScript = QString("%1/game/edit.slua?PlaceID=%2&upload=%2&testmode=false&universeId=%3").arg(RobloxSettings::getBaseURL()).arg(placeId).arg(universeId);
 	}
 
 	handleFileOpen(FFlag::StudioDoublingOnUploadFixEnabled ? "" : fileLocationArg,
