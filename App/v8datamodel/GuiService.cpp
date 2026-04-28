@@ -21,7 +21,6 @@
 #include <boost/algorithm/string.hpp>
 
 FASTFLAGVARIABLE(NewInGameDevConsole, false)
-FASTFLAGVARIABLE(UseNewSubdomainsInCoreScripts, false)
 DYNAMIC_FASTFLAG(EnableShowStatsLua)
 FASTFLAGVARIABLE(UseGameLoadedInLoadingScript, true)
 FASTFLAGVARIABLE(UseUserListMenu, false)

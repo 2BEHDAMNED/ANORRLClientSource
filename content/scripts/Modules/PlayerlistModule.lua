@@ -289,7 +289,6 @@ end
 local function setAvatarIconAsync(player, iconImage)
 	-- this function is pretty much for xbox right now and makes use of modules that are part
 	-- of the xbox app. Please see Kip or Jason if you have any questions
-	local useSubdomainsFlagExists, useSubdomainsFlagValue = pcall(function() return settings():GetFFlag("UseNewSubdomainsInCoreScripts") end)
 	local thumbsUrl = BaseUrl
 
 	local thumbnailLoader = nil
