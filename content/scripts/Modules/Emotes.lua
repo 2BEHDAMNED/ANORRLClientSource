@@ -151,7 +151,7 @@ local function CreateEmotes()
 		frame.Position = UDim2.new(x, 0, y, 0)
 		frame.Size = UDim2.new(0, 100, 0, 100)
 		frame.ZIndex = 10
-		frame.Image = "rbxasset://textures/ui/Emotes/EmoteIcon.png"
+		frame.Image = "arlasset://textures/ui/Emotes/EmoteIcon.png"
 		frame.BackgroundColor3 = Color3.new(1,1,1)
 		frame.BackgroundTransparency = 1
 		
