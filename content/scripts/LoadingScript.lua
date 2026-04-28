@@ -28,10 +28,6 @@ local COLORS = {
 	ERROR = Color3.new(253/255,68/255,72/255)
 }
 
-if isDarkModeEnabled then
-	COLORS.COOLERBLACK = COLORS.WHITE
-end
-
 local function getViewportSize()
 	while not game.Workspace.CurrentCamera do
 		game.Workspace.Changed:wait()
@@ -262,6 +258,14 @@ function MainGui:GenerateMain()
 	local screenGui = create 'ScreenGui' {
 		Name = 'RobloxLoadingGui'
 	}
+	
+	local textColour = COLORS.COOLERBLACK
+	local strokeTransparency = 1
+	
+	if isDarkModeEnabled then
+		textColour = COLORS.WHITE
+		strokeTransparency = 0
+	end
 
 	--
 	-- create descendant frames
@@ -315,7 +319,7 @@ function MainGui:GenerateMain()
 				Font = Enum.Font.SourceSans,
 				FontSize = (isMobile == true and Enum.FontSize.Size12 or Enum.FontSize.Size18),
 				TextWrapped = true,
-				TextColor3 = COLORS.COOLERBLACK,
+				TextColor3 = textColour,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Visible = not isTenFootInterface,
 				Text = "Loading...",
@@ -339,7 +343,7 @@ function MainGui:GenerateMain()
 				Font = Enum.Font.SourceSansBold,
 				FontSize = Enum.FontSize.Size18,
 				TextWrapped = true,
-				TextColor3 = COLORS.COOLERBLACK,
+				TextColor3 = textColour,
 				Text = "",
 				ZIndex = 2,
 				Parent = uiMessageFrame,
@@ -363,8 +367,8 @@ function MainGui:GenerateMain()
 				FontSize = (isTenFootInterface and Enum.FontSize.Size48 or Enum.FontSize.Size24),
 				TextWrapped = true,
 				TextScaled = true,
-				TextColor3 = COLORS.COOLERBLACK,
-				TextStrokeTransparency = 1,
+				TextColor3 = textColour,
+				TextStrokeTransparency = strokeTransparency,
 				Text = "",
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Bottom,
@@ -375,14 +379,14 @@ function MainGui:GenerateMain()
 			if isTenFootInterface then
 				local byLabel = create'TextLabel' {
 					Name = "ByLabel",
-					BackgroundTransparency = 1,
+					BackgroundTransparency = strokeTransparency,
 					Size = UDim2.new(0, 36, 0, 30),
 					Position = UDim2.new(0, 0, 0, 80),
 					Font = Enum.Font.SourceSans,
 					FontSize = Enum.FontSize.Size36,
 					TextScaled = true,
 					TextColor3 = COLORS.WHITE,
-					TextStrokeTransparency = 1,
+					TextStrokeTransparency = strokeTransparency,
 					Text = "By",
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
@@ -412,8 +416,8 @@ function MainGui:GenerateMain()
 				FontSize = (isTenFootInterface and Enum.FontSize.Size36 or Enum.FontSize.Size18),
 				TextWrapped = true,
 				TextScaled = true,
-				TextColor3 = COLORS.COOLERBLACK,
-				TextStrokeTransparency = 1,
+				TextColor3 = textColour,
+				TextStrokeTransparency = strokeTransparency,
 				Text = "",
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
