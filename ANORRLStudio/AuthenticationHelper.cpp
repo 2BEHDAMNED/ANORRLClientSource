@@ -38,7 +38,6 @@
 #include "ANORRLServicesTools.h"
 
 FASTFLAGVARIABLE(StudioInSyncWebKitAuthentication, false)
-FASTFLAGVARIABLE(UseAssetGameSubdomainForGetCurrentUser, false)
 FASTFLAG(UseBuildGenericGameUrl)
 
 
@@ -60,11 +59,6 @@ QString AuthenticationHelper::getLoggedInUserUrl()
         result = RobloxSettings::getBaseURL() + "/game/GetCurrentUser.ashx";
     }
     
-    if (FFlag::UseAssetGameSubdomainForGetCurrentUser)
-	{
-		return QString::fromStdString(
-			ReplaceTopSubdomain(result.toStdString(), "assetgame"));
-	}
 	return result;
 }
 

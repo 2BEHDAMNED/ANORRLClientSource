@@ -108,8 +108,7 @@ end
 local IsSmallScreenDevice = UserInputService.TouchEnabled and GuiService:GetScreenResolution().Y <= 500
 
 local BaseUrl = game:GetService('ContentProvider').BaseUrl:lower()
-BaseUrl = string.gsub(BaseUrl, "/m.", "/www.")
-AssetGameUrl = string.gsub(BaseUrl, 'www', 'assetgame')
+BaseUrl = string.gsub(BaseUrl, "/m.", "/anorrl.")
 
 --[[ Constants ]]--
 local ENTRY_PAD = 2
@@ -130,21 +129,21 @@ if isTenFootInterface then
 	TEXT_STROKE_TRANSPARENCY = 1
 	TILE_SPACING = 5
 end
-local SHADOW_IMAGE = 'arlasset://textures/ui/PlayerList/TileShadowMissingTop.png'--'http://arl.lambda.cam/asset?id=286965900'
+local SHADOW_IMAGE = 'arlasset://textures/ui/PlayerList/TileShadowMissingTop.png'--'http://anorrl.lambda.cam/asset?id=286965900'
 local SHADOW_SLICE_SIZE = 5
 local SHADOW_SLICE_RECT = Rect.new(SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE*2-1, SHADOW_SLICE_SIZE*2-1)
 
 local ADMINS = {	-- Admins with special icons
-    ['7210880'] = 'http://arl.lambda.cam/asset/?id=134032333', -- Jeditkacheff
-    ['13268404'] = 'http://arl.lambda.cam/asset/?id=113059239', -- Sorcus
-    ['261'] = 'http://arl.lambda.cam/asset/?id=105897927', -- shedlestky
-    ['20396599'] = 'http://arl.lambda.cam/asset/?id=161078086', -- Robloxsai
-	['1'] = 'http://arl.lambda.cam/asset/?id=899',
-	['36'] = 'http://arl.lambda.cam/asset/?id=2309',
-	['41'] = 'http://arl.lambda.cam/asset/?id=2827',
-	['30'] = 'http://arl.lambda.cam/asset/?id=3165',
-	['48'] = 'http://arl.lambda.cam/asset/?id=3720',
-	['60'] = 'http://arl.lambda.cam/asset/?id=7429',
+    ['7210880'] = 'http://anorrl.lambda.cam/asset/?id=134032333', -- Jeditkacheff
+    ['13268404'] = 'http://anorrl.lambda.cam/asset/?id=113059239', -- Sorcus
+    ['261'] = 'http://anorrl.lambda.cam/asset/?id=105897927', -- shedlestky
+    ['20396599'] = 'http://anorrl.lambda.cam/asset/?id=161078086', -- Robloxsai
+	['1'] = 'http://anorrl.lambda.cam/asset/?id=899',
+	['36'] = 'http://anorrl.lambda.cam/asset/?id=2309',
+	['41'] = 'http://anorrl.lambda.cam/asset/?id=2827',
+	['30'] = 'http://anorrl.lambda.cam/asset/?id=3165',
+	['48'] = 'http://anorrl.lambda.cam/asset/?id=3720',
+	['60'] = 'http://anorrl.lambda.cam/asset/?id=7429',
 }
 
 local ABUSES = {
@@ -292,9 +291,6 @@ local function setAvatarIconAsync(player, iconImage)
 	-- of the xbox app. Please see Kip or Jason if you have any questions
 	local useSubdomainsFlagExists, useSubdomainsFlagValue = pcall(function() return settings():GetFFlag("UseNewSubdomainsInCoreScripts") end)
 	local thumbsUrl = BaseUrl
-	if(useSubdomainsFlagExists and useSubdomainsFlagValue and AssetGameUrl~=nil) then
-		thumbsUrl = AssetGameUrl
-	end
 
 	local thumbnailLoader = nil
 	pcall(function()

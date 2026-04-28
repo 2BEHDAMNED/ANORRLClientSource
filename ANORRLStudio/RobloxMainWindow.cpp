@@ -727,7 +727,7 @@ void RobloxMainWindow::parseCommandLineOptions(const QMap<QString, QString> argM
 	QString sWidth	= argMap[StudioUtilities::StudioWidthArgument];
 	QString sHeight	= argMap[StudioUtilities::StudioHeightArgument];
 
-	// convert loadfile('http://arl.lambda.cam/game/join.ashx')() to just the url
+	// convert loadfile('http://anorrl.lambda.cam/game/join.ashx')() to just the url
 	if (StudioUtilities::containsJoinScript(scriptArg) && scriptArg.contains("loadfile("))
 	{
 		int urlBegin = scriptArg.indexOf("(")+2; // skip over the qoute

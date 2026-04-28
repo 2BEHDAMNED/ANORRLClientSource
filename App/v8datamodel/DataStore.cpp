@@ -22,8 +22,6 @@ DYNAMIC_FASTINTVARIABLE(DataStoreTouchTimeoutInSeconds, 5);
 
 DYNAMIC_FASTINTVARIABLE(DataStoreSameKeyPerMinute, 10);
 
-DYNAMIC_FASTFLAGVARIABLE(UseNewPersistenceSubdomain, true);
-
 namespace ARL {
 	ARL_REGISTER_CLASS(DataStore);
 	ARL_REGISTER_CLASS(OrderedDataStore);
@@ -752,16 +750,8 @@ namespace ARL {
 			
             if (cp)
             {
-                if (DFFlag::UseNewPersistenceSubdomain)
-                {
-                    serviceUrl = BuildGenericPersistenceUrl(cp->getBaseUrl(), urlApiPath());
-                }
-                else
-                {
-                    //https://api.gametest1.robloxlabs.com//persistence/set?placeId=124921244&key=BF2%5Fds%5Ftest&&type=standard&scope=global&target=BF2%5Fds%5Fkey%5Ftmp&valueLength=31
-                    serviceUrl = cp->getApiBaseUrl() + urlApiPath() + '/';
-                }
-                
+                //https://api.gametest1.robloxlabs.com//persistence/set?placeId=124921244&key=BF2%5Fds%5Ftest&&type=standard&scope=global&target=BF2%5Fds%5Fkey%5Ftmp&valueLength=31
+                serviceUrl = cp->getApiBaseUrl() + urlApiPath() + '/';
             }
             
 			FASTLOGS(FLog::DataStore, "Initialized Data Store, url: %s", serviceUrl);

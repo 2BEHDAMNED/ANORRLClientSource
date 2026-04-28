@@ -35,7 +35,7 @@ function makeFriend(fromPlayer,toPlayer)
 	if friendRequestBlacklist[fromPlayer] then return end -- previously cancelled friend request, we don't want it!
 
 	popup.PopupText.Text = "Accept Friend Request from " .. tostring(fromPlayer.Name) .. "?"
-	popup.PopupImage.Image = "http://arl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=352&y=352"
+	popup.PopupImage.Image = "http://anorrl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=352&y=352"
 	
 	showTwoButtons()
 	popup.Visible = true
@@ -74,7 +74,7 @@ game.Players.FriendRequestEvent:connect(function(fromPlayer,toPlayer,event)
 		if event == Enum.FriendRequestEvent.Accept then
 			game:GetService("GuiService"):SendNotification("You are Friends",
 			"With " .. toPlayer.Name .. "!",
-			"http://arl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(toPlayer.userId).."&x=48&y=48",
+			"http://anorrl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(toPlayer.userId).."&x=48&y=48",
 			5,
 			function()
 			
@@ -85,7 +85,7 @@ game.Players.FriendRequestEvent:connect(function(fromPlayer,toPlayer,event)
 			if friendRequestBlacklist[fromPlayer] then return end -- previously cancelled friend request, we don't want it!
 			game:GetService("GuiService"):SendNotification("Friend Request",
 				"From " .. fromPlayer.Name,
-				"http://arl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=48&y=48",
+				"http://anorrl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=48&y=48",
 				8,
 				function()
 					makeFriend(fromPlayer,toPlayer)
@@ -93,7 +93,7 @@ game.Players.FriendRequestEvent:connect(function(fromPlayer,toPlayer,event)
 		elseif event == Enum.FriendRequestEvent.Accept then
 			game:GetService("GuiService"):SendNotification("You are Friends",
 			"With " .. fromPlayer.Name .. "!",
-			"http://arl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=48&y=48",
+			"http://anorrl.lambda.cam/thumbs/avatar.ashx?userId="..tostring(fromPlayer.userId).."&x=48&y=48",
 			5,
 			function()
 			
@@ -302,7 +302,7 @@ Game:GetService("PointsService").PointsAwarded:connect( function(userId, pointsA
 	if userId == Game.Players.LocalPlayer.userId then
 		game:GetService("GuiService"):SendNotification("Points Awarded!",
 			"You received " ..tostring(pointsAwarded) .. " points!",
-			"http://arl.lambda.cam/asset?id=155363793",
+			"http://anorrl.lambda.cam/asset?id=155363793",
 			5,
 			noOptFunc)
 	end
@@ -313,7 +313,7 @@ Game:GetService("BadgeService").BadgeAwarded:connect( function(message, userId, 
 	if userId == Game.Players.LocalPlayer.userId then
 		game:GetService("GuiService"):SendNotification("Badge Awarded!",
 			message,
-			"http://arl.lambda.cam/asset?id=177200377",
+			"http://anorrl.lambda.cam/asset?id=177200377",
 			5,
 			noOptFunc)
 	end

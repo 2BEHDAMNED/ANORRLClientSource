@@ -141,7 +141,7 @@ FASTFLAGVARIABLE(NoPromptOnAlreadySavedPlace, true)
 FASTFLAG(UseBuildGenericGameUrl)
 FASTFLAG(CSGPhysicsLevelOfDetailEnabled)
 DYNAMIC_FASTSTRINGVARIABLE(WorkspaceMessageText, std::string("Test Me - Please Remove"))
-DYNAMIC_FASTSTRINGVARIABLE(WorkspaceMessageLink, std::string("http://arl.lambda.cam"))
+DYNAMIC_FASTSTRINGVARIABLE(WorkspaceMessageLink, std::string("http://anorrl.lambda.cam"))
 DYNAMIC_FASTFLAGVARIABLE(WorkspaceNotificationMasterEnable, false)
 
 // Level 1 = Show it to people with DEFAULT Physical Properties settings
@@ -504,7 +504,7 @@ shared_ptr<EntityProperties> RobloxIDEDoc::cloudEditDetectionAndPlaceLaunch()
 		if (placeId && !universeId)
 		{
 			EntityProperties p;
-			std::string url = ReplaceTopSubdomain(RobloxSettings::getBaseURL().toStdString(), "arl") +
+			std::string url = RobloxSettings::getBaseURL().toStdString() +
 				format("/universes/get-universe-containing-place?placeId=%d", placeId.get());
 			p.setFromJsonFuture(ARL::HttpAsync::get(url));
 			if (boost::optional<int> placeUniverseId = p.get<int>("UniverseId"))
@@ -516,7 +516,7 @@ shared_ptr<EntityProperties> RobloxIDEDoc::cloudEditDetectionAndPlaceLaunch()
 
 		if (placeId && universeId)
 		{
-			std::string url = ReplaceTopSubdomain(RobloxSettings::getBaseURL().toStdString(), "arl") +
+			std::string url = RobloxSettings::getBaseURL().toStdString() +
 				format("/universes/%d/cloudeditenabled", universeId.get());
 			
 			EntityProperties p;

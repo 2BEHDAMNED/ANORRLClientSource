@@ -222,7 +222,7 @@ int main(int argc, char *argv[])
 	
 	// Platform independent settings
 	QApplication::setOrganizationName("GraceRBLX");
-    QApplication::setOrganizationDomain("arl.lambda.cam");
+    QApplication::setOrganizationDomain("anorrl.lambda.cam");
     QApplication::setApplicationName("ANORRLStudio");  
     QApplication::setApplicationVersion(RobloxSettings::getVersionString());
 

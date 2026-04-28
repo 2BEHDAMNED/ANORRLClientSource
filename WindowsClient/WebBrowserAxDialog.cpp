@@ -302,7 +302,7 @@ DWORD ThreadDoUploadVideo(shared_ptr<ARL::DataModel> dataModel, bool siteSEO, st
 				"<media:title type=\"plain\">" + videoTitle + "</media:title>\r\n"
 				"<media:description type=\"plain\">\r\n"
 				"" + videoSEOInfo + "\r\n"
-				"For more games visit http://arl.lambda.cam\r\n"
+				"For more games visit http://anorrl.lambda.cam\r\n"
 				"</media:description>\r\n"
 				"<media:category\r\n"
 				"scheme=\"http://gdata.youtube.com/schemas/2007/categories.cat\">Games\r\n"
@@ -398,7 +398,7 @@ void WebBrowserAxDialog::DoUploadVideo(std::string token, std::string title, std
 		siteSEO = false;
 		if (placeId > 0) 
 		{
-			videoSEOInfo = format_string("To play this game, please visit: http://arl.lambda.cam/a-place?id=%d&amp;rbx_source=youtube&amp;rbx_medium=uservideo", placeId);
+			videoSEOInfo = format_string("To play this game, please visit: http://anorrl.lambda.cam/a-place?id=%d&amp;rbx_source=youtube&amp;rbx_medium=uservideo", placeId);
 		} else {
 			videoSEOInfo = seostr;
 		}

@@ -974,7 +974,7 @@ void PublishToRobloxAsVerb::doIt(ARL::IDataState*)
 		initDialog();
 	else
 	{
-		// "http://arl.lambda.cam/IDE/Upload.aspx"
+		// "http://anorrl.lambda.cam/IDE/Upload.aspx"
 		QString initialUrl = QString("%1/IDE/Upload.aspx").arg(RobloxSettings::getBaseURL());
 
 		if (!m_dlg)
@@ -1141,7 +1141,7 @@ void PublishSelectionToRobloxVerb::doIt(ARL::IDataState*)
 		}
 	}
 
-	// "http://arl.lambda.cam/UI/Save.aspx"
+	// "http://anorrl.lambda.cam/UI/Save.aspx"
 	QString initialUrl;
 	if(isScript)
 		initialUrl = QString("%1/UI/Save.aspx?type=Lua").arg(RobloxSettings::getBaseURL());
@@ -1502,7 +1502,7 @@ void PlaySoloVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://arl.lambda.cam/game/visit.ashx')()
+	// loadfile('http://anorrl.lambda.cam/game/visit.ashx')()
 	QString script;
 	script = QString("loadfile(\"%1/game/visit.ashx?IsPlaySolo=1&placeId=%2&universeId=%3\")()\n")
 		.arg(RobloxSettings::getBaseURL())
@@ -1623,7 +1623,7 @@ void StartServerVerb::doIt(ARL::IDataState*)
         return;
     }
 
-	// loadfile('http://arl.lambda.cam/game/gameserver.ashx')(<placeid>, 53640)
+	// loadfile('http://anorrl.lambda.cam/game/gameserver.ashx')(<placeid>, 53640)
 	QString script;
 	script = QString(
 		"loadfile(\"%1/game/gameserver.ashx\")("
@@ -1648,7 +1648,7 @@ StartPlayerVerb::StartPlayerVerb(ARL::VerbContainer* pVerbContainer)
 
 void StartPlayerVerb::doIt(ARL::IDataState*)
 {
-    // loadfile('http://arl.lambda.cam//game/join.ashx?UserID=0&serverPort=53640')()
+    // loadfile('http://anorrl.lambda.cam//game/join.ashx?UserID=0&serverPort=53640')()
 	QString script;
 	script = QString("loadfile(\"%1/game/join.ashx?UserID=0&serverPort=53640&universeId=%2\")()\n")
 		.arg(RobloxSettings::getBaseURL())
@@ -2044,7 +2044,7 @@ QString ScreenshotVerb::getSEOStr()
 {
 	QString seo = QString::fromStdString(m_spDataModel->getScreenshotSEOInfo());
 	if (seo.isEmpty())
-		seo = tr("A screenshot from ANORRL.  Learn more at http://arl.lambda.cam");
+		seo = tr("A screenshot from ANORRL.  Learn more at http://anorrl.lambda.cam");
 	return seo;
 }
 
@@ -2238,7 +2238,7 @@ void PublishToRobloxVerb::doIt(ARL::IDataState* dataState )
 	if (RobloxIDEDoc::getIsCloudEditSession())
 	{
 		QString baseUrl = RobloxSettings::getBaseURL();
-		baseUrl = QString::fromStdString(ReplaceTopSubdomain(baseUrl.toStdString(), "data"));
+		baseUrl = QString::fromStdString(baseUrl.toStdString());
 		uploadUrl = QString("%1/Data/Upload.ashx?assetid=%2").arg(baseUrl).arg(m_pDataModel->getPlaceID()).toStdString();
 	}
 	else

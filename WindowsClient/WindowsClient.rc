@@ -214,7 +214,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_DEFAULT_IMAGE_INFO  "A screenshot from ANORRL.  Learn more at http://arl.lambda.cam"
+    IDS_DEFAULT_IMAGE_INFO  "A screenshot from ANORRL.  Learn more at http://anorrl.lambda.cam"
 END
 
 #endif    // English (United States) resources

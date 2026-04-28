@@ -182,7 +182,6 @@ namespace ARL
 		static bool isScript(const char* url);
 		static bool isRobloxSite(const char* url);
         static bool isStrictlyRobloxSite(const char* url);
-		static bool isMoneySite(const char* url);
 		
 		// Utility
 		static std::string urlEncode(const std::string& s);

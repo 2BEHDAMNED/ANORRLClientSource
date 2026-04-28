@@ -58,7 +58,6 @@ DYNAMIC_FASTINTVARIABLE(ContentProviderThreadPoolSize, 16)
 DYNAMIC_FASTFLAGVARIABLE(ContentProviderHttpCaching, false)
 
 DYNAMIC_FASTFLAGVARIABLE(ImageFailedToLoadContext, false)
-DYNAMIC_FASTFLAG(UrlReconstructToAssetGame)
 
 using namespace boost::posix_time;
 
@@ -152,7 +151,7 @@ namespace ARL {
 					apiBaseUrl.replace(foundPos,4,"https");
 				}
 			}
-			return ReplaceTopSubdomain(apiBaseUrl, "arl");
+			return apiBaseUrl;
 		}
 
 		return baseUrl;
@@ -160,11 +159,6 @@ namespace ARL {
 
 	std::string ContentProvider::getUnsecureApiBaseUrl(const std::string& baseUrl)
 	{
-		if(!baseUrl.empty())
-		{
-			return ReplaceTopSubdomain(baseUrl, "arl");
-		}
-
 		return baseUrl;
 	}
 

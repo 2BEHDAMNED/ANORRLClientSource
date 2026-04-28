@@ -473,10 +473,8 @@ static const bool jobsAsArray = true;
 			std::string baseUrl = baseUrlInput;
 
 			ARLASSERT(baseUrl.substr(0, 7) == "http://");
-			if (baseUrl.find("arl.lambda.cam") != std::string::npos)
-				baseUrl = "http://arl.lambda.cam/";
-			else
-				baseUrl.insert(7, "logging.service.");	// Inserted after http://
+			if (baseUrl.find("anorrl.lambda.cam") != std::string::npos)
+				baseUrl = "http://anorrl.lambda.cam/";
 			return baseUrl + "Gatherer/LogEntry?Shard=" + shard;
 		}
 

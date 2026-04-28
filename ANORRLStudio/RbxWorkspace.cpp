@@ -703,7 +703,7 @@ void RbxWorkspace::UploadVideo(const QString &token, bool doPost, int postSettin
 		int placeId = m_pDataModel->getPlaceID();
 		if (placeId > 0) 
 		{
-			QString str(QString("To play this game, please visit: http://arl.lambda.cam/game/%1?rbx_source=youtube&amp;rbx_medium=uservideo").arg(placeId));
+			QString str(QString("To play this game, please visit: http://anorrl.lambda.cam/game/%1?rbx_source=youtube&amp;rbx_medium=uservideo").arg(placeId));
 			videoSEOInfo = str.toStdString();
 		} 
 	}
@@ -763,12 +763,12 @@ void UploadVideoThread::run()
 				"<media:title type=\"plain\">" + m_videoTitle + "</media:title>\r\n"
 				"<media:description type=\"plain\">\r\n"
 				"" + m_videoSEOInfo + "\r\n"
-				"For more games visit http://arl.lambda.cam\r\n"
+				"For more games visit http://anorrl.lambda.cam\r\n"
 				"</media:description>\r\n"
 				"<media:category\r\n"
 				"scheme=\"http://gdata.youtube.com/schemas/2007/categories.cat\">Games\r\n"
 				"</media:category>\r\n"
-				"<media:keywords>ROBLOX, video, free game, online virtual world</media:keywords>\r\n"
+				"<media:keywords>ANORRL, video, free game, online virtual world</media:keywords>\r\n"
 				"</media:group>\r\n"
 				"</entry>\r\n"
 				"--f93dcbA3\r\n"

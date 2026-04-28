@@ -211,7 +211,7 @@ void View::initializeView()
         ::WriteProfileString("Settings", "lastGFXMode", "-1");
 		throw initialization_error(
 			"Your graphics drivers seem to be too old for Roblox to use.\n\n"
-			"Visit http://arl.lambda.cam/drivers for info on how to perform a driver upgrade.");
+			"Visit http://anorrl.lambda.cam/drivers for info on how to perform a driver upgrade.");
 	}
 
     ARLASSERT( view );

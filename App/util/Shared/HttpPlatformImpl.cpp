@@ -1187,7 +1187,7 @@ void setCookiesForDomain(const std::string& domain, const std::string& cookies)
         if (domain.empty() || cookies.empty())
             return;
         
-        // Do Domain trimming only for BaseURL's, only trim www. or m.,
+        // Do Domain trimming only for BaseURL's, only trim arl. or m.,
         // This allows to propogate cookies accross www, m, web, api for all roblox baseURL sub domains
         std::string trimmedDomain = domain;
         if (DFFlag::HttpCurlDomainTrimmingWithBaseURL)
@@ -1201,8 +1201,8 @@ void setCookiesForDomain(const std::string& domain, const std::string& cookies)
             
             if (trimmedDomain.find_first_of(coreBaseURL) == 0)
             {
-                if (trimmedDomain.find_first_of("www.") == 0)
-                    boost::replace_all(trimmedDomain, "www.", "");
+                if (trimmedDomain.find_first_of("arl.") == 0)
+                    boost::replace_all(trimmedDomain, "arl.", "");
                 else if(trimmedDomain.find_first_of("m.") == 0)
                     boost::replace_all(trimmedDomain, "m.", "");
                 else

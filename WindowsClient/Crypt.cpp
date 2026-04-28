@@ -277,7 +277,7 @@ bool VerifyCryptSignature(const std::wstring& fileName)
         // signer info structure.
         if (GetProgAndPublisherInfo(pSignerInfo, &ProgPubInfo))
         {
-			if (StrCmpW(ProgPubInfo.lpszProgramName, L"Roblox Application") != 0)
+			if (StrCmpW(ProgPubInfo.lpszProgramName, L"ANORRL Application") != 0)
             {
 				result = false;
 				__leave;
@@ -289,7 +289,7 @@ bool VerifyCryptSignature(const std::wstring& fileName)
             //    wprintf(L"Publisher Link : %s\n", ProgPubInfo.lpszPublisherLink);
             //}
 
-			if (StrCmpW(ProgPubInfo.lpszMoreInfoLink, L"http://arl.lambda.cam ") != 0)
+			if (StrCmpW(ProgPubInfo.lpszMoreInfoLink, L"http://anorrl.lambda.cam ") != 0)
             {
 				result = false;
 				__leave;
@@ -594,18 +594,15 @@ bool VerifyCertificateInfo(PCCERT_CONTEXT pCertContext)
 	issuerNameToCheck += " CA";
 
 	static std::string nameToCheck;
+	nameToCheck += "G";
+	nameToCheck += "r";
+	nameToCheck += "a";
+	nameToCheck += "c";
+	nameToCheck += "e";
 	nameToCheck += "R";
-	nameToCheck += "O";
 	nameToCheck += "B";
 	nameToCheck += "L";
-	nameToCheck += "O";
 	nameToCheck += "X";
-	nameToCheck += " C";
-	nameToCheck += "or";
-	nameToCheck += "por";
-	nameToCheck += "at";
-	nameToCheck += "io";
-	nameToCheck += "n";
 
     // Print Serial Number.
     //_tprintf(_T("Serial Number: "));

@@ -60,10 +60,6 @@ extern "C" {
         return ARL::Http::trustCheckBrowser(url) ? 1 : 0;
     }
 }
-
-// NOTICE: Remove these calls after transition for Apple is complete.
-int rbx_isRobloxSite(const char* url);
-int rbx_isMoneySite(const char* url);
 #endif // ifdef __APPLE__
 
 namespace
@@ -824,7 +820,7 @@ void Http::onWinHttpRedirect(unsigned long dwInternetStatus, std::string redirec
     // If so, then record an alternate URL in case the CDN fails.
     // The alternate URL is the corresponding Amazon S3 URL.
     // bitgravity:
-    int pos = redirectUrl.find("bg.roblox");
+    int pos = redirectUrl.find("bg.anorrl");
     if (pos != std::string::npos)
     {
         alternateUrl = redirectUrl.substr(0, pos);
@@ -833,7 +829,7 @@ void Http::onWinHttpRedirect(unsigned long dwInternetStatus, std::string redirec
     }
 
     // cloudfront:
-    pos = redirectUrl.find("-cf.roblox");
+    pos = redirectUrl.find("-cf.anorrl");
     if (pos != std::string::npos)
     {
         alternateUrl = redirectUrl.substr(0, pos);
@@ -980,76 +976,6 @@ bool Http::isScript(const char* url)
         0 == strncmp(url, jscript, strlen(jscript));
 }
 
-bool Http::isMoneySite(const char* url)
-{
-#ifdef __APPLE__
-    if (!useCurlHttpImpl)
-    {
-        return rbx_isMoneySite(url) != 0;
-    }
-#endif // ifdef __APPLE__
-
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
-    if (!useCurlHttpImpl)
-    {
-        CUrl crack;
-        crack.CrackUrl(url);
-        switch (crack.GetScheme())
-        {
-        case ATL_URL_SCHEME_HTTP:
-        case ATL_URL_SCHEME_HTTPS:
-        case ATL_URL_SCHEME_FTP:
-        {
-            // only trust urls from roblox.com
-            CString hostName = crack.GetHostName();
-            hostName.MakeLower();
-            if (hostName.Right(10)=="paypal.com")
-                return true;
-            if (hostName.Right(9)=="rixty.com")
-                return true;
-            return false;
-        }
-        default:
-        {
-            return false;
-        }
-        }
-    }
-#endif // ifdef _WIN32
-
-    if (DFFlag::UseNewUrlClass)
-    {
-        ARL::Url parsed = ARL::Url::fromString(url);
-
-        return parsed.hasHttpScheme() &&
-            (parsed.isSubdomainOf("paypal.com") || parsed.isSubdomainOf("rixty.com"));
-    }
-    
-    std::string host;
-	boost::scoped_ptr<char> cscheme(HTParse(url, NULL, PARSE_ACCESS));
-	if (!isValidScheme(cscheme.get()))
-	{
-		return false;
-	}
-
-	boost::scoped_ptr<char> chost(HTParse(url, NULL, PARSE_HOST));
-	host = chost.get();
-
-    std::transform(host.begin(), host.end(), host.begin(), ::tolower);
-
-    // Only trust urls from roblox.com.
-    if ("paypal.com" == host || hasEnding(host, ".paypal.com"))
-    {
-        return true;
-    }
-    if ("rixty.com" == host || hasEnding(host, ".rixty.com"))
-    {
-        return true;
-    }
-
-    return false;
-}
-
 // This allows just roblox domains, not roblox trusted domains like facebook.
 bool Http::isStrictlyRobloxSite(const char* url)
 {
@@ -1098,12 +1024,6 @@ bool Http::isRobloxSite(const char* url)
 			if (hostName.Right(10)=="lambda.cam" || hostName.Right(14)=="robloxlabs.com")
 				return true;
 
-            // trust facebook login
-            if ((hostName == "login.facebook.com" && urlPath == "/login.php")
-                || (hostName == "ssl.facebook.com" && urlPath == "/connect/uiserver.php")
-                || (hostName == "www.facebook.com" && (urlPath == "/connect/uiserver.php" || urlPath == "/logout.php")))
-                return true;
-
             // trust google/youtube upload/auth
             if (hostName == "www.youtube.com" && (urlPath == "/auth_sub_request" || urlPath == "/signin" || urlPath == "/issue_auth_sub_token"))
                 return true;
@@ -1136,15 +1056,6 @@ bool Http::isRobloxSite(const char* url)
         const bool isRoblox =
             parsed.isSubdomainOf("lambda.cam") ||
             parsed.isSubdomainOf("robloxlabs.com");
-
-        const bool isFacebook =
-            ("login.facebook.com" == parsed.host()
-                && parsed.pathEqualsCaseInsensitive("/login.php")) ||
-            ("ssl.facebook.com" == parsed.host()
-                && parsed.pathEqualsCaseInsensitive("/connect/uiserver.php")) ||
-            ("www.facebook.com" == parsed.host()
-                && (parsed.pathEqualsCaseInsensitive("/connect/uiserver.php")
-                    || parsed.pathEqualsCaseInsensitive("/logout.php")));
         
         const bool isYoutube =
             ("www.youtube.com" == parsed.host()
@@ -1159,7 +1070,7 @@ bool Http::isRobloxSite(const char* url)
             ("accounts.google.com" == parsed.host()
                 && parsed.pathEqualsCaseInsensitive("/serviceloginauth"));
 
-        return isRoblox || isFacebook || isYoutube || isGoogle;
+        return isRoblox || isYoutube || isGoogle;
     } // if (DFFlag::UseNewUrlClass)
 
     std::string host;
@@ -1183,10 +1094,6 @@ bool Http::isRobloxSite(const char* url)
     return
         "lambda.cam" == host || hasEnding(host, ".lambda.cam") ||
         "robloxlabs.com" == host || hasEnding(host, ".robloxlabs.com") ||
-        // trust facebook login
-        ("login.facebook.com" == host && "/login.php") ||
-        ("ssl.facebook.com" == host && "/connect/uiserver.php" == path) ||
-        ("www.facebook.com" == host && ("/connect/uiserver.php" == path || "/logout.php" == path)) ||
         // trust google/youtube upload/auth
         ("www.youtube.com" == host && ("/auth_sub_request" == path || "/signin" == path || "/issue_auth_sub_token" == path)) ||
         ("uploads.gdata.youtube.com" == host) ||
@@ -1196,7 +1103,7 @@ bool Http::isRobloxSite(const char* url)
 
 bool Http::trustCheckBrowser(const char* url)
 {
-    return trustCheck(url) || isMoneySite(url);
+    return trustCheck(url);
 }
 
 bool Http::isExternalRequest(const char* url)

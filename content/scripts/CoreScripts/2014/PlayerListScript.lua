@@ -4,149 +4,8 @@
 
 local ADMINS =
 {
-	rbadam = 1,
-	adamintygum = 1,
-	androidtest = 1,
-	robloxfrenchie = 1,
-	jackssmirkingrevenge = 1,
-	lindapepita = 1,
-	vaiobot = 1,
-	goddessnoob = 1,
-	effward = 1,
-	blockhaak = 1,
-	drewbda = 1,
-	['659223'] = 1,
-	tone = 1,
-	fasterbuilder19 = 1,
-	zeuxcg = 1,
-	concol2 = 1,
-	reesemcblox = 1,
-	jeditkacheff = 'http://arl.lambda.cam/asset/?id=134032333',
-	whkm1980 = 1,
-	chiefjustus = 1,
-	ellissar = 1,
-	arbolito = 1,
-	noob007 = 1,
-	limon = 1,
-	cmed = 1,
-	hawkington = 1,
-	tabemono = 1,
-	autoconfig = 1,
-	brighteyes = 1,
-	monsterinc3d = 1,
-	mrdoombringer = 1,
-	isolatedevent = 1,
-	countonconnor = 1,
-	scubasomething = 1,
-	onlytwentycharacters = 1,
-	lordrugdumph = 1,
-	bellavour = 1,
-	['david.baszucki'] = 1,
-	ibanez2189 = 1,
-	sorcus = 'http://arl.lambda.cam/asset/?id=113059239',
-	deeana00 = 1,
-	thelorekt = 1,
-	niquemonster = 1,
-	thorasaur = 1,
-	['mse6'] = 1,
-	corgiparade = 1,
-	varia = 1,
-	['4runningwolves'] = 1,
-	pulmoesflor = 1,
-	olive71 = 1,
-	groundcontroll2 = 1,
-	gurukrish = 1,
-	countvelcro = 1,
-	iltalumi = 1,
-	juanjuan23 = 1,
-	ostrichsized = 1,
-	jackintheblox = 1,
-	slingshotjunkie = 1,
-	gordonrox24 = 1,
-	sharpnine = 1,
-	motornerve = 1,
-	motornerve = 1,
-	watchmedogood = 1,
-	jmargh = 1,
-	jaykorean = 1,
-	foyle = 1,
-	majortom4321 = 1,
-	shedletsky = 'http://arl.lambda.cam/asset/?id=105897927',
-	supernovacaine = 1,
-	ffjosh = 1,
-	sickenedmonkey = 1,
-	doughtless = 1,
-	kbux = 1,
-	totallynothere = 1,
-	erzastar = 1,
-	keith = 1,
-	chro = 1,
-	solarcrane = 1,
-	glorioussalt = 1,
-	uristmcsparks = 1,
-	itolauren = 1,
-	malcomso = 1,
-	stickmasterluke = 1,
-	windlight13 = 1,
-	yumyumcheerios = 1,
-	stravant = 1,
-	byteme = 1,
-	imaginationsensation = 1,
-	['matt.dusek'] = 1,
-	mcrtest = 1,
-	maxvee = 1,
-	coatp0cketninja = 1,
-	screenme = 1,
-	b1tsh1ft = 1,
-	totbl = 1,
-	aquabot8 = 1,
-	grossinger = 1,
-	merely = 1,
-	cdakkar = 1,
-	siekiera = 1,
-	robloxkidsaccount = 1,
-	flotsamthespork = 1,
-	soggoth = 1,
-	phil = 1,
-	orcasparkles = 1,
-	skullgoblin = 1,
-	rickrosstheb0ss = 1,
-	argonpirate = 1,
-	nobledragon = 1,
-	squidcod = 1,
-	raeglyn = 1,
-	robloxsai = 'http://arl.lambda.cam/asset/?id=161078086',
-	briarroze = 1,
-	hawkeyebandit = 1,
-	dapperbuffalo = 1,
-	vukota = 1,
-	swiftstone = 1,
-	gemlocker = 1,
-	loopylens = 1,
-	tarabyte = 1,
-	timobius = 1,
-	tobotrobot = 1,
-	foster008 = 1,
-	twberg = 1,
-	darthvaden = 1,
-	khanovich = 1,
-	codewriter = 1,
-	vladthefirst = 1,
-	phaedre = 1,
-	gorroth = 1,
-	sphinxshen = 1,
-	jynj1984 = 1,
-	roboyz = 1,
-	zodiaczak = 1,
-	superman205 = 1,
-	convexrumbler = 1,
-	mpliner476 = 1,
-	geekndestroy = 1,
-	glewis17 = 1,
-	buckeroob = 1,
+	grace = 1
 }
-
-
 
 local Images = {
 	bottomDark = '94691904',
@@ -238,7 +97,7 @@ end
 function getMembershipTypeIcon(membershipType,playerName)
 	if ADMINS[string.lower(playerName)]~=nil then
 		if ADMINS[string.lower(playerName)] == 1 then
-			return "http://arl.lambda.cam/asset/?id=99727663"
+			return "http://anorrl.lambda.cam/asset/?id=99727663"
 		else
 			return ADMINS[string.lower(playerName)]
 		end
@@ -259,11 +118,11 @@ local function getFriendStatusIcon(friendStatus)
 	if friendStatus == Enum.FriendStatus.Unknown or friendStatus == Enum.FriendStatus.NotFriend then
 		return ""
 	elseif friendStatus == Enum.FriendStatus.Friend then
-		return "http://arl.lambda.cam/asset/?id=99749771"
+		return "http://anorrl.lambda.cam/asset/?id=99749771"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestSent then
-		return "http://arl.lambda.cam/asset/?id=99776888"
+		return "http://anorrl.lambda.cam/asset/?id=99776888"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestReceived then
-		return "http://arl.lambda.cam/asset/?id=99776838"
+		return "http://anorrl.lambda.cam/asset/?id=99776838"
 	else
 		error("Unknown FriendStatus: " .. friendStatus)
 	end
@@ -376,7 +235,7 @@ local HeaderFrame = Obj.Create"Frame"
 	Position = UDim2.new(0,0,0,0),
 	Size = UDim2.new(1, 0, .07, 0),
 	Parent = MainFrame,
-	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=94692054'),
+	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=94692054'),
 }
 	local HeaderFrameHeight = HeaderFrame.Size.Y.Scale
 	local MaximizeButton = Obj.Create"ImageButton"
@@ -627,7 +486,7 @@ local MiddleBGTemplate = Obj.Create"Frame"
 	BackgroundTransparency = 1,
 	Position = UDim2.new(100,0,.07,0),
 	Size = UDim2.new(.5, 0, .025, 0),--UDim2.new(1, 0, .03, 0),
-	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=94692025'),
+	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=94692025'),
 	
 }
 
@@ -662,7 +521,7 @@ local AbuseSettingsFrame = Obj.Create"Frame"
 	Size = UDim2.new(1, 0, 1, 0),
 	Active = true,
 	BackgroundTransparency = 1,
-	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96488767'), -- 96480351'),
+	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96488767'), -- 96480351'),
 	Obj.Create"TextLabel"
 	{
 		Name = "Title",
@@ -749,7 +608,7 @@ local SubmitReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(.5, - 200, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = false,
-	Image = 'http://arl.lambda.cam/asset/?id=96502438', -- 96501119',
+	Image = 'http://anorrl.lambda.cam/asset/?id=96502438', -- 96501119',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -760,7 +619,7 @@ local CancelReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(0.5, 50, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = true,
-	Image = 'http://arl.lambda.cam/asset/?id=96500683',
+	Image = 'http://anorrl.lambda.cam/asset/?id=96500683',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -799,7 +658,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position=UDim2.new(0.25, 0, 0.300000012, 0),
 	Size=UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96506233'),
+	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -835,7 +694,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://arl.lambda.cam/asset/?id=96507959',
+		Image = 'http://anorrl.lambda.cam/asset/?id=96507959',
 	}
 }
 local NormalAbuseBox = Obj.Create'Frame'
@@ -844,7 +703,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position = UDim2.new(0.25, 0, 0.300000012, 0),
 	Size = UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://arl.lambda.cam/asset/?id=96506233'),
+	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -880,7 +739,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://arl.lambda.cam/asset/?id=96507959',
+		Image = 'http://anorrl.lambda.cam/asset/?id=96507959',
 	},
 }
 
@@ -960,7 +819,7 @@ local DefaultEntriesOnScreen = 8
 
 
 for _,i in pairs(Images) do
-	Game:GetService("ContentProvider"):Preload("http://arl.lambda.cam/asset/?id="..i)
+	Game:GetService("ContentProvider"):Preload("http://anorrl.lambda.cam/asset/?id="..i)
 end
 
  -- ordered array of 'score data', each entry has:
@@ -1239,20 +1098,20 @@ end
 	player		Player to check for rank on
 --]]
 function HighlightMyRank(player,BanPlayerButton,VisitorButton,MemberButton,AdminButton)
-	BanPlayerButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['LightPopupMid']
-	VisitorButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkPopupMid']
-	MemberButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['LightPopupMid']
-	AdminButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkPopupBottom']
+	BanPlayerButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['LightPopupMid']
+	VisitorButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkPopupMid']
+	MemberButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['LightPopupMid']
+	AdminButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkPopupBottom']
 	
 	local rank=player.PersonalServerRank
 	if rank <= PrivilegeLevel['Banned'] then
-		BanPlayerButton.Image='http://arl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
+		BanPlayerButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Visitor'] then
-		VisitorButton.Image='http://arl.lambda.cam/asset/?id='..Images['DarkBluePopupMid']
+		VisitorButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['DarkBluePopupMid']
 	elseif rank <= PrivilegeLevel['Member'] then
-		MemberButton.Image='http://arl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
+		MemberButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Admin'] then
-		AdminButton.Image= 'http://arl.lambda.cam/asset/?id='..Images['DarkBluePopupBottom']
+		AdminButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkBluePopupBottom']
 	end
 end
 
@@ -1298,7 +1157,7 @@ end
 function CloseAbuseDialog()
 	AbuseName = nil
 	SubmitReportButton.Active = false
-	SubmitReportButton.Image = 'http://arl.lambda.cam/asset/?id=96502438' -- 96501119',
+	SubmitReportButton.Image = 'http://anorrl.lambda.cam/asset/?id=96502438' -- 96501119',
 	AbuseDescriptionBox:Destroy()
 	CalmingAbuseBox.Parent = nil
 	NormalAbuseBox.Parent = nil
@@ -1315,7 +1174,7 @@ function InitReportAbuse()
 		AbuseName = abuseText 
 		if AbuseName and SelectedPlayer then
 			SubmitReportButton.Active = true
-			SubmitReportButton.Image = 'http://arl.lambda.cam/asset/?id=96501119'
+			SubmitReportButton.Image = 'http://anorrl.lambda.cam/asset/?id=96501119'
 		end
 	end
 	

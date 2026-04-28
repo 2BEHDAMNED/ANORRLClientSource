@@ -35,7 +35,6 @@ local DataFarmUsesHttpsFlagExists, DataFarmUsesHttpsFlagValue = pcall(function (
 if DataFarmUsesHttpsFlagExists and DataFarmUsesHttpsFlagValue then
 	DataFarmProtocol = 'https'
 end
-local DataFarmUrl = DataFarmProtocol .. '://data.' .. UrlBase
 
 -----------------
 --| Functions |--
@@ -178,11 +177,7 @@ for _, player in pairs(PlayersService:GetPlayers()) do
 	OnPlayerAdded(player)
 end
 
-local useSubdomainsFlagExists, useSubdomainsFlagValue = pcall(function () return settings():GetFFlag("UseNewSubdomainsInCoreScripts") end)
 local saveUrlBase = Url
-if(useSubdomainsFlagExists and useSubdomainsFlagValue and DataFarmUrl~=nil) then
-	saveUrlBase = DataFarmUrl
-end
 
 if saveUrlBase~=nil then
 	game:SetServerSaveUrl(saveUrlBase .. "/Data/AutoSave.ashx?assetId=" .. PlaceId)

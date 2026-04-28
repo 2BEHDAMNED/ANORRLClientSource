@@ -212,7 +212,7 @@ std::string formatUrl(const std::string& formatString, int universeId, QVariant 
 	const QString baseUrl = RobloxSettings::getBaseURL();
 	const std::string stdBaseUrl = baseUrl.toStdString();
 	const QString apiBaseUrl = QString::fromStdString(ContentProvider::getUnsecureApiBaseUrl(stdBaseUrl));
-	const QString dataBaseUrl = QString::fromStdString(ReplaceTopSubdomain(stdBaseUrl, "data"));
+	const QString dataBaseUrl = QString::fromStdString(stdBaseUrl);
 
 	return QString::fromStdString(formatString)
 		.replace("%WEB_BASE%", baseUrl)

@@ -25,7 +25,7 @@ local HEALTH_GREEN_COLOR = Color3.new(164/255, 69/255, 222/255)
 
 local HEALTH_PERCANTAGE_FOR_OVERLAY = 5 / 100
 
-local HURT_OVERLAY_IMAGE = "http://arl.lambda.cam/asset/?id=3654"
+local HURT_OVERLAY_IMAGE = "http://anorrl.lambda.cam/asset/?id=3654"
 
 local DEBOUNCE_TIME = 0.25
 

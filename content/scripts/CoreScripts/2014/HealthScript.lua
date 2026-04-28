@@ -37,7 +37,7 @@ local characterAddedConnection = nil
 local greenBarImage = "arlasset://textures/ui/Health-BKG-Center.png"
 local greenBarImageLeft = "arlasset://textures/ui/Health-BKG-Left-Cap.png"
 local greenBarImageRight = "arlasset://textures/ui/Health-BKG-Right-Cap.png"
-local hurtOverlayImage = "http://arl.lambda.cam/asset/?id=34854607"
+local hurtOverlayImage = "http://anorrl.lambda.cam/asset/?id=34854607"
 
 Game:GetService("ContentProvider"):Preload(greenBarImage)
 Game:GetService("ContentProvider"):Preload(hurtOverlayImage)

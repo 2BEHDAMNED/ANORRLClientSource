@@ -717,7 +717,7 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
 	{
 		// Bootstrapper will wait for this event, to make sure that app was started
 		ATL::CEvent anorrlStartedEvent;
-		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/anorrlStartedEvent"))
+		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "anorrl.lambda.cam/anorrlStartedEvent"))
 		{
 			anorrlStartedEvent.Set();
 		}
@@ -1266,7 +1266,7 @@ void Application::waitForShowWindow(int delay)
 
 		// Bootstrapper will wait for this event, to make sure that app was started
 		ATL::CEvent anorrlStartedEvent;
-		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "arl.lambda.cam/anorrlStartedEvent"))
+		if (anorrlStartedEvent.Open(EVENT_MODIFY_STATE, FALSE, "anorrl.lambda.cam/anorrlStartedEvent"))
 		{
 			anorrlStartedEvent.Set();
 		}
@@ -1301,11 +1301,11 @@ void Application::validateBootstrapperVersion()
 			std::string installHost;
 			std::string baseUrl = GetBaseURL();
 
-			pos = baseUrl.find("arl");
+			pos = baseUrl.find("anorrl");
 			if (pos == std::string::npos)
 				return;
 
-			// from arl.lambda.cam or www.gametest1.robloxlabs.com to setup.roblox.com or setup.gametest1.robloxlabs.com, etc...
+			// from anorrl.lambda.cam or www.gametest1.robloxlabs.com to setup.roblox.com or setup.gametest1.robloxlabs.com, etc...
 			installHost = "http://setup" + baseUrl.substr(pos+3);
 
 			{

@@ -1,4 +1,4 @@
-<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://arl.lambda.cam/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://anorrl.lambda.cam/roblox.xsd" version="4">
   <Item class="ReflectionMetadataClasses">
     <Properties></Properties>
     <Item class="ReflectionMetadataClass">

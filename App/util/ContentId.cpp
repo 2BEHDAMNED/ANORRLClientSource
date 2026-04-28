@@ -17,8 +17,6 @@
 
 #include "util/URL.h"
 
-DYNAMIC_FASTFLAGVARIABLE(UrlReconstructToAssetGame, false);
-DYNAMIC_FASTFLAGVARIABLE(UrlReconstructToAssetGameSecure, false);
 DYNAMIC_FASTFLAGVARIABLE(UrlReconstructRejectInvalidSchemes, false);
 
 namespace
@@ -157,7 +155,7 @@ namespace ARL
 	{
 		boost::scoped_array<char> url(new char[id.length()+1]);
 
-		// remove any spaces since HTParse stops parsing at the first space and we need to handle "http://arl.lambda.cam/asset/?id= 1818"
+		// remove any spaces since HTParse stops parsing at the first space and we need to handle "http://anorrl.lambda.cam/asset/?id= 1818"
 		char* urlIter = url.get();
 		for (size_t i = 0; i < id.length(); ++i)
 		{
@@ -203,43 +201,16 @@ namespace ARL
             {
                 if (parsed.pathEqualsCaseInsensitive(paths[i]))
                 {
-                    if (DFFlag::UrlReconstructToAssetGame)
+                    if (parsed.isSubdomainOf(testsite_domain))
                     {
-                        // Allow assets from prod to be used on test sites
-                        if (baseUrlParsed.isSubdomainOf(testsite_domain)
-                            && !parsed.isSubdomainOf(testsite_domain))
-                        {
-                            host = "arl.lambda.cam";
-                        }
-                        else
-                        {
-                            scheme = baseUrlParsed.scheme();
-                            host = baseUrlParsed.host();
-                            
-                            if (boost::starts_with(host, "arl."))
-                            {
-                                host.replace(0, 3, "arl");
-                            }
-                        }
-
-                        if (DFFlag::UrlReconstructToAssetGameSecure)
-                        {
-                            scheme = "https";
-                        }
+                        scheme = baseUrlParsed.scheme();
+                        host = baseUrlParsed.host();
+                        path = baseUrlParsed.path() + path;
                     }
                     else
                     {
-                        if (parsed.isSubdomainOf(testsite_domain))
-                        {
-                            scheme = baseUrlParsed.scheme();
-                            host = baseUrlParsed.host();
-                            path = baseUrlParsed.path() + path;
-                        }
-                        else
-                        {
-                            scheme = "http";
-                            host = "arl.lambda.cam";
-                        }
+                        scheme = "http";
+                        host = "anorrl.lambda.cam";
                     }
 
                     id = ARL::Url::fromComponents(scheme, host, path, parsed.query(), parsed.fragment()).asString();
@@ -280,38 +251,12 @@ namespace ARL
             {
                 static const char* domain = ".robloxlabs.com";
 
-                if (DFFlag::UrlReconstructToAssetGame)
-                {
-                    // Allow assets from prod to be used on test sites
-                    if (baseUrl.find(domain) != std::string::npos && host.find(domain) == std::string::npos)
-                        id = "http://arl.lambda.cam/" + path;
-                    else
-                        id = baseUrl + (baseUrl[baseUrl.size()-1] != '/' ? "/" : "") + path;
-
-                    if (DFFlag::UrlReconstructToAssetGameSecure)
-                    {
-                        // Note that we rewrite both HTTP and HTTPS to use HTTPS since web team wants to do HTTPS-exclusive calls
-                        if (boost::starts_with(id, "http://arl."))
-                            id = "https://assetgame." + id.substr(11);
-                        else if (boost::starts_with(id, "https://arl."))
-                            id = "https://assetgame." + id.substr(12);
-                    }
-                    else
-                    {
-                        if (boost::starts_with(id, "http://arl."))
-                            id = "http://assetgame." + id.substr(11);
-                        else if (boost::starts_with(id, "https://arl."))
-                            id = "https://assetgame." + id.substr(12);
-                    }
-                }
+                size_t robloxLabsPos = host.find(domain);
+                if (robloxLabsPos != std::string::npos)
+                    id = baseUrl + "/" + path;
                 else
-                {
-                    size_t robloxLabsPos = host.find(domain);
-                    if (robloxLabsPos != std::string::npos)
-                        id = baseUrl + "/" + path;
-                    else
-                        id = "http://arl.lambda.cam/" + path;
-                }
+                    id = "http://anorrl.lambda.cam/" + path;
+                
 
                 return true;
             }

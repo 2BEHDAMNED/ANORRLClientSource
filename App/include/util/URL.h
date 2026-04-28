@@ -87,7 +87,7 @@ public:
     }
 
     // Check whether the current host() is a subdomain of provided domain name.
-    // - "arl.lambda.cam" is a subdomain of "lambda.cam"
+    // - "anorrl.lambda.cam" is a subdomain of "lambda.cam"
     // - "lambda.cam" is a subdomain of "lambda.cam"
     // - "notlambda.cam" is not a subdomain of "lambda.cam"
     // Domain names are case insensitive
