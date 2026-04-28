@@ -974,7 +974,6 @@ void PublishToRobloxAsVerb::doIt(ARL::IDataState*)
 		initDialog();
 	else
 	{
-		// "http://anorrl.lambda.cam/IDE/Upload.aspx"
 		QString initialUrl = QString("%1/IDE/Upload.aspx").arg(RobloxSettings::getBaseURL());
 
 		if (!m_dlg)
@@ -1141,7 +1140,6 @@ void PublishSelectionToRobloxVerb::doIt(ARL::IDataState*)
 		}
 	}
 
-	// "http://anorrl.lambda.cam/UI/Save.aspx"
 	QString initialUrl;
 	if(isScript)
 		initialUrl = QString("%1/UI/Save.aspx?type=Lua").arg(RobloxSettings::getBaseURL());
@@ -1956,15 +1954,6 @@ void ScreenshotVerb::showPostImageWebDialog()
     if (!m_spDataModel)
         return;
 
-	/*QString url = QString("%1/UploadMedia/PostImage.aspx?from=client&rand=%2&seostr=%3&filename=%4").arg(RobloxSettings::getBaseURL())
-																									.arg(rand())
-																									.arg(getSEOStr())
-																									.arg(m_fileToUpload);
-
-	WebDialog *pWebDialog = new WebDialog(&UpdateUIManager::Instance().getMainWindow(), url, m_spDataModel.get());
-	pWebDialog->exec();
-	pWebDialog->deleteLater();*/
-
 	UpdateUIManager::Instance().updateToolBars();
 }
 
@@ -2152,15 +2141,6 @@ void RecordToggleVerb::doIt(ARL::IDataState*)
 
 void RecordToggleVerb::uploadVideo()
 {
-	/*char n[16];
-	itoa(rand(), n, 10);
-	QString url = QString("%1/UploadMedia/UploadVideo.aspx?from=client&rand=").arg(RobloxSettings::getBaseURL());
-	url.append(n);
-
-	WebDialog *pWebDialog = new WebDialog(&UpdateUIManager::Instance().getMainWindow(), url, m_pDataModel);
-	pWebDialog->exec();
-	pWebDialog->deleteLater();*/
-
 	m_bIsBusy = false;
 	UpdateUIManager::Instance().updateToolBars();
 }

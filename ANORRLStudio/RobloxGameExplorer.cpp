@@ -2695,7 +2695,7 @@ void RobloxGameExplorer::badgesContextMenuHandler(const QPoint& point, EntityPro
 	if (result == configureAction)
 	{
 		openAndFocusConfigureDoc(
-			formatUrl("%WEB_BASE%/My/Item.aspx?ID=%ITEM_ID%", currentGameId, badgeId));
+			formatUrl("%WEB_BASE%/edit?id=%ITEM_ID%", currentGameId, badgeId));
 	}
 	else if (FFlag::GameExplorerCopyId && copyIdAction && result == copyIdAction)
 	{
@@ -2731,7 +2731,7 @@ void RobloxGameExplorer::badgesPlaceContextMenuHandler(const QPoint& point, Enti
 		else
 		{
 			openAndFocusConfigureDoc(
-				formatUrl("%WEB_BASE%/My/NewBadge.aspx?targetID=%ITEM_ID%", currentGameId, placeId));
+				formatUrl("%WEB_BASE%/create/%ITEM_ID%/badge", currentGameId, placeId));
 		}
 	}
 }

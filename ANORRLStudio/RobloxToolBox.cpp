@@ -83,7 +83,7 @@ void RobloxToolBox::setupWebView(QWidget *wrapperWidget)
 
 	connect(m_pWebView->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(initJavascript())); 
 
-	m_urlString = QString("%1/IDE/ClientToolbox.aspx").arg(RobloxSettings::getBaseURL());
+	m_urlString = QString("%1/ide/toolbox").arg(RobloxSettings::getBaseURL());
 
 	connect(&AuthenticationHelper::Instance(), SIGNAL(authenticationChanged(bool)), this, SLOT(onAuthenticationChanged(bool)));
 }
