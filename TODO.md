@@ -4,4 +4,7 @@
 
 - Fix font renderer disappearing when window is resized/minimised.
 - Swap QT browser to webengine (chromium)
-- Added webframes (BROWSER? IN FRAMES??)
+- voicechatservice (MAYBE)
+- more post effects (atmosphere, sunrays etc)
+- fix seats because uhm they're bitch as fuck!
+- clean up discordrpcservice a little bit more possibly
