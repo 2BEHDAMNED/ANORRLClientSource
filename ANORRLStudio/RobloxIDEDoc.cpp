@@ -3108,6 +3108,8 @@ void RobloxIDEDoc::closePlayDataModel()
         if (RobloxDocManager::Instance().getCurrentDoc() != this)
             RobloxDocManager::Instance().getCurrentDoc()->activate();
     }
+
+	m_pMainWindow->updateDiscordRPC();
 }
 
 void RobloxIDEDoc::onIdeRun(bool play)
@@ -3189,6 +3191,8 @@ void RobloxIDEDoc::onIdeReset()
 		ARL::DataModel::LegacyLock lock(dataModel, ARL::DataModelJob::Write);
 		dataModel->create<ARL::RunService>()->stop();
 		dataModel->create<ARL::ChangeHistoryService>()->reset();
+
+		m_pMainWindow->updateDiscordRPC();
 	}
 
 	updateOnSimulationStateChange(false);

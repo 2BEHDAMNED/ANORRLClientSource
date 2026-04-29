@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "RobloxStudioVersion.h"
+#include "ANORRLStudioVersion.h"
 "IDI_ICON1"             ICON                    "images/ANORRLStudio.ico"
 
 VS_VERSION_INFO VERSIONINFO

@@ -14,14 +14,16 @@ namespace ARL {
 	{
 	private:
 		typedef DescribedCreatable<DiscordRPCService, Instance, sDiscordRPCService, Reflection::ClassDescriptor::INTERNAL_LOCAL> Super;
+		std::string state;
+		std::string details;
 	public:
 		DiscordRPCService();
 
 		void setState(std::string state);
 		void setDetails(std::string details);
-		void setStartTimestamp(int64_t timestamp);
-		void setEndTimestamp(int64_t timestamp);
 
+		std::string getState() { return state; }
+		std::string getDetails() { return details; }
 
 		/*
 		int64_t startTimestamp;

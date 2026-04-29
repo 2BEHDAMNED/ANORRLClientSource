@@ -64,7 +64,7 @@
 #include "CountersClient.h"
 #include "FastLog.h"
 #include "SharedLauncher.h"
-#include "RobloxStudioVersion.h"
+#include "ANORRLStudioVersion.h"
 #include "RobloxQuickAccessConfig.h"
 #include "RenderSettingsItem.h"
 #include "ANORRLServicesTools.h"
@@ -2549,10 +2549,30 @@ void RobloxMainWindow::updateWindowTitle()
 	// if no document or we're in basic build mode just use the simple title
     if ( !pDoc || m_BuildMode == BM_BASIC )
         setWindowTitle(sWindow_Title);
-    else
-    {
+	else
+	{
+		updateDiscordRPC();
+
+		setWindowTitle(pDoc->windowTitle() + " - " + QString(sWindow_Title));
+    }
+}
+
+void RobloxMainWindow::updateDiscordRPC()
+{
+	IRobloxDoc* pDoc = RobloxDocManager::Instance().getCurrentDoc();
+
+	bool discord = true;
+	if (IRobloxDoc* playDoc = RobloxDocManager::Instance().getPlayDoc())
+	{
+		if (RobloxIDEDoc* ide = dynamic_cast<RobloxIDEDoc*>(playDoc)) {
+			discord = !ide->isPlaySolo() && !ide->isSimulating();
+		}
+	}
+
+	if (discord)
+	{
 		std::string docTypeString = "";
-		
+
 		switch (pDoc->docType()) {
 		case IRobloxDoc::ARLDocType::BROWSER:
 			docTypeString = "Browsing";
@@ -2568,9 +2588,19 @@ void RobloxMainWindow::updateWindowTitle()
 			break;
 		}
 
-		ARL::DiscordHandler::SetDetails(docTypeString, pDoc->displayName().toStdString());
-		setWindowTitle(pDoc->windowTitle() + " - " + QString(sWindow_Title));
-    }
+		if (IRobloxDoc* playDoc = RobloxDocManager::Instance().getPlayDoc())
+		{
+			if (RobloxIDEDoc* ide = dynamic_cast<RobloxIDEDoc*>(playDoc)) {
+				if (ide->isCloudEditSession())
+					docTypeString = "Cloud Editing!";
+			}
+		}
+
+		//ARL::StandardOut::singleton()->printf(ARL::MESSAGE_INFO, docTypeString.c_str());
+
+		ARL::DiscordHandler::SetDetails(pDoc->displayName().toStdString());
+		ARL::DiscordHandler::SetState(docTypeString);
+	}
 }
 
 /**
@@ -2591,7 +2621,6 @@ QString RobloxMainWindow::getDialogTitle() const
  */
 void RobloxMainWindow::onMinuteTimer()
 {
-	ARL::DiscordHandler::Callback(); // PERFECT I THINK.
 	// prevent re-entrancy
     static bool processing = false;
     if ( processing )

@@ -11,13 +11,13 @@ const char* const ARL::sPostEffect = "PostEffect";
 using namespace ARL;
 
 REFLECTION_BEGIN();
-const Reflection::PropDescriptor<PostEffect, bool> prop_Enabled("Enabled", category_State, &PostEffect::isEnabled, &PostEffect::setIsEnabled, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
-const Reflection::PropDescriptor<BlurEffect, float> prop_Size("Size", category_State, &BlurEffect::getSize, &BlurEffect::setSize, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
+const Reflection::PropDescriptor<PostEffect, bool> prop_Enabled("Enabled", category_State, &PostEffect::isEnabled, &PostEffect::setIsEnabled, Reflection::PropertyDescriptor::STANDARD);
+const Reflection::PropDescriptor<BlurEffect, float> prop_Size("Size", category_State, &BlurEffect::getSize, &BlurEffect::setSize, Reflection::PropertyDescriptor::STANDARD);
 
-const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Brightness("Brightness", category_State, &ColorCorrectionEffect::getBrightness, &ColorCorrectionEffect::setBrightness, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
-const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Contrast("Contrast", category_State, &ColorCorrectionEffect::getContrast, &ColorCorrectionEffect::setContrast, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
-const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Saturation("Saturation", category_State, &ColorCorrectionEffect::getSaturation, &ColorCorrectionEffect::setSaturation, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
-const Reflection::PropDescriptor<ColorCorrectionEffect, G3D::Color3> prop_TintColor("TintColor", category_State, &ColorCorrectionEffect::getTintColor, &ColorCorrectionEffect::setTintColor, Reflection::PropertyDescriptor::STANDARD_NO_REPLICATE);
+const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Brightness("Brightness", category_State, &ColorCorrectionEffect::getBrightness, &ColorCorrectionEffect::setBrightness, Reflection::PropertyDescriptor::STANDARD);
+const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Contrast("Contrast", category_State, &ColorCorrectionEffect::getContrast, &ColorCorrectionEffect::setContrast, Reflection::PropertyDescriptor::STANDARD);
+const Reflection::PropDescriptor<ColorCorrectionEffect, float> prop_Saturation("Saturation", category_State, &ColorCorrectionEffect::getSaturation, &ColorCorrectionEffect::setSaturation, Reflection::PropertyDescriptor::STANDARD);
+const Reflection::PropDescriptor<ColorCorrectionEffect, G3D::Color3> prop_TintColor("TintColor", category_State, &ColorCorrectionEffect::getTintColor, &ColorCorrectionEffect::setTintColor, Reflection::PropertyDescriptor::STANDARD);
 REFLECTION_END();
 
 PostEffect::PostEffect()

@@ -85,9 +85,9 @@ class SeatImpl : public ActionStation<Base>
 
 			if (DFFlag::FixAnchoredSeatingPosition){
 				//If the seat is anchored the weld will not move the torso. To fix this, we move the torso before welding. (Again, note 0.5 for leg room)
-				//root->setCoordinateFrame(this->getPartPrimitive()->getCoordinateFrame() * CoordinateFrame(Vector3(0, seatOffset + torsoOffset + 0.5f, 0)));
-				PartInstance* part = PartInstance::fromPrimitive(root);
-				part->setCoordinateFrame(this->getPartPrimitive()->getCoordinateFrame() * CoordinateFrame(Vector3(0, seatOffset + torsoOffset + 0.5f, 0)));
+				root->setCoordinateFrame(this->getPartPrimitive()->getCoordinateFrame() * CoordinateFrame(Vector3(0, seatOffset + torsoOffset + 0.5f, 0)));
+				//PartInstance* part = PartInstance::fromPrimitive(root);
+				//part->setCoordinateFrame(this->getPartPrimitive()->getCoordinateFrame() * CoordinateFrame(Vector3(0, seatOffset + torsoOffset + 0.5f, 0)));
 			}
 
 			shared_ptr<Weld> tempWeld = Creatable<Instance>::create<Weld>();

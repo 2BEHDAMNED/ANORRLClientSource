@@ -627,7 +627,7 @@ xcopy /E /Y "$(SolutionDir)BuiltInPlugins" "$(ProjectDir)$(OutDir)BuiltInPlugins
     <Moc Include="RobloxRibbonMainWindow.h" />
     <Moc Include="RobloxQuickAccessConfig.h" />
     <ClInclude Include="RobloxSavingStateDialog.h" />
-    <ClInclude Include="RobloxStudioVersion.h" />
+    <ClInclude Include="ANORRLStudioVersion.h" />
     <Moc Include="RobloxTaskScheduler.h" />
     <Moc Include="RobloxTextOutputWidget.h" />
     <Moc Include="RobloxToolBox.h" />

@@ -1527,6 +1527,7 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="v8datamodel\CSGMesh.cpp" />
     <ClCompile Include="v8datamodel\CustomParticleEmitter.cpp" />
     <ClCompile Include="v8datamodel\DataStore.cpp" />
+    <ClCompile Include="v8datamodel\DiscordRPCService.cpp" />
     <ClCompile Include="v8datamodel\FlyweightService.cpp" />
     <ClCompile Include="v8datamodel\Folder.cpp" />
     <ClCompile Include="v8datamodel\GamepadService.cpp" />
@@ -2165,7 +2166,7 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="util\Region2.cpp" />
     <ClCompile Include="util\Region3.cpp" />
     <ClCompile Include="util\Region3int16.cpp" />
-    <ClCompile Include="..\ClientShared\RobloxServicesTools.cpp" />
+    <ClCompile Include="..\ClientShared\ANORRLServicesTools.cpp" />
     <ClCompile Include="util\RunningAverage.cpp" />
     <ClCompile Include="Util\RunStateOwner.cpp" />
     <ClCompile Include="util\ScriptInformationProvider.cpp" />
@@ -4405,6 +4406,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\v8datamodel\CSGMesh.h" />
     <ClInclude Include="include\v8datamodel\CustomParticleEmitter.h" />
     <ClInclude Include="include\v8datamodel\DataStore.h" />
+    <ClInclude Include="include\v8datamodel\DiscordRPCService.h" />
     <ClInclude Include="include\v8datamodel\FlyweightService.h" />
     <ClInclude Include="include\v8datamodel\Folder.h" />
     <ClInclude Include="include\v8datamodel\GamepadService.h" />
@@ -4773,7 +4775,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\util\Region2.h" />
     <ClInclude Include="include\util\Region3.h" />
     <ClInclude Include="include\util\Region3int16.h" />
-    <ClInclude Include="..\ClientShared\RobloxServicesTools.h" />
+    <ClInclude Include="..\ClientShared\ANORRLServicesTools.h" />
     <ClInclude Include="include\util\RunningAverage.h" />
     <ClInclude Include="include\Util\RunStateOwner.h" />
     <ClInclude Include="include\util\ScopedAssign.h" />

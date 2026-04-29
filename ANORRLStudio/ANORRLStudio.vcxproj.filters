@@ -686,9 +686,6 @@
     <ClInclude Include="..\ClientBase\RenderSettingsItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RobloxStudioVersion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -774,6 +771,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ui_ARLMainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ANORRLStudioVersion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

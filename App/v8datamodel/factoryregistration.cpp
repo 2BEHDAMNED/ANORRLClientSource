@@ -221,6 +221,7 @@
 #include "v8datamodel/ColorSequence.h"
 
 #include "v8datamodel/PostEffect.h"
+#include "v8datamodel/DiscordRPCService.h"
 
 using namespace ARL;
 
@@ -571,6 +572,7 @@ ARL_REGISTER_CLASS(HapticService);
 ARL_REGISTER_CLASS(PostEffect);
 ARL_REGISTER_CLASS(BlurEffect);
 ARL_REGISTER_CLASS(ColorCorrectionEffect);
+ARL_REGISTER_CLASS(DiscordRPCService);
 
 // Xbox
 #if defined(ARL_PLATFORM_DURANGO)

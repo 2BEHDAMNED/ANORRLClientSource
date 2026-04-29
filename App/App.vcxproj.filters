@@ -1019,7 +1019,7 @@
     <ClCompile Include="util\Region3int16.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="..\ClientShared\RobloxServicesTools.cpp">
+    <ClCompile Include="..\ClientShared\ANORRLServicesTools.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="util\RunningAverage.cpp">
@@ -1788,6 +1788,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="v8datamodel\PostEffect.cpp">
+      <Filter>Source Files\V8DataModel</Filter>
+    </ClCompile>
+    <ClCompile Include="v8datamodel\DiscordRPCService.cpp">
       <Filter>Source Files\V8DataModel</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2692,7 +2695,7 @@
     <ClInclude Include="include\util\Region3int16.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="..\ClientShared\RobloxServicesTools.h">
+    <ClInclude Include="..\ClientShared\ANORRLServicesTools.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="include\util\RunningAverage.h">
@@ -3677,6 +3680,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\v8datamodel\PostEffect.h">
+      <Filter>Header Files\V8DataModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\v8datamodel\DiscordRPCService.h">
       <Filter>Header Files\V8DataModel</Filter>
     </ClInclude>
   </ItemGroup>

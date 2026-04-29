@@ -143,6 +143,7 @@ public:
         const QString&          script = "" );
 
     void updateWindowTitle();
+	void updateDiscordRPC();
 	void updateRecentFilesList(const QStringList& files);
 	void updateInternalWidgetsState(QAction* pAction, bool enabledState, bool checkedState);
 

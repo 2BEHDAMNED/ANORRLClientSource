@@ -493,7 +493,7 @@ namespace ARL
 	{
 		if( !ARL::Http::isRobloxSite(url.c_str()) )
 		{
-			StandardOut::singleton()->print(MESSAGE_WARNING, "GuiService::OpenBrowserWindow() was called on non-Roblox url.");
+			StandardOut::singleton()->print(MESSAGE_WARNING, "GuiService::OpenBrowserWindow() was called on non-ANORRL url.");
 			return;
 		}
 		if(!ARL::Network::Players::frontendProcessing(this))

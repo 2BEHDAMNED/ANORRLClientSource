@@ -23,7 +23,7 @@
 #include "RbxWorkspace.h"
 
 #ifdef _WIN32
-    #include "RobloxStudioVersion.h"
+    #include "ANORRLStudioVersion.h"
 #endif
 
 AppSettings& AppSettings::instance()

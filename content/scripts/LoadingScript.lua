@@ -6,7 +6,7 @@
 --[[
 	TODO:
 	- add thumbnail in the middle
-	- dark/light mode feature in settings
+	- add DiscordRPCService here
 ]]
 
 -- Constants
@@ -17,6 +17,7 @@ local UIS = game:GetService('UserInputService')
 local CP = game:GetService('ContentProvider')
 local guiService = game:GetService("GuiService")
 local ContextActionService = game:GetService('ContextActionService')
+local discord = game:GetService("DiscordRPCService")
 
 local startTime = tick()
 
@@ -497,6 +498,7 @@ local lastBrickCount = 0
 renderSteppedConnection = game:GetService("RunService").RenderStepped:connect(function()
 	if not currScreenGui then return end
 	if not currScreenGui:FindFirstChild("BlackFrame") then return end
+	currScreenGui.IgnoreGuiInset = true
 
 	if setVerb then
 		currScreenGui.BlackFrame.CloseButton:SetVerb("Exit")
@@ -578,6 +580,9 @@ renderSteppedConnection = game:GetService("RunService").RenderStepped:connect(fu
 			end
 		end
 	end
+	
+	discord:SetDetails("Playing: ", placeLabel.Text)
+	discord:SetState("By: ", creatorLabel.Text)
 
 	if not isTenFootInterface then
 		if currentTime - startTime > 5 and currScreenGui.BlackFrame.CloseButton.ImageTransparency > 0 then
