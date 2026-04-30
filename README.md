@@ -12,6 +12,7 @@ Thanks to all these people for the contributions made to this project (of the cl
 - gammaguy for studio splash 19
 - dosth for studio splash 34
 - platos for studio splash 37
+- glitchysavvy for studio splash 38
 
 The rest were either made by me and/or power!
 
