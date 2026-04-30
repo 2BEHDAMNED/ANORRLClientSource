@@ -27,8 +27,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,8,25
- PRODUCTVERSION 1,2,8,25
+ FILEVERSION 1,2,8,26
+ PRODUCTVERSION 1,2,8,26
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -47,13 +47,13 @@ BEGIN
             VALUE "FileDescription", "ANORRL Launcher Plugin"
             VALUE "FileExtents", "launcher"
             VALUE "FileOpenName", "ANORRL Launcher Plugin"
-            VALUE "FileVersion", "1, 2, 8, 25"
+            VALUE "FileVersion", "1, 2, 8, 26"
             VALUE "InternalName", "ANORRLLauncherPlugin"
             VALUE "LegalCopyright", "(c) 2026 GraceRBLX.  All rights reserved."
             VALUE "MIMEType", "application/x-vnd-anorrl-launcher"
             VALUE "OriginalFilename", "NPANORRLProxy.dll"
             VALUE "ProductName", "ANORRL Launcher Plugin"
-            VALUE "ProductVersion", "1, 2, 8, 25"
+            VALUE "ProductVersion", "1, 2, 8, 26"
         END
     END
     BLOCK "VarFileInfo"

@@ -12,8 +12,8 @@ local buttonVector = {}
 local buttonScreenGui = nil
 local buttonFrame = nil
 
-local ContextDownImage = "http://anorrl.lambda.cam/asset/?id=97166756"
-local ContextUpImage = "http://anorrl.lambda.cam/asset/?id=97166444"
+local ContextDownImage = "arlassetid://97166756"
+local ContextUpImage = "arlassetid://97166444"
 
 local oldTouches = {}
 

@@ -735,9 +735,6 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
 	if (startBootstrapperValidationThread)
 		validateBootstrapperVersionThread.reset(new boost::thread(boost::bind(&Application::validateBootstrapperVersion, this)));
 
-	ARL::DiscordHandler::Initialise("1456740539390230609");
-	ARL::DiscordHandler::SetDetails("", "Playing a game");
-
 	return true;
 }
 

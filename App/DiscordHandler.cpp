@@ -9,7 +9,6 @@ namespace ARL {
 	std::string DiscordHandler::details = std::string("[[ details here ]]");
 
 	void DiscordHandler::SetDetails(std::string value) {
-		//ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "(SetDetails) Initialised -> %s", (initialized ? "true" : "false"));
 		if (!initialized)
 			return;
 
@@ -19,7 +18,6 @@ namespace ARL {
 	}
 
 	void DiscordHandler::SetState(std::string value) {
-		//ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "(SetState) Initialised -> %s", (initialized ? "true" : "false"));
 		if (!initialized)
 			return;
 
@@ -33,11 +31,12 @@ namespace ARL {
 		if (initialized)
 			return;
 
+#ifndef ARL_RCC_SECURITY
 		DiscordEventHandlers handlers;
 		memset(&handlers, 0, sizeof(handlers));
 		
 		Discord_Initialize(applicationID, &handlers, 0, NULL);
-
+#endif
 		// This is really unsafe but works anyway
 		initialized = true;
 		UpdateActivity();
@@ -45,11 +44,10 @@ namespace ARL {
 
 	void DiscordHandler::UpdateActivity()
 	{
-		//ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "(UpdateActivity) Initialised -> %s", (initialized ? "true" : "false"));
-
 		if (!initialized)
 			return;
 
+#ifndef ARL_RCC_SECURITY
 		DiscordRichPresence discordPresence;
 		memset(&discordPresence, 0, sizeof(discordPresence));
 		discordPresence.state = state.c_str();
@@ -57,6 +55,7 @@ namespace ARL {
 		discordPresence.startTimestamp = std::time(0);
 		discordPresence.instance = 1;
 		Discord_UpdatePresence(&discordPresence);
+#endif
 
 		/*discordPresence.endTimestamp = time(0) + 5 * 60;
 		discordPresence.largeImageKey = "canary-large";
@@ -68,10 +67,10 @@ namespace ARL {
 	{
 		if (!initialized)
 			return;
-
+#ifndef ARL_RCC_SECURITY
 		Discord_ClearPresence();
 		Discord_Shutdown();
-
+#endif
 		initialized = false;
 	}
 }

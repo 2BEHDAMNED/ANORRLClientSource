@@ -42,7 +42,7 @@ local renderSteppedConnection = nil
 
 -- user facing images
 local assetUrls = {}
-local assetUrl = "http://anorrl.lambda.cam/Asset/?id=" 
+local assetUrl = "arlassetid://" 
 local errorImageUrl = assetUrl .. "42557901" table.insert(assetUrls, errorImageUrl)
 local buyImageUrl = assetUrl .. "142494143" table.insert(assetUrls,buyImageUrl)
 local cancelButtonImageUrl = assetUrl .. "142494219" table.insert(assetUrls, cancelButtonImageUrl)

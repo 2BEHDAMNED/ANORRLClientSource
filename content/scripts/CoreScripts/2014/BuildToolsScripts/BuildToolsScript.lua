@@ -83,7 +83,7 @@ function showBuildToolsTutorial()
 	local RbxGui = LoadLibrary("RbxGui")
 
 	local frame, showTutorial, dismissTutorial, gotoPage = RbxGui.CreateTutorial("Build", tutorialKey, false)
-	local firstPage = RbxGui.CreateImageTutorialPage(" ", "http://anorrl.lambda.cam/asset/?id=59162193", 359, 296, function() dismissTutorial() end, true)
+	local firstPage = RbxGui.CreateImageTutorialPage(" ", "arlassetid://59162193", 359, 296, function() dismissTutorial() end, true)
 
 	RbxGui.AddTutorialPage(frame, firstPage)
 	frame.Parent = game:GetService("CoreGui"):FindFirstChild("RobloxGui")

@@ -160,6 +160,9 @@ function InfoProvider:LoadAssets()
 			end)
 			if not success then
 				print("LoadingScript->InfoProvider:LoadAssets:", result)
+			else
+				discord:SetDetails("Playing: " .. GameAssetInfo.Name)
+				discord:SetState("By: " .. GameAssetInfo.Creator.Name)
 			end
 		end))
 	end)
@@ -580,9 +583,6 @@ renderSteppedConnection = game:GetService("RunService").RenderStepped:connect(fu
 			end
 		end
 	end
-	
-	discord:SetDetails("Playing: ", placeLabel.Text)
-	discord:SetState("By: ", creatorLabel.Text)
 
 	if not isTenFootInterface then
 		if currentTime - startTime > 5 and currScreenGui.BlackFrame.CloseButton.ImageTransparency > 0 then

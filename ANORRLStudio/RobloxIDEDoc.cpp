@@ -771,7 +771,7 @@ bool RobloxIDEDoc::openStream(const QString& fileName, std::istream* stream, boo
 				}
 				else if (ARL::ContentProvider::isUrl(m_initializationScript.toStdString()))
                 {
-					 if (StudioUtilities::containsEditScript(m_initializationScript))
+					if (StudioUtilities::containsEditScript(m_initializationScript))
                     {
 						// if in EDIT mode, connect with workspaceLoadedSignal, so we can initialize debugger data
                         m_contentDataLoadedConnection = m_EditGame.m_Game->getDataModel()->workspaceLoadedSignal.connect(boost::bind(
@@ -3654,10 +3654,10 @@ void RobloxIDEDoc::onContentDataLoaded()
 	// but it's presence affects the child count in turn resulting in error on getting script from child number
 	QTimer::singleShot(0, this, SLOT(onDelayedInitializeDebuggerData()));
 
-    updateFromPlaceID(getDataModel()->getPlaceID());
+    updateFromPlaceID(getEditDataModel()->getPlaceID());
 
 	QMetaObject::invokeMethod(&UpdateUIManager::Instance().getViewWidget<RobloxGameExplorer>(eDW_GAME_EXPLORER),
-		"openGameFromPlaceId", Qt::QueuedConnection, Q_ARG(int, m_EditGame.m_Game->getDataModel()->getPlaceID()));
+		"openGameFromPlaceId", Qt::QueuedConnection, Q_ARG(int, getEditDataModel()->getPlaceID()));
 
 	searchToolboxByDefaultSearchString();
 }

@@ -36,8 +36,8 @@ const String kANORRLTestSiteHost = "anorrllabs.com";
 
 //const String kANORRLHost = "LocalHost";
 
-const String kMIMEDescription  = "application/x-vnd-anorrl-launcher:.launcher:info@anorrl.com";
-const String kPluginDescriptionString = "<a href=\"http://arl.lambda.cam/\">ANORRLLauncherPlugin</a> plugin.";
+const String kMIMEDescription  = "application/x-vnd-anorrl-launcher:.launcher:info@lambda.cam";
+const String kPluginDescriptionString = "<a href=\"http://anorrl.lambda.cam/\">ANORRLLauncherPlugin</a> plugin.";
 const String kStartComOk = "CoInitialize Ok";
 const String kStartComFail = "CoInitialize fail";
 const String kStopComOk = "CoUninitialize Ok";

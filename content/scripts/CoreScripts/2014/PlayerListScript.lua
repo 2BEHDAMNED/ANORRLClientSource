@@ -97,7 +97,7 @@ end
 function getMembershipTypeIcon(membershipType,playerName)
 	if ADMINS[string.lower(playerName)]~=nil then
 		if ADMINS[string.lower(playerName)] == 1 then
-			return "http://anorrl.lambda.cam/asset/?id=99727663"
+			return "arlassetid://99727663"
 		else
 			return ADMINS[string.lower(playerName)]
 		end
@@ -118,11 +118,11 @@ local function getFriendStatusIcon(friendStatus)
 	if friendStatus == Enum.FriendStatus.Unknown or friendStatus == Enum.FriendStatus.NotFriend then
 		return ""
 	elseif friendStatus == Enum.FriendStatus.Friend then
-		return "http://anorrl.lambda.cam/asset/?id=99749771"
+		return "arlassetid://99749771"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestSent then
-		return "http://anorrl.lambda.cam/asset/?id=99776888"
+		return "arlassetid://99776888"
 	elseif friendStatus == Enum.FriendStatus.FriendRequestReceived then
-		return "http://anorrl.lambda.cam/asset/?id=99776838"
+		return "arlassetid://99776838"
 	else
 		error("Unknown FriendStatus: " .. friendStatus)
 	end
@@ -235,7 +235,7 @@ local HeaderFrame = Obj.Create"Frame"
 	Position = UDim2.new(0,0,0,0),
 	Size = UDim2.new(1, 0, .07, 0),
 	Parent = MainFrame,
-	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=94692054'),
+	MakeBackgroundGuiObj('arlassetid://94692054'),
 }
 	local HeaderFrameHeight = HeaderFrame.Size.Y.Scale
 	local MaximizeButton = Obj.Create"ImageButton"
@@ -486,7 +486,7 @@ local MiddleBGTemplate = Obj.Create"Frame"
 	BackgroundTransparency = 1,
 	Position = UDim2.new(100,0,.07,0),
 	Size = UDim2.new(.5, 0, .025, 0),--UDim2.new(1, 0, .03, 0),
-	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=94692025'),
+	MakeBackgroundGuiObj('arlassetid://94692025'),
 	
 }
 
@@ -521,7 +521,7 @@ local AbuseSettingsFrame = Obj.Create"Frame"
 	Size = UDim2.new(1, 0, 1, 0),
 	Active = true,
 	BackgroundTransparency = 1,
-	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96488767'), -- 96480351'),
+	MakeBackgroundGuiObj('arlassetid://96488767'), -- 96480351'),
 	Obj.Create"TextLabel"
 	{
 		Name = "Title",
@@ -608,7 +608,7 @@ local SubmitReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(.5, - 200, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = false,
-	Image = 'http://anorrl.lambda.cam/asset/?id=96502438', -- 96501119',
+	Image = 'arlassetid://96502438', -- 96501119',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -619,7 +619,7 @@ local CancelReportButton = Obj.Create"ImageButton"
 	Position = UDim2.new(0.5, 50, 1, - 80),
 	Size = UDim2.new(0,150,0,50),
 	AutoButtonColor = true,
-	Image = 'http://anorrl.lambda.cam/asset/?id=96500683',
+	Image = 'arlassetid://96500683',
 	Parent = AbuseSettingsFrame,
 }
 
@@ -658,7 +658,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position=UDim2.new(0.25, 0, 0.300000012, 0),
 	Size=UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96506233'),
+	MakeBackgroundGuiObj('arlassetid://96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -694,7 +694,7 @@ local CalmingAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://anorrl.lambda.cam/asset/?id=96507959',
+		Image = 'arlassetid://96507959',
 	}
 }
 local NormalAbuseBox = Obj.Create'Frame'
@@ -703,7 +703,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 	BackgroundTransparency = 1,
 	Position = UDim2.new(0.25, 0, 0.300000012, 0),
 	Size = UDim2.new(0.5, 0, 0.370000005, 0),
-	MakeBackgroundGuiObj('http://anorrl.lambda.cam/asset/?id=96506233'),
+	MakeBackgroundGuiObj('arlassetid://96506233'),
 	Obj.Create'TextLabel'
 	{
 		Name = 'Header',
@@ -739,7 +739,7 @@ local NormalAbuseBox = Obj.Create'Frame'
 		Position = UDim2.new(0.5, -75, 1, -80),
 		Size = UDim2.new(0,150,0,50),
 		AutoButtonColor = true,
-		Image = 'http://anorrl.lambda.cam/asset/?id=96507959',
+		Image = 'arlassetid://96507959',
 	},
 }
 
@@ -819,7 +819,7 @@ local DefaultEntriesOnScreen = 8
 
 
 for _,i in pairs(Images) do
-	Game:GetService("ContentProvider"):Preload("http://anorrl.lambda.cam/asset/?id="..i)
+	Game:GetService("ContentProvider"):Preload("arlassetid://"..i)
 end
 
  -- ordered array of 'score data', each entry has:
@@ -1098,20 +1098,20 @@ end
 	player		Player to check for rank on
 --]]
 function HighlightMyRank(player,BanPlayerButton,VisitorButton,MemberButton,AdminButton)
-	BanPlayerButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['LightPopupMid']
-	VisitorButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkPopupMid']
-	MemberButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['LightPopupMid']
-	AdminButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkPopupBottom']
+	BanPlayerButton.Image= 'arlassetid://'..Images['LightPopupMid']
+	VisitorButton.Image= 'arlassetid://'..Images['DarkPopupMid']
+	MemberButton.Image= 'arlassetid://'..Images['LightPopupMid']
+	AdminButton.Image= 'arlassetid://'..Images['DarkPopupBottom']
 	
 	local rank=player.PersonalServerRank
 	if rank <= PrivilegeLevel['Banned'] then
-		BanPlayerButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
+		BanPlayerButton.Image='arlassetid://'..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Visitor'] then
-		VisitorButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['DarkBluePopupMid']
+		VisitorButton.Image='arlassetid://'..Images['DarkBluePopupMid']
 	elseif rank <= PrivilegeLevel['Member'] then
-		MemberButton.Image='http://anorrl.lambda.cam/asset/?id='..Images['LightBluePopupMid']
+		MemberButton.Image='arlassetid://'..Images['LightBluePopupMid']
 	elseif rank <= PrivilegeLevel['Admin'] then
-		AdminButton.Image= 'http://anorrl.lambda.cam/asset/?id='..Images['DarkBluePopupBottom']
+		AdminButton.Image= 'arlassetid://'..Images['DarkBluePopupBottom']
 	end
 end
 
@@ -1157,7 +1157,7 @@ end
 function CloseAbuseDialog()
 	AbuseName = nil
 	SubmitReportButton.Active = false
-	SubmitReportButton.Image = 'http://anorrl.lambda.cam/asset/?id=96502438' -- 96501119',
+	SubmitReportButton.Image = 'arlassetid://96502438' -- 96501119',
 	AbuseDescriptionBox:Destroy()
 	CalmingAbuseBox.Parent = nil
 	NormalAbuseBox.Parent = nil
@@ -1174,7 +1174,7 @@ function InitReportAbuse()
 		AbuseName = abuseText 
 		if AbuseName and SelectedPlayer then
 			SubmitReportButton.Active = true
-			SubmitReportButton.Image = 'http://anorrl.lambda.cam/asset/?id=96501119'
+			SubmitReportButton.Image = 'arlassetid://96501119'
 		end
 	end
 	

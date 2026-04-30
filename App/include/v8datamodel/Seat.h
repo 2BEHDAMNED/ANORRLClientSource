@@ -33,7 +33,7 @@ class SeatImpl : public ActionStation<Base>
 						&&  !h->getSit()
 						&&  !h->getDead()
 						&&  !disabled
-						&&	!torso->computeNetworkOwnerIsSomeoneElse()
+						//&&	!torso->computeNetworkOwnerIsSomeoneElse()
 						&&	Workspace::contextInWorkspace(torso)
 						&&	Workspace::contextInWorkspace(this)) {
 						ARLASSERT(h->getTorsoSlow()->getPartPrimitive()->getAssembly() != this->getPartPrimitive()->getAssembly());

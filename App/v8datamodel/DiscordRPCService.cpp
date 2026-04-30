@@ -1,8 +1,10 @@
 #include "stdafx.h"
 
 #include "V8DataModel/DiscordRPCService.h"
-#include "DiscordHandler.h"
 
+#ifndef ARL_RCC_SECURITY
+#include "DiscordHandler.h"
+#endif
 namespace ARL
 {
 	const char* const sDiscordRPCService = "DiscordRPCService";
@@ -16,10 +18,10 @@ namespace ARL
 	DiscordRPCService::DiscordRPCService()
 		:Super()
 	{
+#ifndef ARL_RCC_SECURITY
 #ifdef ARL_STUDIO_BUILD
 		DiscordHandler::Initialise("1456345979635892400");
 #else
-#ifndef ARL_RCC_SECURITY
 		DiscordHandler::Initialise("1456740539390230609");
 #endif
 #endif
@@ -29,16 +31,18 @@ namespace ARL
 	void DiscordRPCService::setState(std::string value) {
 		if (state != value) {
 			state = value;
-			StandardOut::singleton()->printf(MESSAGE_INFO, "Setting DiscordRPCService->state to %s", state.c_str());
+#ifndef ARL_RCC_SECURITY
 			DiscordHandler::SetState(state);
+#endif
 		}
 	}
 
 	void DiscordRPCService::setDetails(std::string value) {
 		if (details != value) {
 			details = value;
-			StandardOut::singleton()->printf(MESSAGE_INFO, "Setting DiscordRPCService->details to %s", details.c_str());
+#ifndef ARL_RCC_SECURITY
 			DiscordHandler::SetDetails(details);
+#endif
 		}
 	}
 }

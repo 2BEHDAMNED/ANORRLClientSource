@@ -302,7 +302,7 @@ Game:GetService("PointsService").PointsAwarded:connect( function(userId, pointsA
 	if userId == Game.Players.LocalPlayer.userId then
 		game:GetService("GuiService"):SendNotification("Points Awarded!",
 			"You received " ..tostring(pointsAwarded) .. " points!",
-			"http://anorrl.lambda.cam/asset?id=155363793",
+			"arlassetid://155363793",
 			5,
 			noOptFunc)
 	end
@@ -313,7 +313,7 @@ Game:GetService("BadgeService").BadgeAwarded:connect( function(message, userId, 
 	if userId == Game.Players.LocalPlayer.userId then
 		game:GetService("GuiService"):SendNotification("Badge Awarded!",
 			message,
-			"http://anorrl.lambda.cam/asset?id=177200377",
+			"arlassetid://177200377",
 			5,
 			noOptFunc)
 	end

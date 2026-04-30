@@ -2,7 +2,9 @@
 
 #include <string>
 
+#ifndef ARL_RCC_SECURITY
 #include "discord_rpc.h"
+#endif
 
 namespace ARL {
 	class DiscordHandler {

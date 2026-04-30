@@ -13,10 +13,10 @@
 // TODO - rename to just "ANORRL Studio"
 static const TCHAR* BootstrapperQTStudioFileName    = _T(STUDIOBOOTSTAPPERNAMEBETA);
 static const TCHAR* ANORRLStudioAppFileName         = _T(STUDIOQTEXENAME);
-static const TCHAR* BootstrapperMutexName           = _T("arl.lambda.cam/bootstrapperQTStudio");
-static const TCHAR* StartANORRLStudioAppMutex       = _T("arl.lambda.cam/startANORRLQTStudioApp");
+static const TCHAR* BootstrapperMutexName           = _T("anorrl.lambda.cam/bootstrapperQTStudio");
+static const TCHAR* StartANORRLStudioAppMutex       = _T("anorrl.lambda.cam/startANORRLQTStudioApp");
 static const TCHAR* FriendlyName                    = _T("ANORRL Studio");
-static const TCHAR* StartEvent                      = _T("arl.lambda.cam/anorrlQTStudioStartedEvent");
+static const TCHAR* StartEvent                      = _T("anorrl.lambda.cam/anorrlQTStudioStartedEvent");
 
 static Bootstrapper* newBootstrapper(HINSTANCE hInstance)
 {

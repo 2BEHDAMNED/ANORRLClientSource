@@ -44,7 +44,7 @@ CurrentLoadout.Parent = gui
 local CLBackground = Instance.new('ImageLabel')						
 CLBackground.Name = 'Background';
 CLBackground.Size = UDim2.new(1.2, 0, 1.2, 0);
-CLBackground.Image = "http://anorrl.lambda.cam/asset/?id=96536002"
+CLBackground.Image = "arlassetid://96536002"
 CLBackground.BackgroundTransparency = 1.0;
 CLBackground.Position = UDim2.new(-0.1, 0, -0.1, 0);
 CLBackground.ZIndex = 0.0;	
@@ -124,7 +124,7 @@ TempSlot.ZIndex = 3.0
 	local HighLight = Instance.new('ImageLabel')
 	HighLight.Name = 'Highlight'
 	HighLight.BackgroundTransparency = 1.0
-	HighLight.Image = 'http://anorrl.lambda.cam/asset/?id=97643886'
+	HighLight.Image = 'arlassetid://97643886'
 	HighLight.Size = UDim2.new(1, 0, 1, 0)	
 	--HighLight.Parent = TempSlot
 	HighLight.Visible = false 
@@ -302,8 +302,8 @@ Backpack.Active = true
 			local XImage = Instance.new("ImageLabel")
 			XImage.RobloxLocked = true
 			XImage.Name = "XImage"
-			game:GetService("ContentProvider"):Preload("http://anorrl.lambda.cam/asset/?id=75547445")
-			XImage.Image = "http://anorrl.lambda.cam/asset/?id=75547445"  --TODO: move to arlasset
+			game:GetService("ContentProvider"):Preload("arlassetid://75547445")
+			XImage.Image = "arlassetid://75547445"  --TODO: move to arlasset
 			XImage.BackgroundTransparency = 1
 			XImage.Position = UDim2.new(-.25,-1,-.25,-1)
 			XImage.Size = UDim2.new(1.5,2,1.5,2)

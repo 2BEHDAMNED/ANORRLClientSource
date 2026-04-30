@@ -25,7 +25,7 @@
     <SccLocalPath>..</SccLocalPath>
     <SccProvider>MSSCCI:Perforce SCM</SccProvider>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>ACCService</ProjectName>
+    <ProjectName>Cloud Compute Service</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'" Label="Configuration">
@@ -143,8 +143,8 @@
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>dxerr9.lib;zlib.lib;libcurl_a.lib;fmod_vc.lib;discord-rpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CONTRIB_PATH)\boost_1_56_0\lib;.\libraries;..\TBB_4_1\lib;..\fmod\win32\lib;.\Mesa-7.8.1\lib;$(CONTRIB_PATH)\SDK\Lib;$(CONTRIB_PATH)\VMProtectWin_2.13;$(CONTRIB_PATH)\windows\x86\zlib\zlib-1.2.8\lib;$(CONTRIB_PATH)\windows\x86\curl\curl-7.43.0\lib;$(CONTRIB_PATH)\discord-rpc-win32-static\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>dxerr9.lib;zlib.lib;libcurl_a.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CONTRIB_PATH)\boost_1_56_0\lib;.\libraries;..\TBB_4_1\lib;..\fmod\win32\lib;.\Mesa-7.8.1\lib;$(CONTRIB_PATH)\SDK\Lib;$(CONTRIB_PATH)\VMProtectWin_2.13;$(CONTRIB_PATH)\windows\x86\zlib\zlib-1.2.8\lib;$(CONTRIB_PATH)\windows\x86\curl\curl-7.43.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>

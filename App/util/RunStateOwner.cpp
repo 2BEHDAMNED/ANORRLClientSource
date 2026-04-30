@@ -20,7 +20,7 @@
 
 DYNAMIC_FASTFLAGVARIABLE(HeartBeatCanRunTwiceFor30Hz, true)
 DYNAMIC_FASTFLAGVARIABLE(PhysicsFPSTimerFix, false)
-DYNAMIC_FASTFLAGVARIABLE(ScriptExecutionContextApi, false)
+DYNAMIC_FASTFLAGVARIABLE(ScriptExecutionContextApi, true)
 LOGGROUP(CyclicExecutiveTiming)
 LOGVARIABLE(HeartBeatFailure, 0)
 LOGVARIABLE(PhysicsStepsPerSecond, 0)

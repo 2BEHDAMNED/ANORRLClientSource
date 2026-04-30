@@ -12,8 +12,8 @@ namespace ARL {
 REFLECTION_BEGIN();
 static const Reflection::PropDescriptor<Seat, bool> propDisabled("Disabled", "Control", &Seat::getDisabled, &Seat::setDisabled);
 static const Reflection::RefPropDescriptor<Seat, Humanoid> propOccupant("Occupant", "Control", &Seat::getOccupant, NULL, Reflection::PropertyDescriptor::SCRIPTING);
-static Reflection::RemoteEventDesc<Seat, void(shared_ptr<Instance>)> event_createSeatWeld(&Seat::createSeatWeldSignal, "RemoteCreateSeatWeld", "humanoid", Security::None, Reflection::RemoteEventCommon::REPLICATE_ONLY,	Reflection::RemoteEventCommon::CLIENT_SERVER);
-static Reflection::RemoteEventDesc<Seat, void()> event_destroySeatWeld(&Seat::destroySeatWeldSignal, "RemoteDestroySeatWeld", Security::None, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
+static Reflection::RemoteEventDesc<Seat, void(shared_ptr<Instance>)> event_createSeatWeld(&Seat::createSeatWeldSignal, "RemoteCreateSeatWeld", "humanoid", Security::None, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::BROADCAST);
+static Reflection::RemoteEventDesc<Seat, void()> event_destroySeatWeld(&Seat::destroySeatWeldSignal, "RemoteDestroySeatWeld", Security::None, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::BROADCAST);
 REFLECTION_END();
 
 const char* const sSeat = "Seat";
@@ -41,17 +41,19 @@ void Seat::createSeatWeld(Humanoid *h)
 			this->debounceTime = Time::now<Time::Fast>();
 		}
 	}
-	
+	ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "createSeatWeld(Humanoid *h)");
 	Super::createSeatWeld(h);
 }
 
 void Seat::findAndDestroySeatWeld()
 {
+	ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "findAndDestroySeatWeld()");
 	event_destroySeatWeld.fireAndReplicateEvent(this);
 }
 
 void Seat::onSeatedChanged(bool seated, Humanoid* humanoid)
 {
+	ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "onSeatedChanged(seated: %s, humanoid)", (seated ? "true" : "false"));
 	if (!seated && humanoid && (humanoid == Humanoid::getLocalHumanoidFromContext(this)))
 	{
 		humanoid->setSit(false);
@@ -60,6 +62,7 @@ void Seat::onSeatedChanged(bool seated, Humanoid* humanoid)
 
 void Seat::setOccupant(Humanoid* value)
 {
+	ARL::StandardOut::singleton()->printf(MESSAGE_INFO, "setOccupant(Humanoid* valueHumanoid* value)");
 	if (occupant.get() != value)
 	{
 		occupant = shared_from(value);

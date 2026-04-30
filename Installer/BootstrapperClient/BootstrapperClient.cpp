@@ -26,8 +26,8 @@
 
 static const TCHAR* BootstrapperFileName    = _T("ANORRLPlayerLauncher.exe");
 static const TCHAR* ANORRLAppFileName		= _T(PLAYEREXENAME);
-static const TCHAR* BootstrapperMutexName   = _T("arl.lambda.cam/bootstrapper");
-static const TCHAR* StartANORRLAppMutex     = _T("arl.lambda.cam/startANORRLApp");
+static const TCHAR* BootstrapperMutexName   = _T("anorrl.lambda.cam/bootstrapper");
+static const TCHAR* StartANORRLAppMutex     = _T("anorrl.lambda.cam/startANORRLApp");
 static const TCHAR* LauncherFileName        = _T("ANORRLProxy.dll");
 static const TCHAR* LauncherFileName64      = _T("ANORRLProxy64.dll");
 static const TCHAR* FriendlyName            = _T("ANORRL");
@@ -702,7 +702,7 @@ void BootstrapperClient::StartANORRLApp(bool fromInstall)
 	message("Starting ANORRL...");
 
 	LOG_ENTRY("Creating event");
-	CEvent anorrlStartedEvent(NULL, TRUE, FALSE, _T("arl.lambda.cam/anorrlStartedEvent"));
+	CEvent anorrlStartedEvent(NULL, TRUE, FALSE, _T("anorrl.lambda.cam/anorrlStartedEvent"));
 	LOG_ENTRY("Resetting event");
 	anorrlStartedEvent.Reset();
 

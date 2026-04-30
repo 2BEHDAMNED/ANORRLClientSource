@@ -602,7 +602,7 @@ function Chat:CreateTouchButton()
 								Size = UDim2.new(1, 0, 1, 0);
 								Position = UDim2.new(0, 0, 0, 0);
 								BackgroundTransparency = 1.0;
-								Image = 'http://anorrl.lambda.cam/asset/?id=97078724'
+								Image = 'arlassetid://97078724'
 							};
 
 						}
@@ -710,7 +710,7 @@ function Chat:CreateGui()
 					Gui.Create'ImageLabel'
 					{
 						Name = 'Background';
-						Image = 'http://anorrl.lambda.cam/asset/?id=97120937'; --96551212';
+						Image = 'arlassetid://97120937'; --96551212';
 						Size = UDim2.new(1.3, 0, 1.64, 0);
 						Position = UDim2.new(0, 0, 0, 0);
 						BackgroundTransparency = 1.0;								
