@@ -234,8 +234,10 @@ namespace ARL { namespace Lua {
 
 	private:
 		static int newColor3(lua_State *L);
-		static int fromRGBColor3(lua_State* L);
-		static int fromHexColor3(lua_State* L);
+		static int newColor3FromRGB(lua_State* L);
+		static int color3ToHSV(lua_State* L);
+		static int newColor3FromHSV(lua_State* L);
+		static int newColor3FromHex(lua_State* L);
 		static const luaL_reg classLibrary[];
 	};
 

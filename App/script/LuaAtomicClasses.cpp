@@ -84,11 +84,13 @@ const char* Bridge<G3D::Color3>::className("Color3");
 
 const luaL_reg Color3Bridge::classLibrary[] = {
 	{"new", newColor3},
-	{"fromRGB", fromRGBColor3},
-	{"fromHex", fromHexColor3},
+	{"fromRGB", newColor3FromRGB},
+	{"toHSV", color3ToHSV},
+	{"fromHSV", newColor3FromHSV},
+	{"fromHex", newColor3FromHex},
 	{NULL, NULL}
 };
-    
+
 void Color3Bridge::registerClassLibrary (lua_State *L) {
     
 	// Register the "new" function
@@ -101,7 +103,7 @@ void Color3Bridge::pushColor3(lua_State *L, const G3D::Color3& color)
 {
     pushNewObject(L, color);
 }
-    
+
 int Color3Bridge::newColor3(lua_State *L)
 {
 	float color[3];
@@ -116,7 +118,7 @@ int Color3Bridge::newColor3(lua_State *L)
 	return 1;
 }
 
-int Color3Bridge::fromRGBColor3(lua_State* L)
+int Color3Bridge::newColor3FromRGB(lua_State* L)
 {
 	float color[3];
 
@@ -130,11 +132,45 @@ int Color3Bridge::fromRGBColor3(lua_State* L)
 	return 1;
 }
 
-int Color3Bridge::fromHexColor3(lua_State* L)
+int Color3Bridge::color3ToHSV(lua_State* L)
+{
+	if (lua_gettop(L) < 1) ARL::runtime_error("Color3.toHSV requires a Color3 argument");
+
+	G3D::Color3 rgb = Color3Bridge::getObject(L, 1);
+	Vector3 hsv = G3D::Color3::toHSV(rgb);
+
+	lua_pushnumber(L, hsv.x);
+	lua_pushnumber(L, hsv.y);
+	lua_pushnumber(L, hsv.z);
+	return 3;
+}
+
+int Color3Bridge::newColor3FromHSV(lua_State* L)
 {
 	float color[3];
 
-	const char* s = safe_lua_tostring(L, 1);
+	if (lua_gettop(L) < 3) throw ARL::runtime_error("Color3.fromHSV requires three arguments");
+	for (int i = 0; i < 3; i++)
+		color[i] = lua_tofloat(L, i + 1);
+	
+	Vector3 hsv = Vector3(color);
+	Color3 color3 = G3D::Color3::fromHSV(hsv);
+
+	color[0] = color3.r;
+	color[1] = color3.g;
+	color[2] = color3.b;
+
+	pushNewObject(L, color);
+	return 1;
+}
+
+int Color3Bridge::newColor3FromHex(lua_State* L)
+{
+	float color[3];
+
+	if (lua_gettop(L) < 1) throw ARL::runtime_error("Color3.fromHex requires one argument");
+
+	const char* s = safe_lua_tostring(L, 1); // Actual Roblox from 2022 has G3D::Color3::fromHex(hex);
 	if (strlen(s) >= 3) {
 		if (s[0] == '#') {
 			s++; // jump #
@@ -155,7 +191,7 @@ int Color3Bridge::fromHexColor3(lua_State* L)
 		pushNewObject(L, color);
 		return 1;
 	}
-	throw ARL::runtime_error("Unable to convert characters to hex value"); // soooo jank
+	throw ARL::runtime_error("Unable to convert characters to hex value");
 }
 
 template<>
