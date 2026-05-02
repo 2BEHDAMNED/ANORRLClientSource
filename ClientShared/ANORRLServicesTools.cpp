@@ -17,12 +17,6 @@ static std::string BuildGenericApiUrl(const std::string &baseUrl, const std::str
 {
     std::string rbxUrl = ".lambda.cam";
 	size_t pos = baseUrl.find(rbxUrl);
-	if (pos == std::string::npos)
-	{
-		rbxUrl = ".robloxlabs.com";
-		pos =  baseUrl.find(rbxUrl);
-	}
-
 	std::string subUrl = baseUrl.substr(0, pos);
     
 	if (subUrl == "anorrl" || subUrl == "http://anorrl" || subUrl == "https://anorrl" || subUrl == "m" || subUrl == "http://m" ) //prod

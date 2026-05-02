@@ -43,16 +43,10 @@ Reflection::BoundProp<float> prop_CollisionSoundVolume("CollisionSoundVolume", "
 Reflection::BoundProp<int> prop_MaxCollisionSounds("MaxCollisionSounds", "Sound", &GameSettings::maxCollisionSounds, Reflection::PropertyDescriptor::Attributes::deprecated());
 Reflection::BoundProp<int> prop_bubbleChatMaxBubbles("BubbleChatMaxBubbles", "Online", &GameSettings::bubbleChatMaxBubbles);
 Reflection::BoundProp<float> prop_bubbleChatLifetime("BubbleChatLifetime", "Online", &GameSettings::bubbleChatLifetime);
-
-#if defined(ARL_PLATFORM_DURANGO)
-Reflection::BoundProp<float> prop_overscanPX("OverscanPX", category_Video, &GameSettings::overscanPX);
-Reflection::BoundProp<float> prop_overscanPY("OverscanPY", category_Video, &GameSettings::overscanPY);
-#endif
-
 Reflection::BoundProp<bool> prop_hardwareMouse("HardwareMouse", "Input", &GameSettings::hardwareMouse);
 
 static const Reflection::EnumPropDescriptor<GameSettings, GameSettings::VideoQuality> prop_videoSettings("VideoQuality", category_Video, &GameSettings::getVideoQualitySetting, &GameSettings::setVideoQualitySetting);
-static Reflection::EventDesc<GameSettings, void(bool)> event_videoRecordingRequest(&GameSettings::videoRecordingSignal, "VideoRecordingChangeRequest","recording",Security::RobloxScript);
+static Reflection::EventDesc<GameSettings, void(bool)> event_videoRecordingRequest(&GameSettings::videoRecordingSignal, "VideoRecordingChangeRequest","recording",Security::ANORRLScript);
 Reflection::BoundProp<bool> prop_videoCaptureEnabled("VideoCaptureEnabled", category_Video, &GameSettings::videoCaptureEnabled);
 REFLECTION_END();
 

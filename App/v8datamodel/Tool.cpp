@@ -1129,7 +1129,7 @@ void Tool::setToolTip(std::string value)
 	if(value.size() > ContentFilter::MAX_CONTENT_FILTER_SIZE)																										
 		value = value.substr(0, ContentFilter::MAX_CONTENT_FILTER_SIZE);																									
 																																									
-	if(!ProfanityFilter::ContainsProfanity(value) || getRobloxLocked())
+	if(!ProfanityFilter::ContainsProfanity(value) || getANORRLLocked())
 	{																									
 		if(toolTip != value)
 		{																																

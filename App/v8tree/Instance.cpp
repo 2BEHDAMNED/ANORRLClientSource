@@ -47,7 +47,7 @@ static Reflection::BoundFuncDesc<Instance, bool(shared_ptr<Instance>)> func_isAn
 static Reflection::BoundFuncDesc<Instance, std::string(int)> func_GetReadableId(&Instance::getReadableDebugId, "GetDebugId", "scopeLength", 4, Security::Plugin);
 static Reflection::PropDescriptor<Instance, std::string> prop_className("ClassName", category_Data, &Instance::getClassNameStr, NULL, Reflection::PropertyDescriptor::UI);
 static Reflection::PropDescriptor<Instance, std::string> prop_classNameDeprecated("className", category_Data, &Instance::getClassNameStr, NULL, Reflection::PropertyDescriptor::Attributes::deprecated(prop_className));
-static Reflection::PropDescriptor<Instance, int> prop_dataCost("DataCost", category_Data, &Instance::getPersistentDataCost, NULL, Reflection::PropertyDescriptor::UI, Security::RobloxPlace);
+static Reflection::PropDescriptor<Instance, int> prop_dataCost("DataCost", category_Data, &Instance::getPersistentDataCost, NULL, Reflection::PropertyDescriptor::UI, Security::ANORRLPlace);
 
 static Reflection::BoundYieldFuncDesc<Instance, shared_ptr<Instance>(std::string)> func_WaitForChild(&Instance::waitForChild, "WaitForChild", "childName", Security::None);
 
@@ -56,7 +56,7 @@ static Reflection::CustomBoundFuncDesc<Instance, shared_ptr<const Instances>()> 
 
 const Reflection::PropDescriptor<Instance, std::string> Instance::desc_Name("Name", category_Data, &Instance::getName, &Instance::setName);
 const Reflection::RefPropDescriptor<Instance, Instance> Instance::propParent("Parent", category_Data, &Instance::getParentDangerous, &Instance::setParent, Reflection::PropertyDescriptor::UI);
-const Reflection::PropDescriptor<Instance, bool> Instance::propRobloxLocked("RobloxLocked", category_Data, &Instance::getRobloxLocked, &Instance::setRobloxLocked, Reflection::PropertyDescriptor::SCRIPTING, Security::Plugin);
+const Reflection::PropDescriptor<Instance, bool> Instance::propANORRLLocked("ANORRLLocked", category_Data, &Instance::getANORRLLocked, &Instance::setANORRLLocked, Reflection::PropertyDescriptor::SCRIPTING, Security::Plugin);
 
 Reflection::EventDesc<
 	Instance, 
@@ -601,7 +601,7 @@ bool Instance::setParentInternal(Instance* newParent, bool ignoreLock)
     checkRbxCaller<kCallCheckCallArg, callCheckSetBasicFlag<HATE_RETURN_CHECK> >(thisFunction);    
 
 	// signals for the child being added
-#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32)
     bool detectedExploit = false;
 #endif
 	if (newParent != NULL)
@@ -616,7 +616,7 @@ bool Instance::setParentInternal(Instance* newParent, bool ignoreLock)
 
 		checkParentWaitingForChildren();
 	}
-#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32)
     else
     {
         detectedExploit = (detectDllByExceptionChainStack<4>(&newParent, ARL::Security::kCheckDefault) != 0);
@@ -629,7 +629,7 @@ bool Instance::setParentInternal(Instance* newParent, bool ignoreLock)
 
 	raiseChanged(propParent);
 
-#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32)
     if (detectedExploit)
     {
         VMProtectBeginVirtualization(NULL);
@@ -870,7 +870,7 @@ Instance::Instance()
 	,name("Instance")
 	,archivable(true)
 	,isParentLocked(false)
-	,robloxLocked(false)
+	,anorrlLocked(false)
 	,isSettingParent(false)
 {
 }
@@ -880,7 +880,7 @@ Instance::Instance(const char* name)
 	,name(name)
 	,archivable(true)
 	,isParentLocked(false)
-	,robloxLocked(false)
+	,anorrlLocked(false)
 	,isSettingParent(false)
 {
 }
@@ -947,13 +947,13 @@ void Instance::setName(const std::string& value)
 	}
 }
 
-void Instance::setRobloxLocked(bool value)
+void Instance::setANORRLLocked(bool value)
 {
-	if(robloxLocked != value){
-		robloxLocked = value;
-		raisePropertyChanged(propRobloxLocked);
+	if(anorrlLocked != value){
+		anorrlLocked = value;
+		raisePropertyChanged(propANORRLLocked);
 	}
-    void (Instance::* thisFunction)(bool) = &Instance::setRobloxLocked;
+    void (Instance::* thisFunction)(bool) = &Instance::setANORRLLocked;
     checkRbxCaller<kCallCheckCodeOnly, callCheckSetApiFlag<kRbxLockedApiOffset> >(
         reinterpret_cast<void*>((void*&)(thisFunction)));
 }

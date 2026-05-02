@@ -12,7 +12,7 @@
 local HttpService = game:GetService('HttpService')
 local HttpRbxApiService = game:GetService('HttpRbxApiService')
 local Players = game:GetService('Players')
-local RobloxReplicatedStorage = game:GetService('RobloxReplicatedStorage')
+local RobloxReplicatedStorage = game:GetService('ANORRLReplicatedStorage')
 local RunService = game:GetService('RunService')
 
 local GET_MULTI_FOLLOW = "user/multi-following-exists"

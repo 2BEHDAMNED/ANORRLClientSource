@@ -135,7 +135,7 @@ void BulletShapeContact::updateClosestFeatures()
 
 	deleteConnectors(polyConnectors);		// any remaining not matched
 		
-	// set bullet's manifold point references back to roblox kernel connectors
+	// set bullet's manifold point references back to anorrl kernel connectors
 	for (size_t i = 0; i < newConnectors.size(); ++i)
 	{
 		btManifoldArray manifoldArray;

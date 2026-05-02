@@ -98,7 +98,7 @@ scrollFrameLoadout.Size = UDim2.new(1,0,1,0)
 scrollFrameLoadout.Parent = backpack.Gear.GearLoadouts.LoadoutsList
 
 local LoadoutButton = Instance.new("TextButton")
-LoadoutButton.RobloxLocked = true
+LoadoutButton.ANORRLLocked = true
 LoadoutButton.Name = "LoadoutButton"
 LoadoutButton.Font = Enum.Font.ArialBold
 LoadoutButton.FontSize = Enum.FontSize.Size14
@@ -147,7 +147,7 @@ function removeFromMap(map,object)
 end
 
 function robloxLock(instance)
-  instance.RobloxLocked = true
+  instance.ANORRLLocked = true
   children = instance:GetChildren()
   if children then
 	 for i, child in ipairs(children) do

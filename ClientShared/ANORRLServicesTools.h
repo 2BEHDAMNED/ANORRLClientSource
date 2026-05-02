@@ -10,7 +10,6 @@ std::string GetWebChatFilterURL(const std::string& baseUrl, const std::string& k
 std::string GetGridUrl(const std::string &, bool changeToDataDomain = true);
 std::string GetDmpUrl(const std::string &, bool changeToDataDomain = true);
 std::string GetBreakpadUrl(const std::string &, bool changeToDataDomain = true);
-std::string ReplaceTopSubdomain(const std::string& url, const char* newTopSubDoman);
 
 std::string BuildGenericPersistenceUrl(const std::string& baseUrl, const std::string &servicePath);
 std::string BuildGenericGameUrl(const std::string &baseUrl, const std::string &servicePath);

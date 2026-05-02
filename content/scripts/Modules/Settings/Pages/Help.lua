@@ -12,27 +12,27 @@ local PC_TABLE_SPACING = 4
 
 -------------- SERVICES --------------
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local UserInputService = game:GetService("UserInputService")
 local GuiService = game:GetService("GuiService")
 
 ----------- UTILITIES --------------
-local utility = require(RobloxGui.Modules.Settings.Utility)
+local utility = require(ANORRLGui.Modules.Settings.Utility)
 
 ------------ Variables -------------------
 local PageInstance = nil
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 
 ----------- CLASS DECLARATION --------------
 
 local function Initialize()
-	local settingsPageFactory = require(RobloxGui.Modules.Settings.SettingsPageFactory)
+	local settingsPageFactory = require(ANORRLGui.Modules.Settings.SettingsPageFactory)
 	local this = settingsPageFactory:CreateNewPage()
 	this.HelpPages = {}
 
 	-- TODO: Change dev console script to parent this to somewhere other than an engine created gui
-	local ControlFrame = RobloxGui:WaitForChild('ControlFrame')
+	local ControlFrame = ANORRLGui:WaitForChild('ControlFrame')
 	local ToggleDevConsoleBindableFunc = ControlFrame:WaitForChild('ToggleDevConsole')
 	local lastInputType = nil
 
@@ -207,11 +207,11 @@ local function Initialize()
 		local gamepadImage = "arlasset://textures/ui/Settings/Help/GenericController.png"
 		local imageSize = UDim2.new(0,650,0,239)
 		local imagePosition = UDim2.new(0.5,-imageSize.X.Offset/2,0.5,-imageSize.Y.Offset/2)
-		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne or UserInputService:GetPlatform() == Enum.Platform.XBox360 then
+		if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
 			gamepadImage = "arlasset://textures/ui/Settings/Help/XboxController.png"
 			imageSize = UDim2.new(0,1334,0,570)
 			imagePosition = UDim2.new(0.5, (-imageSize.X.Offset/2) - 50, 0.5, -imageSize.Y.Offset/2)
-		elseif UserInputService:GetPlatform() == Enum.Platform.PS4 or UserInputService:GetPlatform() == Enum.Platform.PS3 then
+		elseif UserInputService:GetPlatform() == Enum.Platform.PS4 then
 			gamepadImage = "arlasset://textures/ui/Settings/Help/PSController.png"
 		end
 

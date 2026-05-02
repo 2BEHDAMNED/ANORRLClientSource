@@ -1,81 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="DebugRcc|Durango">
-      <Configuration>DebugRcc</Configuration>
-      <Platform>Durango</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="DebugRcc|Win32">
       <Configuration>DebugRcc</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="DebugStudio|Durango">
-      <Configuration>DebugStudio</Configuration>
-      <Platform>Durango</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="DebugStudio|Win32">
       <Configuration>DebugStudio</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Durango">
-      <Configuration>Debug</Configuration>
-      <Platform>Durango</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="NoOptRcc|Durango">
-      <Configuration>NoOptRcc</Configuration>
-      <Platform>Durango</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="NoOptRcc|Win32">
       <Configuration>NoOptRcc</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="NoOptStudio|Durango">
-      <Configuration>NoOptStudio</Configuration>
-      <Platform>Durango</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="NoOptStudio|Win32">
       <Configuration>NoOptStudio</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="NoOpt|Durango">
-      <Configuration>NoOpt</Configuration>
-      <Platform>Durango</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="NoOpt|Win32">
       <Configuration>NoOpt</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseRcc|Durango">
-      <Configuration>ReleaseRcc</Configuration>
-      <Platform>Durango</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseRcc|Win32">
       <Configuration>ReleaseRcc</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseStudio|Durango">
-      <Configuration>ReleaseStudio</Configuration>
-      <Platform>Durango</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseStudio|Win32">
       <Configuration>ReleaseStudio</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseTest|Durango">
-      <Configuration>ReleaseTest</Configuration>
-      <Platform>Durango</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseTest|Win32">
       <Configuration>ReleaseTest</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Durango">
-      <Configuration>Release</Configuration>
-      <Platform>Durango</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -1201,54 +1161,6 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="solver\SolverBody.cpp" />
     <ClCompile Include="solver\SolverConfig.cpp" />
     <ClCompile Include="solver\SolverKernel.cpp" />
-    <ClCompile Include="util\Durango\FileSystemDurango.cpp">
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">true</CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">true</CompileAsWinRT>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">NotUsing</PrecompiledHeader>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">true</ExcludedFromBuild>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">true</CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">true</CompileAsWinRT>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="util\Durango\ProgramMemoryChecker.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="util\FileSystemIndependent.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">true</ExcludedFromBuild>
@@ -1487,13 +1399,6 @@ cmd /c "exit /b 0"</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="util\XboxHttp2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">true</ExcludedFromBuild>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">
-      </CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">
-      </CompileAsWinRT>
-    </ClCompile>
     <ClCompile Include="util\xxhash.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">NotUsing</PrecompiledHeader>
@@ -1564,7 +1469,7 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="v8datamodel\PointsService.cpp" />
     <ClCompile Include="v8datamodel\PostEffect.cpp" />
     <ClCompile Include="v8datamodel\ReplicatedFirst.cpp" />
-    <ClCompile Include="v8datamodel\RobloxReplicatedStorage.cpp" />
+    <ClCompile Include="v8datamodel\ANORRLReplicatedStorage.cpp" />
     <ClCompile Include="v8datamodel\ScrollingFrame.cpp" />
     <ClCompile Include="v8datamodel\PartOperation.cpp" />
     <ClCompile Include="v8datamodel\SelectionSphere.cpp" />
@@ -4253,86 +4158,46 @@ cmd /c "exit /b 0"</Command>
     <ClCompile Include="Lua-5.1.4\src\print.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">true</ExcludedFromBuild>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">CompileAsCpp</CompileAs>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">true</ExcludedFromBuild>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">CompileAsCpp</CompileAs>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">true</ExcludedFromBuild>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">CompileAsCpp</CompileAs>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ClCompile Include="voxel2\Grid.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOpt|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOptRcc|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DebugRcc|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='NoOptStudio|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Win32'">$(IntDir)\Grid1.obj</ObjectFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DebugStudio|Durango'">$(IntDir)\Grid1.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="voxel2\MaterialTable.cpp" />
     <ClCompile Include="voxel2\Mesher.cpp" />
@@ -4432,7 +4297,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\v8datamodel\PointsService.h" />
     <ClInclude Include="include\v8datamodel\PostEffect.h" />
     <ClInclude Include="include\v8datamodel\ReplicatedFirst.h" />
-    <ClInclude Include="include\v8datamodel\RobloxReplicatedStorage.h" />
+    <ClInclude Include="include\v8datamodel\ANORRLReplicatedStorage.h" />
     <ClInclude Include="include\v8datamodel\ScrollingFrame.h" />
     <ClInclude Include="include\v8datamodel\SelectionSphere.h" />
     <ClInclude Include="include\v8datamodel\SolidModelContentProvider.h" />
@@ -4716,10 +4581,7 @@ cmd /c "exit /b 0"</Command>
     <ClInclude Include="include\util\ContentId.h" />
     <ClInclude Include="include\util\ContentProviderJob.h" />
     <ClInclude Include="include\util\ControlledLRUCache.h" />
-    <ClInclude Include="..\ClientShared\CountersClient.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Durango'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Durango'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\ClientShared\CountersClient.h" />
     <ClInclude Include="include\util\Cursors.h" />
     <ClInclude Include="include\util\DoubleEndedVector.h" />
     <ClInclude Include="include\util\Exception.h" />

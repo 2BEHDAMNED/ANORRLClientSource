@@ -108,22 +108,22 @@ static Reflection::BoundFuncDesc<Players, void(std::string)> funcChat(&Players::
 static Reflection::BoundFuncDesc<Players, void(std::string)> funcTeamChat(&Players::teamChat, "TeamChat", "message", Security::Plugin);
 static Reflection::BoundFuncDesc<Players, void(std::string, shared_ptr<Instance>)> funcPlayerChat(&Players::whisperChat, "WhisperChat", "message", "player", Security::LocalUser);
 static Reflection::EventDesc<Players, void(Players::PlayerChatType, shared_ptr<Instance>, std::string, shared_ptr<Instance>)> event_Chatted(&Players::playerChattedSignal, "PlayerChatted", "chatType", "player", "message", "targetPlayer", Security::LocalUser);
-static Reflection::EventDesc<Players, void(std::string)> event_GameAnnounce(&Players::gameAnnounceSignal, "GameAnnounce", "message", Security::RobloxScript);
+static Reflection::EventDesc<Players, void(std::string)> event_GameAnnounce(&Players::gameAnnounceSignal, "GameAnnounce", "message", Security::ANORRLScript);
 
 static Reflection::BoundFuncDesc<Players, void(shared_ptr<Instance>, std::string, std::string)> funcReportAbuse(&Players::reportAbuseLua, "ReportAbuse", "player", "reason", "optionalMessage", Security::LocalUser);
 static Reflection::BoundFuncDesc<Players, shared_ptr<const Instances>()> func_GetPlayers(&Players::getPlayers, "GetPlayers", Security::None);
 static Reflection::BoundFuncDesc<Players, shared_ptr<const Instances>()> dep_players(&Players::getPlayers, "players", Security::None, Reflection::Descriptor::Attributes::deprecated(func_GetPlayers));
 static Reflection::BoundFuncDesc<Players, shared_ptr<const Instances>()> dep_getPlayers(&Players::getPlayers, "getPlayers", Security::None, Reflection::Descriptor::Attributes::deprecated(func_GetPlayers));
 static Reflection::BoundFuncDesc<Players, shared_ptr<Instance>(int, bool)> func_createLocalPlayer(&Players::createLocalPlayer, "CreateLocalPlayer", "userId", "isTeleport", false, Security::Plugin);
-static Reflection::BoundFuncDesc<Players, void(std::string)> func_setAbuseReportUrl( &Players::setAbuseReportUrl, "SetAbuseReportUrl", "url", Security::Roblox);
-static Reflection::BoundFuncDesc<Players, void(std::string)> func_setChatFilterUrl( &Players::setChatFilterUrl, "SetChatFilterUrl", "url", Security::Roblox);
+static Reflection::BoundFuncDesc<Players, void(std::string)> func_setAbuseReportUrl( &Players::setAbuseReportUrl, "SetAbuseReportUrl", "url", Security::ANORRL);
+static Reflection::BoundFuncDesc<Players, void(std::string)> func_setChatFilterUrl( &Players::setChatFilterUrl, "SetChatFilterUrl", "url", Security::ANORRL);
 
-static Reflection::BoundFuncDesc<Players, void(std::string)> func_setBuildUserPermissionsUrl(&Players::setBuildUserPermissionsUrl, "SetBuildUserPermissionsUrl", "url", Security::Roblox);
+static Reflection::BoundFuncDesc<Players, void(std::string)> func_setBuildUserPermissionsUrl(&Players::setBuildUserPermissionsUrl, "SetBuildUserPermissionsUrl", "url", Security::ANORRL);
 static Reflection::BoundFuncDesc<Players, shared_ptr<Instance>(shared_ptr<Instance>)> func_playerFromCharacter(&Players::playerFromCharacter, "GetPlayerFromCharacter", "character", Security::None);
 static Reflection::BoundFuncDesc<Players, shared_ptr<Instance>(shared_ptr<Instance>)> func_playerFromCharacterOld(&Players::playerFromCharacter, "playerFromCharacter", "character", Security::None, Reflection::Descriptor::Attributes::deprecated(func_playerFromCharacter));
 static Reflection::BoundFuncDesc<Players, shared_ptr<Instance>(shared_ptr<Instance>)> dep_playerFromCharacter(&Players::playerFromCharacter, "getPlayerFromCharacter", "character", Security::None, Reflection::Descriptor::Attributes::deprecated(func_playerFromCharacter));
 
-static Reflection::EventDesc<Players, void(shared_ptr<Instance>, shared_ptr<Instance>, FriendService::FriendEventType)> event_FriendRequestEvent(&Players::friendRequestEvent, "FriendRequestEvent", "player", "player", "friendRequestEvent", Security::RobloxScript);
+static Reflection::EventDesc<Players, void(shared_ptr<Instance>, shared_ptr<Instance>, FriendService::FriendEventType)> event_FriendRequestEvent(&Players::friendRequestEvent, "FriendRequestEvent", "player", "player", "friendRequestEvent", Security::ANORRLScript);
 static Reflection::EventDesc<Players, void(shared_ptr<Instance>)> event_PlayerAddedEarly(&Players::playerAddedEarlySignal, "PlayerAddedEarly", "player", Security::LocalUser);
 static Reflection::EventDesc<Players, void(shared_ptr<Instance>)> event_PlayerAdded(&Players::playerAddedSignal, "PlayerAdded", "player");
 static Reflection::EventDesc<Players, void(shared_ptr<Instance>)> event_PlayerRemoving(&Players::playerRemovingSignal, "PlayerRemoving", "player");
@@ -141,14 +141,14 @@ static Reflection::BoundFuncDesc<Players, void(Players::ChatOption)> func_setCha
 Reflection::PropDescriptor<Players, bool> propClassicChat("ClassicChat", category_Data, &Players::getClassicChat, NULL, Reflection::PropertyDescriptor::UI);
 Reflection::PropDescriptor<Players, bool> propBubbleChat("BubbleChat", category_Data, &Players::getBubbleChat, NULL, Reflection::PropertyDescriptor::UI);
 
-static Reflection::BoundFuncDesc<Players, bool()> func_coreScriptHealthBar(&Players::getUseCoreScriptHealthBar, "GetUseCoreScriptHealthBar", Security::RobloxScript);
+static Reflection::BoundFuncDesc<Players, bool()> func_coreScriptHealthBar(&Players::getUseCoreScriptHealthBar, "GetUseCoreScriptHealthBar", Security::ANORRLScript);
 
 // Chat Ignore Support
-static Reflection::RemoteEventDesc<Players, void(int, int, std::string)> event_serverFinishedBlockUser(&Players::blockUserFinishedFromServerSignal, "BlockedRequestFinishedSignal", "blockerUserId", "blockeeUserId", "didDoRequest", Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::BROADCAST);
-static Reflection::RemoteEventDesc<Players, void(int, int, bool)> event_blockUserFromClient(&Players::blockUserRequestFromClientSignal, "BlockUserSignal", "blockerUserId", "blockeeUserId", "blocking", Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
+static Reflection::RemoteEventDesc<Players, void(int, int, std::string)> event_serverFinishedBlockUser(&Players::blockUserFinishedFromServerSignal, "BlockedRequestFinishedSignal", "blockerUserId", "blockeeUserId", "didDoRequest", Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::BROADCAST);
+static Reflection::RemoteEventDesc<Players, void(int, int, bool)> event_blockUserFromClient(&Players::blockUserRequestFromClientSignal, "BlockUserSignal", "blockerUserId", "blockeeUserId", "blocking", Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
 
-static Reflection::BoundYieldFuncDesc<Players, std::string(int, int)> func_blockUser(&Players::blockUser, "BlockUser", "blockerUserId", "blockeeUserId", Security::RobloxScript);
-static Reflection::BoundYieldFuncDesc<Players, std::string(int, int)> func_unblockUser(&Players::unblockUser, "UnblockUser", "exblockerUserId", "exblockeeUserId", Security::RobloxScript);
+static Reflection::BoundYieldFuncDesc<Players, std::string(int, int)> func_blockUser(&Players::blockUser, "BlockUser", "blockerUserId", "blockeeUserId", Security::ANORRLScript);
+static Reflection::BoundYieldFuncDesc<Players, std::string(int, int)> func_unblockUser(&Players::unblockUser, "UnblockUser", "exblockerUserId", "exblockeeUserId", Security::ANORRLScript);
 
 //UserName to userId, userId to UserName
 static Reflection::BoundYieldFuncDesc<Players, int(std::string)> func_getUserIdFromName(&Players::getUserIdFromName, "GetUserIdFromNameAsync", "userName", Security::None);
@@ -159,11 +159,11 @@ static Reflection::BoundFuncDesc<Players, shared_ptr<Instance>(int)> func_getPla
 
 Reflection::RemoteEventDesc<Players, void(int)> Players::event_requestCloudEditKick(
 		&Players::requestCloudEditKick, "RequestCloudEditKick", "playerId",
-		Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY,
+		Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY,
 		Reflection::RemoteEventCommon::CLIENT_SERVER);
 Reflection::RemoteEventDesc<Players, void()> Players::event_requestCloudEditShutdown(
 		&Players::requestCloudEditShutdown, "RequestCloudEditShutdown",
-		Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY,
+		Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY,
 		Reflection::RemoteEventCommon::CLIENT_SERVER);
 REFLECTION_END();
 

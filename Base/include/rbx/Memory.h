@@ -54,7 +54,7 @@ namespace ARL {
     }
 
 	// You can use this allocator when using std or boost collections
-	class roblox_allocator
+	class anorrl_allocator
 	{
     public:
         static bool crashOnAllocationFailure;	// TODO: Put this in more places, including std allocator overrides?
@@ -97,7 +97,7 @@ namespace ARL {
 			void* result = boost::singleton_pool<T, sizeof(T), boost::default_user_allocator_malloc_free>::malloc();
 			if (!result)
 			{
-				if (roblox_allocator::crashOnAllocationFailure)
+				if (anorrl_allocator::crashOnAllocationFailure)
 					ARLCRASH();	// We want a nice fat crash here so that the process quits and we can log it
 				throw std::bad_alloc();
 			}
@@ -150,10 +150,10 @@ namespace ARL {
 #else
 		void* operator new(size_t nSize) {
 			assert(nSize==sizeof(T));
-			void* result = (void*)roblox_allocator::malloc(nSize);
+			void* result = (void*)anorrl_allocator::malloc(nSize);
 			if (!result)
 			{
-				if (roblox_allocator::crashOnAllocationFailure)
+				if (anorrl_allocator::crashOnAllocationFailure)
 					ARLCRASH();	// We want a nice fat crash here so that the process quits and we can log it
 				throw std::bad_alloc();
 			}
@@ -164,7 +164,7 @@ namespace ARL {
 		}
 
 		void operator delete(void* p) {
-			roblox_allocator::free((char*)p);
+			anorrl_allocator::free((char*)p);
 #ifdef ARL_ALLOCATOR_COUNTS
 			count--;
 #endif

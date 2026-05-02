@@ -104,7 +104,7 @@ OfficeStylePrivate::OfficeStylePrivate()
 #endif /* Q_OS_MAC*/
 
 #ifdef Q_OS_WIN
-    m_themeType = OfficeStyle::Office2013White;
+    m_themeType = OfficeStyle::Office2013Black;
 #endif /* Q_OS_WIN*/
 }
 
@@ -351,6 +351,9 @@ QString OfficeStylePrivate::theme(const QString& str) const
         case OfficeStyle::Office2013Gray:
             strStyle += ":/res/Office2013Gray/";
             break;
+		case OfficeStyle::Office2013Black:
+			strStyle += ":/res/Office2013Black/";
+			break;
         default:
             Q_ASSERT(false);
             break;
@@ -372,7 +375,7 @@ IOfficePaintManager* OfficeStylePrivate::officePaintManager() const
 void OfficeStylePrivate::makePaintManager()
 {
     QTN_P(OfficeStyle)
-    if (p.getTheme() == OfficeStyle::Office2013White || p.getTheme() == OfficeStyle::Office2013Gray)
+    if (p.getTheme() == OfficeStyle::Office2013White || p.getTheme() == OfficeStyle::Office2013Gray || p.getTheme() == OfficeStyle::Office2013Black)
         setPaintManager(*new OfficePaintManager2013(&p));
     else
         setPaintManager(*new OfficePaintManager(&p));
@@ -386,7 +389,7 @@ QColor OfficeStylePrivate::accentIndexToColor(OfficeStyle::AccentColor accentcol
     {
         case OfficeStyle::AccentColorBlue:
         default:
-            return p.getThemeColor("Window", "AccentColorBlue", QColor(43, 87, 154));
+            return p.getThemeColor("Window", "AccentColorBlue", QColor(87, 43, 154));
 
         case OfficeStyle::AccentColorBrown:
             return p.getThemeColor("Window", "AccentColorBrown", QColor(161, 53, 55));
@@ -1901,7 +1904,7 @@ bool OfficeStyle::drawIndicatorToolBarHandle(const QStyleOption* opt, QPainter* 
     {
         for (int y = 4; y < rect.height() - 4; y += 4)
         {
-            p->fillRect(QRect(QPoint(3, y+1), QPoint(4, y + 2)), QColor(234, 251, 251));
+            p->fillRect(QRect(QPoint(3, y+1), QPoint(4, y + 2)), QColor(251, 234, 251));
             p->fillRect(QRect(QPoint(2, y), QPoint(3, y + 1)), d.m_ToolbarGripper);
         }
     } 
@@ -1909,7 +1912,7 @@ bool OfficeStyle::drawIndicatorToolBarHandle(const QStyleOption* opt, QPainter* 
     {
         for (int x = 4; x < opt->rect.width() - 4; x += 4)
         {
-            p->fillRect(QRect(QPoint(x + 1, 3), QPoint(x + 2, 4)), QColor(234, 251, 251));
+            p->fillRect(QRect(QPoint(x + 1, 3), QPoint(x + 2, 4)), QColor(251, 234, 251));
             p->fillRect(QRect(QPoint(x, 2), QPoint(x + 1, 3)), d.m_ToolbarGripper);
         }
     }

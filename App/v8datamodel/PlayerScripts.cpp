@@ -189,13 +189,13 @@ void StarterPlayerScripts::InitializeDefaultScripts()
 
 	Instance *controlScript = findFirstChildByName("ControlScript");
 	if (!controlScript) {
-		ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/scripts/controlScript.rbxmx"), 
+		ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/scripts/controlScript.arlmx"), 
 			ContentProvider::PRIORITY_SCRIPT, boost::bind(&PlayerScriptsLoadHelper, weak_from(this), _1, _2), AsyncHttpQueue::AsyncWrite);
 	}
 
 	Instance *cameraScript = findFirstChildByName("CameraScript");
 	if (!cameraScript) {
-		ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/scripts/cameraScript.rbxmx"), 
+		ServiceProvider::create<ContentProvider>(this)->loadContent(ContentId::fromAssets("avatar/scripts/cameraScript.arlmx"), 
 			ContentProvider::PRIORITY_SCRIPT, boost::bind(&PlayerScriptsLoadHelper, weak_from(this), _1, _2), AsyncHttpQueue::AsyncWrite);
 	}
 

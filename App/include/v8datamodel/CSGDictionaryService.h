@@ -17,10 +17,10 @@ namespace ARL
 	extern const char *const sCSGDictionaryService;
 
 	class CSGDictionaryService
-		: public DescribedCreatable<CSGDictionaryService, FlyweightService, sCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox>
+		: public DescribedCreatable<CSGDictionaryService, FlyweightService, sCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL>
 	{
 	protected:
-		typedef DescribedCreatable<CSGDictionaryService, FlyweightService, sCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox> Super;
+		typedef DescribedCreatable<CSGDictionaryService, FlyweightService, sCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL> Super;
 		typedef boost::unordered_map<std::string, boost::shared_ptr<CSGMesh> > CSGMeshMap;
 		CSGMeshMap cachedBREPMeshMap;
 		CSGMeshMap cachedMeshMap;

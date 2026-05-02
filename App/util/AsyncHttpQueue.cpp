@@ -6,7 +6,7 @@
 #include "v8datamodel/ContentProvider.h"
 #include "Network/Api.h"
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "winhttp.h" //Used for StatusCode Defines
 #endif
 

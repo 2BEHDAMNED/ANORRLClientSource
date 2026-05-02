@@ -36,7 +36,7 @@ static const uint qt_meta_data_Qtitan__OfficeStyle[] = {
       61,   32, 0x01095103,
 
  // enums: name, flags, count, data
-      20, 0x0,   10,   30,
+      20, 0x0,   11,   30,
 
  // enum data: key, value
       70, uint(Qtitan::OfficeStyle::Office2007Blue),
@@ -49,6 +49,7 @@ static const uint qt_meta_data_Qtitan__OfficeStyle[] = {
      180, uint(Qtitan::OfficeStyle::Office2010Black),
      196, uint(Qtitan::OfficeStyle::Office2013White),
      212, uint(Qtitan::OfficeStyle::Office2013Gray),
+     227, uint(Qtitan::OfficeStyle::Office2013Black),
 
        0        // eod
 };
@@ -61,6 +62,7 @@ static const char qt_meta_stringdata_Qtitan__OfficeStyle[] = {
     "Windows7Scenic\0Office2010Silver\0"
     "Office2010Blue\0Office2010Black\0"
     "Office2013White\0Office2013Gray\0"
+    "Office2013Black\0"
 };
 
 void Qtitan::OfficeStyle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)

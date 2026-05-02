@@ -22,15 +22,15 @@ namespace ARL
     
     REFLECTION_BEGIN();
     static Reflection::BoundFuncDesc<NotificationService, void(int, int, std::string, int) >
-    func_ScheduleNotification( &NotificationService::scheduleNotification, "ScheduleNotification", "userId", "alertId", "alertMsg", "minutesToFire", Security::RobloxPlace);
+    func_ScheduleNotification( &NotificationService::scheduleNotification, "ScheduleNotification", "userId", "alertId", "alertMsg", "minutesToFire", Security::ANORRLPlace);
     
     static Reflection::BoundFuncDesc<NotificationService, void(int, int) >
-    func_CancelNotification( &NotificationService::cancelNotification, "CancelNotification", "userId", "alertId", Security::RobloxPlace);
+    func_CancelNotification( &NotificationService::cancelNotification, "CancelNotification", "userId", "alertId", Security::ANORRLPlace);
 
     static Reflection::BoundFuncDesc<NotificationService, void(int) >
-    func_CancelAllNotification( &NotificationService::cancelAllNotification, "CancelAllNotification", "userId", Security::RobloxPlace);
+    func_CancelAllNotification( &NotificationService::cancelAllNotification, "CancelAllNotification", "userId", Security::ANORRLPlace);
     
-    static Reflection::BoundYieldFuncDesc<NotificationService, shared_ptr<const Reflection::ValueArray>(int)> func_GetScheduledNotifications( &NotificationService::getScheduledNotifications, "GetScheduledNotifications", "userId", Security::RobloxPlace);
+    static Reflection::BoundYieldFuncDesc<NotificationService, shared_ptr<const Reflection::ValueArray>(int)> func_GetScheduledNotifications( &NotificationService::getScheduledNotifications, "GetScheduledNotifications", "userId", Security::ANORRLPlace);
     REFLECTION_END();
     
    

@@ -20,9 +20,9 @@
 #include "rbx/SystemUtil.h"
 
 LOGGROUP(PlayerShutdownLuaTimeoutSeconds)
-LOGGROUP(RobloxWndInit)
+LOGGROUP(ANORRLWndInit)
 FASTFLAGVARIABLE(DirectX11Enable, false)
-FASTFLAGVARIABLE(UseNewAppBridgeInputWindows, false)
+FASTFLAGVARIABLE(UseNewAppBridgeInputWindows, true)
 
 DYNAMIC_FASTFLAGVARIABLE(FullscreenRefocusingFix, false)
 
@@ -37,7 +37,7 @@ namespace {
 namespace ARL {
 
 static const char* kSavedScreenSizeRegistryKey =
-	"HKEY_CURRENT_USER\\Software\\GraceRBLX\\ANORRL\\Settings\\RobloxPlayerV4WindowSizeAndPosition";
+	"HKEY_CURRENT_USER\\Software\\GraceRBLX\\ANORRL\\Settings\\ANORRLPlayerV4WindowSizeAndPosition";
 
 View::View(HWND h)
 	: fullscreen(false)
@@ -210,7 +210,7 @@ void View::initializeView()
 
         ::WriteProfileString("Settings", "lastGFXMode", "-1");
 		throw initialization_error(
-			"Your graphics drivers seem to be too old for Roblox to use.\n\n"
+			"Your graphics drivers seem to be too old for ANORRL to use.\n\n"
 			"Visit http://anorrl.lambda.cam/drivers for info on how to perform a driver upgrade.");
 	}
 
@@ -326,7 +326,7 @@ bool View::findBestMonitorMatch(LPCTSTR szDevice, int desiredX, int desiredY, bo
 		return false;
 	}
 
-	FASTLOG2(FLog::RobloxWndInit, "Current screen resolution - %d x %d", dm.dmPelsWidth, dm.dmPelsHeight);
+	FASTLOG2(FLog::ANORRLWndInit, "Current screen resolution - %d x %d", dm.dmPelsWidth, dm.dmPelsHeight);
 
 	// If current user mode is smaller than the desired resolution, just keep it
 	if (dm.dmPelsHeight <= (DWORD)desiredY && resolutionAuto)
@@ -367,7 +367,7 @@ bool View::findBestMonitorMatch(LPCTSTR szDevice, int desiredX, int desiredY, bo
 void View::restoreResolution()
 {
 	fullscreen = false;
-	FASTLOG(FLog::RobloxWndInit, "Start View::restoreResolution");
+	FASTLOG(FLog::ANORRLWndInit, "Start View::restoreResolution");
 
 	ARL::ScopedAssign<bool> assign(changingResolution, true);
 
@@ -406,7 +406,7 @@ void View::restoreResolution()
 	}
 
 	SetWindowPlacement(GetHWnd(), &nonFullscreenPlacement);
-	FASTLOG(FLog::RobloxWndInit, "Done Vew::restoreResolution");
+	FASTLOG(FLog::ANORRLWndInit, "Done Vew::restoreResolution");
 }
 
 void View::SetFullscreen(bool value)
@@ -505,7 +505,7 @@ void View::changeResolution()
 			changedResolution = !matches;
 
 		if (!matches)
-			FASTLOG2(FLog::RobloxWndInit, "Changed screen resolution to %d x %d", dm.dmPelsWidth, dm.dmPelsHeight);
+			FASTLOG2(FLog::ANORRLWndInit, "Changed screen resolution to %d x %d", dm.dmPelsWidth, dm.dmPelsHeight);
 
 		// Now resize the window to the monitor's (potentially) new resolution
 		MONITORINFOEX monitorInfo;
@@ -531,7 +531,7 @@ void View::changeResolution()
 	} else {
 		LogManager::ReportEvent(EVENTLOG_ERROR_TYPE, ARL::format("ChangeDisplaySettings returned %d", result).c_str());
 	}
-	FASTLOG(FLog::RobloxWndInit, "Done View::changeResolution");
+	FASTLOG(FLog::ANORRLWndInit, "Done View::changeResolution");
 }
 
 G3D::Vector2int16 View::calcDefaultResolution(float aspect_XdivY)

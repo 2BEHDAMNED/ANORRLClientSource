@@ -83,8 +83,8 @@ namespace
 
 		if (securityContext.identity == ARL::Security::LocalGUI_ ||
 			securityContext.identity == ARL::Security::GameScript_ ||
-			securityContext.identity == ARL::Security::GameScriptInRobloxPlace_ ||
-			securityContext.identity == ARL::Security::RobloxGameScript_ ||
+			securityContext.identity == ARL::Security::GameScriptInANORRLPlace_ ||
+			securityContext.identity == ARL::Security::ANORRLGameScript_ ||
 #if defined(ARL_STUDIO_BUILD)
             securityContext.identity == ARL::Security::StudioPlugin ||
 #endif

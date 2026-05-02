@@ -32,14 +32,14 @@ FASTFLAG(UserAllCamerasInLua)
 
 namespace ARL {
 
-class RobloxCritSecLoc
+class ANORRLCritSecLoc
 {
-	RobloxCriticalSection& robloxCriticalSection;
+	ANORRLCriticalSection& anorrlCriticalSection;
 	CCritSecLock lock;
 
 public:
-	RobloxCritSecLoc( RobloxCriticalSection& cs, const std::string& location)
-		: robloxCriticalSection(cs)
+	ANORRLCritSecLoc( ANORRLCriticalSection& cs, const std::string& location)
+		: anorrlCriticalSection(cs)
 		, lock(cs.diSection)
 	{
 // should compile away the string manipulations
@@ -53,7 +53,7 @@ public:
 #endif
 	}
 
-	~RobloxCritSecLoc()
+	~ANORRLCritSecLoc()
 	{
 // should compile away the string manipulations
 #ifdef __ARL_NOT_RELEASE
@@ -236,7 +236,7 @@ void UserInput::setKeyboardDesiredInternal(bool set)
 
 void UserInput::setKeyboardDesired(bool set)
 {
-	RobloxCritSecLoc lock(diSection, "setKeyboardDesired");
+	ANORRLCritSecLoc lock(diSection, "setKeyboardDesired");
 	setKeyboardDesiredInternal(set);
 }
 
@@ -385,7 +385,7 @@ void UserInput::postUserInputMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 void UserInput::processUserInputMessage(UINT uMsg, WPARAM wParam,
 										LPARAM lParam)
 {
-	RobloxCritSecLoc lock(diSection, "ProcessUserInputMessage");
+	ANORRLCritSecLoc lock(diSection, "ProcessUserInputMessage");
 
 	if (uMsg == WM_MOUSEMOVE)
 	{
@@ -903,7 +903,7 @@ G3D::Vector2 UserInput::getWindowsCursorPositionInternal()
 
 G3D::Vector2 UserInput::getCursorPosition()
 {
-	RobloxCritSecLoc lock(diSection, "getCursorPosition");
+	ANORRLCritSecLoc lock(diSection, "getCursorPosition");
 	return getCursorPositionInternal();
 }
 
@@ -930,7 +930,7 @@ bool UserInput::keyDown(KeyCode code) const
 
 void UserInput::setKeyState(ARL::KeyCode code, ARL::ModCode modCode, char modifiedKey, bool isDown)
 {
-	RobloxCritSecLoc lock(diSection, "setKeyState");
+	ANORRLCritSecLoc lock(diSection, "setKeyState");
 	externallyForcedKeyDown = isDown ? code : 0;
 }
 
@@ -945,7 +945,7 @@ void UserInput::reacquireKeyboard()
 
 void UserInput::processInput()
 {
-	RobloxCritSecLoc lock(diSection, "processInput");
+	ANORRLCritSecLoc lock(diSection, "processInput");
 	updateKeyboard();
 
 	if (isMouseAcquired)

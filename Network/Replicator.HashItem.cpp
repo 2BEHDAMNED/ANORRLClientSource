@@ -27,7 +27,7 @@ namespace ARL {
             , apiToken(apiToken)
             , prevApiToken(prevApiToken)
         {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
             this->hashes.hash.push_back(ARL::Security::getIndirectly<LINE_RAND4>((void*)(&ARL::Security::rbxTextSize)));
             this->hashes.hash.push_back(ARL::Security::getIndirectly<LINE_RAND4>((void*)(&ARL::Security::rbxTextBase)));
 #endif

@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD)
 #include "Security/RandomConstant.h"
 
 // This is junk code generation.  All of this is intended to be inlined

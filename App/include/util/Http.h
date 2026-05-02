@@ -61,7 +61,7 @@ namespace ARL
         }
 
 		static std::string accessKey;
-		static std::string gameSessionID; // additional header to be sent in POST requests to roblox
+		static std::string gameSessionID; // additional header to be sent in POST requests to anorrl
 		static std::string gameID;
 		static std::string placeID;
 		static std::string requester;
@@ -102,8 +102,8 @@ namespace ARL
 
         API instanceApi;
 
-		static ARL::mutex *robloxResponceLock;
-		static ARL::mutex *cdnResponceLock;
+		static ARL::mutex *anorrlResponseLock;
+		static ARL::mutex *cdnResponseLock;
 		static std::string lastCsrfToken;
 		static boost::mutex lastCsrfTokenMutex;
 
@@ -126,14 +126,14 @@ namespace ARL
         static rbx::atomic<int> alternateCdnSuccessCount;
         static rbx::atomic<int> alternateCdnFailureCount;
 		static double lastCdnFailureTimeSpan;
-        static rbx::atomic<int> robloxSuccessCount;
-        static rbx::atomic<int> robloxFailureCount;
+        static rbx::atomic<int> anorrlSuccessCount;
+        static rbx::atomic<int> anorrlFailureCount;
 
-		static WindowAverage<double, double> robloxResponce;
-		static WindowAverage<double, double> cdnResponce;
+		static WindowAverage<double, double> anorrlResponse;
+		static WindowAverage<double, double> cdnResponse;
 
-		static ARL::mutex *getRobloxResponceLock();
-		static ARL::mutex *getCdnResponceLock();
+		static ARL::mutex *getANORRLResponseLock();
+		static ARL::mutex *getCdnResponseLock();
 
         std::string url;
 		Http():instanceApi(defaultApi),url("") { init(); }
@@ -180,8 +180,8 @@ namespace ARL
 		static bool trustCheck(const char* url, bool allowExternal = false);
 		static bool trustCheckBrowser(const char* url);
 		static bool isScript(const char* url);
-		static bool isRobloxSite(const char* url);
-        static bool isStrictlyRobloxSite(const char* url);
+		static bool isANORRLSite(const char* url);
+        static bool isStrictlyANORRLSite(const char* url);
 		
 		// Utility
 		static std::string urlEncode(const std::string& s);
@@ -192,9 +192,7 @@ namespace ARL
 
 	private:
         void httpGetPost(bool isPost, std::istream& dataStream, const std::string& contentType, bool compressData, const HttpAux::AdditionalHeaders& additionalHeaders, bool allowExternal, std::string& response, bool forceNativeHttp = false);
-#if defined(ARL_PLATFORM_DURANGO)
-		void httpGetPostXbox(bool isPost, std::istream& dataStream, const std::string& contentType, bool compressData, const HttpAux::AdditionalHeaders& additionalHeaders, bool allowExternal, HttpCache::Policy cachePolicy, std::string& response);
-#elif defined(_WIN32)
+#if defined(_WIN32)
         void httpGetPostWinInet(bool isPost, std::istream& dataStream, const std::string& contentType, bool compressData, const HttpAux::AdditionalHeaders& additionalHeaders, bool allowExternal, std::string& response);
         void httpGetPostWinHttp(bool isPost, std::istream& dataStream, const std::string& contentType, bool compressData, const HttpAux::AdditionalHeaders& additionalHeaders, bool allowExternal, std::string& response);
 #elif defined(__APPLE__)
@@ -214,7 +212,7 @@ namespace ARL
 
 		static void ThrowIfFailure(bool success, const char* url, const char* message);	
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 		static void ThrowLastError(int error, const char* url, const char* message);
 #endif
 

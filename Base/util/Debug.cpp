@@ -31,13 +31,6 @@ namespace ARL
 
 	void Debugable::doCrash(const char* message)
 	{
-#if defined(ARL_PLATFORM_DURANGO)
-        OutputDebugStringA("ASSERTION FAILED: ");
-        OutputDebugStringA(message);
-        OutputDebugStringA("\n");
-        if (!IsDebuggerPresent()) 
-            return;
-#endif
 		if (doCrashEnabled) 
 		{
 			DebugBreak();

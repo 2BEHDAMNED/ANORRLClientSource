@@ -318,7 +318,7 @@ ScriptDebugger* DebuggerManager::findDebugger( lua_State* L )
 	if (iter != debuggersLookup.end())
 		return iter->second;
 
-	ScriptDebugger* scriptDebugger = findDebugger(RobloxExtraSpace::get(L)->script.lock().get());
+	ScriptDebugger* scriptDebugger = findDebugger(ANORRLExtraSpace::get(L)->script.lock().get());
 	if (scriptDebugger)
 		debuggersLookup[L] = scriptDebugger;
 
@@ -997,8 +997,8 @@ void ScriptDebugger::withPausedThreadHook( lua_State* L, lua_Debug *ar, boost::f
 
 	ARLASSERT(pausedThread.lock() == L);
 	//pausedThread = L;
-	ARLASSERT(!RobloxExtraSpace::get(L)->yieldCaptured);
-	RobloxExtraSpace::get(L)->yieldCaptured = true;
+	ARLASSERT(!ANORRLExtraSpace::get(L)->yieldCaptured);
+	ANORRLExtraSpace::get(L)->yieldCaptured = true;
 	lua_yield(L, 0);
 }
 
@@ -1098,8 +1098,8 @@ void ScriptDebugger::debuggerBreak( lua_State* L, lua_Debug *ar )
 	}
 	else
 	{
-		ARLASSERT(!RobloxExtraSpace::get(L)->yieldCaptured);
-		RobloxExtraSpace::get(L)->yieldCaptured = true;
+		ARLASSERT(!ANORRLExtraSpace::get(L)->yieldCaptured);
+		ANORRLExtraSpace::get(L)->yieldCaptured = true;
 		lua_yield(L, 0);
 	}
 }
@@ -1985,7 +1985,7 @@ void ScriptDebugger::setLuaHook(ScriptDebugger* scriptDebugger, int hookMask, lu
 {
 	if (L && (L->hookmask != hookMask))
 	{
-		const RobloxExtraSpace* pExtraSpace = RobloxExtraSpace::get(L);
+		const ANORRLExtraSpace* pExtraSpace = ANORRLExtraSpace::get(L);
 		if (pExtraSpace)
 		{
 			shared_ptr<BaseScript> script = pExtraSpace->script.lock();
@@ -2021,7 +2021,7 @@ void ScriptDebugger::updateHook()
 	}
 
 	// set hook for all the dependent threads
-	RobloxExtraSpace* pExtraSpace = RobloxExtraSpace::get(rootThread.lock());
+	ANORRLExtraSpace* pExtraSpace = ANORRLExtraSpace::get(rootThread.lock());
 	if (pExtraSpace)
 	{
 		int hookMask = LUA_MASKLINE | LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT;

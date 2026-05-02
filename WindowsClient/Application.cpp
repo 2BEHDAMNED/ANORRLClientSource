@@ -41,7 +41,7 @@
 #include "util/ProgramMemoryChecker.h"
 #include "script/LuaVM.h"
 #include "functionHooks.h"
-#include "robloxHooks.h"
+#include "ANORRLHooks.h"
 #include "GameVerbs.h"
 #include "v8datamodel/GuiService.h"
 #include "v8datamodel/TeleportService.h"
@@ -55,7 +55,7 @@
 
 #include "rbx/Profiler.h"
 
-LOGGROUP(RobloxWndInit)
+LOGGROUP(ANORRLWndInit)
 LOGGROUP(Network)
 FASTFLAGVARIABLE(ReloadSettingsOnTeleport, false)
 FASTFLAGVARIABLE(DebugUseDefaultGlobalSettings, false)
@@ -298,7 +298,7 @@ void Application::InferredCrashReportingThreadImpl()
 		ARL::Analytics::InfluxDb::Points points;
 		points.addPoint("Session" , crash ? "Crash" : "Success" );
 		points.report("Windows-ANORRLPlayer-SessionReport-Inferred", FInt::InferredCrashReportingHundredthsPercentage);
-		ARL::Analytics::EphemeralCounter::reportCounter(crash ? "Windows-ROBLOXPlayer-Session-Inferred-Crash" : "Windows-ANORRLPlayer-Session-Inferred-Success", 1, true);
+		ARL::Analytics::EphemeralCounter::reportCounter(crash ? "Windows-ANORRLPlayer-Session-Inferred-Crash" : "Windows-ANORRLPlayer-Session-Inferred-Success", 1, true);
 	}
 	
 	ARL::RegistryUtil::write32bitNumber("HKEY_CURRENT_USER\\Software\\GraceRBLX\\ANORRL\\InferredCrash", 1);
@@ -476,7 +476,7 @@ void Application::shareHwnd(HWND hWnd)
 	mapFileForWnd = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(hWnd), mainWndStorageName);
 	if (mapFileForWnd != NULL) 
 	{
-		FASTLOG1(FLog::RobloxWndInit, "CMainFrame::ShareHwnd wnd=%d", hWnd);
+		FASTLOG1(FLog::ANORRLWndInit, "CMainFrame::ShareHwnd wnd=%d", hWnd);
 		bufForWnd = (LPTSTR)MapViewOfFile(mapFileForWnd, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(hWnd));
 	}
 
@@ -635,7 +635,7 @@ bool Application::Initialize(HWND hWnd, HINSTANCE hInstance)
 		ARL::GlobalAdvancedSettings::singleton()->loadState("");
 
 	{
-		ARL::Security::Impersonator impersonate(ARL::Security::RobloxGameScript_);
+		ARL::Security::Impersonator impersonate(ARL::Security::ANORRLGameScript_);
 		ARL::GlobalBasicSettings::singleton()->loadState(globalBasicSettingsPath);
 	}
 
@@ -801,7 +801,7 @@ bool Application::LoadAppSettings(HINSTANCE hInstance)
 				}
 			}
 		}
-		RobloxCrashReporter::silent = (valSilentCrashReport != 0);
+		ANORRLCrashReporter::silent = (valSilentCrashReport != 0);
 
 		// BaseURL
 		const XmlElement* xmlBaseUrl = root->findFirstChildByTag(tagBaseUrl);
@@ -935,8 +935,8 @@ bool Application::ParseArguments(const char* argv)
 			("fast", "uses fast startup path")
 
 			#if defined(LOVE_ALL_ACCESS) || defined(_DEBUG) || defined(_NOOPT)
-			("userName", po::value<std::string>(), "Your Roblox UserName")
-			("passWord", po::value<std::string>(), "Your Roblox Password")
+			("userName", po::value<std::string>(), "Your ANORRL UserName")
+			("passWord", po::value<std::string>(), "Your ANORRL Password")
 			("md5", po::value<std::string>(), 
 			"md5 hash to spoof (debug build only)")
 			#endif // defined(LOVE_ALL_ACCESS) || defined(_DEBUG) || defined(_NOOPT)
@@ -1105,7 +1105,7 @@ void Application::uploadCrashData(bool userRequested)
 		// Only produce a popup if the user explicitly requested this behavior
 		if (userRequested) {
 			MessageBoxA(mainWindow, 
-				"Feature not available in offline mode.\nPlease check internet connection and restart Roblox.",
+				"Feature not available in offline mode.\nPlease check internet connection and restart ANORRL.",
 				"Error", MB_ICONSTOP | MB_OK);
 		}
 		return;
@@ -1140,18 +1140,18 @@ void Application::handleError(const std::exception& e)
 	message.append("\n");
 	OutputDebugString(message.c_str());
 	LogManager::ReportException(e);
-	if (!RobloxCrashReporter::silent) {
+	if (!ANORRLCrashReporter::silent) {
 		MessageBoxA(NULL, e.what(), "ANORRL", MB_OK | MB_ICONSTOP);
 	}
 }
 
 void Application::waitForNewPlayerProcess(HWND hWnd)
 {
-	static const char kPreventMultipleRobloxPlayersEventName[] = "ANORRL_singletonEvent";
-	static const char kPreventMultipleRobloxPlayersMutexName[] = "ANORRL_singletonMutex";
+	static const char kPreventMultipleANORRLPlayersEventName[] = "ANORRL_singletonEvent";
+	static const char kPreventMultipleANORRLPlayersMutexName[] = "ANORRL_singletonMutex";
 
 	// Create (or open if already created) named event
-	HANDLE event = CreateEventA(NULL, FALSE, FALSE, kPreventMultipleRobloxPlayersEventName);
+	HANDLE event = CreateEventA(NULL, FALSE, FALSE, kPreventMultipleANORRLPlayersEventName);
 
 	// If we cannot create or open the event for some reason we should still run
 	// the process
@@ -1164,7 +1164,7 @@ void Application::waitForNewPlayerProcess(HWND hWnd)
 
 	// Create a mutex to assure we don't have multiple concurrent waits on the
 	// event
-	HANDLE mutex = CreateMutexA(NULL, TRUE, kPreventMultipleRobloxPlayersMutexName);
+	HANDLE mutex = CreateMutexA(NULL, TRUE, kPreventMultipleANORRLPlayersMutexName);
 	if (NULL == mutex) {
 		LogManager::ReportEvent(EVENTLOG_ERROR_TYPE, 
 			ARL::format("Failure creating named (preventing multiple simultaneous processes), "
@@ -1238,10 +1238,10 @@ void Application::waitForShowWindow(int delay)
 			}
 
 			if (waitResult == WAIT_FAILED) {
-				FASTLOG2(FLog::RobloxWndInit, "Waiting for show window (video preroll) is done with ERROR, "
+				FASTLOG2(FLog::ANORRLWndInit, "Waiting for show window (video preroll) is done with ERROR, "
 					"wait result is = 0x%X, ERROR = 0x%X", waitResult, GetLastError());
 			} else {
-				FASTLOG1(FLog::RobloxWndInit, 
+				FASTLOG1(FLog::ANORRLWndInit,
 					"Waiting for show window (video preroll) is done and wait result is = 0x%X", waitResult);
 			}
 
@@ -1302,8 +1302,8 @@ void Application::validateBootstrapperVersion()
 			if (pos == std::string::npos)
 				return;
 
-			// from anorrl.lambda.cam or www.gametest1.robloxlabs.com to setup.roblox.com or setup.gametest1.robloxlabs.com, etc...
-			installHost = "http://setup" + baseUrl.substr(pos+3);
+			// from anorrl.lambda.cam or www.gametest1.robloxlabs.com to setup.lambda.cam or setup.gametest1.robloxlabs.com, etc...
+			installHost = "http://setup" + baseUrl.substr(pos+5);
 
 			{
 				Http http(installHost + "version");

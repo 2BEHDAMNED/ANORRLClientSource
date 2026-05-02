@@ -12,7 +12,7 @@ local FORCE_TEN_FOOT_INTERFACE = false
 
 -------------- SERVICES --------------
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local UserInputService = game:GetService("UserInputService")
 local GuiService = game:GetService("GuiService")
 
@@ -62,7 +62,7 @@ local function CreateModule()
 				Image = "";
 				Active = false;
 				BackgroundTransparency = 1;
-				Parent = RobloxGui;
+				Parent = ANORRLGui;
 			};
 		end
 	end

@@ -46,7 +46,7 @@ class FunctionMarshaller
 	~FunctionMarshaller();
 public:
 	// see Q196026
-	DECLARE_WND_CLASS("Roblox.FunctionMarshaller")
+	DECLARE_WND_CLASS("ANORRL.FunctionMarshaller")
 
 	// TODO: Wrap with a reference counter and then remove ~StaticData()
 	// cleanup code and remove ReleaseWindow()

@@ -474,7 +474,7 @@ IRibbonPaintManager* RibbonStylePrivate::ribbonPaintManager() const
 void RibbonStylePrivate::makePaintManager()
 {
     QTN_P(RibbonStyle)
-    if (p.getTheme() == OfficeStyle::Office2013White || p.getTheme() == OfficeStyle::Office2013Gray)
+    if (p.getTheme() == OfficeStyle::Office2013White || p.getTheme() == OfficeStyle::Office2013Gray || p.getTheme() == OfficeStyle::Office2013Black)
         setPaintManager(*new RibbonPaintManager2013(&p));
     else
         setPaintManager(*new RibbonPaintManager(&p));

@@ -67,8 +67,8 @@ using namespace ARL::HttpPlatformImpl;
 
 namespace
 {
-static std::string robloxCookieOverrideDomain;
-static std::string robloxCookieOverride;
+static std::string anorrlCookieOverrideDomain;
+static std::string anorrlCookieOverride;
 
 static std::string proxyHost = "";
 static long proxyPort = 0;
@@ -1162,7 +1162,7 @@ void init(Http::CookieSharingPolicy cookieSharingPolicy)
         logCurlError(NULL, "CURLSHOPT_SHARE", curl_share_setopt(gCurlsh.get(), CURLSHOPT_SHARE, CURL_LOCK_DATA_DNS));
         logCurlError(NULL, "CURLSHOPT_SHARE", curl_share_setopt(gCurlsh.get(), CURLSHOPT_SHARE, CURL_LOCK_DATA_SSL_SESSION));
         
-        setCookiesForDomain(robloxCookieOverrideDomain, robloxCookieOverride);
+        setCookiesForDomain(anorrlCookieOverrideDomain, anorrlCookieOverride);
 
         {
             boost::function0<void> f = boost::bind(&CacheStatistics::initializeCachingThreadHandler);
@@ -1187,8 +1187,8 @@ void setCookiesForDomain(const std::string& domain, const std::string& cookies)
         if (domain.empty() || cookies.empty())
             return;
         
-        // Do Domain trimming only for BaseURL's, only trim arl. or m.,
-        // This allows to propogate cookies accross www, m, web, api for all roblox baseURL sub domains
+        // Do Domain trimming only for BaseURL's, only trim anorrl. or m.,
+        // This allows to propogate cookies across anorrl, m, for all anorrl baseURL sub domains
         std::string trimmedDomain = domain;
         if (DFFlag::HttpCurlDomainTrimmingWithBaseURL)
         {
@@ -1201,8 +1201,8 @@ void setCookiesForDomain(const std::string& domain, const std::string& cookies)
             
             if (trimmedDomain.find_first_of(coreBaseURL) == 0)
             {
-                if (trimmedDomain.find_first_of("arl.") == 0)
-                    boost::replace_all(trimmedDomain, "arl.", "");
+                if (trimmedDomain.find_first_of("anorrl.") == 0)
+                    boost::replace_all(trimmedDomain, "anorrl.", "");
                 else if(trimmedDomain.find_first_of("m.") == 0)
                     boost::replace_all(trimmedDomain, "m.", "");
                 else
@@ -1253,8 +1253,8 @@ void setCookiesForDomain(const std::string& domain, const std::string& cookies)
     }
     else
     {
-        robloxCookieOverrideDomain = domain;
-        robloxCookieOverride = cookies;
+        anorrlCookieOverrideDomain = domain;
+        anorrlCookieOverride = cookies;
     }
 }
 

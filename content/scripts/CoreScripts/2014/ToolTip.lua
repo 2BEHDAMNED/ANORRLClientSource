@@ -57,7 +57,7 @@ function createSettingsButtonTip(parent)
 	end
 	
 	local toolTip = frameTip:clone()
-    toolTip.RobloxLocked = true
+    toolTip.ANORRLLocked = true
     toolTip.Text = "Settings/Leave Game"
     toolTip.Position = UDim2.new(0,0,0,-18)
     toolTip.Size = UDim2.new(0,120,0,20)
@@ -76,7 +76,7 @@ for i = 1, #bottomLeftChildren do
 
 	if bottomLeftChildren[i].Name == "Exit" then
 	    local exitTip = frameTip:clone()
-	    exitTip.RobloxLocked = true
+	    exitTip.ANORRLLocked = true
 	    exitTip.Text = "Leave Place"
 	    exitTip.Position = UDim2.new(0,0,-1,0)
 	    exitTip.Size = UDim2.new(1,0,1,0)
@@ -95,7 +95,7 @@ local bottomRightChildren = bottomRightControl:GetChildren()
 for i = 1, #bottomRightChildren do
 	if bottomRightChildren[i].Name:find("Camera") ~= nil then
 		local cameraTip = frameTip:clone()
-		cameraTip.RobloxLocked = true
+		cameraTip.ANORRLLocked = true
 		cameraTip.Text = "Camera View"
 		if bottomRightChildren[i].Name:find("Zoom") then
 			cameraTip.Position = UDim2.new(-1,0,-1.5)

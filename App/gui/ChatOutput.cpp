@@ -25,7 +25,7 @@ namespace ARL {
 
 using ARL::Network::Players;
 
-const char* PlayerChatLine::ROBLOXNAME = "(ROBLOX)";
+const char* PlayerChatLine::ANORRLNAME = "(ANORRL)"; // dunno whats this about
 const char* ChatLine::ELIPSES = "...";
 const int ChatOutput::MaxChatBubblesPerPlayer = 10;
 const int ChatOutput::MaxChatLinesPerBubble = 5; // the number of lines each bubble can display
@@ -87,7 +87,7 @@ PlayerChatLine::PlayerChatLine(ChatType chatType, boost::shared_ptr<Network::Pla
 		}
 	}
 	else{
-		user = ROBLOXNAME;
+		user = ANORRLNAME;
 		userColor = Color::black();
 	}
 }
@@ -354,7 +354,7 @@ void ChatOutput::createBillboardGuiHelper(Instance* instance, bool onlyCharacter
 					//Create a new billboardGui object attached to this player
 					shared_ptr<BillboardGui> billboardGui = Creatable<Instance>::create<BillboardGui>();
 					billboardGui->setAdornee(part);	
-					billboardGui->setRobloxLocked(true);
+					billboardGui->setANORRLLocked(true);
 					billboardGui->setParent(coreGui);
 
 					characterSortedMsg[instance].billboardGui = billboardGui;
@@ -369,7 +369,7 @@ void ChatOutput::createBillboardGuiHelper(Instance* instance, bool onlyCharacter
 					//Create a new billboardGui object attached to this player
 					shared_ptr<BillboardGui> billboardGui = Creatable<Instance>::create<BillboardGui>();
 					billboardGui->setAdornee(head);	
-					billboardGui->setRobloxLocked(true);
+					billboardGui->setANORRLLocked(true);
 					billboardGui->setParent(coreGui);
 
 					characterSortedMsg[instance].billboardGui = billboardGui;

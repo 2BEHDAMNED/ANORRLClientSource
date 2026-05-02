@@ -1262,6 +1262,9 @@
       <file>../../res/Office2013Gray/OfficeTheme.ini</file>
       <file>../../res/Office2013Gray/ToolbarButtonDropDownGlyph.png</file>
 
+      <file>../../res/Office2013Black/OfficeTheme.ini</file>
+      <file>../../res/Office2013Black/ToolbarButtonDropDownGlyph.png</file>
+
       <file>../../res/qtitan.png</file>
       <file>../../res/qtitanlogo32x32.png</file>
       <file>../../res/ribbonbackstageback_icon.png</file>

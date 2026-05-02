@@ -10,7 +10,7 @@ end
 while not game:FindFirstChild("CoreGui") do
 	wait(0.1)
 end
-while not game.CoreGui:FindFirstChild("RobloxGui") do
+while not game.CoreGui:FindFirstChild("ANORRLGui") do
 	wait(0.1)
 end
 
@@ -56,7 +56,7 @@ local buyFailedHeaderText = "An Error Occurred"
 
 local errorPurchasesDisabledText = "In-game purchases are disabled"
 local errorPurchasesBuyRobuxText = "your account does not have enough Robux"
-local errorPurchasesUnknownText = "Roblox is performing maintenance"
+local errorPurchasesUnknownText = "ANORRL is performing maintenance"
 
 local purchaseSucceededText = "Your purchase of itemName succeeded!"
 local purchaseFailedText = "Your purchase of itemName failed because errorReason. Your account has not been charged. Please try again soon."
@@ -189,7 +189,7 @@ function getMinimumProductNeededForPurchase(amountNeededToBuy)
 		if isBcMember then
 			appendString = "bc"
 		end
-		appPrefix = "com.roblox.client."
+		appPrefix = "com.anorrl.client."
 	else
 		if isBcMember then
 			appendString = "RobuxBC"
@@ -197,7 +197,7 @@ function getMinimumProductNeededForPurchase(amountNeededToBuy)
 			appendString = "RobuxNonBC"
 		end
 
-		appPrefix = "com.roblox.robloxmobile."
+		appPrefix = "com.anorrl.robloxmobile."
 	end
 	
 	local productString = appPrefix .. prependString .. tostring(productAmount) .. appendString
@@ -661,7 +661,7 @@ end
 
 function isFreeItem()
 	-- Apparently free items have 'IsForSale' set to false, but 'IsPublicDomain' set to true
-	-- Example: https://api.roblox.com/marketplace/productinfo?assetid=163811695
+	-- Example: https://arl.lambda.cam/marketplace/productinfo?assetid=163811695
 	-- I've tested it, if you take it off the public domain, 'IsPublicDomain' is of course false
 	return currentProductInfo and currentProductInfo["IsPublicDomain"] == true
 end
@@ -881,7 +881,7 @@ function createPurchasePromptGui()
 	purchaseDialog.BackgroundColor3 = Color3.new(225/255,225/255,225/255)
 	purchaseDialog.BorderSizePixel = 0
 	purchaseDialog.ZIndex = 8
-	purchaseDialog.Parent = game.CoreGui.RobloxGui
+	purchaseDialog.Parent = game.CoreGui.ANORRLGui
 
 	local bodyFrame = Instance.new("Frame")
 	bodyFrame.Name = "BodyFrame"

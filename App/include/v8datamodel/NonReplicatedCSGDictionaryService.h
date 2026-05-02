@@ -16,10 +16,10 @@ namespace ARL
 	extern const char *const sNonReplicatedCSGDictionaryService;
 
 	class NonReplicatedCSGDictionaryService
-		: public DescribedCreatable<NonReplicatedCSGDictionaryService, FlyweightService, sNonReplicatedCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox>
+		: public DescribedCreatable<NonReplicatedCSGDictionaryService, FlyweightService, sNonReplicatedCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL>
 	{
 	protected:
-		typedef DescribedCreatable<NonReplicatedCSGDictionaryService, FlyweightService, sNonReplicatedCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox> Super;
+		typedef DescribedCreatable<NonReplicatedCSGDictionaryService, FlyweightService, sNonReplicatedCSGDictionaryService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL> Super;
 
 		virtual void refreshRefCountUnderInstance(ARL::Instance* instance);
 

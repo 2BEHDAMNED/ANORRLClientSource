@@ -192,7 +192,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\ClientShared\InfluxDbHelper.cpp" />
-    <ClCompile Include="..\..\ClientShared\RobloxServicesTools.cpp" />
+    <ClCompile Include="..\..\ClientShared\ANORRLServicesTools.cpp" />
     <ClCompile Include="..\..\ClientShared\StringConv.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -232,7 +232,7 @@
     <ClCompile Include="ProgressDialog.cpp" />
     <ClCompile Include="SharedHelpers.cpp" />
     <ClCompile Include="ShutdownDialog.cpp" />
-    <ClCompile Include="ShutdownRobloxApp.cpp" />
+    <ClCompile Include="ShutdownANORRLApp.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

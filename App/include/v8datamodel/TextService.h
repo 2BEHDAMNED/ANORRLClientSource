@@ -82,7 +82,10 @@ namespace ARL {
 			FONT_SILKSCREEN = 19,
 			FONT_PROXIMANOVA = 20,
 
-			FONT_LAST = 21
+			FONT_NOTOSANS = 21,
+			FONT_NOTOSANSBOLD = 22,
+
+			FONT_LAST = 23
 		};
 
 		static Font FromTextFont(Text::Font font);

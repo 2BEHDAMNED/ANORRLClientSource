@@ -19,7 +19,7 @@ local currentLoadout = script.Parent
 local StaticTabName = "gear"
 local backpackEnabled = true
 
-local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+local robloxGui = game:GetService("CoreGui"):FindFirstChild("ANORRLGui")
 assert(robloxGui)
 local controlFrame = waitForChild(robloxGui, 'ControlFrame')
 local backpackButton = waitForChild(controlFrame, 'BackpackButton')
@@ -277,7 +277,7 @@ function reorganizeLoadout(gear, inserting, equipped, addToSlot)
 end
 
 function checkToolAncestry(child,parent)
-	if child:FindFirstChild("RobloxBuildTool") then return end -- don't show roblox build tools
+	if child:FindFirstChild("RobloxBuildTool") then return end -- don't show anorrl build tools
 	if child:IsA("Tool") or child:IsA("HopperBin") then
 		for i = 1, #gearSlots do
 			if gearSlots[i] ~= "empty" and gearSlots[i].GearReference.Value == child then
@@ -573,7 +573,7 @@ local addingPlayerChild = function(child, equipped, addToSlot, inventoryGearButt
 	waitForDebounce()
 	debounce = true
 	
-	if child:FindFirstChild("RobloxBuildTool") then debounce = false return end -- don't show roblox build tools
+	if child:FindFirstChild("RobloxBuildTool") then debounce = false return end -- don't show anorrl build tools
 	if not child:IsA("Tool") then
 		if not child:IsA("HopperBin") then
 			debounce = false
@@ -612,7 +612,7 @@ local addingPlayerChild = function(child, equipped, addToSlot, inventoryGearButt
 		end
 	end)
 
-	gearClone.RobloxLocked = true
+	gearClone.ANORRLLocked = true
 
 	local slotToMod = -1
 

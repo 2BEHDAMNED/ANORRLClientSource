@@ -1,7 +1,5 @@
--- Creates the generic "ROBLOX" loading screen on startup
+-- Creates the generic "ANORRL" loading screen on startup
 -- Written by ArceusInator & Ben Tkacheff, 2014
---
-
 
 --[[
 	TODO:
@@ -260,7 +258,7 @@ end
 -- Declare member functions
 function MainGui:GenerateMain()
 	local screenGui = create 'ScreenGui' {
-		Name = 'RobloxLoadingGui'
+		Name = 'ANORRLLoadingGui'
 	}
 	
 	local textColour = COLORS.COOLERBLACK
@@ -596,10 +594,10 @@ renderSteppedConnection = game:GetService("RunService").RenderStepped:connect(fu
 end)
 
 spawn(function()
-	local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+	local ANORRLGui = game:GetService("CoreGui"):WaitForChild("ANORRLGui")
 	local guiInsetChangedEvent = Instance.new("BindableEvent")
 	guiInsetChangedEvent.Name = "GuiInsetChanged"
-	guiInsetChangedEvent.Parent = RobloxGui
+	guiInsetChangedEvent.Parent = ANORRLGui
 	guiInsetChangedEvent.Event:connect(function(x1, y1, x2, y2)
 		if currScreenGui and currScreenGui:FindFirstChild("BlackFrame") then
 			currScreenGui.BlackFrame.Position = UDim2.new(0, -x1, 0, -y1)
@@ -632,8 +630,8 @@ guiService.ErrorMessageChanged:connect(function()
 			-- we show a B button to kill game data model on console
 			if not isTenFootInterface then
 				if leaveGameButton == nil then
-					local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-					local utility = require(RobloxGui.Modules.Settings.Utility)
+					local ANORRLGui = game:GetService("CoreGui"):WaitForChild("ANORRLGui")
+					local utility = require(ANORRLGui.Modules.Settings.Utility)
 					local textLabel = nil
 					leaveGameButton, leaveGameTextLabel = utility:MakeStyledButton("LeaveGame", "Leave", UDim2.new(0, 288, 0, 78))
 					leaveGameButton:SetVerb("Exit")

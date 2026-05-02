@@ -7,11 +7,6 @@
 
 #include "VideoControl.h"
 
-// System Headers
-#ifndef ARL_PLATFORM_DURANGO
-#include <atlcomcli.h>
-#endif // ARL_PLATFORM_DURANGO
-
 struct IMediaControl;
 struct IGraphBuilder;
 

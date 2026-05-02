@@ -112,9 +112,6 @@
     <ClCompile Include="functionHooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="robloxHooks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\ClientShared\SDLGameController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
     <ClCompile Include="$(CONTRIB_PATH)\boost_1_56_0\libs\program_options\src\value_semantic.cpp" />
     <ClCompile Include="$(CONTRIB_PATH)\boost_1_56_0\libs\program_options\src\variables_map.cpp" />
     <ClCompile Include="$(CONTRIB_PATH)\boost_1_56_0\libs\program_options\src\winmain.cpp" />
+    <ClCompile Include="ANORRLHooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -204,9 +204,6 @@
     <ClInclude Include="RbxWebView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RobloxHooks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="functionHooks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -214,6 +211,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ReleasePatcher.h" />
+    <ClInclude Include="ANORRLHooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AppSettings.xml">
@@ -271,9 +271,6 @@
     <None Include="html_con.htm" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Roblox.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="ANORRL.ico">
       <Filter>Resource Files</Filter>
     </Image>

@@ -3,9 +3,7 @@
 #include "Security/FuzzyTokens.h"
 #include "Security/RandomConstant.h"
 
-#if defined(ARL_PLATFORM_DURANGO)
-#define NOINLINE __declspec(noinline)
-#elif defined(_WIN32)
+#if defined(_WIN32)
 #include <windows.h>
 #include <winternl.h>
 #undef min
@@ -57,7 +55,7 @@ namespace ARL
 {
 FORCEINLINE static bool isRbxTextAddr(const void* const ptr)
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO) && !defined(ARL_STUDIO_BUILD)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD)
     return (reinterpret_cast<uintptr_t>(ptr) - ARL::Security::rbxTextBase < ARL::Security::rbxTextSize);
 #else
     return true;
@@ -114,7 +112,7 @@ static const int kCallCheckRegCall = 4;
 template<int level, void(*action)(unsigned int)> 
 FORCEINLINE static unsigned int checkRbxCaller(const void* const funcAddress)
 {
-#if defined(_WIN32) && !defined(_NOOPT) && !defined(LOVE_ALL_ACCESS) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(_NOOPT) && !defined(LOVE_ALL_ACCESS) && !defined(ARL_STUDIO_BUILD)
     unsigned int flags = 0;
 
     void* returnAddress = _ReturnAddress();
@@ -169,7 +167,7 @@ namespace Security{
 }
 
 // Only supporting ntdll for now.
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 
 inline const WCHAR* getUnicodeDllName(const UNICODE_STRING& str)
 {
@@ -249,7 +247,7 @@ struct CallChainInfo
     CallChainInfo(uint32_t handler, uint32_t ret) : handler(handler), ret(ret) {}
 };
 
-#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_RCC_SECURITY) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_RCC_SECURITY)
 // Call Stack, function with:
 // 
 // == C++ Exceptions == | == SEH3 Exceptions ==
@@ -294,14 +292,14 @@ template<size_t kMaxDepth> FORCEINLINE uint32_t detectDllByExceptionChain(void* 
         // check for end of chain in ntdll.
         if (!(kFlags & Security::kCheckNoThreadInit) && (stkPtr[0] == 0xFFFFFFFF))
         {
-            // check if handler chain init in roblox. (equivalent to "addr - base >= size")
+            // check if handler chain init in anorrl. (equivalent to "addr - base >= size")
             if ((stkPtr[kStackEndingArgIdx] + textEndNeg ) <= textSizeNeg)
             {
                 result |= 1 << (i*3);
             }
             break;
         }
-        // check if handler in roblox code. (equivalent to "addr - base >= size")
+        // check if handler in anorrl code. (equivalent to "addr - base >= size")
         if ((stkPtr[kStackHandlerIdx] + textEndNeg ) <= textSizeNeg)
         {
             result |= 1 << (i*3 + 1);

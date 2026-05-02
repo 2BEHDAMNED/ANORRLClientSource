@@ -183,7 +183,7 @@ bool DataModel::uploadPlace(const std::string& uploadUrl, const SaveFilter saveF
 	try
 	{
 
-		if( !ARL::Http::isRobloxSite(uploadUrl.c_str()) )
+		if( !ARL::Http::isANORRLSite(uploadUrl.c_str()) )
 			return uploadPlaceReturn(false, "Url is invalid", resumeFunction, errorFunction);
 
 		// serialize the datamodel

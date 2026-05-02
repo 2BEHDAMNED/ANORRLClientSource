@@ -33,7 +33,7 @@ int Bridge<EventInstance>::on_index(const EventInstance& object, const char* nam
 		return 1;
 	}
 
-	// TODO: Remove this when we remove it from any Roblox scripts.
+	// TODO: Remove this when we remove it from any ANORRL scripts.
 	if (strcmp(name, "connectFirst")==0 || strcmp(name, "ConnectFirst") == 0)
 	{
 		ARL::Security::Context::current().requirePermission(ARL::Security::LocalUser, "connectFirst");
@@ -42,7 +42,7 @@ int Bridge<EventInstance>::on_index(const EventInstance& object, const char* nam
 		return 1;
 	}
 
-	// TODO: Remove this when we remove it from any Roblox scripts.
+	// TODO: Remove this when we remove it from any ANORRL scripts.
 	if (strcmp(name, "connectLast")==0 || strcmp(name, "ConnectLast") == 0)
 	{
 		ARL::Security::Context::current().requirePermission(ARL::Security::LocalUser, "connectLast");
@@ -319,7 +319,7 @@ public:
 
 int EventBridge::connect(lua_State *L) 
 {
-	RobloxExtraSpace* space = RobloxExtraSpace::get(L);
+	ANORRLExtraSpace* space = ANORRLExtraSpace::get(L);
 	EventInstance& ei(getObject(L, 1));
 	
 	rbx::signals::connection connection;
@@ -381,8 +381,8 @@ int EventBridge::wait(lua_State *L)
 			wrapper->slot.assignConnection(ei.descriptor->connectGeneric(source.get(), wrapper));
 		}
 
-		ARLASSERT(!RobloxExtraSpace::get(L)->yieldCaptured);
-		RobloxExtraSpace::get(L)->yieldCaptured = true;
+		ARLASSERT(!ANORRLExtraSpace::get(L)->yieldCaptured);
+		ANORRLExtraSpace::get(L)->yieldCaptured = true;
 	}
 
 	return lua_yield(L, 0);

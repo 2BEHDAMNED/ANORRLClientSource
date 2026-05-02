@@ -67,7 +67,7 @@ while Player == nil do
 	Player = PlayersService.LocalPlayer
 end
 
-local GuiRoot = CoreGuiService:WaitForChild('RobloxGui')
+local GuiRoot = CoreGuiService:WaitForChild('ANORRLGui')
 
 if not GuiRoot:FindFirstChild("Modules") then return nil end
 
@@ -676,9 +676,9 @@ end
 --- SETTINGS ---
 local function CreateSettingsIcon(topBarInstance)
 	local MenuModule = nil
-	game.CoreGui.RobloxGui.Modules:WaitForChild("Settings")
-	game.CoreGui.RobloxGui.Modules.Settings:WaitForChild("SettingsHub")
-	MenuModule = require(game.CoreGui.RobloxGui.Modules.Settings.SettingsHub)
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("Settings")
+	game.CoreGui.ANORRLGui.Modules.Settings:WaitForChild("SettingsHub")
+	MenuModule = require(game.CoreGui.ANORRLGui.Modules.Settings.SettingsHub)
 
 	local settingsIconButton = Util.Create'ImageButton'
 	{
@@ -843,9 +843,9 @@ local function CreateChatIcon()
 	local ChatModule = require(GuiRoot.Modules.Chat)
 	
 	local MenuModule = nil
-	game.CoreGui.RobloxGui.Modules:WaitForChild("Settings")
-	game.CoreGui.RobloxGui.Modules.Settings:WaitForChild("SettingsHub")
-	MenuModule = require(game.CoreGui.RobloxGui.Modules.Settings.SettingsHub)
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("Settings")
+	game.CoreGui.ANORRLGui.Modules.Settings:WaitForChild("SettingsHub")
+	MenuModule = require(game.CoreGui.ANORRLGui.Modules.Settings.SettingsHub)
 
 	local bubbleChatIsOn = not PlayersService.ClassicChat and PlayersService.BubbleChat
 	local debounce = 0
@@ -1126,8 +1126,8 @@ end
 --- EMOTES ---
 local function CreateEmotesIcon()
 	local MenuModule = nil
-	game.CoreGui.RobloxGui.Modules:WaitForChild("Emotes")
-	MenuModule = require(game.CoreGui.RobloxGui.Modules.Emotes)
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("Emotes")
+	MenuModule = require(game.CoreGui.ANORRLGui.Modules.Emotes)
 	local emotesActive = false
 
 	local emotesIconButton = Util.Create'ImageButton'

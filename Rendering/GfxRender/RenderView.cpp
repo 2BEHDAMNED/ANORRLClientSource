@@ -43,9 +43,7 @@
 #include "MaterialGenerator.h"
 #include "GeometryGenerator.h"
 
-#if !defined(ARL_PLATFORM_DURANGO)
 #include "ObjectExporter.h"
-#endif
 #include "TextureAtlas.h"
 
 #include "FastLog.h"
@@ -71,7 +69,7 @@
 
 #include "GfxBase/AdornBillboarder.h"
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include <mmsystem.h>
 #endif
 
@@ -269,7 +267,7 @@ RenderView::RenderView(CRenderSettings::GraphicsMode graphicsMode, OSContext* co
 {
 	FASTLOG1(FLog::ViewRbxInit, "RenderView created - %p", this);
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	timeBeginPeriod(1);
 #endif
 
@@ -396,7 +394,7 @@ RenderView::~RenderView(void)
 {	
 	bindWorkspace(boost::shared_ptr<ARL::DataModel>());
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	timeEndPeriod(1);
 #endif
 	FASTLOG(FLog::ViewRbxInit, "RenderView destroyed");
@@ -478,7 +476,7 @@ void RenderView::updateFog()
 	}
 }
 
-void RenderView::updateLighting(Lighting* lighting)
+void RenderView::updateLighting(Lighting* lighting, bool skipEffects)
 {
     SceneManager* smgr = visualEngine->getSceneManager();
 
@@ -503,39 +501,6 @@ void RenderView::updateLighting(Lighting* lighting)
             // Update clear color for time-of-day
             lighting->setClearColor(lighting->getSkyParameters().skyAmbient);
         }
-
-		float brightnessIntensity = 0.0f;
-		float contrastIntensity = 0.0f;
-		float saturationIntensity = 0.0f;
-		float blurIntensity = 0.0f;
-		G3D::Color3 tintColorIntensity = G3D::Color3::white();
-
-		// this is fine
-		if (Instance* inst = lighting->findFirstChildOfType("BlurEffect")) {
-
-			// oh my god what am i doing
-			if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
-				if (blur->isEnabled())
-					blurIntensity = (blur->getSize()/56.f)*15.f;
-			}
-		}
-		
-		if (Instance* inst = lighting->findFirstChildOfType("ColorCorrectionEffect")) {
-
-			// oh my god what am i doing
-			if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
-				if (colorCorrection->isEnabled()) {
-					brightnessIntensity = colorCorrection->getBrightness();
-					contrastIntensity = colorCorrection->getContrast();
-					saturationIntensity = colorCorrection->getSaturation();
-					tintColorIntensity = colorCorrection->getTintColor();
-				}
-					
-			}
-		}
-
-		// yep
-		smgr->setPostProcess(brightnessIntensity, contrastIntensity, -saturationIntensity, blurIntensity, tintColorIntensity);
 
         // Lighting
         presetLighting(lighting);
@@ -985,7 +950,57 @@ void RenderView::renderPrepareImpl(IMetric* metric, bool updateViewport)
 
     adorn->postSubmitPass();
 
-    updateLighting(lighting);
+	float brightnessIntensity = 0.0f;
+	float contrastIntensity = 0.0f;
+	float saturationIntensity = 0.0f;
+	float blurIntensity = 0.0f;
+	G3D::Color3 tintColorIntensity = G3D::Color3::white();
+	
+	// this is fine
+	if (Instance* inst = cameraobj->findFirstChildOfType("BlurEffect")) {
+
+		// oh my god what am i doing
+		if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
+			if (blur->isEnabled())
+				blurIntensity = (blur->getSize() / 56.f)*15.f;
+		}
+	} else if (Instance* inst = lighting->findFirstChildOfType("BlurEffect")) {
+		// oh my god what am i doing
+		if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
+			if (blur->isEnabled())
+				blurIntensity = (blur->getSize() / 56.f)*15.f;
+		}
+	}
+
+
+	if (Instance* inst = cameraobj->findFirstChildOfType("ColorCorrectionEffect")) {
+
+		// oh my god what am i doing
+		if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
+			if (colorCorrection->isEnabled()) {
+				brightnessIntensity = colorCorrection->getBrightness();
+				contrastIntensity = colorCorrection->getContrast();
+				saturationIntensity = colorCorrection->getSaturation();
+				tintColorIntensity = colorCorrection->getTintColor();
+			}
+
+		}
+	} else if (Instance* inst = lighting->findFirstChildOfType("ColorCorrectionEffect")) {
+		// oh my god what am i doing
+		if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
+			if (colorCorrection->isEnabled()) {
+				brightnessIntensity = colorCorrection->getBrightness();
+				contrastIntensity = colorCorrection->getContrast();
+				saturationIntensity = colorCorrection->getSaturation();
+				tintColorIntensity = colorCorrection->getTintColor();
+			}
+		}
+	}
+
+	// yep
+	visualEngine->getSceneManager()->setPostProcess(brightnessIntensity, contrastIntensity, -saturationIntensity, blurIntensity, tintColorIntensity);
+	
+    updateLighting(lighting, cameraobj->findFirstChildOfType("PostEffect") != NULL);
 
     float dt = frm->GetFrameTimeStats().getLatest() / 1000.f;
 
@@ -994,13 +1009,6 @@ void RenderView::renderPrepareImpl(IMetric* metric, bool updateViewport)
     visualEngine->getSceneUpdater()->updatePrepare(0, *visualEngine->getUpdateFrustum());
 
     visualEngine->getTextureCompositor()->update(poi);
-    
-#if defined(ARL_PLATFORM_DURANGO)
-    if(ARL::PlatformService* platformService = ServiceProvider::find<PlatformService>(dataModel.get()))
-    {
-        presetPostProcess(platformService);
-    }
-#endif
     
     // Pass FRM configuration to shaders
     GlobalShaderData& globalShaderData = visualEngine->getSceneManager()->writeGlobalShaderData();
@@ -1557,15 +1565,6 @@ void RenderView::presetLighting(ARL::Lighting* l, const ARL::Color3& extraAmbien
 	smgr->setLighting(ambientColor, sunDirection, keyLightColor.min(Color3::white()), fillLightColor.min(Color3::white()));
 }
 
-void RenderView::presetPostProcess(ARL::PlatformService* platformService)
-{
-#if defined(ARL_PLATFORM_DURANGO)
-    SceneManager *smgr = visualEngine->getSceneManager();
-
-    smgr->setPostProcess(platformService->brightness, platformService->contrast, platformService->grayscaleLevel, platformService->blurIntensity, platformService->tintColor);
-#endif
-}
-
 static void waitForContent(ARL::ContentProvider* contentProvider)
 {
 	boost::xtime expirationTime;
@@ -1731,13 +1730,10 @@ void RenderView::renderThumb(unsigned char* data, int width, int height, bool cr
 }
 
 //
-//	Write render target to file, using user picture folder\Roblox 
+//	Write render target to file, using user picture folder\ANORRL 
 //
 bool RenderView::saveScreenshotToFile(std::string& /*output*/ filename)
 {
-#if defined(ARL_PLATFORM_DURANGO)
-    // TODO: implement screenshot for durango
-#else
 	Framebuffer* framebuffer = visualEngine->getDevice()->getMainFramebuffer();
 
 	if (framebuffer)
@@ -1776,7 +1772,6 @@ bool RenderView::saveScreenshotToFile(std::string& /*output*/ filename)
 
         return true;
 	}
-#endif
     return false;
 }
 
@@ -1792,23 +1787,15 @@ void RenderView::immediateAssetReload(const std::string& filePath)
 
 bool RenderView::exportSceneThumbJSON(ExporterSaveType saveType, ExporterFormat format, bool encodeBase64, std::string& strOut)
 {
-#if !defined(ARL_PLATFORM_DURANGO)
-    FASTLOG(FLog::ThumbnailRender, "Rendering thumbnail: populating scene graph, trigger resource load");
+	FASTLOG(FLog::ThumbnailRender, "Rendering thumbnail: populating scene graph, trigger resource load");
     prepareSceneGraph();
 
     return ObjectExporter::exportToJSON(saveType, format, dataModel.get(), visualEngine.get(), encodeBase64, &strOut);
-#else
-    return false;
-#endif
 }
 
 bool RenderView::exportScene(const std::string& filePath, ExporterSaveType saveType, ExporterFormat format)
 {
-#if !defined(ARL_PLATFORM_DURANGO)
     return ObjectExporter::exportToFile(filePath, saveType, format, dataModel.get(), visualEngine.get());
-#else
-    return false;
-#endif
 }
 
 

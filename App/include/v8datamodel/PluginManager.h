@@ -90,7 +90,7 @@ namespace ARL {
 		PluginMouse *getMouse() const { return mouse; }
 		shared_ptr<Instance> getMouseLua();
 		shared_ptr<Instance> createToolbar(std::string name);
-        void saveSelectedToRoblox();
+        void saveSelectedToANORRL();
 
         void setSetting(std::string key, Reflection::Variant value);
         Reflection::Variant getSetting(std::string key);

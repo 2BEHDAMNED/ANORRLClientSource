@@ -44,11 +44,11 @@ class GuiObject;
 
 extern const char *const sDataModel;
 
-static inline void robloxScriptModifiedCheck(ARL::Security::Permissions perm)
+static inline void anorrlScriptModifiedCheck(ARL::Security::Permissions perm)
 {
 #ifndef ARL_STUDIO_BUILD
-    ARL::Security::Context::current().requirePermission(ARL::Security::RobloxScript);
-    if (perm != ARL::Security::RobloxScript)
+    ARL::Security::Context::current().requirePermission(ARL::Security::ANORRLScript);
+    if (perm != ARL::Security::ANORRLScript)
     {
         throw std::runtime_error("");
     }
@@ -368,7 +368,7 @@ public:
 
 	int getPlaceID() const { return placeID; }
 	int getPlaceIDOrZeroInStudio();
-	void setPlaceID(int placeID, bool robloxPlace);
+	void setPlaceID(int placeID, bool anorrlPlace);
 
 	void setGameInstanceID(std::string gameInstanceID) { this->gameInstanceID = gameInstanceID; }
 	std::string getGameInstanceID() { return this->gameInstanceID; }
@@ -413,7 +413,7 @@ public:
 	void checkFetchExperimentalFeatures();
 
 	bool canSaveLocal() const;
-	void saveToRoblox(boost::function<void(bool)> resumeFunction, boost::function<void(std::string)> errorFunction);
+	void saveToANORRL(boost::function<void(bool)> resumeFunction, boost::function<void(std::string)> errorFunction);
 	void completeShutdown(bool saveLocal);
 	boost::function<bool()>				requestShutdownCallback;
 

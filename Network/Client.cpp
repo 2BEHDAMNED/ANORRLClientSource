@@ -54,7 +54,7 @@ REFLECTION_BEGIN();
 Reflection::BoundProp<std::string> Client::prop_Ticket("Ticket", "Authentication", &Client::ticket);
 static Reflection::BoundFuncDesc<Client, shared_ptr<Instance>(int, std::string, int, int, int)> f_connect(&Client::playerConnect, "PlayerConnect", "userId", "server", "serverPort", "clientPort", 0, "threadSleepTime", 30, Security::Plugin);
 static Reflection::BoundFuncDesc<Client, void(int)> f_disconnect(&Client::disconnect, "Disconnect", "blockDuration", 3000, Security::LocalUser);
-static Reflection::BoundFuncDesc<Client, void(std::string)> func_setGameSessionID(&Client::setGameSessionID, "SetGameSessionID", "gameSessionID", Security::Roblox);
+static Reflection::BoundFuncDesc<Client, void(std::string)> func_setGameSessionID(&Client::setGameSessionID, "SetGameSessionID", "gameSessionID", Security::ANORRL);
 static Reflection::EventDesc<Client, void(std::string, shared_ptr<ARL::Instance>)> event_ConnectionAccepted(&Client::connectionAcceptedSignal, "ConnectionAccepted", "peer", "replicator");
 static Reflection::EventDesc<Client, void(std::string)> event_ConnectionRejected(&Client::connectionRejectedSignal, "ConnectionRejected", "peer");
 static Reflection::EventDesc<Client, void(std::string, int, std::string)> event_ConnectionFailed(&Client::connectionFailedSignal, "ConnectionFailed", "peer", "code", "reason");
@@ -162,7 +162,7 @@ shared_ptr<Instance> Client::playerConnect(int userId, std::string server, int s
 		{
 			if (!lansubnet)
 			{
-				ARL::Security::Context::current().requirePermission(ARL::Security::Roblox, " connect to an extranet game");
+				ARL::Security::Context::current().requirePermission(ARL::Security::ANORRL, " connect to an extranet game");
 			}
 		}
 	}
@@ -286,7 +286,7 @@ void Client::sendTicket()
 	// TODO: better way to track protocol changes between versions
 	// Network Protocol version 2
 	serializeStringCompressed(DebugSettings::singleton().osPlatform(), bitStream);
-    serializeStringCompressed(DebugSettings::singleton().getRobloxProductName(), bitStream);
+    serializeStringCompressed(DebugSettings::singleton().getANORRLProductName(), bitStream);
 
     serializeStringCompressed(Http::gameSessionID, bitStream);
 
@@ -380,7 +380,7 @@ void Client::HandleConnection(RakNet::Packet *packet)
 
         proxy->setAndLockParent(this);
 
-#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO) 
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) 
         VMProtectBeginMutation("25");
 		{
             weak_ptr<DataModel> weakDataModel = weak_from(DataModel::get(this));

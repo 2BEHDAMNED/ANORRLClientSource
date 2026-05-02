@@ -449,7 +449,7 @@ namespace ARL{ namespace HttpPlatformImpl {
 void init(Http::CookieSharingPolicy cookieSharingPolicy) { ARLASSERT(0); }
 void setCookiesForDomain(const std::string& domain, const std::string& cookies) { ARLASSERT(0); }
 void getCookiesForDomain(const std::string& domain, std::string& cookies) { ARLASSERT(0); }
-boost::filesystem::path getRobloxCookieJarPath() { ARLASSERT(0); return ""; }
+boost::filesystem::path getANORRLCookieJarPath() { ARLASSERT(0); return ""; }
 void setProxy(const std::string& host, long port) { ARLASSERT(0); }
 void perform(HttpOptions& options, std::string& response) { ARLASSERT(0); }
 

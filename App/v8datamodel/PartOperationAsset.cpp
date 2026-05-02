@@ -37,8 +37,8 @@ namespace ARL
 {
 using namespace Reflection;
 
-const Reflection::PropDescriptor<PartOperationAsset, BinaryString> PartOperationAsset::desc_ChildData("ChildData", category_Data, &PartOperationAsset::getChildData, &PartOperationAsset::setChildData, Reflection::PropertyDescriptor::CLUSTER, Security::Roblox);
-const Reflection::PropDescriptor<PartOperationAsset, BinaryString> PartOperationAsset::desc_MeshData("MeshData", category_Data, &PartOperationAsset::getMeshData, &PartOperationAsset::setMeshData, Reflection::PropertyDescriptor::STREAMING, Security::Roblox);
+const Reflection::PropDescriptor<PartOperationAsset, BinaryString> PartOperationAsset::desc_ChildData("ChildData", category_Data, &PartOperationAsset::getChildData, &PartOperationAsset::setChildData, Reflection::PropertyDescriptor::CLUSTER, Security::ANORRL);
+const Reflection::PropDescriptor<PartOperationAsset, BinaryString> PartOperationAsset::desc_MeshData("MeshData", category_Data, &PartOperationAsset::getMeshData, &PartOperationAsset::setMeshData, Reflection::PropertyDescriptor::STREAMING, Security::ANORRL);
 
 const char* const sPartOperationAsset = "PartOperationAsset";
 

@@ -11,22 +11,22 @@ local RESET_CHARACTER_GAME_ACTION = "ResetCharacterAction"
 -------------- SERVICES --------------
 local CoreGui = game:GetService("CoreGui")
 local ContextActionService = game:GetService("ContextActionService")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local GuiService = game:GetService("GuiService")
 local PlayersService = game:GetService("Players")
 
 ----------- UTILITIES --------------
-local utility = require(RobloxGui.Modules.Settings.Utility)
+local utility = require(ANORRLGui.Modules.Settings.Utility)
 
 ------------ Variables -------------------
 local PageInstance = nil
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 
 ----------- CLASS DECLARATION --------------
 
 local function Initialize()
-	local settingsPageFactory = require(RobloxGui.Modules.Settings.SettingsPageFactory)
+	local settingsPageFactory = require(ANORRLGui.Modules.Settings.SettingsPageFactory)
 	local this = settingsPageFactory:CreateNewPage()
 
 	this.DontResetCharFunc = function(isUsingGamepad)

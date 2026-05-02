@@ -54,7 +54,7 @@ void DumpErrorUploader::Upload(const std::string& url)
     hMutex = CreateMutex( 
         NULL,                        // default security descriptor
         TRUE,                       // own the mutex
-        TEXT("RobloxCrashDumpUploaderMutex"));  // object name
+        TEXT("ANORRLCrashDumpUploaderMutex"));  // object name
 
     if (hMutex == NULL) 
 	{
@@ -64,7 +64,7 @@ void DumpErrorUploader::Upload(const std::string& url)
 	{
         if ( GetLastError() == ERROR_ALREADY_EXISTS ) 
 		{
-			ARL::StandardOut::singleton()->printf(ARL::MESSAGE_INFO, "RobloxCrashDumpUploaderMutex already exists. Not uploading logs.");
+			ARL::StandardOut::singleton()->printf(ARL::MESSAGE_INFO, "ANORRLCrashDumpUploaderMutex already exists. Not uploading logs.");
 			return;
 		}
 	}

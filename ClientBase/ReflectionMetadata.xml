@@ -1,4 +1,4 @@
-<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://anorrl.lambda.cam/roblox.xsd" version="4">
+<anorrl xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://anorrl.lambda.cam/anorrl.xsd" version="4">
   <Item class="ReflectionMetadataClasses">
     <Properties></Properties>
     <Item class="ReflectionMetadataClass">
@@ -2567,7 +2567,7 @@
 
     <Item class="ReflectionMetadataClass">
       <Properties>
-        <string name="Name">RobloxReplicatedStorage</string>
+        <string name="Name">ANORRLReplicatedStorage</string>
         <bool name="Browsable">false</bool>
       </Properties>
     </Item>
@@ -2582,7 +2582,7 @@
       <Item class="ReflectionMetadataFunctions">
         <Item class="ReflectionMetadataMember">
           <Properties>
-            <string name="Name">RemoveRobloxLoadingScreen</string>
+            <string name="Name">RemoveANORRLLoadingScreen</string>
             <string name="summary">Removes the default ANORRL loading screen from view. Call this when you are ready to either show your own loading gui, or when the game is ready to play.</string>
           </Properties>
         </Item>

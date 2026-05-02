@@ -210,7 +210,7 @@ namespace ARL {
 	public:
 		CoreGuiService();
 
-		void createRobloxScreenGui();
+		void createANORRLScreenGui();
 
 		// for showing on screen messages, (duration == 0) for infinite time.
 		void displayOnScreenMessage(int slot, const std::string &message, double duration);
@@ -219,7 +219,7 @@ namespace ARL {
 		
 		void setGuiVisibility(bool visible);
 
-		// used to add/remove standard lua gui elements in (for ROBLOX in-game gui) -bt
+		// used to add/remove standard lua gui elements in (for ANORRL in-game gui) -bt
 		void addChild(Instance* instance);
 		void removeChild(Instance* instance);
 		void removeChild(const std::string &Name);
@@ -227,7 +227,7 @@ namespace ARL {
 
 		int getGuiVersion() const;
         
-        shared_ptr<ARL::ScreenGui> getRobloxScreenGui();
+        shared_ptr<ARL::ScreenGui> getANORRLScreenGui();
 
 		////////////////////////////////////////////////////////////////////////////////////
 		//

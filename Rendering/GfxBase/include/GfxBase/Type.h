@@ -25,6 +25,8 @@ namespace ARL {
 			FONT_COMICSANS,
 			FONT_SILKSCREEN,
 			FONT_PROXIMANOVA,
+			FONT_NOTOSANS,
+			FONT_NOTOSANSBOLD,
 			FONT_LAST
 		};
 		// Font drawing params - copied from G3D

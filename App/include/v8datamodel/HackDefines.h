@@ -120,7 +120,7 @@ namespace ARL
 {
 namespace Security
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 // This generates an "or" operation in a way that is closer to what a compiler would
 // generate.
 template<unsigned int key> __forceinline void setHackFlagVs(unsigned int& y, const unsigned int x)

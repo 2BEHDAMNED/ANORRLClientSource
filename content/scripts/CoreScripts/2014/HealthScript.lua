@@ -54,7 +54,7 @@ local capWidth = 7
 
 function CreateGui()
 	if HealthGui and #HealthGui:GetChildren() > 0 then 
-		HealthGui.Parent = Game.CoreGui.RobloxGui
+		HealthGui.Parent = Game.CoreGui.ANORRLGui
 		return 
 	end
 
@@ -145,7 +145,7 @@ function CreateGui()
 	healthBarRight.Parent = healthBar
 	healthBarRight.ImageColor3 = greenColor
 
-	HealthGui.Parent = Game.CoreGui.RobloxGui
+	HealthGui.Parent = Game.CoreGui.ANORRLGui
 end
 
 function UpdateGui(health)

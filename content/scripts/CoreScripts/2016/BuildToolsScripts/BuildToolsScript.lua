@@ -84,7 +84,7 @@ function showBuildToolsTutorial()
 	local firstPage = RbxGui.CreateImageTutorialPage(" ", "http://anorrl.lambda.cam/asset/?id=59162193", 359, 296, function() dismissTutorial() end, true)
 
 	RbxGui.AddTutorialPage(frame, firstPage)
-	frame.Parent = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+	frame.Parent = game:GetService("CoreGui"):FindFirstChild("ANORRLGui")
 	
 	game:GetService("GuiService"):AddCenterDialog(frame, Enum.CenterDialogType.UnsolicitedDialog,
 		--showFunction

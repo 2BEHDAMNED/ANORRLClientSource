@@ -25,7 +25,7 @@ using namespace ARL;
 
 REFLECTION_BEGIN();
 static Reflection::BoundFuncDesc<GlobalAdvancedSettings, std::string(std::string)> fun_getFastVariable(&GlobalAdvancedSettings::getFVariable, "GetFVariable", "name", Security::None);
-static Reflection::BoundFuncDesc<GlobalAdvancedSettings, shared_ptr<const ARL::Reflection::ValueTable>()> fun_getFastVariables(&GlobalAdvancedSettings::getFVariables, "GetFVariables", Security::RobloxScript);
+static Reflection::BoundFuncDesc<GlobalAdvancedSettings, shared_ptr<const ARL::Reflection::ValueTable>()> fun_getFastVariables(&GlobalAdvancedSettings::getFVariables, "GetFVariables", Security::ANORRLScript);
 static Reflection::BoundFuncDesc<GlobalAdvancedSettings, bool(std::string)> func_getFFlag(&GlobalAdvancedSettings::getFFlag, "GetFFlag", "name", Security::None);
 REFLECTION_END();
 
@@ -185,7 +185,7 @@ GlobalAdvancedSettings::~GlobalAdvancedSettings()
 	if (FFlag::DisableGlobalSettingsParentChange && (ARL::Security::Context::current().identity != ARL::Security::Anonymous))
 	{
 		try {
-			ARL::Security::Context::current().requirePermission(ARL::Security::RobloxScript, "set settings parent");
+			ARL::Security::Context::current().requirePermission(ARL::Security::ANORRLScript, "set settings parent");
 		}
 		catch (ARL::base_exception& e)
 		{
@@ -266,7 +266,7 @@ bool ARL::GlobalBasicSettings::isUserFeatureEnabled( std::string name )
 	if (ARL::Security::Context::current().identity != ARL::Security::Anonymous) 
 	{
 		try {
-			ARL::Security::Context::current().requirePermission(ARL::Security::RobloxScript, "set UserSettings parent");
+			ARL::Security::Context::current().requirePermission(ARL::Security::ANORRLScript, "set UserSettings parent");
 		} 
 		catch (ARL::base_exception& e) 
 		{

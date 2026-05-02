@@ -18,8 +18,8 @@ DYNAMIC_LOGVARIABLE(AnalyticsLog, 0)
 
 // google analytics
 FASTFLAG(DebugAnalyticsForceLotteryWin)
-DYNAMIC_FASTSTRING(RobloxAnalyticsURL)
-DYNAMIC_FASTFLAG(RobloxAnalyticsTrackingEnabled)
+DYNAMIC_FASTSTRING(ANORRLAnalyticsURL)
+DYNAMIC_FASTFLAG(ANORRLAnalyticsTrackingEnabled)
 DYNAMIC_FASTFLAG(DebugAnalyticsSendUserId)
 FASTFLAG(SendStudioEventsWithStudioSID)
 FASTFLAG(UseBuildGenericGameUrl)

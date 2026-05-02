@@ -10,15 +10,15 @@ local HttpService = game:GetService("HttpService")
 local UserInputService = game:GetService("UserInputService")
 
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 
 ----------- UTILITIES --------------
-local utility = require(RobloxGui.Modules.Settings.Utility)
+local utility = require(ANORRLGui.Modules.Settings.Utility)
 
 
 ----------- VARIABLES --------------
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 
 ----------- CONSTANTS --------------
 local HEADER_SPACING = 5

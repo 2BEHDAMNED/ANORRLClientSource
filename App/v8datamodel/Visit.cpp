@@ -18,9 +18,9 @@ using namespace ARL::Network;
 
 REFLECTION_BEGIN();
 // Still used
-static Reflection::BoundFuncDesc<Visit, void(std::string)> UploadUrlFunction(&Visit::setUploadUrl, "SetUploadUrl", "url", Security::Roblox);
-static Reflection::BoundFuncDesc<Visit, std::string()> getUploadUrl(&Visit::getUploadUrl, "GetUploadUrl", Security::Roblox);
-static Reflection::BoundFuncDesc<Visit, void(std::string, int)> desc_setPing( &Visit::setPing, "SetPing", "pingUrl", "interval", Security::Roblox);
+static Reflection::BoundFuncDesc<Visit, void(std::string)> UploadUrlFunction(&Visit::setUploadUrl, "SetUploadUrl", "url", Security::ANORRL);
+static Reflection::BoundFuncDesc<Visit, std::string()> getUploadUrl(&Visit::getUploadUrl, "GetUploadUrl", Security::ANORRL);
+static Reflection::BoundFuncDesc<Visit, void(std::string, int)> desc_setPing( &Visit::setPing, "SetPing", "pingUrl", "interval", Security::ANORRL);
 REFLECTION_END();
 
 

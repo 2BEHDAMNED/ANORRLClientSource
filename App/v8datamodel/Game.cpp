@@ -49,12 +49,7 @@ namespace ARL {
 		:Game(lockVerb, baseUrl, shouldShowLoadingScreen)
 	{
 		static boost::once_flag flag = BOOST_ONCE_INIT;
-#if 1
 		boost::call_once(&Network::initWithPlayerSecurity, flag);
-#else
-		// For testing security. Don't ship with this!
-		boost::call_once(&Network::initWithServerSecurity, flag);
-#endif
 	}
 
 	UnsecuredStudioGame::UnsecuredStudioGame(Verb* lockVerb, const char* baseUrl, bool isNetworked, bool showLoadingScreen)
@@ -72,8 +67,6 @@ namespace ARL {
 		ARL::Http::CookieSharingPolicy cookieSharingPolicy;
 #if defined(ARL_PLATFORM_IOS) || defined(__ANDROID__)
         cookieSharingPolicy = ARL::Http::CookieSharingSingleProcessMultipleThreads;
-#elif defined(ARL_PLATFORM_DURANGO)
-		cookieSharingPolicy = ARL::Http::CookieSharingSingleProcessMultipleThreads;
 #elif defined(_WIN32) || defined(__APPLE__)
 	if (DFFlag::PersistenceCurlCookies)
 	{
@@ -91,9 +84,7 @@ namespace ARL {
 #error Unsupported platform.
 #endif
 
-#if defined(ARL_PLATFORM_DURANGO)
-		Http::init(Http::XboxHttp, cookieSharingPolicy);
-#elif defined(_WIN32)
+#if defined(_WIN32)
 		Http::init(Http::WinInet, cookieSharingPolicy);
 #else
 		Http::init(Http::WinHttp, cookieSharingPolicy);

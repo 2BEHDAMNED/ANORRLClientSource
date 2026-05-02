@@ -23,14 +23,14 @@ local UserInputService = game:GetService("UserInputService")
 local GuiService = game:GetService("GuiService")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:FindFirstChild("RobloxGui")
+local ANORRLGui = CoreGui:FindFirstChild("ANORRLGui")
 local ContextActionService = game:GetService("ContextActionService")
 
 ------------------ VARIABLES --------------------
 local tenFootInterfaceEnabled = false
 do
-	RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-	tenFootInterfaceEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+	ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+	tenFootInterfaceEnabled = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 end
 
 
@@ -507,7 +507,7 @@ local function CreateDropDown(dropDownStringTable, startPosition, settingsHub)
 		Visible = false,
 		Selectable = false,
 		AutoButtonColor = false,
-		Parent = CoreGui.RobloxGui
+		Parent = CoreGui.ANORRLGui
 	};
 
 	local DropDownSelectionFrame = Util.Create'ImageLabel'
@@ -1137,7 +1137,7 @@ local function CreateSelector(selectionStringTable, startPosition)
 end
 
 local function ShowAlert(alertMessage, okButtonText, settingsHub, okPressedFunc, hasBackground)
-	if CoreGui.RobloxGui:FindFirstChild("AlertViewFullScreen") then return end
+	if CoreGui.ANORRLGui:FindFirstChild("AlertViewFullScreen") then return end
 
 	local NON_SELECTED_TEXT_COLOR = Color3.new(59/255, 166/255, 241/255)
 	local SELECTED_TEXT_COLOR = Color3.new(1,1,1)
@@ -1153,7 +1153,7 @@ local function ShowAlert(alertMessage, okButtonText, settingsHub, okPressedFunc,
 		Size = UDim2.new(0, 400, 0, 350),
 		Position = UDim2.new(0.5, -200, 0.5, -175),
 		ZIndex = 9,
-		Parent = CoreGui.RobloxGui
+		Parent = CoreGui.ANORRLGui
 	};
 	if hasBackground then 
 		AlertViewBacking.ImageTransparency = 0
@@ -1162,9 +1162,9 @@ local function ShowAlert(alertMessage, okButtonText, settingsHub, okPressedFunc,
 		AlertViewBacking.Position = UDim2.new(0.1, 0, 0.1, 0)
 	end
 
-	if CoreGui.RobloxGui.AbsoluteSize.Y <= AlertViewBacking.Size.Y.Offset then
+	if CoreGui.ANORRLGui.AbsoluteSize.Y <= AlertViewBacking.Size.Y.Offset then
 		AlertViewBacking.Size = UDim2.new(AlertViewBacking.Size.X.Scale, AlertViewBacking.Size.X.Offset, 
-											AlertViewBacking.Size.Y.Scale, CoreGui.RobloxGui.AbsoluteSize.Y)
+											AlertViewBacking.Size.Y.Scale, CoreGui.ANORRLGui.AbsoluteSize.Y)
 		AlertViewBacking.Position = UDim2.new(0.5, -AlertViewBacking.Size.X.Offset/2, 0.5, -AlertViewBacking.Size.Y.Offset/2)
 	end
 
@@ -1805,7 +1805,7 @@ local function AddNewRow(pageToAddTo, rowDisplayName, selectionType, rowValues, 
 		end)
 
 		local setRowSelection = function()
-			local fullscreenDropDown = CoreGui.RobloxGui:FindFirstChild("DropDownFullscreenFrame")
+			local fullscreenDropDown = CoreGui.ANORRLGui:FindFirstChild("DropDownFullscreenFrame")
 			if fullscreenDropDown and fullscreenDropDown.Visible then return end
 
 			local valueFrame = ValueChangerSelection
@@ -1842,7 +1842,7 @@ local function AddNewRow(pageToAddTo, rowDisplayName, selectionType, rowValues, 
 
 	if isARealRow then
 		local setRowSelection = function()
-			local fullscreenDropDown = CoreGui.RobloxGui:FindFirstChild("DropDownFullscreenFrame")
+			local fullscreenDropDown = CoreGui.ANORRLGui:FindFirstChild("DropDownFullscreenFrame")
 			if fullscreenDropDown and fullscreenDropDown.Visible then return end
 
 			local valueFrame = ValueChangerInstance.SliderFrame 

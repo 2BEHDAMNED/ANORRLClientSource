@@ -193,7 +193,7 @@ HANDLE  g_hConsoleOut;                   // Handle to debug console
 
 
 
-RobloxCrashReporter::RobloxCrashReporter(const char* outputPath, const char* appName, const char* crashExtention)
+ANORRLCrashReporter::ANORRLCrashReporter(const char* outputPath, const char* appName, const char* crashExtention)
 {
 	controls.minidumpType=MiniDumpWithDataSegs;
 	
@@ -208,9 +208,9 @@ RobloxCrashReporter::RobloxCrashReporter(const char* outputPath, const char* app
 	strncpy(controls.crashExtention, crashExtention, sizeof(controls.crashExtention));
 }
 
-bool RobloxCrashReporter::silent;
+bool ANORRLCrashReporter::silent;
 
-LONG RobloxCrashReporter::ProcessException(struct _EXCEPTION_POINTERS *info, bool noMsg)
+LONG ANORRLCrashReporter::ProcessException(struct _EXCEPTION_POINTERS *info, bool noMsg)
 {
 	LogManager::ReportEvent(EVENTLOG_INFORMATION_TYPE, "StartProcessException...");
 
@@ -231,7 +231,7 @@ LONG RobloxCrashReporter::ProcessException(struct _EXCEPTION_POINTERS *info, boo
 	return result;	
 }
 
-void RobloxCrashReporter::logEvent(const char* msg)
+void ANORRLCrashReporter::logEvent(const char* msg)
 {
 	LogManager::ReportEvent(EVENTLOG_INFORMATION_TYPE, msg);
 }
@@ -240,7 +240,7 @@ void MainLogManager::WriteCrashDump()
 {
 	std::string appName = "log_";
 	appName += getSessionId();
-	crashReporter.reset(new RobloxCrashReporter((LPCTSTR) GetLogPath(), appName.c_str(), crashExtention));
+	crashReporter.reset(new ANORRLCrashReporter((LPCTSTR) GetLogPath(), appName.c_str(), crashExtention));
 	crashReporter->Start();
 	CString eventMessage;
 	eventMessage.Format("CrashReporter Start");

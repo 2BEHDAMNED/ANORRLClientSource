@@ -21,7 +21,7 @@ local TeleportService = game:GetService('TeleportService')
 local HttpService = game:GetService("HttpService")
 local ContextActionService = game:GetService("ContextActionService")
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local Settings = UserSettings()
 local GameSettings = Settings.GameSettings
 
@@ -47,8 +47,8 @@ local BindableEvent_SendNotification = Instance.new('BindableFunction')
 BindableEvent_SendNotification.Name = "SendNotification"
 BindableEvent_SendNotification.Parent = RbxGui
 local isPaused = false
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 
 local pointsNotificationsActive = true
 local badgesNotificationsActive = true
@@ -345,8 +345,8 @@ end
 
 -- New follower notification
 spawn(function()
-	local RobloxReplicatedStorage = game:GetService('RobloxReplicatedStorage')
-	local RemoteEvent_NewFollower = RobloxReplicatedStorage:WaitForChild('NewFollower')
+	local ANORRLReplicatedStorage = game:GetService('ANORRLReplicatedStorage')
+	local RemoteEvent_NewFollower = ANORRLReplicatedStorage:WaitForChild('NewFollower')
 	--
 	RemoteEvent_NewFollower.OnClientEvent:connect(function(followerRbxPlayer)
 		sendNotifcation("New Follower", followerRbxPlayer.Name.." is now following you!",
@@ -557,7 +557,7 @@ else
 end
 
 if not isTenFootInterface then
-	local gamepadMenu = RobloxGui:WaitForChild("CoreScripts/GamepadMenu")
+	local gamepadMenu = ANORRLGui:WaitForChild("CoreScripts/GamepadMenu")
 	local gamepadNotifications = gamepadMenu:FindFirstChild("GamepadNotifications")
 	while not gamepadNotifications do
 		wait()
@@ -593,7 +593,7 @@ if not isTenFootInterface then
 			ContextActionService:BindCoreAction("LeaveNotificationSelection", leaveNotificationFunc, false, Enum.KeyCode.ButtonB)
 		else
 			isPaused = false
-			local utility = require(RobloxGui.Modules.Settings.Utility)
+			local utility = require(ANORRLGui.Modules.Settings.Utility)
 			local okPressedFunc = function() end
 			utility:ShowAlert("You have no notifications", "Ok", settingsHub, okPressedFunc, true)
 		end
@@ -610,7 +610,7 @@ end
 
 local UserInputService = game:GetService('UserInputService')
 local Platform = UserInputService:GetPlatform()
-local Modules = RobloxGui:FindFirstChild('Modules')
+local Modules = ANORRLGui:FindFirstChild('Modules')
 if Platform == Enum.Platform.XBoxOne then
 	-- Platform hook for controller connection events
 	-- Displays overlay to user on controller connection lost

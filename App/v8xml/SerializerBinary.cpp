@@ -1530,7 +1530,7 @@ namespace ARL
 			MemoryOutputStream stream("End");
 			
 			// This footer is required for the Web code to validate that the file is not truncated
-			const char* footer = "</roblox>";
+			const char* footer = "</anorrl>";
 			
 			stream.write(footer, strlen(footer));
 			

@@ -503,8 +503,7 @@ namespace ARL
 
 					std::string currString = s.substr(0,pos);
 
-					if (currString.size() >= 11 &&
-                        (currString.find(".lambda.cam") != std::string::npos || currString.find(".robloxlabs.com") != std::string::npos))
+					if (currString.size() >= 11 && currString.find(".lambda.cam") != std::string::npos)
 						foundIt = true;
 
 					while(!foundIt && !externalRequest)
@@ -520,8 +519,7 @@ namespace ARL
 						currString = s.substr(pos,nextReturn - pos);
 						safeToLower(currString);
 
-                        if (currString.size() >= 11 &&
-                            (currString.find(".lambda.cam") != std::string::npos || currString.find(".robloxlabs.com") != std::string::npos))
+                        if (currString.size() >= 11 && currString.find(".lambda.cam") != std::string::npos)
                             foundIt = true;
 
 						if(!foundIt && nextReturn == s.size())

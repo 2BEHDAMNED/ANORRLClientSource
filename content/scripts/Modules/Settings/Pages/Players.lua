@@ -6,7 +6,7 @@
 --]]
 -------------- SERVICES --------------
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local GuiService = game:GetService("GuiService")
 local PlayersService = game:GetService('Players')
 local HttpService = game:GetService('HttpService')
@@ -16,9 +16,9 @@ local Settings = UserSettings()
 local GameSettings = Settings.GameSettings
 
 ----------- UTILITIES --------------
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local utility = require(RobloxGui.Modules.Settings.Utility)
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local utility = require(ANORRLGui.Modules.Settings.Utility)
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 
 ------------ Constants -------------------
 local frameDefaultTransparency = .85
@@ -30,7 +30,7 @@ local localPlayer = PlayersService.LocalPlayer
 
 ----------- CLASS DECLARATION --------------
 local function Initialize()
-	local settingsPageFactory = require(RobloxGui.Modules.Settings.SettingsPageFactory)
+	local settingsPageFactory = require(ANORRLGui.Modules.Settings.SettingsPageFactory)
 	local this = settingsPageFactory:CreateNewPage()
 
 	local playerLabelFakeSelection = Instance.new('ImageLabel')
@@ -181,7 +181,7 @@ local function Initialize()
 	end)
 
 	if utility:IsSmallTouchScreen() then
-		local spaceFor3Buttons = RobloxGui.AbsoluteSize.x >= 720	-- else there is only space for 2
+		local spaceFor3Buttons = ANORRLGui.AbsoluteSize.x >= 720	-- else there is only space for 2
 
 		local resetFunc = function()
 			this.HubRef:SwitchToPage(this.HubRef.ResetCharacterPage, false, 1)

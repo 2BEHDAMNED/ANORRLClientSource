@@ -16,7 +16,7 @@ local UserInputService = game:GetService('UserInputService')
 local RunService = game:GetService("RunService")
 
 --[[ Script Variables ]]--
-local RobloxGui = script.Parent
+local ANORRLGui = script.Parent
 local ThirdPartyProductName = nil
 
 --[[ Flags ]]--
@@ -30,8 +30,8 @@ local IsCurrentlyPrompting = false
 local IsCurrentlyPurchasing = false
 local IsPurchasingConsumable = false
 local IsCheckingPlayerFunds = false
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local TenFootInterface = require(RobloxGui.Modules.TenFootInterface)
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local TenFootInterface = require(ANORRLGui.Modules.TenFootInterface)
 local isTenFootInterface = TenFootInterface:IsEnabled()
 local freezeControllerActionName = "doNothingActionPrompt"
 local freezeThumbstick1Name = "doNothingThumbstickPrompt"
@@ -254,7 +254,7 @@ end
 --[[ Begin Gui Creation ]]--
 local PurchaseDialog = isTenFootInterface and createFrame("PurchaseDialog", DIALOG_SIZE_TENFOOT, HIDE_POSITION_TENFOOT, 1, nil) or createFrame("PurchaseDialog", DIALOG_SIZE, HIDE_POSITION, 1, nil)
 PurchaseDialog.Visible = false
-PurchaseDialog.Parent = RobloxGui
+PurchaseDialog.Parent = ANORRLGui
 
 	local ContainerFrame = createFrame("ContainerFrame", UDim2.new(1, 0, 1, 0), nil, 1, nil)
 	ContainerFrame.Parent = PurchaseDialog
@@ -622,7 +622,7 @@ local function getRobuxProduct(amountNeeded, isBCMember)
 
 	if platform == Enum.Platform.XBoxOne then
 		productArray = {}
-		local platformCatalogData = require(RobloxGui.Modules.PlatformCatalogData)
+		local platformCatalogData = require(ANORRLGui.Modules.PlatformCatalogData)
 
 		local catalogInfo = platformCatalogData:GetCatalogInfoAsync()
 		if catalogInfo then
@@ -667,7 +667,7 @@ local function getRobuxProductToBuyItem(amountNeeded)
 		end
 		appPrefix = "com.anorrl.client."
 	elseif platform == Enum.Platform.XBoxOne then
-		local platformCatalogData = require(RobloxGui.Modules.PlatformCatalogData)
+		local platformCatalogData = require(ANORRLGui.Modules.PlatformCatalogData)
 
 		local catalogInfo = platformCatalogData:GetCatalogInfoAsync()
 		if catalogInfo then

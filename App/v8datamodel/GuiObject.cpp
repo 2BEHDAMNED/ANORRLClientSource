@@ -951,7 +951,7 @@ void GuiObject::setBorderSizePixel(int value)
 
 void GuiObject::setZIndex(int value)
 {
-	if(ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript)){
+	if(ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript)){
 		//We can access level 0 
 		if(value < GuiBase::minZIndex()) 
 			value = GuiBase::minZIndex();
@@ -2018,7 +2018,7 @@ bool GuiObject::isSelectedObject()
 const char* const  sGuiButton = "GuiButton";
 
 REFLECTION_BEGIN();
-static const Reflection::BoundFuncDesc<GuiButton, void(std::string)> func_setVerb(&GuiButton::setVerb,"SetVerb", "verb", Security::RobloxScript);
+static const Reflection::BoundFuncDesc<GuiButton, void(std::string)> func_setVerb(&GuiButton::setVerb,"SetVerb", "verb", Security::ANORRLScript);
 
 static Reflection::RemoteEventDesc<GuiButton, void()>		   event_MouseButton1Click(&GuiButton::mouseButton1ClickSignal, "MouseButton1Click", Security::None, Reflection::RemoteEventCommon::SCRIPTING, Reflection::RemoteEventCommon::CLIENT_SERVER);
 static Reflection::RemoteEventDesc<GuiButton, void()>		   event_MouseButton2Click(&GuiButton::mouseButton2ClickSignal, "MouseButton2Click", Security::None, Reflection::RemoteEventCommon::SCRIPTING, Reflection::RemoteEventCommon::CLIENT_SERVER);

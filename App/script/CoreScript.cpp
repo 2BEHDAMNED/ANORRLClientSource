@@ -19,7 +19,7 @@ namespace ARL
 		:Super()
 	{
 		setName(sCoreScript);
-		setRobloxLocked(true);
+		setANORRLLocked(true);
 	}
 
 	// used to make sure corescripts not in the workspace still get removed properly

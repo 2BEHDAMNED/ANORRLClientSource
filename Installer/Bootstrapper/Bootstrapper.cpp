@@ -755,7 +755,7 @@ void Bootstrapper::postData(std::fstream &data)
 	std::string v = vi.GetFileVersionAsDotString();
 
 	std::string url = format_string("/Error/InstallLog.ashx?version=%s&stage=%02d&guid=%d", v.c_str(), stage, reportStatGuid);
-	HttpTools::httpPost(this, GetUseDataDomain() ? ReplaceTopSubdomain(baseHost, "data") : baseHost, url, data, "text/plain", result, true, boost::bind(&Bootstrapper::dummyProgress, _1, _2));
+	HttpTools::httpPost(this, baseHost, url, data, "text/plain", result, true, boost::bind(&Bootstrapper::dummyProgress, _1, _2));
 	result << (char)0;
 	LOG_ENTRY1("Uploading log file result: %s", result.str());
 }

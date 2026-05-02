@@ -194,16 +194,7 @@ void System::init() {
 
 
     // Get the operating system name (also happens to read some other information)
-#    ifdef ARL_PLATFORM_DURANGO
-
-    m_hasSSE = true;
-    m_hasSSE2 = true;
-    m_hasSSE3 = true;
-    m_numCores = 6;
-    m_operatingSystem = "Durango";
-    m_cpuSpeed = 999;
-     
-#    elif defined(G3D_WIN32)
+#    if defined(G3D_WIN32)
 		bool success = false;
         // Note that this overrides some of the values computed above
         m_cpuSpeed = 999;
@@ -627,7 +618,7 @@ std::string System::currentDateString() {
     return format("%d-%02d-%02d", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday); 
 }
 
-#if defined(_MSC_VER) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_MSC_VER)
 
 
 // VC on Intel
@@ -651,7 +642,7 @@ void System::cpuid(CPUIDFunction func, uint32& areg, uint32& breg, uint32& creg,
     dreg = d;
 }
 
-#elif (defined(ARL_PLATFORM_DURANGO) || defined(G3D_OSX) || defined(G3D_IOS) || defined(G3D_ANDROID)) && ! defined(G3D_OSX_INTEL)
+#elif (defined(G3D_OSX) || defined(G3D_IOS) || defined(G3D_ANDROID)) && ! defined(G3D_OSX_INTEL)
 
 // no CPUID
 void System::cpuid(CPUIDFunction func, uint32& eax, uint32& ebx, uint32& ecx, uint32& edx) {
@@ -661,7 +652,7 @@ void System::cpuid(CPUIDFunction func, uint32& eax, uint32& ebx, uint32& ecx, ui
     edx = 0;
 }
 
-#elif !defined(ARL_PLATFORM_DURANGO)
+#else
 
 // See http://sam.zoy.org/blog/2007-04-13-shlib-with-non-pic-code-have-inline-assembly-and-pic-mix-well
 // for a discussion of why the second version saves ebx; it allows 32-bit code to compile with the -fPIC option.

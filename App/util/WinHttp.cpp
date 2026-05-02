@@ -132,7 +132,7 @@ namespace ARL
 			throw ARL::runtime_error("'%s' is missing a hostName", theUrl.c_str());
 
 		// Use WinHttpOpen to obtain a session handle.
-		WINHTTPHINTERNET hSession = ::WinHttpOpen( L"Roblox/WinHttp", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0 );	
+		WINHTTPHINTERNET hSession = ::WinHttpOpen( L"ANORRL/WinHttp", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0 );	
 		ThrowIfFailure(hSession!=NULL, "WinHttpOpen");
 
 		bool isHttps = u.GetScheme()==ATL_URL_SCHEME_HTTPS;

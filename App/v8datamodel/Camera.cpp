@@ -22,6 +22,7 @@
 #include "Util/UserInputBase.h"
 #include "v8datamodel/GameBasicSettings.h"
 #include "FastLog.h"
+#include "v8datamodel/PostEffect.h"
 
 #include <algorithm>
 
@@ -64,7 +65,7 @@ static Reflection::BoundFuncDesc<Camera, float(void)> func_getTiltSpeed(&Camera:
 static Reflection::BoundFuncDesc<Camera, float(void)> func_getPanSpeed(&Camera::getPanSpeed, "GetPanSpeed", Security::None);
 
 static Reflection::BoundFuncDesc<Camera, void(Camera::CameraPanMode)> func_setCameraPanMode(&Camera::setCameraPanMode, "SetCameraPanMode", "mode", Camera::CAMERAPANMODE_CLASSIC, Security::None);
-static Reflection::BoundFuncDesc<Camera, bool(float)> func_zoom(&Camera::zoom, "Zoom", "distance", Security::RobloxScript);
+static Reflection::BoundFuncDesc<Camera, bool(float)> func_zoom(&Camera::zoom, "Zoom", "distance", Security::ANORRLScript);
 
 static Reflection::BoundFuncDesc<Camera, void(int)> func_panUnits(&Camera::panUnits, "PanUnits", "units", Security::None);
 static Reflection::BoundFuncDesc<Camera, bool(int)> func_tiltUnits(&Camera::tiltUnits, "TiltUnits", "units", Security::None);
@@ -72,7 +73,7 @@ static Reflection::BoundFuncDesc<Camera, bool(int)> func_tiltUnits(&Camera::tilt
 static Reflection::BoundFuncDesc<Camera, void(CoordinateFrame, CoordinateFrame, float)> func_interpolateCamera(&Camera::beginCameraInterpolation, "Interpolate", "endPos", "endFocus", "duration", Security::None);
 static Reflection::EventDesc<Camera, void()> event_doneInterpolating(&Camera::interpolationFinishedSignal, "InterpolationFinished");
 
-static Reflection::EventDesc<Camera, void(bool)> event_firstPersonTransition(&Camera::firstPersonTransitionSignal, "FirstPersonTransition", "entering", Security::RobloxPlace);
+static Reflection::EventDesc<Camera, void(bool)> event_firstPersonTransition(&Camera::firstPersonTransitionSignal, "FirstPersonTransition", "entering", Security::ANORRLPlace);
 
 static Reflection::PropDescriptor<Camera, bool> desc_HeadLocked("HeadLocked", category_Data, &Camera::getHeadLocked, &Camera::setHeadLocked);
 static Reflection::BoundFuncDesc<Camera, CoordinateFrame()> func_GetRenderCFrame(&Camera::getRenderingCoordinateFrameLua, "GetRenderCFrame", Security::None);
@@ -167,6 +168,11 @@ Camera::Camera() :
 bool Camera::askSetParent(const Instance* instance) const
 {
 	return Instance::fastDynamicCast<Workspace>(instance)!=NULL;
+}
+
+bool Camera::askAddChild(const Instance* instance) const
+{
+	return Instance::fastDynamicCast<PostEffect>(instance) != NULL;
 }
 
 // static

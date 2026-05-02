@@ -163,7 +163,7 @@ namespace ARL
 		};
 		rbx::safe_queue<WaitingThread> waitingThreads;
 
-		bool robloxPlace;
+		bool anorrlPlace;
 		bool scriptsDisabled;	// == don't run the scripts contained in BaseScript objects
 		bool preventNewConnection;
 
@@ -242,7 +242,7 @@ namespace ARL
 
 		////////////////////////////////////////////////
 		// Configuration
-		void setRobloxPlace(bool robloxPlace);
+		void setANORRLPlace(bool anorrlPlace);
         void initializeLuaStateSandbox(Lua::WeakThreadRef& threadRef, lua_State* parentState, Security::Identities identity);
         void setKeys(unsigned int scriptKey, unsigned int coreScriptModKey);
 
@@ -393,11 +393,9 @@ namespace ARL
 		static int pluginmanager(lua_State* thread);
 		static int debuggermanager(lua_State *thread);
 		static int loadLibrary(lua_State* L);
-		static int loadRobloxLibrary(lua_State* L);
-        static int requireModuleScript(lua_State* L);
+		static int requireModuleScript(lua_State* L);
 		static int stats(lua_State* thread);
 		static int version(lua_State* thread);
-		static int statsitemvalue(lua_State* thread);
 		
 		static int requireModuleScriptFromInstance(lua_State* L, shared_ptr<ModuleScript> moduleScript);
 		static int requireModuleScriptFromAssetId(lua_State* L, int assetId);

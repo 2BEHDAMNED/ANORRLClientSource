@@ -88,7 +88,7 @@ public:
 
 private:
     void onWorkspaceDescendantAdded(shared_ptr<ARL::Instance> descendant);
-    void updateLighting(Lighting* lighting);
+    void updateLighting(Lighting* lighting, bool skipEffects = false);
     void updateFog();
     void invalidateLighting(bool updateSkybox);
     void onTakeScreenshot();

@@ -30,9 +30,9 @@
 
 
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include <atlutil.h>
-#endif // defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#endif // defined(_WIN32)
 
 LOGGROUP(Http)
 DYNAMIC_FASTINT(ExternalHttpRequestSizeLimitKB)
@@ -64,11 +64,7 @@ extern "C" {
 
 namespace
 {
-#if defined(ARL_PLATFORM_DURANGO)
-static bool useCurlHttpImpl = false;
-#else
 static bool useCurlHttpImpl = true;
-#endif
 
 static const int kNumberThreadPoolThreads = 16;
 static ThreadPool* threadPool;
@@ -350,9 +346,7 @@ std::string Http::gameID;
 std::string Http::placeID;
 std::string Http::requester = "Client";
 #if defined (__APPLE__) && !defined(ARL_PLATFORM_IOS)
-std::string Http::rbxUserAgent = "Roblox/Darwin";
-#elif defined(ARL_PLATFORM_DURANGO)
-std::string Http::rbxUserAgent = "Roblox/XboxOne";
+std::string Http::rbxUserAgent = "ANORRL/Darwin";
 #elif defined (_WIN32)
 std::string Http::rbxUserAgent = "ANORRL/WinInet";
 #else
@@ -374,13 +368,13 @@ rbx::atomic<int> Http::cdnFailureCount = 0;
 rbx::atomic<int> Http::alternateCdnSuccessCount = 0;
 rbx::atomic<int> Http::alternateCdnFailureCount = 0;
 double Http::lastCdnFailureTimeSpan = 0;
-rbx::atomic<int> Http::robloxSuccessCount = 0;
-rbx::atomic<int> Http::robloxFailureCount = 0;
-WindowAverage<double, double> Http::robloxResponce(kWindowSize);
-WindowAverage<double, double> Http::cdnResponce(kWindowSize);
+rbx::atomic<int> Http::anorrlSuccessCount = 0;
+rbx::atomic<int> Http::anorrlFailureCount = 0;
+WindowAverage<double, double> Http::anorrlResponse(kWindowSize);
+WindowAverage<double, double> Http::cdnResponse(kWindowSize);
 
-ARL::mutex *Http::robloxResponceLock = NULL;
-ARL::mutex *Http::cdnResponceLock = NULL;
+ARL::mutex *Http::anorrlResponseLock = NULL;
+ARL::mutex *Http::cdnResponseLock = NULL;
 
 Http::MutexGuard Http::lockGuard;
 
@@ -434,27 +428,27 @@ void Http::httpGetPostImpl(bool isPost, std::istream& data, const std::string& c
 
 Http::MutexGuard::MutexGuard()
 {
-    robloxResponceLock = new ARL::mutex();
-    cdnResponceLock = new ARL::mutex();
+    anorrlResponseLock = new ARL::mutex();
+    cdnResponseLock = new ARL::mutex();
 }
 
 Http::MutexGuard::~MutexGuard()
 {
-    delete robloxResponceLock;
-    robloxResponceLock = NULL;
+    delete anorrlResponseLock;
+    anorrlResponseLock = NULL;
 
-    delete cdnResponceLock;
-    cdnResponceLock = NULL;
+    delete cdnResponseLock;
+    cdnResponseLock = NULL;
 }
 
-ARL::mutex *Http::getRobloxResponceLock()
+ARL::mutex *Http::getANORRLResponseLock()
 {
-    return robloxResponceLock;
+    return anorrlResponseLock;
 }
 
-ARL::mutex *Http::getCdnResponceLock()
+ARL::mutex *Http::getCdnResponseLock()
 {
-    return cdnResponceLock;
+    return cdnResponseLock;
 }
 
 http_status_error::http_status_error(int statusCode)
@@ -488,7 +482,7 @@ void Http::init(API api, CookieSharingPolicy sharingPolicy)
     static boost::scoped_ptr<ThreadPool> tp(new ThreadPool(kNumberThreadPoolThreads));
     threadPool = tp.get();
     Http::defaultApi = api;
-    FASTLOG2(FLog::Http, "Http initialization M1 = 0x%x M2=0x%x", &Http::robloxResponceLock, &Http::cdnResponceLock);
+    FASTLOG2(FLog::Http, "Http initialization M1 = 0x%x M2=0x%x", &Http::anorrlResponseLock, &Http::cdnResponseLock);
     cookieSharingPolicy = sharingPolicy;
 	Http::SetUseCurl(useCurlHttpImpl);
 }
@@ -526,7 +520,7 @@ void Http::SetUseCurl(bool value)
 void Http::setCookiesForDomain(const std::string& domain, const std::string& cookies)
 {
     HttpPlatformImpl::setCookiesForDomain(domain, cookies);
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	if (!useCurlHttpImpl && Http::defaultApi == WinInet)
 	{
 		setCookiesForDomainWinInet(domain, cookies);
@@ -547,7 +541,7 @@ void Http::ThrowIfFailure(bool success, const char* url, const char* message)
 {
     if (!success)
     {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
         ThrowLastError(GetLastError(), url, message);
 #else
         throw ARL::runtime_error("%s: %s", url, message);
@@ -555,7 +549,7 @@ void Http::ThrowIfFailure(bool success, const char* url, const char* message)
     }
 }
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 void Http::ThrowLastError(int err, const char* url, const char* message)
 {
     TCHAR buffer[256];
@@ -570,11 +564,6 @@ void Http::ThrowLastError(int err, const char* url, const char* message)
         throw ARL::runtime_error("%s: %s, %s", url, message, buffer);
 }
 #endif // ifdef _WIN32
-
-
-#if defined(ARL_PLATFORM_DURANGO)
-void dprintf( const char* fmt, ... );
-#endif
 
 void Http::httpGetPost(bool isPost, std::istream& dataStream,
 					   const std::string& contentType, bool compressData,
@@ -673,41 +662,7 @@ void Http::httpGetPost(bool isPost, std::istream& dataStream,
         }
     }
 
-#if defined(ARL_PLATFORM_DURANGO)
-	if (!useCurlHttpImpl || forceNativeHttp)
-	{
-        if (url.find("http://") == 0) // starts with http?
-        {
-            dprintf( "WARN HTTP: %s\n", url.c_str() );
-        }
-
-		try
-		{
-			httpGetPostXbox(isPost, dataStream, contentType, compressData, headers, externalRequest, cachePolicy, response);
-			if (recordStatistics)
-			{
-				HTTPStatistics::success(httpTimer.delta().msec(), url.c_str(), response.size());
-			}
-		}
-		catch (const ARL::http_status_error& e)
-		{
-			if (recordStatistics)
-			{
-				HTTPStatistics::failure(httpTimer.delta().msec(), url.c_str(), response.size(), e.what(), e.statusCode);
-			}
-			throw;
-		}
-		catch (const std::exception& e)
-		{
-			if (recordStatistics)
-			{
-				HTTPStatistics::failure(httpTimer.delta().msec(), url.c_str(), response.size(), e.what());
-			}
-			throw;
-		}
-		return;
-	}
-#elif defined(_WIN32)
+#if defined(_WIN32)
 	if (!useCurlHttpImpl || forceNativeHttp)
     {
         try
@@ -943,7 +898,7 @@ void Http::get(std::string& response, bool externalRequest)
 
 bool Http::isScript(const char* url)
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
     if (!useCurlHttpImpl)
     {
         CUrl crack;
@@ -976,35 +931,34 @@ bool Http::isScript(const char* url)
         0 == strncmp(url, jscript, strlen(jscript));
 }
 
-// This allows just roblox domains, not roblox trusted domains like facebook.
-bool Http::isStrictlyRobloxSite(const char* url)
+// This allows just anorrl domains, not anorrl trusted domains like facebook.
+bool Http::isStrictlyANORRLSite(const char* url)
 {
     if (DFFlag::UseNewUrlClass)
     {
         ARL::Url parsed = ARL::Url::fromString(url);
     
-        return parsed.isSubdomainOf("lambda.cam") || parsed.isSubdomainOf("robloxlabs.com");
+        return parsed.isSubdomainOf("lambda.cam");
     }
 
     std::string host(HTParse(url, NULL, PARSE_HOST));
-    if ("lambda.cam" != host && !hasEnding(host, ".lambda.cam") 
-        && "robloxlabs.com" != host && !hasEnding(host, ".robloxlabs.com"))
+    if ("lambda.cam" != host && !hasEnding(host, ".lambda.cam"))
     {
         return false;
     }
     return true;
 }
 
-bool Http::isRobloxSite(const char* url)
+bool Http::isANORRLSite(const char* url)
 {
 #ifdef __APPLE__
     if (!useCurlHttpImpl)
     {
-        return rbx_isRobloxSite(url) != 0;
+        return rbx_isRobloxSite(url) != 0; // uhm ok
     }
 #endif // ifdef __APPLE__
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
     if (!useCurlHttpImpl)
     {
         CUrl crack;
@@ -1020,8 +974,8 @@ bool Http::isRobloxSite(const char* url)
             CString urlPath = crack.GetUrlPath();
             urlPath.MakeLower();
 
-            // trust urls from roblox.com
-			if (hostName.Right(10)=="lambda.cam" || hostName.Right(14)=="robloxlabs.com")
+            // trust urls from lambda.cam
+			if (hostName.Right(10)=="lambda.cam")
 				return true;
 
             // trust google/youtube upload/auth
@@ -1053,9 +1007,8 @@ bool Http::isRobloxSite(const char* url)
             return false;
         }
     
-        const bool isRoblox =
-            parsed.isSubdomainOf("lambda.cam") ||
-            parsed.isSubdomainOf("robloxlabs.com");
+		const bool isANORRL =
+			parsed.isSubdomainOf("lambda.cam");
         
         const bool isYoutube =
             ("www.youtube.com" == parsed.host()
@@ -1070,7 +1023,7 @@ bool Http::isRobloxSite(const char* url)
             ("accounts.google.com" == parsed.host()
                 && parsed.pathEqualsCaseInsensitive("/serviceloginauth"));
 
-        return isRoblox || isYoutube || isGoogle;
+        return isANORRL || isYoutube || isGoogle;
     } // if (DFFlag::UseNewUrlClass)
 
     std::string host;
@@ -1093,7 +1046,6 @@ bool Http::isRobloxSite(const char* url)
 
     return
         "lambda.cam" == host || hasEnding(host, ".lambda.cam") ||
-        "robloxlabs.com" == host || hasEnding(host, ".robloxlabs.com") ||
         // trust google/youtube upload/auth
         ("www.youtube.com" == host && ("/auth_sub_request" == path || "/signin" == path || "/issue_auth_sub_token" == path)) ||
         ("uploads.gdata.youtube.com" == host) ||
@@ -1108,7 +1060,7 @@ bool Http::trustCheckBrowser(const char* url)
 
 bool Http::isExternalRequest(const char* url)
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
     if (!useCurlHttpImpl)
     {
         std::string urlLower = url;
@@ -1123,7 +1075,7 @@ bool Http::isExternalRequest(const char* url)
 
         std::string hostname = urlParsed.GetHostName();
 
-        if(hostname.find("lambda.cam") != std::string::npos || hostname.find("robloxlabs.com") != std::string::npos)
+        if(hostname.find("lambda.cam") != std::string::npos)
             return false;
 
         return true;
@@ -1138,8 +1090,7 @@ bool Http::isExternalRequest(const char* url)
             return false;
         }
 
-        return !parsed.isSubdomainOf("lambda.cam")
-            && !parsed.isSubdomainOf("robloxlabs.com");
+		return !parsed.isSubdomainOf("lambda.cam");
     }
 
     std::string host;
@@ -1156,8 +1107,7 @@ bool Http::isExternalRequest(const char* url)
     std::transform(host.begin(), host.end(), host.begin(), ::tolower);
 
     return
-        "lambda.cam" != host && !hasEnding(host, ".lambda.cam") &&
-        "robloxlabs.com" != host && !hasEnding(host, ".robloxlabs.com");
+        "lambda.cam" != host && !hasEnding(host, ".lambda.cam");
 }
 
 void Http::setProxy(const std::string& host, long port)
@@ -1179,13 +1129,13 @@ bool Http::trustCheck(const char* url, bool externalRequest)
     }
 
     if (std::string("about:blank") == url ||
-        isRobloxSite(url) ||
+        isANORRLSite(url) ||
         isScript(url))
     {
         return true;
     }
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
     if (!useCurlHttpImpl)
     {
         CUrl crack;

@@ -119,6 +119,8 @@ VisualEngine::VisualEngine(Device* device, CRenderSettings* settings)
 			"fonts/ComicSans.ttf",
 			"fonts/silkscreen.ttf",
 			"fonts/ProximaNova.ttf",
+			"fonts/NotoSans-Regular.ttf",
+			"fonts/NotoSans-Bold.ttf",
 		};
 
 		float legacyHeightScale = (font == Text::FONT_LEGACY) ? 1.5f : 1.f;

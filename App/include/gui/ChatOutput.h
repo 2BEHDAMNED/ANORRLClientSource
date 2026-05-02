@@ -77,7 +77,7 @@ namespace ARL {
 	class PlayerChatLine : public ChatLine {
 	public:
 
-		static const char* ROBLOXNAME;
+		static const char* ANORRLNAME;
 		Color3 userColor;
 		
 		std::string user;

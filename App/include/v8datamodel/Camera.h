@@ -264,6 +264,7 @@ private:
 
 	// Instance
 	/*override*/ bool askSetParent(const Instance* instance) const;
+	/*override*/ bool askAddChild(const Instance* instance) const;
 	/*override*/ void onServiceProvider(ServiceProvider* oldProvider, ServiceProvider* newProvider) {
 		Super::onServiceProvider(oldProvider, newProvider);
 		onServiceProviderHeartbeatInstance(oldProvider, newProvider);		// hooks up heartbeat

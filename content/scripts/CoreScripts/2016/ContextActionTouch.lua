@@ -64,7 +64,7 @@ function setButtonSizeAndPosition(object)
 	local yOffset = 95
 
 	-- todo: better way to determine mobile sized screens
-	local onSmallScreen = (game:GetService("CoreGui").RobloxGui.AbsoluteSize.X < 600)
+	local onSmallScreen = (game:GetService("CoreGui").ANORRLGui.AbsoluteSize.X < 600)
 	if not onSmallScreen then
 		buttonSize = 85
 		xOffset = 40
