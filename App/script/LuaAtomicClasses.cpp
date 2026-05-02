@@ -84,6 +84,8 @@ const char* Bridge<G3D::Color3>::className("Color3");
 
 const luaL_reg Color3Bridge::classLibrary[] = {
 	{"new", newColor3},
+	{"fromRGB", fromRGBColor3},
+	{"fromHex", fromHexColor3},
 	{NULL, NULL}
 };
     
@@ -112,6 +114,48 @@ int Color3Bridge::newColor3(lua_State *L)
 		color[i] = 0.0;
 	pushNewObject(L, color);
 	return 1;
+}
+
+int Color3Bridge::fromRGBColor3(lua_State* L)
+{
+	float color[3];
+
+	// There should be up to 3 numerical parameters (r,g,b). Following Lua conventions ignore others and use 0 for missing
+	int count = std::min(3, lua_gettop(L));
+	for (int i = 0; i < count; i++)
+		color[i] = lua_tofloat(L, i + 1) / 255.0f;
+	for (int i = count; i < 3; i++)
+		color[i] = 0.0;
+	pushNewObject(L, color);
+	return 1;
+}
+
+int Color3Bridge::fromHexColor3(lua_State* L)
+{
+	float color[3];
+
+	const char* s = safe_lua_tostring(L, 1);
+	if (strlen(s) >= 3) {
+		if (s[0] == '#') {
+			s++; // jump #
+		}
+		for (int i = 0; i < 3; i++) {
+			char buf[3] = { 0 };
+			if (strlen(s) == 6) {
+				buf[0] = s[i * 2];
+				buf[1] = s[i * 2 + 1];
+			} else if (strlen(s) == 3) {
+				buf[0] = s[i];
+				buf[1] = s[i];
+			} else {
+				throw ARL::runtime_error("Unable to convert characters to hex value");
+			}
+			color[i] = (char)strtol(buf, NULL, 16) / 255.0f;
+		}
+		pushNewObject(L, color);
+		return 1;
+	}
+	throw ARL::runtime_error("Unable to convert characters to hex value"); // soooo jank
 }
 
 template<>

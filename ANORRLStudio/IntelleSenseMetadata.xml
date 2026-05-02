@@ -183,7 +183,9 @@
   </ItemStruct>
   <ItemStruct name="Color3">
     <StaticFunction name="new" tooltip="Color3 Color3.new(r, g, b)%1Returns a Color3 from the values r, g and b. &lt;a href=&#34;http://wiki.lambda.cam/index.php/Color3&#34;&gt;More Info&lt;/a&gt;"/>
-    <Property name="r" tooltip="Number Color3.r%1The red value of the color"/>
+	<StaticFunction name="fromRGB" tooltip="Color3 Color3.fromRGB(r, g, b)%1Returns a Color3 from given components within the range of 0 to 255. &lt;a href=&#34;http://wiki.lambda.cam/index.php/Color3&#34;&gt;More Info&lt;/a&gt;"/>
+	<StaticFunction name="fromHex" tooltip="Color3 Color3.fromHex(string)%1Returns a Color3 from a given hex value. &lt;a href=&#34;http://wiki.lambda.cam/index.php/Color3&#34;&gt;More Info&lt;/a&gt;"/>
+	<Property name="r" tooltip="Number Color3.r%1The red value of the color"/>
     <Property name="g" tooltip="Number Color3.g%1The green value of the color"/>
     <Property name="b" tooltip="Number Color3.b%1The blue value of the color"/>
   </ItemStruct>
