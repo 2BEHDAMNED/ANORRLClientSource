@@ -1550,8 +1550,11 @@ const luaL_reg CoordinateFrameBridge::classLibrary[] = {
 	{"fromEulerAnglesXYZ", fromEulerAnglesXYZ},
 	{"FromEulerAnglesXYZ", fromEulerAnglesXYZ},
 	{"Angles", fromEulerAnglesXYZ},	//Synonym, much shorter for 
+	{"fromEulerAnglesYXZ", fromEulerAnglesYXZ},
+	{"fromOrientation", fromEulerAnglesYXZ},
 	{"fromAxisAngle", fromAxisAngle},
 	{"FromAxisAngle", fromAxisAngle},
+	{"lookAt", fromLookAt},
 	{NULL, NULL}
 };
 
@@ -1809,10 +1812,29 @@ int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State *L)
 	return 1;
 };
 
+int CoordinateFrameBridge::fromEulerAnglesYXZ(lua_State* L)
+{
+	G3D::CoordinateFrame cf;
+	cf.rotation = G3D::Matrix3::fromEulerAnglesYXZ((float)luaL_checknumber(L, 1), (float)luaL_checknumber(L, 2), (float)luaL_checknumber(L, 3));
+	CoordinateFrameBridge::pushNewObject(L, cf);
+	return 1;
+};
+
 int CoordinateFrameBridge::fromAxisAngle(lua_State *L)
 {
 	G3D::CoordinateFrame cf;
 	cf.rotation = G3D::Matrix3::fromAxisAngle(Vector3Bridge::getObject(L, 1), (float) luaL_checknumber(L, 2));
+	CoordinateFrameBridge::pushNewObject(L, cf);
+	return 1;
+};
+
+int CoordinateFrameBridge::fromLookAt(lua_State* L)
+{
+	G3D::Vector3 pivot_offset = (lua_gettop(L) == 3) ? Vector3Bridge::getObject(L, 3) : G3D::Vector3(0.0f, 1.0f, 0.0f);
+	G3D::CoordinateFrame cf;
+	cf.translation = pivot_offset + Vector3Bridge::getObject(L, 1);
+	cf.lookAt(Vector3Bridge::getObject(L, 2));
+	cf.translation -= pivot_offset;
 	CoordinateFrameBridge::pushNewObject(L, cf);
 	return 1;
 };

@@ -34,7 +34,9 @@ namespace ARL { namespace Lua {
 	private:
 		static int newCoordinateFrame(lua_State *L);
 		static int fromEulerAnglesXYZ(lua_State *L);
+		static int fromEulerAnglesYXZ(lua_State* L);
 		static int fromAxisAngle(lua_State *L);
+		static int fromLookAt(lua_State* L);
 		static int on_add(lua_State *L);
 		static int on_sub(lua_State *L);
 		static int on_mul(lua_State *L);
