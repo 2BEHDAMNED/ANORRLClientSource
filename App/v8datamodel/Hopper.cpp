@@ -58,8 +58,8 @@ static Reflection::EventDesc<HopperBin, void(shared_ptr<Instance>), rbx::remote_
 static Reflection::RemoteEventDesc<HopperBin, void()> desc_ReplicatedSelected(&HopperBin::replicatedSelectedSignal, "ReplicatedSelected", Security::None, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
 static Reflection::EventDesc<HopperBin, void()> desc_Deselected(&HopperBin::deselectedSignal, "Deselected");
 
-static const Reflection::BoundFuncDesc<HopperBin,void()> func_toggleSelect(&HopperBin::onLocalClicked,"ToggleSelect", Security::RobloxScript);
-static const Reflection::BoundFuncDesc<HopperBin,void()> func_disable(&HopperBin::disable,"Disable", Security::RobloxScript);
+static const Reflection::BoundFuncDesc<HopperBin,void()> func_toggleSelect(&HopperBin::onLocalClicked,"ToggleSelect", Security::ANORRLScript);
+static const Reflection::BoundFuncDesc<HopperBin,void()> func_disable(&HopperBin::disable,"Disable", Security::ANORRLScript);
 
 // Legacy - This command string is now legacy, replaced with BinType - 
 static Reflection::PropDescriptor<HopperBin, std::string> desc_legacyCommand("Command", category_Data, NULL, &HopperBin::setLegacyCommand, Reflection::PropertyDescriptor::LEGACY);

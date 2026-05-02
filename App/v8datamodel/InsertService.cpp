@@ -406,9 +406,9 @@ void InsertService::insert(shared_ptr<Instance> instance)
 		if (!instance)
 			throw std::runtime_error("instance must be non-nil");
 			
-		// make sure we aren't trying to manipulate a robloxlocked object under the wrong permission
-		if (instance->getRobloxLocked())
-			ARL::Security::Context::current().requirePermission(ARL::Security::Plugin, "Roblox locked in InsertService:Insert()");
+		// make sure we aren't trying to manipulate a anorrllocked object under the wrong permission
+		if (instance->getANORRLLocked())
+			ARL::Security::Context::current().requirePermission(ARL::Security::Plugin, "ANORRL locked in InsertService:Insert()");
 
 		Instances instances;
 		instances.push_back(instance);

@@ -363,7 +363,7 @@ bool OfficePaintManager::drawPanelTipLabel(const QStyleOption* opt, QPainter* p,
     if (!clrLight.isValid()) 
         clrLight = QColor(255, 255, 255);
     if (!clrDark.isValid()) 
-        clrDark = QColor(201, 217, 239);
+        clrDark = QColor(217, 201, 239);
     // [1]
     DrawHelpers::drawGradientFill(*p, opt->rect, clrLight, clrDark, true);
 

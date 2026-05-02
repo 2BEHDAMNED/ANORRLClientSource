@@ -67,10 +67,10 @@ local StarterGui = game:GetService('StarterGui')
 local GuiService = game:GetService('GuiService')
 local CoreGui = game:GetService('CoreGui')
 local ContextActionService = game:GetService('ContextActionService')
-local RobloxGui = CoreGui:WaitForChild('RobloxGui')
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
-local utility = require(RobloxGui.Modules.Settings.Utility)
+local ANORRLGui = CoreGui:WaitForChild('ANORRLGui')
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
+local utility = require(ANORRLGui.Modules.Settings.Utility)
 local topbarEnabled = true
 
 if isTenFootInterface then
@@ -1125,7 +1125,7 @@ pcall(function() TopBarEnabled = settings():GetFFlag('UseInGameTopBar') end)
 -- Make the main frame, which (mostly) covers the screen
 MainFrame = NewGui('Frame', 'Backpack')
 MainFrame.Visible = false
-MainFrame.Parent = RobloxGui
+MainFrame.Parent = ANORRLGui
 
 -- Make the HotbarFrame, which holds only the Hotbar Slots
 HotbarFrame = NewGui('Frame', 'Hotbar')
@@ -1442,7 +1442,7 @@ do -- Make the Inventory expand/collapse arrow (unless TopBar)
 	
 	local function openClose()
 
-		local SettingsHub = require(RobloxGui.Modules.Settings:WaitForChild("SettingsHub"))
+		local SettingsHub = require(ANORRLGui.Modules.Settings:WaitForChild("SettingsHub"))
 		if SettingsHub.Instance.Visible then
 			--SettingsHub:SetVisibility(false)
 			setVis(false)

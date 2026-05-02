@@ -123,7 +123,7 @@ Reflection::BoundProp<float> SoundService::prop_dopplerscale("DopplerScale", cat
 Reflection::BoundProp<float> SoundService::prop_distancefactor("DistanceFactor", category_Data, &SoundService::distancefactor, &SoundService::on3DSettingChanged);
 Reflection::BoundProp<float> SoundService::prop_rolloffscale("RolloffScale", category_Data, &SoundService::rolloffscale, &SoundService::on3DSettingChanged);
 Reflection::EnumPropDescriptor<SoundService, ReverbType> SoundService::prop_AmbientReverb("AmbientReverb", category_Data, &SoundService::getAmbientReverb, &SoundService::setAmbientReverb);
-Reflection::BoundFuncDesc<SoundService, void(SoundType)> func_playSound(&SoundService::playSound, "PlayStockSound", "sound", Security::RobloxScript);
+Reflection::BoundFuncDesc<SoundService, void(SoundType)> func_playSound(&SoundService::playSound, "PlayStockSound", "sound", Security::ANORRLScript);
 Reflection::BoundFuncDesc<SoundService, void(ListenerType, shared_ptr<const ARL::Reflection::Tuple>)> func_setListener(&SoundService::setListener, "SetListener", "listenerType", "listener", Security::None);
 Reflection::BoundFuncDesc<SoundService, shared_ptr<const ARL::Reflection::Tuple>()> func_getListener(&SoundService::getListener, "GetListener", Security::None);
 

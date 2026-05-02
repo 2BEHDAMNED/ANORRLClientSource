@@ -52,7 +52,7 @@
 #include "V8DataModel/UserInputService.h"
 #include "V8DataModel/HackDefines.h"
 #include "v8datamodel/ReplicatedStorage.h"
-#include "v8datamodel/RobloxReplicatedStorage.h"
+#include "v8datamodel/ANORRLReplicatedStorage.h"
 #include "v8datamodel/ReplicatedFirst.h"
 #include "v8datamodel/ServerScriptService.h"
 #include "v8datamodel/ServerStorage.h"
@@ -178,7 +178,7 @@ std::string DataModel::hash; // contains the hash of the exe
 boost::function<void(ARL::DataModel*)> DataModel::loaderFunc = boost::function<void(ARL::DataModel*)>(dummyLoader);
 
 REFLECTION_BEGIN();
-static Reflection::BoundFuncDesc<DataModel, void()> func_loadPlugins(&DataModel::loadPlugins, "LoadPlugins", Security::Roblox);
+static Reflection::BoundFuncDesc<DataModel, void()> func_loadPlugins(&DataModel::loadPlugins, "LoadPlugins", Security::ANORRL);
 
 Reflection::EventDesc<DataModel, void(shared_ptr<Instance>, const Reflection::PropertyDescriptor*)> event_ItemChanged(&DataModel::itemChangedSignal, "ItemChanged", "object", "descriptor");
 
@@ -193,7 +193,7 @@ static Reflection::BoundFuncDesc<DataModel, void(int)>  loadWorldFunction(&DataM
 static Reflection::BoundFuncDesc<DataModel, void(int)>  loadGameFunction(&DataModel::loadGame, "LoadGame", "assetID", Security::LocalUser);
 
 static Reflection::BoundFuncDesc<DataModel, void(ContentId)>  loadFunction(&DataModel::loadContent, "Load", "url", Security::LocalUser);
-static Reflection::BoundFuncDesc<DataModel, void(ContentId)>  saveFunction(&DataModel::save, "Save", "url", Security::Roblox);
+static Reflection::BoundFuncDesc<DataModel, void(ContentId)>  saveFunction(&DataModel::save, "Save", "url", Security::ANORRL);
 
 static Reflection::BoundFuncDesc<DataModel, void(bool)> setRemoteBuildMode(&DataModel::setRemoteBuildMode, "SetRemoteBuildMode", "buildModeEnabled", Security::LocalUser);
 static Reflection::BoundFuncDesc<DataModel, bool()> getRemoteBuildMode(&DataModel::getRemoteBuildMode, "GetRemoteBuildMode", Security::None);
@@ -202,14 +202,14 @@ static Reflection::BoundFuncDesc<DataModel, void()> serverSaveFunction(&DataMode
 
 // TODO: Security: Make this Trusted only:
 // TODO: Remove the default value for synchronous, or make it true?  It is non-intuitive to be false by default
-static const Security::Permissions kHttpPermission = Security::RobloxScript;
+static const Security::Permissions kHttpPermission = Security::ANORRLScript;
 static Reflection::BoundYieldFuncDesc<DataModel, std::string(std::string)>  httpGetAsyncFunction(&DataModel::httpGetAsync, "HttpGetAsync", "url", kHttpPermission);
 static Reflection::BoundYieldFuncDesc<DataModel, std::string(std::string, std::string, std::string)>  httpPostAsyncFunction(&DataModel::httpPostAsync, "HttpPostAsync", "url", "data", "contentType", "*/*", kHttpPermission);
 static Reflection::BoundFuncDesc<DataModel, std::string(std::string, bool)>  httpGetFunction(&DataModel::httpGet, "HttpGet", "url", "synchronous", false, kHttpPermission);
 static Reflection::BoundFuncDesc<DataModel, std::string(std::string, std::string, bool, std::string)>  httpPostFunction(&DataModel::httpPost, "HttpPost", "url", "data", "synchronous", false, "contentType", "*/*", kHttpPermission);
 
 static Reflection::BoundFuncDesc<DataModel, shared_ptr<const Reflection::ValueArray>()>  getJobsInfo(&DataModel::getJobsInfo, "GetJobsInfo", Security::Plugin);
-static Reflection::BoundFuncDesc<DataModel, void(std::string, std::string, std::string, std::string, std::string)>  func_reportMeasurement(&DataModel::reportMeasurement, "ReportMeasurement", "id", "key1", "value1", "key2", "value2", Security::RobloxScript);
+static Reflection::BoundFuncDesc<DataModel, void(std::string, std::string, std::string, std::string, std::string)>  func_reportMeasurement(&DataModel::reportMeasurement, "ReportMeasurement", "id", "key1", "value1", "key2", "value2", Security::ANORRLScript);
 
 #if defined(ARL_STUDIO_BUILD) || defined (ARL_RCC_SECURITY) || defined (ARL_TEST_BUILD)
 static Reflection::BoundFuncDesc<DataModel, void(bool)> sanitizeFunction(&DataModel::clearContents, "ClearContent", "resettingSimulation", Security::LocalUser);
@@ -217,12 +217,12 @@ static Reflection::BoundFuncDesc<DataModel, void(bool)> sanitizeFunction(&DataMo
 static Reflection::BoundFuncDesc<DataModel, void()> closeFunction(&DataModel::close, "Shutdown", Security::LocalUser);
 static Reflection::BoundFuncDesc<DataModel, void()> toggleFunction(&DataModel::toggleToolsOff, "ToggleTools", Security::LocalUser);
 
-static Reflection::PropDescriptor<DataModel, bool> prop_isPersonalServer("IsPersonalServer", category_State, &DataModel::getIsPersonalServer, &DataModel::setIsPersonalServer, Reflection::PropertyDescriptor::SCRIPTING, Security::RobloxScript);
-static Reflection::PropDescriptor<DataModel, bool> prop_canSaveLocal("LocalSaveEnabled", category_State, &DataModel::canSaveLocal, NULL, Reflection::PropertyDescriptor::UI, Security::RobloxScript);
+static Reflection::PropDescriptor<DataModel, bool> prop_isPersonalServer("IsPersonalServer", category_State, &DataModel::getIsPersonalServer, &DataModel::setIsPersonalServer, Reflection::PropertyDescriptor::SCRIPTING, Security::ANORRLScript);
+static Reflection::PropDescriptor<DataModel, bool> prop_canSaveLocal("LocalSaveEnabled", category_State, &DataModel::canSaveLocal, NULL, Reflection::PropertyDescriptor::UI, Security::ANORRLScript);
 
-static Reflection::BoundYieldFuncDesc<DataModel, bool()> saveToRobloxFunction(&DataModel::saveToRoblox, "SaveToRoblox", Security::RobloxScript);
-static Reflection::BoundCallbackDesc<bool()> requestShutdownCallback("RequestShutdown", &DataModel::requestShutdownCallback, Security::RobloxScript);
-static Reflection::BoundFuncDesc<DataModel, void(bool)> finishShutdownFunction(&DataModel::completeShutdown, "FinishShutdown", "localSave", Security::RobloxScript);
+static Reflection::BoundYieldFuncDesc<DataModel, bool()> saveToANORRLFunction(&DataModel::saveToANORRL, "SaveToANORRL", Security::ANORRLScript);
+static Reflection::BoundCallbackDesc<bool()> requestShutdownCallback("RequestShutdown", &DataModel::requestShutdownCallback, Security::ANORRLScript);
+static Reflection::BoundFuncDesc<DataModel, void(bool)> finishShutdownFunction(&DataModel::completeShutdown, "FinishShutdown", "localSave", Security::ANORRLScript);
 
 static Reflection::BoundFuncDesc<DataModel, void(std::string)> func_SetUiMessage(&DataModel::setUiMessage, "SetMessage", "message", Security::LocalUser);
 static Reflection::BoundFuncDesc<DataModel, void()> func_ClearUIMessage(&DataModel::clearUiMessage, "ClearMessage", Security::LocalUser);
@@ -236,8 +236,8 @@ static Reflection::BoundFuncDesc<DataModel, double(std::string, double)>  getJob
 static Reflection::BoundFuncDesc<DataModel, void(double)>  setJobsExtendedStatsWindow(&DataModel::setJobsExtendedStatsWindow, "SetJobsExtendedStatsWindow", "seconds", Security::LocalUser);
 
 static Reflection::BoundFuncDesc<DataModel, void(int)>  setPlaceVersion(&DataModel::setPlaceVersion, "SetPlaceVersion", "placeId", Security::Plugin);
-static Reflection::BoundFuncDesc<DataModel, void(int, bool)>  setPlaceId(&DataModel::setPlaceID, "SetPlaceId", "placeId", "robloxPlace", false, Security::Plugin);
-static Reflection::BoundFuncDesc<DataModel, void(int, bool)>  setPlaceIdDeprecated(&DataModel::setPlaceID, "SetPlaceID", "placeID", "robloxPlace", false, Security::Plugin);
+static Reflection::BoundFuncDesc<DataModel, void(int, bool)>  setPlaceId(&DataModel::setPlaceID, "SetPlaceId", "placeId", "anorrlPlace", false, Security::Plugin);
+static Reflection::BoundFuncDesc<DataModel, void(int, bool)>  setPlaceIdDeprecated(&DataModel::setPlaceID, "SetPlaceID", "placeID", "anorrlPlace", false, Security::Plugin);
 static Reflection::BoundFuncDesc<DataModel, void(std::string)> setGameInstanceId(&DataModel::setGameInstanceID, "SetGameInstanceId", "instanceID", Security::Plugin);
 static Reflection::BoundFuncDesc<DataModel, void(int)> setUniverseId(&DataModel::setUniverseId, "SetUniverseId", "universeId", Security::Plugin);
 static Reflection::BoundFuncDesc<DataModel, void(int, DataModel::CreatorType)>  setCreatorId(&DataModel::setCreatorID, "SetCreatorId", "creatorId", "creatorType", Security::Plugin);
@@ -252,7 +252,7 @@ Reflection::RefPropDescriptor<DataModel, Instance> DataModel::prop_lighting("lig
 static Reflection::PropDescriptor<DataModel, int> prop_placeId("PlaceId", category_State, &DataModel::getPlaceID, NULL, Reflection::PropertyDescriptor::UI);
 static Reflection::PropDescriptor<DataModel, int> prop_placeVersion("PlaceVersion", category_State, &DataModel::getPlaceVersion, NULL, Reflection::PropertyDescriptor::UI);
 static Reflection::PropDescriptor<DataModel, int> prop_creatorId("CreatorId", category_State, &DataModel::getCreatorID, NULL, Reflection::PropertyDescriptor::UI);
-static Reflection::PropDescriptor<DataModel, bool> prop_forceR15("ForceR15", category_State, &DataModel::getForceR15, &DataModel::setForceR15, Reflection::PropertyDescriptor::REPLICATE_ONLY, Security::Roblox);
+static Reflection::PropDescriptor<DataModel, bool> prop_forceR15("ForceR15", category_State, &DataModel::getForceR15, &DataModel::setForceR15, Reflection::PropertyDescriptor::REPLICATE_ONLY, Security::ANORRL);
 static Reflection::EnumPropDescriptor<DataModel, DataModel::CreatorType> prop_creatorType("CreatorType", category_State, &DataModel::getCreatorType, NULL, Reflection::PropertyDescriptor::UI);
 static Reflection::EnumPropDescriptor<DataModel, DataModel::Genre> prop_genre("Genre", category_State, &DataModel::getGenre, NULL, Reflection::PropertyDescriptor::UI);
 static Reflection::EnumPropDescriptor<DataModel, DataModel::GearGenreSetting> prop_gearGenreSetting("GearGenreSetting", category_State, &DataModel::getGearGenreSetting, NULL, Reflection::PropertyDescriptor::UI);
@@ -665,7 +665,7 @@ void DataModel::doDataModelSetup(shared_ptr<DataModel> dataModel, bool startHear
 			{
 				if (ScriptContext* sc = ARL::ServiceProvider::create<ScriptContext>(dataModel.get()))
 				{
-					sc->executeInNewThread(ARL::Security::RobloxGameScript_, *source, "LoadingScript");
+					sc->executeInNewThread(ARL::Security::ANORRLGameScript_, *source, "LoadingScript");
 				}
 			}
 		}
@@ -966,7 +966,7 @@ void DataModel::initializeContents(bool startHeartbeat)
 	starterGuiService = shared_from(ServiceProvider::create<StarterGuiService>());
 
 	coreGuiService = shared_from(ServiceProvider::create<CoreGuiService>());
-	coreGuiService->createRobloxScreenGui();
+	coreGuiService->createANORRLScreenGui();
 
 	if (TeleportService* ts = ServiceProvider::create<TeleportService>(this))
 	{
@@ -975,7 +975,7 @@ void DataModel::initializeContents(bool startHeartbeat)
 			if (ARL::ScreenGui* loadingGui = Instance::fastDynamicCast<ARL::ScreenGui>(TeleportService::getCustomTeleportLoadingGui().get()))
 			{
 				ts->setTempCustomTeleportLoadingGui(loadingGui->clone(EngineCreator));
-				ts->getTempCustomTeleportLoadingGui()->setParent(coreGuiService->getRobloxScreenGui().get());
+				ts->getTempCustomTeleportLoadingGui()->setParent(coreGuiService->getANORRLScreenGui().get());
 				ts->setCustomTeleportLoadingGui(loadingGui->clone(EngineCreator));
 			}
 		}
@@ -1250,7 +1250,7 @@ bool DataModel::canSaveLocal() const
 #endif
 }
 
-void DataModel::saveToRoblox(boost::function<void(bool)> resumeFunction, boost::function<void(std::string)> errorFunction)
+void DataModel::saveToANORRL(boost::function<void(bool)> resumeFunction, boost::function<void(std::string)> errorFunction)
 {
 	if(canSave(this)){
 		if (Visit* visit = ARL::ServiceProvider::find<Visit>(this))
@@ -1324,7 +1324,7 @@ static void httpErrorCallback(const std::string& url, const std::string& error)
 std::string DataModel::httpGet(std::string url, bool synchronous)
 {
 	ARLASSERT(isInitialized);    //  Show to David or Erik - threading issue
-	robloxScriptModifiedCheck(ARL::httpGetFunction.security);
+	anorrlScriptModifiedCheck(ARL::httpGetFunction.security);
 	if (url.size()>0)
 	{
 		if (synchronous)
@@ -1346,7 +1346,7 @@ void DataModel::httpGetAsync(std::string url, boost::function<void(std::string)>
 		errorFunction("Empty URL");
 		return;
 	}
-	robloxScriptModifiedCheck(ARL::httpGetAsyncFunction.security);
+	anorrlScriptModifiedCheck(ARL::httpGetAsyncFunction.security);
 	doHttpGet(url, resumeFunction, errorFunction);
 }
 
@@ -1359,7 +1359,7 @@ std::string DataModel::httpPost(std::string url, std::string data, bool synchron
 {
 	ARLASSERT(isInitialized);    //  Show to David or Erik - threading issue
 
-	robloxScriptModifiedCheck(ARL::httpPostFunction.security);
+	anorrlScriptModifiedCheck(ARL::httpPostFunction.security);
 	if (synchronous)
 	{
 		return doHttpPost(url, data, optionalContentType);
@@ -1381,7 +1381,7 @@ void DataModel::httpPostAsync(std::string url, std::string data, std::string opt
 		return;
 	}
 
-	robloxScriptModifiedCheck(ARL::httpPostAsyncFunction.security);
+	anorrlScriptModifiedCheck(ARL::httpPostAsyncFunction.security);
 	doHttpPost(url, data, optionalContentType, resumeFunction, errorFunction);
 }
 
@@ -1420,7 +1420,7 @@ void DataModel::loadWorld(int assetID)
 		service->removeAllChildren();
 	if (ReplicatedStorage* service = ServiceProvider::find<ReplicatedStorage>(this))
 		service->removeAllChildren();
-	if (RobloxReplicatedStorage* service = ServiceProvider::find<RobloxReplicatedStorage>(this))
+	if (ANORRLReplicatedStorage* service = ServiceProvider::find<ANORRLReplicatedStorage>(this))
 		service->removeAllChildren();
 	if (ReplicatedFirst* service = ServiceProvider::find<ReplicatedFirst>(this))
 		service->removeAllChildren();
@@ -1698,7 +1698,7 @@ void DataModel::renderPass2d(Adorn* adorn, IMetric* graphicsMetric)
 		// 2. Render the User created gui - either inside the PlayerGui, or the StarterGui
 		renderPlayerGui(adorn);
 
-		// 3. Render the ROBLOX gui elements
+		// 3. Render the ANORRL gui elements
 		coreGuiService->render2d(adorn);
 
 		// 4. Render old school guiRoot (don't add anything to this, only debug stats are shown here: Shift-F1 and Shift-F2)
@@ -2489,7 +2489,7 @@ GuiResponse DataModel::processCameraCommands(const shared_ptr<InputObject>& even
     
 void DataModel::setInitialScreenSize(ARL::Vector2 newScreenSize)
 {
-    if (shared_ptr<ARL::ScreenGui> coreScreenGui = coreGuiService->getRobloxScreenGui())
+    if (shared_ptr<ARL::ScreenGui> coreScreenGui = coreGuiService->getANORRLScreenGui())
     {
         coreScreenGui->setBufferedViewport(Rect2D(newScreenSize));
     }
@@ -2937,8 +2937,8 @@ void DataModel::clearContents(bool resettingSimulation)
 		service->removeAllChildren();
 	}
 
-	if (Instance* service = ServiceProvider::find<RobloxReplicatedStorage>(this)) {
-		FASTLOG1(FLog::CloseDataModel, "Clearing RobloxReplicatedStorage -- %d Instances", service->countDescendantsOfType<Instance>());		
+	if (Instance* service = ServiceProvider::find<ANORRLReplicatedStorage>(this)) {
+		FASTLOG1(FLog::CloseDataModel, "Clearing ANORRLReplicatedStorage -- %d Instances", service->countDescendantsOfType<Instance>());		
 		service->removeAllChildren();
 	}
 
@@ -3563,7 +3563,7 @@ static void updateFlagsOnPlaceFilter(const std::string& name, const std::string&
     }
 }
 
-void DataModel::setPlaceID(int placeID, bool robloxPlace)
+void DataModel::setPlaceID(int placeID, bool anorrlPlace)
 {
 	FASTLOG1(FLog::CloseDataModel, "Setting place ID %u", placeID);
 	RbxDbgInfo::AddPlace(placeID);
@@ -3578,7 +3578,7 @@ void DataModel::setPlaceID(int placeID, bool robloxPlace)
 	}
 
 	if(ScriptContext* sc = create<ScriptContext>())
-		sc->setRobloxPlace(robloxPlace);
+		sc->setANORRLPlace(anorrlPlace);
 
 	Http::placeID = ARL::format("%d", placeID);
 

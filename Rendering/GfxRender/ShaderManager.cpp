@@ -79,11 +79,7 @@ static std::string getPackName(const std::string& language)
     if (language == "hlsl")
         return "d3d9";
 	else if (language == "hlsl11")
-#ifdef ARL_PLATFORM_DURANGO
-        return "d3d11_durango";
-#else
         return "d3d11";
-#endif
     else if (language == "hlsl11_level_9_3")
         return "d3d11_level_9_3";
     else

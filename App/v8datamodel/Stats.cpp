@@ -25,7 +25,7 @@ namespace ARL
 {
 namespace JNI
 {
-extern std::string robloxVersion; // JNIMain.cpp
+extern std::string anorrlVersion; // JNIMain.cpp
 }
 }
 #endif
@@ -202,9 +202,7 @@ namespace ARL
 		{
 			if (exception)
 			{
-#if !defined(ARL_PLATFORM_DURANGO) // remove this define in future?
 				StandardOut::singleton()->printf(MESSAGE_ERROR, "%s: %s", url.c_str(), exception->what());
-#endif
 			}
 		}
 
@@ -259,12 +257,12 @@ namespace ARL
 		const char* const  sStats = "Stats";
 
         REFLECTION_BEGIN();
-		static Reflection::BoundFuncDesc<StatsService, void(std::string, shared_ptr<const Reflection::ValueTable>)> func_report(&StatsService::report, "Report", "category", "data", ARL::Security::RobloxScript);
-		static Reflection::BoundFuncDesc<StatsService, void(bool)> func_reportTaskScheduler(&StatsService::reportTaskScheduler, "ReportTaskScheduler", "includeJobs", false, ARL::Security::RobloxScript);
-		static Reflection::BoundFuncDesc<StatsService, void()> func_reportJobsStepWindow(&StatsService::reportJobsStepWindow, "ReportJobsStepWindow", ARL::Security::RobloxScript);
-		static Reflection::BoundFuncDesc<StatsService, void(std::string)> prop_reportUrl(&StatsService::setReportUrl, "SetReportUrl", "url", Security::RobloxScript);
-		static Reflection::BoundProp<std::string> prop_reporterType("ReporterType", "Reporting", &StatsService::reporterType, Reflection::PropertyDescriptor::UI, Security::RobloxScript);
-		static Reflection::BoundProp<double> prop_minReportInterval("MinReportInterval", "Reporting", &StatsService::minReportInterval, Reflection::PropertyDescriptor::UI, Security::RobloxScript);
+		static Reflection::BoundFuncDesc<StatsService, void(std::string, shared_ptr<const Reflection::ValueTable>)> func_report(&StatsService::report, "Report", "category", "data", ARL::Security::ANORRLScript);
+		static Reflection::BoundFuncDesc<StatsService, void(bool)> func_reportTaskScheduler(&StatsService::reportTaskScheduler, "ReportTaskScheduler", "includeJobs", false, ARL::Security::ANORRLScript);
+		static Reflection::BoundFuncDesc<StatsService, void()> func_reportJobsStepWindow(&StatsService::reportJobsStepWindow, "ReportJobsStepWindow", ARL::Security::ANORRLScript);
+		static Reflection::BoundFuncDesc<StatsService, void(std::string)> prop_reportUrl(&StatsService::setReportUrl, "SetReportUrl", "url", Security::ANORRLScript);
+		static Reflection::BoundProp<std::string> prop_reporterType("ReporterType", "Reporting", &StatsService::reporterType, Reflection::PropertyDescriptor::UI, Security::ANORRLScript);
+		static Reflection::BoundProp<double> prop_minReportInterval("MinReportInterval", "Reporting", &StatsService::minReportInterval, Reflection::PropertyDescriptor::UI, Security::ANORRLScript);
 		
 		const char* const  sStatsItem = "StatsItem";
 
@@ -697,7 +695,7 @@ static const bool jobsAsArray = true;
 					VMProtectBeginMutation("19");
 					ProtectedString verifiedSource = ProtectedString::fromTrustedSource(script);
 					ContentProvider::verifyRequestedScriptSignature(verifiedSource, "StatsScript", true);
-					sc->executeInNewThread(Security::RobloxGameScript_, verifiedSource, "StatsReporting");
+					sc->executeInNewThread(Security::ANORRLGameScript_, verifiedSource, "StatsReporting");
 					VMProtectEnd();
 				}
 			}
@@ -764,11 +762,6 @@ static const bool jobsAsArray = true;
 
 		bool StatsService::tryToStartScript( )
 		{
-			/*
-			SettingsConsole.exe gametest get ClientSharedSettings
-			SettingsConsole.exe gametest set ClientSharedSettings.StatsGatheringScriptUrl=
-			SettingsConsole.exe gametest set ClientSharedSettings.StatsGatheringScriptUrl=http://logging.gametest.roblox.com/GameScript
-			*/
 			// TODO: This is a hack until we have a common way of getting the correct url
 			std::string baseUrl;
 			if (ContentProvider* contentProvider = ServiceProvider::find<ContentProvider>(this))

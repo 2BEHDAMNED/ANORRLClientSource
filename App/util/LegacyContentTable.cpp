@@ -474,10 +474,10 @@ namespace ARL
 		AddEntry("arlasset://fonts/clonewand.mesh", "arlasset://retros/tools/clonewand.mesh");
 		AddEntry("arlasset://fonts/hammer.mesh", "arlasset://retros/tools/hammer.mesh");
 		AddEntry("arlasset://fonts/PaintballGun.mesh", "arlasset://retros/tools/PaintballGun.mesh");
-		AddEntry("arlasset://fonts/Rocket.rbxm", "arlasset://retros/tools/Rocket.rbxm");
+		AddEntry("arlasset://fonts/Rocket.rbxm", "arlasset://retros/tools/Rocket.arlm");
 		AddEntry("arlasset://fonts/rocketlauncher.mesh", "arlasset://retros/tools/rocketlauncher.mesh");
 		AddEntry("arlasset://fonts/slingshot.mesh", "arlasset://retros/tools/slingshot.mesh");
-		AddEntry("arlasset://fonts/SlingshotPellet.rbxm", "arlasset://retros/tools/SlingshotPellet.rbxm");
+		AddEntry("arlasset://fonts/SlingshotPellet.rbxm", "arlasset://retros/tools/SlingshotPellet.arlm");
 		AddEntry("arlasset://fonts/sword.mesh", "arlasset://retros/tools/sword.mesh");
 		AddEntry("arlasset://fonts/timebomb.mesh", "arlasset://retros/tools/timebomb.mesh");
 		AddEntry("arlasset://fonts/tree.mesh", "arlasset://retros/tools/tree.mesh");

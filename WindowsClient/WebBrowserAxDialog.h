@@ -6,6 +6,7 @@
 #include "v8datamodel/DataModel.h"
 #include "boost/shared_ptr.hpp"
 #include "boost/function.hpp"
+#include <oaidl.h>
 
 class WebBrowserAxDialog; // forward declaration
 

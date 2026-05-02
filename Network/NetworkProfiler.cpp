@@ -1,5 +1,6 @@
 #include "NetworkProfiler.h"
 
+// uhm ok i guess
 #ifdef NETWORK_PROFILER
 
 #include "SQLite3Plugin/sqlite3.h"
@@ -66,7 +67,7 @@ void NetworkProfiler::Connect()
 		}
 		else
 		{
-			loggerPlugin->SetServerParameters(serverAddress, "roblox.db3");
+			loggerPlugin->SetServerParameters(serverAddress, "anorrl.db3");
 			connected = true;
 			if (networkSettings->profilerTimedSeconds > 0.f)
 			{

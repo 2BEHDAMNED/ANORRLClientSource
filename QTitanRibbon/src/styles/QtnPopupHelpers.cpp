@@ -350,7 +350,7 @@ void PopupOffice2000DrawHelper::drawPrimitive(PrimitiveElement element, const QS
                 int titleBarHeight = proxy()->pixelMetric(PM_TitleBarHeight, 0, 0);
                 QRect rcBackground = rect;
                 rcBackground.setHeight(titleBarHeight);
-                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(0, 0, 128), QColor(24, 180, 192), false);
+                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(0, 0, 128), QColor(180, 24, 192), false);
 
                 rect.adjust(1, 1, -1, -1);
 
@@ -520,9 +520,9 @@ void PopupOffice2003DrawHelper::drawComplexControl(ComplexControl cc, const QSty
                 int right = qMax(2, (rcGripper.width() - 4 * 9) / 2);
                 for (int i = 0; i < 9; i++)
                 {
-                    p->fillRect(right, rcGripper.top() + 1, 2, 2, QColor(40, 50, 71));
-                    p->fillRect(right+ 1, rcGripper.top() + 2, 2, 2, QColor(249, 249, 251));
-                    p->fillRect(right+ 1, rcGripper.top() + 2, 1, 1, QColor(97, 116, 152));
+                    p->fillRect(right, rcGripper.top() + 1, 2, 2, QColor(50, 40, 71));
+                    p->fillRect(right+ 1, rcGripper.top() + 2, 2, 2, QColor(251, 249, 251));
+                    p->fillRect(right+ 1, rcGripper.top() + 2, 1, 1, QColor(116, 97, 152));
                     right += 4;
                 }
 
@@ -669,25 +669,25 @@ void PopupOffice2003DrawHelper::refreshPalette()
         case OS_SYSTEMROYALE:
         case OS_SYSTEMAERO:
             {
-                m_palBackground.setColor(QPalette::Light, QColor(196, 218, 250));
-                m_palBackground.setColor(QPalette::Dark, QColor(158, 190, 245));
+                m_palBackground.setColor(QPalette::Light, QColor(218, 196, 250));
+                m_palBackground.setColor(QPalette::Dark, QColor(190, 158, 245));
 
-                m_palGripper.setColor(QPalette::Light, QColor(89, 135, 214));
-                m_palGripper.setColor(QPalette::Dark, QColor(0, 45, 150));
+                m_palGripper.setColor(QPalette::Light, QColor(135, 89, 214));
+                m_palGripper.setColor(QPalette::Dark, QColor(45, 0, 150));
 
-                m_palFrame.setColor(QPalette::Light, QColor(0, 45, 250));
-                m_palFrame.setColor(QPalette::Dark, QColor(0, 45, 250));
+                m_palFrame.setColor(QPalette::Light, QColor(45, 0, 250));
+                m_palFrame.setColor(QPalette::Dark, QColor(45, 0, 250));
 
                 m_clrButtonSelected = QColor(255, 238, 194);
                 m_clrButtonPressed = QColor(254, 128, 62);
-                m_clrButtonSelectedBorder = QColor(0, 0, 128);
-                m_clrButtonPressedBorder = QColor(0, 0, 128);
+                m_clrButtonSelectedBorder = QColor(128, 0, 128);
+                m_clrButtonPressedBorder = QColor(128, 0, 128);
             }
             break;
 
         case OS_SYSTEMOLIVE :
             {
-                m_palBackground.setColor(QPalette::Light, QColor(242, 241, 228));
+                m_palBackground.setColor(QPalette::Light, QColor(241, 242, 228));
                 m_palBackground.setColor(QPalette::Dark, QColor(217, 217, 167));
 
                 m_palGripper.setColor(QPalette::Light, QColor(120, 142, 111));
@@ -705,8 +705,8 @@ void PopupOffice2003DrawHelper::refreshPalette()
 
         case OS_SYSTEMSILVER:
             {
-                m_palBackground.setColor(QPalette::Light, QColor(243, 243, 247));
-                m_palBackground.setColor(QPalette::Dark, QColor(215, 215, 229));
+                m_palBackground.setColor(QPalette::Light, QColor(247, 243, 247));
+                m_palBackground.setColor(QPalette::Dark, QColor(229, 215, 229));
 
                 m_palGripper.setColor(QPalette::Light, QColor(168, 167, 191));
                 m_palGripper.setColor(QPalette::Dark, QColor(119, 118, 151));
@@ -814,10 +814,10 @@ void PopupMSNDrawHelper::drawPrimitive(PrimitiveElement element, const QStyleOpt
             {
                 QRect rect = optFrame->rect;
 
-                DrawHelpers::draw3DRect(*p, QColor(166, 180, 207), QColor(69, 86, 144), 
+                DrawHelpers::draw3DRect(*p, QColor(166, 180, 207), QColor(86, 69, 144),
                     rect.x(), rect.y(), rect.width()-1, rect.height()-1, true);
                 rect.adjust(1, 1, -1, -1);
-                DrawHelpers::draw3DRect(*p, QColor(255, 255, 255), QColor(207, 222, 244), 
+                DrawHelpers::draw3DRect(*p, QColor(255, 255, 255), QColor(222, 207, 244),
                     rect.x(), rect.y(), rect.width()-1, rect.height()-1, true);
                 rect.adjust(1, 1, -1, -1);
 
@@ -825,22 +825,22 @@ void PopupMSNDrawHelper::drawPrimitive(PrimitiveElement element, const QStyleOpt
 
                 QRect rcBackground = rect;
                 rcBackground.setHeight(12); 
-                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(207, 215, 236), QColor(255, 255, 255), true);
+                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(215, 207, 236), QColor(255, 255, 255), true);
 
                 rcBackground.setHeight(titleBarHeight + 1); 
-                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(255, 255, 255), QColor(207, 221, 244), true);
+                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(255, 255, 255), QColor(221, 207, 244), true);
 
                 rcBackground.setHeight(40); 
-                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(207, 221, 244), QColor(255, 255, 255), true);
+                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(221, 207, 244), QColor(255, 255, 255), true);
 
 //                rcBackground = CRect(rcClient.left, rcBackground.bottom, rcClient.right, rcClient.bottom);
                 rcBackground.setTop(rcBackground.bottom());
                 rcBackground.setBottom(rect.bottom());
-                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(255, 255, 255), QColor(207, 221, 244), true);
+                DrawHelpers::drawGradientFill(*p, rcBackground, QColor(255, 255, 255), QColor(221, 207, 244), true);
 
                 QRect rcFrame = rect;//(rcClient.left, rcClient.top + 22, rcClient.right, rcClient.bottom);
                 rcFrame.setTop(rect.top() + titleBarHeight); 
-                DrawHelpers::draw3DRect(*p, QColor(114, 142, 184), QColor(185, 201, 239), 
+                DrawHelpers::draw3DRect(*p, QColor(142, 114, 184), QColor(201, 185, 239),
                     rcFrame.x(), rcFrame.y(), rcFrame.width()-1, rcFrame.height()-1, true);
                 break;
             }

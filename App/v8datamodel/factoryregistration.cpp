@@ -203,7 +203,7 @@
 #include "RbxG3D/RbxTime.h"
 #include "v8datamodel/InputObject.h"
 #include "v8datamodel/ReplicatedStorage.h"
-#include "v8datamodel/RobloxReplicatedStorage.h"
+#include "v8datamodel/ANORRLReplicatedStorage.h"
 #include "v8datamodel/ReplicatedFirst.h"
 #include "v8datamodel/ServerScriptService.h"
 #include "v8datamodel/ServerStorage.h"
@@ -549,7 +549,7 @@ ARL_REGISTER_CLASS(SpotLight);
 ARL_REGISTER_CLASS(SurfaceLight);
 ARL_REGISTER_CLASS(LoginService);
 ARL_REGISTER_CLASS(ReplicatedStorage);
-ARL_REGISTER_CLASS(RobloxReplicatedStorage);
+ARL_REGISTER_CLASS(ANORRLReplicatedStorage);
 ARL_REGISTER_CLASS(ServerScriptService);
 ARL_REGISTER_CLASS(ServerStorage);
 ARL_REGISTER_CLASS(RemoteFunction);
@@ -573,12 +573,6 @@ ARL_REGISTER_CLASS(PostEffect);
 ARL_REGISTER_CLASS(BlurEffect);
 ARL_REGISTER_CLASS(ColorCorrectionEffect);
 ARL_REGISTER_CLASS(DiscordRPCService);
-
-// Xbox
-#if defined(ARL_PLATFORM_DURANGO)
-#include "v8datamodel/PlatformService.h"
-ARL_REGISTER_CLASS(PlatformService);
-#endif
 
 static void onSlotException(std::exception& ex)
 {
@@ -728,8 +722,3 @@ ARL_REGISTER_ENUM(Pose::PoseEasingStyle);
 ARL_REGISTER_ENUM(Pose::PoseEasingDirection);
 ARL_REGISTER_ENUM(HapticService::VibrationMotor);
 ARL_REGISTER_ENUM(UserInputService::UserCFrame);
-
-#if defined(ARL_PLATFORM_DURANGO)
-ARL_REGISTER_ENUM(XboxKeyBoardType)
-ARL_REGISTER_ENUM(VoiceChatState)
-#endif

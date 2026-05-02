@@ -51,7 +51,7 @@
 #include "V8DataModel/TouchTransmitter.h"
 #include "V8DataModel/Test.h"
 #include "v8datamodel/ReplicatedStorage.h"
-#include "v8datamodel/RobloxReplicatedStorage.h"
+#include "v8datamodel/ANORRLReplicatedStorage.h"
 #include "v8datamodel/ReplicatedFirst.h"
 #include "v8datamodel/LogService.h"
 #include "v8datamodel/PointsService.h"
@@ -188,7 +188,7 @@ static Reflection::BoundFuncDesc<Replicator, void()> func_EnableProcessPackets(&
 static Reflection::BoundFuncDesc<Replicator, void(double)> func_SetPropSyncExpiration(&Replicator::setPropSyncExpiration, "SetPropSyncExpiration", "seconds", Security::LocalUser);
 
 static Reflection::PropDescriptor<Replicator, int> prop_port("Port", category_Data, &Replicator::getPort, NULL, Reflection::PropertyDescriptor::UI, Security::LocalUser);
-static Reflection::PropDescriptor<Replicator, std::string> prop_ip("MachineAddress", category_Data, &Replicator::getIpAddress, NULL, Reflection::PropertyDescriptor::UI, Security::Roblox);
+static Reflection::PropDescriptor<Replicator, std::string> prop_ip("MachineAddress", category_Data, &Replicator::getIpAddress, NULL, Reflection::PropertyDescriptor::UI, Security::ANORRL);
 REFLECTION_END();
 
 ARL::Time Replicator::remoteRaknetTimeToLocalRbxTime(const RemoteTime& time)
@@ -803,7 +803,7 @@ void Replicator::addTopReplicationContainers(ServiceProvider* newProvider)
 	addTopReplicationContainer(ServiceProvider::create<ARL::MarketplaceService>(newProvider), true, true, replicationMethodFunc);
 	addTopReplicationContainer(ServiceProvider::create<ARL::BadgeService>(newProvider), true, false, replicationMethodFunc);
 	addTopReplicationContainer(ServiceProvider::create<ARL::ReplicatedStorage>(newProvider), true, true, replicationMethodFunc);
-	addTopReplicationContainer(ServiceProvider::create<ARL::RobloxReplicatedStorage>(newProvider), true, true, replicationMethodFunc);
+	addTopReplicationContainer(ServiceProvider::create<ARL::ANORRLReplicatedStorage>(newProvider), true, true, replicationMethodFunc);
 	addTopReplicationContainer(ServiceProvider::create<ARL::TestService>(newProvider), true, true, replicationMethodFunc);
 	addTopReplicationContainer(ServiceProvider::create<LogService>(newProvider), true, false, replicationMethodFunc);
 	addTopReplicationContainer(ServiceProvider::create<PointsService>(newProvider), true, false, replicationMethodFunc);

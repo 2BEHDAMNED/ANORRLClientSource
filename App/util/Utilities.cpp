@@ -32,7 +32,7 @@ const std::string ARL::Http::kContentTypeTextXml = "text/xml";
 std::string ARL::Http::lastCsrfToken = "";
 boost::mutex ARL::Http::lastCsrfTokenMutex;
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "objbase.h"
 #include <windows.h>
 #include <wincrypt.h>

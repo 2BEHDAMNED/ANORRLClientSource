@@ -94,21 +94,11 @@ static void MicroProfileDebugPrintf(const char* format, ...)
 #define MP_ASSERT(e) ARLASSERT(e)
 #define MICROPROFILE_WEBSERVER 0
 
-#ifdef ARL_PLATFORM_DURANGO
-#define MICROPROFILE_WEBSERVER_PORT 4600
-#define MICROPROFILE_CONTEXT_SWITCH_TRACE 0
-#define getenv(name) NULL
-#endif
-
 #if defined(_WIN32)
 #define MICROPROFILE_GPU_TIMERS_D3D11 1
 #elif defined(__APPLE__) && !defined(ARL_PLATFORM_IOS)
 #include <OpenGL/gl3.h>
 #define MICROPROFILE_GPU_TIMERS_GL 0
-#endif
-
-#if defined(ARL_PLATFORM_DURANGO)
-#include <d3d11_x.h>
 #endif
 
 #define MICROPROFILE_IMPL

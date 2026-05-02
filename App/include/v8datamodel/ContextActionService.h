@@ -177,7 +177,7 @@ namespace ARL {
         FunctionMap functionMap;
 		FunctionVector functionVector;
 
-		// these are used for ROBLOX context binds (For ROBLOX menu, etc.)
+		// these are used for ANORRL context binds (For ANORRL menu, etc.)
 		FunctionMap coreFunctionMap;
 		FunctionVector coreFunctionVector;
         

@@ -126,9 +126,6 @@
     <ClCompile Include="rbx\Profiler.cpp">
       <Filter>Source Files\RBX</Filter>
     </ClCompile>
-    <ClCompile Include="rbx\Durango\SystemUtil.cpp">
-      <Filter>Source Files\RBX</Filter>
-    </ClCompile>
     <ClCompile Include="..\ClientShared\Mobile\CookiesEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -760,11 +760,11 @@ catch (ARL::base_exception const& e)	\
 
 #pragma pack(push)
 #pragma pack(8)
-// This object is embedded in every Lua thread to manage Roblox-specific information
+// This object is embedded in every Lua thread to manage ANORRL-specific information
 
-class RobloxExtraSpace : public ARL::Intrusive::Set<RobloxExtraSpace>::Hook
+class ANORRLExtraSpace : public ARL::Intrusive::Set<ANORRLExtraSpace>::Hook
 {
-	typedef ARL::Intrusive::Set<RobloxExtraSpace> AllThreads;
+	typedef ARL::Intrusive::Set<ANORRLExtraSpace> AllThreads;
 
 	struct Shared
 	{
@@ -811,29 +811,29 @@ public:
 			iter->node->forEachRefs(func);
 	}
 
-	static RobloxExtraSpace* get(struct lua_State *L)
+	static ANORRLExtraSpace* get(struct lua_State *L)
 	{
-		return L ? reinterpret_cast<RobloxExtraSpace*>(((char*) L) - sizeof(RobloxExtraSpace)) : 0;
+		return L ? reinterpret_cast<ANORRLExtraSpace*>(((char*) L) - sizeof(ANORRLExtraSpace)) : 0;
 	}
 	static void constructRoot(lua_State *L)
 	{
-		new(get(L)) RobloxExtraSpace();
+		new(get(L)) ANORRLExtraSpace();
 	}
 	static void destroyRoot(lua_State *L)
 	{
-		get(L)->~RobloxExtraSpace();
+		get(L)->~ANORRLExtraSpace();
 	}
-	static void constructChild(lua_State *L, RobloxExtraSpace *parent)
+	static void constructChild(lua_State *L, ANORRLExtraSpace *parent)
 	{
-		new(get(L)) RobloxExtraSpace(parent);
+		new(get(L)) ANORRLExtraSpace(parent);
 	}
 	static void destroyChild(lua_State *L)
 	{
-		get(L)->~RobloxExtraSpace();
+		get(L)->~ANORRLExtraSpace();
 	}
 
 private:
-	RobloxExtraSpace()
+	ANORRLExtraSpace()
 		:shared(new Shared())
 		,identity(ARL::Security::Anonymous)
 		,node(0)
@@ -843,7 +843,7 @@ private:
 		shared->allThreads.insert(*this);
 	}
 
-	RobloxExtraSpace(RobloxExtraSpace* parent)
+	ANORRLExtraSpace(ANORRLExtraSpace* parent)
 		:shared(parent->shared)
 		,identity(parent->identity)
 		,yieldCaptured(false)
@@ -864,7 +864,7 @@ private:
         }
 	}
 
-	~RobloxExtraSpace()
+	~ANORRLExtraSpace()
 	{
 		shared->allThreads.remove_element(*this);
 
@@ -890,7 +890,7 @@ private:
 ** CHANGE (define) this if you really need that. This value must be
 ** a multiple of the maximum alignment required for your machine.
 */
-#define LUAI_EXTRASPACE		sizeof(RobloxExtraSpace)
+#define LUAI_EXTRASPACE		sizeof(ANORRLExtraSpace)
 
 
 /*
@@ -900,23 +900,23 @@ private:
 */
 inline void luai_userstateopen(lua_State *L)
 {
-	RobloxExtraSpace::constructRoot(L);
+	ANORRLExtraSpace::constructRoot(L);
 }
 inline void luai_userstateclose(lua_State *L)
 {
-	RobloxExtraSpace::destroyRoot(L);
+	ANORRLExtraSpace::destroyRoot(L);
 }
 inline void luai_userstatethread(lua_State *L, lua_State *L1)
 {
-	RobloxExtraSpace::constructChild(L1, RobloxExtraSpace::get(L));
+	ANORRLExtraSpace::constructChild(L1, ANORRLExtraSpace::get(L));
 }
 inline void luai_userstatefree(lua_State *L)
 {
-	RobloxExtraSpace::destroyChild(L);
+	ANORRLExtraSpace::destroyChild(L);
 }
 inline void luai_userstateresume(lua_State *L, int nargs)
 {
-	RobloxExtraSpace::get(L)->yieldCaptured = false;
+	ANORRLExtraSpace::get(L)->yieldCaptured = false;
 }
 
 inline void luai_userstateyield(lua_State *L, int nresults)

@@ -16,23 +16,23 @@ local DEV_CONSOLE_ACTION_NAME = "Open Dev Console"
 
 --[[ SERVICES ]]
 local CoreGui = game:GetService("CoreGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ANORRLGui = CoreGui:WaitForChild("ANORRLGui")
 local ContextActionService = game:GetService("ContextActionService")
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 --[[ UTILITIES ]]
-local utility = require(RobloxGui.Modules.Settings.Utility)
+local utility = require(ANORRLGui.Modules.Settings.Utility)
 
 --[[ VARIABLES ]]
 local isTouchDevice = UserInputService.TouchEnabled
 local isSmallTouchScreen = utility:IsSmallTouchScreen()
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local isTenFootInterface = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 local platform = UserInputService:GetPlatform()
 -- TODO: Change dev console script to parent this to somewhere other than an engine created gui
-local ControlFrame = RobloxGui:WaitForChild('ControlFrame')
+local ControlFrame = ANORRLGui:WaitForChild('ControlFrame')
 local ToggleDevConsoleBindableFunc = ControlFrame:WaitForChild('ToggleDevConsole')
 local lastInputChangedCon = nil
 local emotesWasVisible = false
@@ -51,10 +51,10 @@ local Settings = UserSettings()
 local GameSettings = Settings.GameSettings
 
 --[[ CORE MODULES ]]
-local playerList = require(RobloxGui.Modules.PlayerlistModule)
-local chat = require(RobloxGui.Modules.Chat)
-local emotes = require(RobloxGui.Modules.Emotes)
-local backpack = require(RobloxGui.Modules.BackpackScript)
+local playerList = require(ANORRLGui.Modules.PlayerlistModule)
+local chat = require(ANORRLGui.Modules.Chat)
+local emotes = require(ANORRLGui.Modules.Emotes)
+local backpack = require(ANORRLGui.Modules.BackpackScript)
 
 if isSmallTouchScreen or isTenFootInterface then
 	SETTINGS_SHIELD_ACTIVE_POSITION = UDim2.new(0,0,0,0)
@@ -70,8 +70,8 @@ local function CreateSettingsHub()
 	this.TabHeaders = {}
 	this.BottomBarButtons = {}
 	this.TabConnection = nil
-	this.LeaveGamePage = require(RobloxGui.Modules.Settings.Pages.LeaveGame)
-	this.ResetCharacterPage = require(RobloxGui.Modules.Settings.Pages.ResetCharacter)
+	this.LeaveGamePage = require(ANORRLGui.Modules.Settings.Pages.LeaveGame)
+	this.ResetCharacterPage = require(ANORRLGui.Modules.Settings.Pages.ResetCharacter)
 	this.SettingsShowSignal = utility:CreateSignal()
 	this.OpenStateChangedCount = 0
 
@@ -221,7 +221,7 @@ local function CreateSettingsHub()
 			BackgroundTransparency = 1,
 			Visible = true,
 			ZIndex = SETTINGS_BASE_ZINDEX,
-			Parent = RobloxGui
+			Parent = ANORRLGui
 		};
 
 		this.Shield = utility:Create'Frame'
@@ -395,7 +395,7 @@ local function CreateSettingsHub()
 
 		local function onScreenSizeChanged()
 			local largestPageSize = 600
-			local fullScreenSize = RobloxGui.AbsoluteSize.y
+			local fullScreenSize = ANORRLGui.AbsoluteSize.y
 			local bufferSize = (1-0.95) * fullScreenSize
 			if isTenFootInterface then
 				largestPageSize = 800
@@ -493,7 +493,7 @@ local function CreateSettingsHub()
 			)
 		end
 		-- TODO: disconnect this event?
-		RobloxGui.Changed:connect(function(prop)
+		ANORRLGui.Changed:connect(function(prop)
 			if prop == "AbsoluteSize" then
 				onScreenSizeChanged()
 			end
@@ -988,29 +988,29 @@ local function CreateSettingsHub()
 	-- full page initialization
 	if not useUserList then
 		if utility:IsSmallTouchScreen() then
-			this.HomePage = require(RobloxGui.Modules.Settings.Pages.Home)
+			this.HomePage = require(ANORRLGui.Modules.Settings.Pages.Home)
 			this.HomePage:SetHub(this)
 		end
 	end
 
-	this.GameSettingsPage = require(RobloxGui.Modules.Settings.Pages.GameSettings)
+	this.GameSettingsPage = require(ANORRLGui.Modules.Settings.Pages.GameSettings)
 	this.GameSettingsPage:SetHub(this)
 
 	if platform ~= Enum.Platform.XBoxOne and platform ~= Enum.Platform.PS4 then
-		this.ReportAbusePage = require(RobloxGui.Modules.Settings.Pages.ReportAbuseMenu)
+		this.ReportAbusePage = require(ANORRLGui.Modules.Settings.Pages.ReportAbuseMenu)
 		this.ReportAbusePage:SetHub(this)
 	end
 
-	this.HelpPage = require(RobloxGui.Modules.Settings.Pages.Help)
+	this.HelpPage = require(ANORRLGui.Modules.Settings.Pages.Help)
 	this.HelpPage:SetHub(this)
 
 	if platform == Enum.Platform.Windows then
-		this.RecordPage = require(RobloxGui.Modules.Settings.Pages.Record)
+		this.RecordPage = require(ANORRLGui.Modules.Settings.Pages.Record)
 		this.RecordPage:SetHub(this)
 	end
 
 	if useUserList and not isTenFootInterface then
-		this.PlayersPage = require(RobloxGui.Modules.Settings.Pages.Players)
+		this.PlayersPage = require(ANORRLGui.Modules.Settings.Pages.Players)
 		this.PlayersPage:SetHub(this)
 	end
 

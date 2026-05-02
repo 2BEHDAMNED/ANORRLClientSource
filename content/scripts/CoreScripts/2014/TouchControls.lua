@@ -15,7 +15,7 @@ end
 while not Game:FindFirstChild("CoreGui") do
 	wait()
 end
-while not Game.CoreGui:FindFirstChild("RobloxGui") do
+while not Game.CoreGui:FindFirstChild("ANORRLGui") do
 	wait()
 end
 
@@ -217,7 +217,7 @@ function constructThumbstick(defaultThumbstickPos, updateFunction, stationaryThu
 	outerThumbstick.BackgroundTransparency = 1
 	outerThumbstick.Size = UDim2.new(0,thumbstickSize,0,thumbstickSize)
 	outerThumbstick.Position = defaultThumbstickPos
-	outerThumbstick.Parent = Game.CoreGui.RobloxGui
+	outerThumbstick.Parent = Game.CoreGui.ANORRLGui
 
 	local innerThumbstick = Instance.new("ImageLabel")
 	innerThumbstick.Name = "InnerThumbstick"
@@ -784,7 +784,7 @@ function setupTouchControls()
 	touchControlFrame.Name = "TouchControlFrame"
 	touchControlFrame.Size = UDim2.new(1,0,1,0)
 	touchControlFrame.BackgroundTransparency = 1
-	touchControlFrame.Parent = Game.CoreGui.RobloxGui
+	touchControlFrame.Parent = Game.CoreGui.ANORRLGui
 
 	userInputService.ProcessedEvent:connect(function(inputObject, processed)
 		if not processed then return end

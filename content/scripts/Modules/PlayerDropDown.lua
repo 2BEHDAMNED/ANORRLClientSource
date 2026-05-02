@@ -33,25 +33,25 @@ local serverFollowersSuccess, serverFollowersEnabled = pcall(function() return s
 local IsServerFollowers = serverFollowersSuccess and serverFollowersEnabled
 
 --[[ Modules ]]--
-local RobloxGui = CoreGui:WaitForChild('RobloxGui')
+local ANORRLGui = CoreGui:WaitForChild('ANORRLGui')
 local settingsHub = nil
 
 spawn(function()
-	settingsHub = require(RobloxGui:WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("SettingsHub"))
+	settingsHub = require(ANORRLGui:WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("SettingsHub"))
 end)
 
 --[[ Bindables ]]--
 local BinbableFunction_SendNotification = nil
 spawn(function()
-	BinbableFunction_SendNotification = RobloxGui:WaitForChild("SendNotification")
+	BinbableFunction_SendNotification = ANORRLGui:WaitForChild("SendNotification")
 end)
 
 --[[ Remotes ]]--
 local RemoteEvent_NewFollower = nil
 
 spawn(function()
-	local RobloxReplicatedStorage = game:GetService('RobloxReplicatedStorage')
-	RemoteEvent_NewFollower = RobloxReplicatedStorage:WaitForChild('NewFollower')
+	local ANORRLReplicatedStorage = game:GetService('ANORRLReplicatedStorage')
+	RemoteEvent_NewFollower = ANORRLReplicatedStorage:WaitForChild('NewFollower')
 end)
 
 --[[ Utility Functions ]]--

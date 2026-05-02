@@ -49,9 +49,7 @@ inline void ReleaseCheck(Ty*& object)
     if (object)
     {
         ULONG refCnt = object->Release();
-#if !defined(ARL_PLATFORM_DURANGO) // on xbox, object->Release() always returns 1, just because the COM doc says Release() can return anything
         ARLASSERT(refCnt == 0);
-#endif
         object = NULL;
     }
 }
@@ -215,11 +213,6 @@ public:
 	virtual const DeviceCaps& getCaps() const { return caps; }
 
     virtual DeviceStats getStatistics() const;
-
-#ifdef ARL_PLATFORM_DURANGO
-    virtual void suspend();
-    virtual void resume();
-#endif
 
     ID3D11Device* getDevice11() { return device11; }
     ShaderProfile getShaderProfile() const { return shaderProfile; }

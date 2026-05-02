@@ -15,11 +15,11 @@ const char* const ARL::sReplicatedFirst = "ReplicatedFirst";
 REFLECTION_BEGIN();
 static Reflection::BoundFuncDesc<ReplicatedFirst, void()> func_setLoadingFinished(&ReplicatedFirst::doRemoveDefaultLoadingGui, "RemoveDefaultLoadingScreen", Security::None);
 
-static Reflection::EventDesc<ReplicatedFirst, void()> event_finishedReplicating(&ReplicatedFirst::finishedReplicatingSignal, "FinishedReplicating", Security::RobloxScript);
-static Reflection::BoundFuncDesc<ReplicatedFirst, bool()> func_getFinishedReplicating(&ReplicatedFirst::getIsFinishedReplicating, "IsFinishedReplicating", Security::RobloxScript);
+static Reflection::EventDesc<ReplicatedFirst, void()> event_finishedReplicating(&ReplicatedFirst::finishedReplicatingSignal, "FinishedReplicating", Security::ANORRLScript);
+static Reflection::BoundFuncDesc<ReplicatedFirst, bool()> func_getFinishedReplicating(&ReplicatedFirst::getIsFinishedReplicating, "IsFinishedReplicating", Security::ANORRLScript);
 
-static Reflection::EventDesc<ReplicatedFirst, void()> event_loadingFinished(&ReplicatedFirst::removeDefaultLoadingGuiSignal, "RemoveDefaultLoadingGuiSignal", Security::RobloxScript);
-static Reflection::BoundFuncDesc<ReplicatedFirst, bool()> func_getLoadingFinished(&ReplicatedFirst::getIsDefaultLoadingGuiRemoved, "IsDefaultLoadingGuiRemoved", Security::RobloxScript);
+static Reflection::EventDesc<ReplicatedFirst, void()> event_loadingFinished(&ReplicatedFirst::removeDefaultLoadingGuiSignal, "RemoveDefaultLoadingGuiSignal", Security::ANORRLScript);
+static Reflection::BoundFuncDesc<ReplicatedFirst, bool()> func_getLoadingFinished(&ReplicatedFirst::getIsDefaultLoadingGuiRemoved, "IsDefaultLoadingGuiRemoved", Security::ANORRLScript);
 REFLECTION_END();
 
 ReplicatedFirst::ReplicatedFirst(void) :

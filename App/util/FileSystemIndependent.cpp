@@ -31,7 +31,7 @@ namespace ARL
 {
 namespace JNI
 {
-std::string fileSystemCacheDir; // Set in JNIRobloxSettings.cpp
+std::string fileSystemCacheDir; // Set in JNIANORRLSettings.cpp
 } // namespace JNI
 } // namespace ARL
 #endif // #ifdef __ANDROID__

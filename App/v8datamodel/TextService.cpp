@@ -56,6 +56,8 @@ EnumDesc<TextService::Font>::EnumDesc()
 	addPair(TextService::FONT_COMICSANS, "ComicSans");
 	addPair(TextService::FONT_SILKSCREEN, "SilkScreen");
 	addPair(TextService::FONT_PROXIMANOVA, "ProximaNova");
+	addPair(TextService::FONT_NOTOSANS, "NotoSans");
+	addPair(TextService::FONT_NOTOSANSBOLD, "NotoSansBold");
 }
 
 template<>
@@ -89,7 +91,7 @@ bool StringConverter<TextService::Font>::convertToValue(const std::string& text,
 	return Reflection::EnumDesc<TextService::Font>::singleton().convertToValue(text.c_str(),value);
 }
 
-static Reflection::BoundFuncDesc<TextService, Vector2(std::string, int, TextService::Font, Vector2)> func_getTextSize(&TextService::getTextSize, "GetTextSize", "string", "fontSize", "font", "frameSize", Security::RobloxScript);
+static Reflection::BoundFuncDesc<TextService, Vector2(std::string, int, TextService::Font, Vector2)> func_getTextSize(&TextService::getTextSize, "GetTextSize", "string", "fontSize", "font", "frameSize", Security::ANORRLScript);
 
 TextService::Font TextService::FromTextFont(Text::Font font)
 {
@@ -116,7 +118,9 @@ TextService::Font TextService::FromTextFont(Text::Font font)
 
 	case Text::FONT_COMICSANS:	return FONT_COMICSANS;
 	case Text::FONT_SILKSCREEN:	return FONT_SILKSCREEN;
-	case Text::FONT_PROXIMANOVA:	return FONT_PROXIMANOVA;
+	case Text::FONT_PROXIMANOVA:	return FONT_PROXIMANOVA; 
+	case Text::FONT_NOTOSANS:	return FONT_NOTOSANS;
+	case Text::FONT_NOTOSANSBOLD:	return FONT_NOTOSANSBOLD;
 	default:
 		ARLASSERT(0);
 		return FONT_LEGACY;
@@ -146,7 +150,9 @@ Text::Font TextService::ToTextFont(Font font)
 	case FONT_FINGERPAINT:	return Text::FONT_FINGERPAINT;
 	case FONT_COMICSANS:	return Text::FONT_COMICSANS;
 	case FONT_SILKSCREEN:	return Text::FONT_SILKSCREEN;
-	case FONT_PROXIMANOVA:	return Text::FONT_PROXIMANOVA;
+	case FONT_PROXIMANOVA:	return Text::FONT_PROXIMANOVA; 
+	case FONT_NOTOSANS:	return Text::FONT_NOTOSANS;
+	case FONT_NOTOSANSBOLD:	return Text::FONT_NOTOSANSBOLD;
 
 	default:
 		ARLASSERT(0);

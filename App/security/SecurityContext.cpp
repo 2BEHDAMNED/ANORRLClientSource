@@ -22,15 +22,15 @@ namespace ARL
             case StudioPlugin:
                 return p == Plugin;
 #endif
-			case GameScriptInRobloxPlace_:
-				return                p == RobloxPlace;
-			case RobloxGameScript_:
-				return p == Plugin || p == RobloxPlace || p == LocalUser ||                      p == RobloxScript;
+			case GameScriptInANORRLPlace_:
+				return                p == ANORRLPlace;
+			case ANORRLGameScript_:
+				return p == Plugin || p == ANORRLPlace || p == LocalUser ||                      p == ANORRLScript;
 			case LocalGUI_:
 			case CmdLine_:
-				return p == Plugin || p == RobloxPlace || p == LocalUser;
+				return p == Plugin || p == ANORRLPlace || p == LocalUser;
 			case Replicator_:
-				return                p == RobloxPlace ||                   p == WritePlayer  || p == RobloxScript;
+				return                p == ANORRLPlace ||                   p == WritePlayer  || p == ANORRLScript;
 			case COM:
 			case WebService:
 				return true;

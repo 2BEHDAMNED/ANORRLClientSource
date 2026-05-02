@@ -59,13 +59,13 @@ static Reflection::BoundFuncDesc<Server, void(int, int)> server_startFunction(&S
 static Reflection::BoundFuncDesc<Server, void(int)> f_disconnect(&Server::stop, "Stop", "blockDuration", 1000, Security::LocalUser);
 static Reflection::BoundFuncDesc<Server, int()> f_GetClientCount(&Server::getClientCount, "GetClientCount", Security::LocalUser);
 static Reflection::PropDescriptor<Server, int> prop_Port("Port", category_Data, &Server::getPort, NULL);
-static Reflection::BoundFuncDesc<Server, void(bool)> func_SetIsPlayerAuthenticationRequired(&Server::setIsPlayerAuthenticationRequired, "SetIsPlayerAuthenticationRequired", "value", Security::Roblox);
-static Reflection::BoundFuncDesc<Server, void()> func_ConfigureAsCloudEditServer(&Server::configureAsCloudEditServer, "ConfigureAsCloudEditServer", Security::Roblox);
+static Reflection::BoundFuncDesc<Server, void(bool)> func_SetIsPlayerAuthenticationRequired(&Server::setIsPlayerAuthenticationRequired, "SetIsPlayerAuthenticationRequired", "value", Security::ANORRL);
+static Reflection::BoundFuncDesc<Server, void()> func_ConfigureAsCloudEditServer(&Server::configureAsCloudEditServer, "ConfigureAsCloudEditServer", Security::ANORRL);
 
 static Reflection::EventDesc<Server, void(shared_ptr<Instance>, FilterResult, shared_ptr<Instance>, std::string)> desc_dataBasicFiltered(&Server::dataBasicFilteredSignal, "DataBasicFiltered", "peer", "result", "instance", "member", Security::LocalUser);
 static Reflection::EventDesc<Server, void(shared_ptr<Instance>, FilterResult, shared_ptr<Instance>, std::string)> desc_dataCustomFiltered(&Server::dataCustomFilteredSignal, "DataCustomFiltered", "peer", "result", "instance", "member", Security::LocalUser);
 
-Reflection::EventDesc<Server, void(std::string, shared_ptr<Instance>)> event_IncommingConnection(&Server::incommingConnectionSignal, "IncommingConnection", "peer", "replicator", Security::RobloxScript);
+Reflection::EventDesc<Server, void(std::string, shared_ptr<Instance>)> event_IncommingConnection(&Server::incommingConnectionSignal, "IncommingConnection", "peer", "replicator", Security::ANORRLScript);
 REFLECTION_END();
 
 static const int maxClients = 128;

@@ -1,4 +1,4 @@
-#if !defined(ARL_PLATFORM_DURANGO) && !defined(ARL_PLATFORM_UWP)
+#if !defined(ARL_PLATFORM_UWP)
 #include "DeviceD3D11.h"
 
 #include "FramebufferD3D11.h"

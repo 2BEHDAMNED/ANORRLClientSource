@@ -24,35 +24,23 @@ namespace Graphics
 
     static TypeD3DCompile loadShaderCompiler()
     {
-#if !defined(ARL_PLATFORM_DURANGO)
         HMODULE d3dCompiler = ShaderProgramD3D11::loadShaderCompilerDLL();
 
         return d3dCompiler ? (TypeD3DCompile)GetProcAddress(d3dCompiler, "D3DCompile") : NULL;
-#else
-        return &D3DCompile;
-#endif
     }
 
     static TypeD3DPreprocess loadShaderPreprocessor()
     {
-#if !defined(ARL_PLATFORM_DURANGO)
         HMODULE d3dCompiler = ShaderProgramD3D11::loadShaderCompilerDLL();
 
         return d3dCompiler ? (TypeD3DPreprocess)GetProcAddress(d3dCompiler, "D3DPreprocess") : NULL;
-#else
-        return &D3DPreprocess;
-#endif
     }
 
     static TypeD3DReflect loadShaderReflector()
     {
-#if !defined(ARL_PLATFORM_DURANGO)
         HMODULE d3dCompiler = ShaderProgramD3D11::loadShaderCompilerDLL();
 
         return d3dCompiler ? (TypeD3DReflect)GetProcAddress(d3dCompiler, "D3DReflect") : NULL;
-#else
-        return &D3DReflect;
-#endif
     }
     
     static void extractCbuffers(Device* device, const std::vector<char>& bytecode, std::vector<shared_ptr<CBufferD3D11>>& cbuffers, unsigned globalSize, unsigned int* outSamplerMask)
@@ -670,7 +658,6 @@ namespace Graphics
         return consumeData<char>(hr, bytecode, messages);
     }
 
-#if !defined(ARL_PLATFORM_DURANGO)
     HMODULE ShaderProgramD3D11::loadShaderCompilerDLL()
     {
         static HMODULE compiler;
@@ -680,7 +667,6 @@ namespace Graphics
 
         return compiler;
     }
-#endif
 
     ID3D11InputLayout* ShaderProgramD3D11::getInputLayout11(VertexLayoutD3D11* vertexLayout)
     {

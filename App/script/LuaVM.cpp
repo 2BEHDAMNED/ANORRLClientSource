@@ -19,7 +19,7 @@ struct lua_State;
 void lua_vmhooked_handler(lua_State* L) {
     VMProtectBeginVirtualization(NULL);
     ARL::Tokens::sendStatsToken.addFlagFast(HATE_LUA_VM_HOOKED);
-    ARL::DataModel* dm = ARL::DataModel::get(RobloxExtraSpace::get(L)->context());
+    ARL::DataModel* dm = ARL::DataModel::get(ANORRLExtraSpace::get(L)->context());
     if (dm)
     {
         dm->addHackFlag(HATE_LUA_VM_HOOKED);

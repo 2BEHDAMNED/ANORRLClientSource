@@ -250,10 +250,22 @@ void BootstrapperQTStudio::registerFileTypes()
 {
     // register file extensions
 	{
-        // rbxl
-		CRegKey rbxl = CreateKey(classesKey, _T(".rbxl"), _T("ANORRL.Place"));
-		CRegKey anorrl_place = CreateKey(rbxl, _T("ANORRL.Place"), NULL);
+        // arl
+		CRegKey arl = CreateKey(classesKey, _T(".arl"), _T("ANORRL.Place"));
+		CRegKey anorrl_place = CreateKey(arl, _T("ANORRL.Place"), NULL);
 		CreateKey(anorrl_place, _T("ShellNew"), NULL);
+
+		// arlx
+		CRegKey arlx = CreateKey(classesKey, _T(".arlx"), _T("ANORRL.Place"));
+		CreateKey(CreateKey(arlx, _T("ANORRL.Place"), NULL), _T("ShellNew"), NULL);
+
+
+		CRegKey arlm = CreateKey(classesKey, _T(".arlm"), _T("ANORRL.Model"));
+		CRegKey anorrl_model = CreateKey(arlm, _T("ANORRL.Model"), NULL);
+		CreateKey(anorrl_place, _T("ShellNew"), NULL);
+
+		CRegKey arlmx = CreateKey(classesKey, _T(".arlmx"), _T("ANORRL.Model"));
+		CreateKey(CreateKey(arlmx, _T("ANORRL.Model"), NULL), _T("ShellNew"), NULL);
 	}
 
     // register file types
@@ -277,6 +289,27 @@ void BootstrapperQTStudio::registerFileTypes()
 
 		CRegKey command = CreateKey(open,_T("command"),commandline.c_str());
 	}
+
+	{
+		// ANORRL.Model
+		CRegKey anorrl_model = CreateKey(classesKey, _T("ANORRL.Model"), _T("ANORRL Model"));
+
+		CRegKey defaultIcon = CreateKey(
+			anorrl_model,
+			_T("DefaultIcon"),
+			format_string(_T("%s%s,0"), programDirectory().c_str(), ANORRLStudioAppFileName).c_str());
+
+		CRegKey shell = CreateKey(anorrl_model, _T("shell"), NULL);
+		CRegKey open = CreateKey(shell, _T("Open"), _T("Open"));
+
+		std::wstring commandline = format_string(
+			_T("\"%s%s\" %s \"%%1\""),
+			programDirectory().c_str(),
+			GetBootstrapperFileName().c_str(),
+			convert_s2w(SharedLauncher::IDEArgument).c_str());
+
+		CRegKey command = CreateKey(open, _T("command"), commandline.c_str());
+	}
 }
 
 void BootstrapperQTStudio::unregisterFileTypes()
@@ -286,8 +319,10 @@ void BootstrapperQTStudio::unregisterFileTypes()
 
 void BootstrapperQTStudio::unregisterFileTypes(HKEY ckey)
 {
-	DeleteKey(logger, classesKey, _T(".rbxl")); 
-	DeleteKey(logger, classesKey, _T("ANORRL.Place")); 
+	DeleteKey(logger, classesKey, _T(".arl"));
+	DeleteKey(logger, classesKey, _T(".arlm"));
+	DeleteKey(logger, classesKey, _T("ANORRL.Place"));
+	DeleteKey(logger, classesKey, _T("ANORRL.Model"));
 }
 
 void BootstrapperQTStudio::DoInstallApp()

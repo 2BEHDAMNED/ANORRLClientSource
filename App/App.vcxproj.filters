@@ -45,9 +45,6 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{6d6c3c26-4e29-49c0-86a4-085b27d187a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Util\Durango">
-      <UniqueIdentifier>{9617055c-25a7-43d0-8c92-55bd0fa1c862}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\V8DataModel">
       <UniqueIdentifier>{c9de0b5a-82a1-413e-9509-0d46e6281d13}</UniqueIdentifier>
     </Filter>
@@ -1685,9 +1682,6 @@
     <ClCompile Include="script\LuaVM.cpp">
       <Filter>Source Files\Script</Filter>
     </ClCompile>
-    <ClCompile Include="v8datamodel\RobloxReplicatedStorage.cpp">
-      <Filter>Source Files\V8DataModel</Filter>
-    </ClCompile>
     <ClCompile Include="security\FuzzyTokens.cpp">
       <Filter>Source Files\Security</Filter>
     </ClCompile>
@@ -1742,9 +1736,6 @@
     <ClCompile Include="v8world\MaterialProperties.cpp">
       <Filter>Source Files\V8World</Filter>
     </ClCompile>
-    <ClCompile Include="util\Durango\ProgramMemoryChecker.cpp">
-      <Filter>Source Files\Util\Durango</Filter>
-    </ClCompile>
     <ClCompile Include="v8datamodel\PlatformService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1762,12 +1753,6 @@
     </ClCompile>
     <ClCompile Include="v8world\BulletContact.cpp">
       <Filter>Source Files\V8World</Filter>
-    </ClCompile>
-    <ClCompile Include="util\XboxHttp2.cpp">
-      <Filter>Source Files\Util\Durango</Filter>
-    </ClCompile>
-    <ClCompile Include="util\Durango\FileSystemDurango.cpp">
-      <Filter>Source Files\Util\Durango</Filter>
     </ClCompile>
     <ClCompile Include="util\FileSystemIndependent.cpp">
       <Filter>Source Files\Util</Filter>
@@ -1791,6 +1776,9 @@
       <Filter>Source Files\V8DataModel</Filter>
     </ClCompile>
     <ClCompile Include="v8datamodel\DiscordRPCService.cpp">
+      <Filter>Source Files\V8DataModel</Filter>
+    </ClCompile>
+    <ClCompile Include="v8datamodel\ANORRLReplicatedStorage.cpp">
       <Filter>Source Files\V8DataModel</Filter>
     </ClCompile>
   </ItemGroup>
@@ -3574,9 +3562,6 @@
     <ClInclude Include="include\util\URL.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="include\v8datamodel\RobloxReplicatedStorage.h">
-      <Filter>Header Files\V8DataModel</Filter>
-    </ClInclude>
     <ClInclude Include="include\security\FuzzyTokens.h">
       <Filter>Header Files\Security</Filter>
     </ClInclude>
@@ -3683,6 +3668,9 @@
       <Filter>Header Files\V8DataModel</Filter>
     </ClInclude>
     <ClInclude Include="include\v8datamodel\DiscordRPCService.h">
+      <Filter>Header Files\V8DataModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\v8datamodel\ANORRLReplicatedStorage.h">
       <Filter>Header Files\V8DataModel</Filter>
     </ClInclude>
   </ItemGroup>

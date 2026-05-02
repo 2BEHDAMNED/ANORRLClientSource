@@ -457,11 +457,8 @@ void PlayerConfigurer::onDisconnection(const std::string& peer, bool lostConnect
 	try 
 	{
 		std::string url = ARL::format("%s&disconnect=true", getParamString("PingUrl").c_str());
-#if defined(ARL_PLATFORM_DURANGO)
         HttpAsync::get(url);
-#else
-		dataModel->httpGet(url, true);
-#endif
+//		dataModel->httpGet(url, true);
 	}
 	catch (ARL::base_exception&)
 	{
@@ -606,7 +603,7 @@ void PlayerConfigurer::configure(ARL::Security::Identities identity, DataModel* 
 	if (DFFlag::UseR15Character)
 		dataModel->create<Network::Client>();
 
-	dataModel->setPlaceID(getParamInt("PlaceId"), getParamBool("IsRobloxPlace"));
+	dataModel->setPlaceID(getParamInt("PlaceId"), getParamBool("IsANORRLPlace"));
 	int universeId = getParamInt("UniverseId");
 	dataModel->setUniverseId(universeId);
 	dataModel->create<HttpService>();
@@ -858,16 +855,16 @@ void StudioConfigurer::loadCoreModules()
 		return;
 	}
 
-	shared_ptr<ARL::ScreenGui> robloxScreenGui = coreGuiService->getRobloxScreenGui();
-	if (!robloxScreenGui)
+	shared_ptr<ARL::ScreenGui> anorrlScreenGui = coreGuiService->getANORRLScreenGui();
+	if (!anorrlScreenGui)
 	{
 		return;
 	}
 
 	shared_ptr<ARL::Folder> moduleScriptFolder = ARL::Creatable<Instance>::create<ARL::Folder>();
 	moduleScriptFolder->setName("Modules");
-	moduleScriptFolder->setRobloxLocked(true);
-	moduleScriptFolder->setParent(ARL::Instance::fastDynamicCast<ARL::Instance>(robloxScreenGui.get()));
+	moduleScriptFolder->setANORRLLocked(true);
+	moduleScriptFolder->setParent(ARL::Instance::fastDynamicCast<ARL::Instance>(anorrlScreenGui.get()));
 	
 	boost::unordered_map<std::string, ProtectedString> coreModules;
 
@@ -929,7 +926,7 @@ void StudioConfigurer::loadCoreModules()
 				{
 					shared_ptr<ARL::Folder> newFolder = ARL::Creatable<Instance>::create<ARL::Folder>();
 					newFolder->setName(token);
-					newFolder->setRobloxLocked(true);
+					newFolder->setANORRLLocked(true);
 					if (level == 0)
 					{
 						newFolder->setParent(moduleScriptFolder.get());
@@ -946,7 +943,7 @@ void StudioConfigurer::loadCoreModules()
 
 		moduleScript->setName(name);
 		moduleScript->setSource((*iter).second);
-		moduleScript->setRobloxLocked(true);
+		moduleScript->setANORRLLocked(true);
 
 		moduleScript->setParent(lastFolder.get());
 	}
@@ -969,26 +966,6 @@ void StudioConfigurer::configure(ARL::Security::Identities identity, DataModel* 
 
 	if (Network::Players::frontendProcessing(dataModel))
 		loadCoreModules();
-
-#if defined(ARL_PLATFORM_DURANGO)
-	if (ScriptContext* scriptContext = dataModel->create<ScriptContext>())
-	{
-        if(starterScript.empty()) 
-            starterScript = "StarterScript";
-        scriptContext->addCoreScriptLocal(starterScript, shared_ptr<Instance>());
-        return;
-	}
-#endif
-
-#if defined(ARL_STUDIO_BUILD) && ENABLE_XBOX_STUDIO_BUILD
-    if (ScriptContext* scriptContext = dataModel->create<ScriptContext>())
-    {
-        starterScript = "XStarterScript";
-        scriptContext->addCoreScriptLocal(starterScript, shared_ptr<Instance>());
-        return;
-    }
-#endif
-
 
 	// this will be called in case of old play solo
 	if (ScriptContext* scriptContext = dataModel->create<ScriptContext>())

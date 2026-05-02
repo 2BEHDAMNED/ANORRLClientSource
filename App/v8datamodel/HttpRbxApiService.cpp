@@ -32,8 +32,8 @@ namespace ARL {
 
     REFLECTION_BEGIN();
 	// CoreScript Exposed Functions
-	static Reflection::BoundYieldFuncDesc<HttpRbxApiService, std::string(std::string, bool, ThrottlingPriority)> apiGetAsyncFunction(&HttpRbxApiService::getAsyncLua, "GetAsync", "apiUrlPath", "useHttps", true, "priority", PRIORITY_DEFAULT, Security::RobloxScript);
-	static Reflection::BoundYieldFuncDesc<HttpRbxApiService, std::string(std::string, std::string, bool, ThrottlingPriority, HttpService::HttpContentType)> apiPostAsyncFunction(&HttpRbxApiService::postAsyncLua, "PostAsync", "apiUrlPath", "data", "useHttps", true, "priority", PRIORITY_DEFAULT, "content_type", HttpService::APPLICATION_JSON, Security::RobloxScript);
+	static Reflection::BoundYieldFuncDesc<HttpRbxApiService, std::string(std::string, bool, ThrottlingPriority)> apiGetAsyncFunction(&HttpRbxApiService::getAsyncLua, "GetAsync", "apiUrlPath", "useHttps", true, "priority", PRIORITY_DEFAULT, Security::ANORRLScript);
+	static Reflection::BoundYieldFuncDesc<HttpRbxApiService, std::string(std::string, std::string, bool, ThrottlingPriority, HttpService::HttpContentType)> apiPostAsyncFunction(&HttpRbxApiService::postAsyncLua, "PostAsync", "apiUrlPath", "data", "useHttps", true, "priority", PRIORITY_DEFAULT, "content_type", HttpService::APPLICATION_JSON, Security::ANORRLScript);
     REFLECTION_END();
 
 	namespace Reflection {
@@ -406,7 +406,7 @@ namespace ARL {
 		checkAndUpdatePostUrl(fullUrl, urlPath);
 
 		Http http(fullUrl);
-		robloxScriptModifiedCheck(ARL::apiPostAsyncFunction.security);
+		anorrlScriptModifiedCheck(ARL::apiPostAsyncFunction.security);
 		postAsyncInternal(http, data, content, data.size() > HTTP_POST_COMPRESSION_LIMIT, throttlePriority, resumeFunction, errorFunction);
 	}
 
@@ -494,7 +494,7 @@ namespace ARL {
 
 
 		Http http(fullUrl);
-		robloxScriptModifiedCheck(ARL::apiGetAsyncFunction.security);
+		anorrlScriptModifiedCheck(ARL::apiGetAsyncFunction.security);
 		getAsyncInternal(http, throttlePriority, resumeFunction, errorFunction);
 	}
 

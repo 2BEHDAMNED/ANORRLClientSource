@@ -694,9 +694,9 @@ const Reflection::PropDescriptor<StarterGuiService, bool> StarterGuiService::pro
 
 static const Reflection::BoundFuncDesc<StarterGuiService, void(StarterGuiService::CoreGuiType, bool)> func_setCoreGuiEnabled(&StarterGuiService::setCoreGuiEnabled,"SetCoreGuiEnabled", "coreGuiType", "enabled",  Security::None);
 static const Reflection::BoundFuncDesc<StarterGuiService, bool(StarterGuiService::CoreGuiType)> func_getCoreGuiEnabled(&StarterGuiService::getCoreGuiEnabled,"GetCoreGuiEnabled", "coreGuiType", Security::None);
-static Reflection::EventDesc<StarterGuiService, void(StarterGuiService::CoreGuiType,bool)> event_coreGuiChangedSignal(&StarterGuiService::coreGuiChangedSignal, "CoreGuiChangedSignal", "coreGuiType", "enabled", Security::RobloxScript);
-static const Reflection::BoundFuncDesc<StarterGuiService, void(std::string, Lua::WeakFunctionRef)> func_registerSetCore(&StarterGuiService::registerSetCore,"RegisterSetCore", "parameterName", "setFunction", Security::RobloxScript);
-static const Reflection::BoundFuncDesc<StarterGuiService, void(std::string, Lua::WeakFunctionRef)> func_registerGetCore(&StarterGuiService::registerGetCore,"RegisterGetCore", "parameterName", "getFunction", Security::RobloxScript);
+static Reflection::EventDesc<StarterGuiService, void(StarterGuiService::CoreGuiType,bool)> event_coreGuiChangedSignal(&StarterGuiService::coreGuiChangedSignal, "CoreGuiChangedSignal", "coreGuiType", "enabled", Security::ANORRLScript);
+static const Reflection::BoundFuncDesc<StarterGuiService, void(std::string, Lua::WeakFunctionRef)> func_registerSetCore(&StarterGuiService::registerSetCore,"RegisterSetCore", "parameterName", "setFunction", Security::ANORRLScript);
+static const Reflection::BoundFuncDesc<StarterGuiService, void(std::string, Lua::WeakFunctionRef)> func_registerGetCore(&StarterGuiService::registerGetCore,"RegisterGetCore", "parameterName", "getFunction", Security::ANORRLScript);
 static const Reflection::BoundFuncDesc<StarterGuiService, void(std::string, Reflection::Variant)> func_setCore(&StarterGuiService::setCore,"SetCore", "parameterName", "value", Security::None);
 static const Reflection::BoundYieldFuncDesc<StarterGuiService, Reflection::Variant(std::string)> func_getCore(&StarterGuiService::getCore, "GetCore", "parameterName", Security::None);
 REFLECTION_END();
@@ -903,13 +903,13 @@ GuiResponse StarterGuiService::process(const shared_ptr<InputObject>& event)
 const char *const sCoreGuiService = "CoreGui"; 
 
 REFLECTION_BEGIN();
-static Reflection::RefPropDescriptor<CoreGuiService, GuiObject> prop_CoreSelectionImageObject("SelectionImageObject", category_Appearance, &CoreGuiService::getSelectionImageObject, &CoreGuiService::setSelectionImageObject, Reflection::PropertyDescriptor::STANDARD, Security::RobloxScript);
+static Reflection::RefPropDescriptor<CoreGuiService, GuiObject> prop_CoreSelectionImageObject("SelectionImageObject", category_Appearance, &CoreGuiService::getSelectionImageObject, &CoreGuiService::setSelectionImageObject, Reflection::PropertyDescriptor::STANDARD, Security::ANORRLScript);
 static const Reflection::PropDescriptor<CoreGuiService, int> prop_Version("Version", category_Data, &CoreGuiService::getGuiVersion, NULL);
 REFLECTION_END();
 
 CoreGuiService::CoreGuiService()
 {
-	setRobloxLocked(true);
+	setANORRLLocked(true);
 	Instance::setName(sCoreGuiService);
 
 	onScreenMessages.resize(MAX_ON_SCREEN_MESSAGES);
@@ -919,19 +919,19 @@ int CoreGuiService::getGuiVersion() const
 {
 	return 0;
 }
-void CoreGuiService::createRobloxScreenGui()
+void CoreGuiService::createANORRLScreenGui()
 {
 	screenGui = Creatable<ARL::Instance>::create<ScreenGui>();
-	screenGui->setName("RobloxGui");
-	screenGui->setRobloxLocked(true);
+	screenGui->setName("ANORRLGui"); // because AnorrlGui looks fucking gross
+	screenGui->setANORRLLocked(true);
 	screenGui->setParent(this);
 }
 
-shared_ptr<ARL::ScreenGui> CoreGuiService::getRobloxScreenGui()
+shared_ptr<ARL::ScreenGui> CoreGuiService::getANORRLScreenGui()
 {
     if (!screenGui)
     {
-        createRobloxScreenGui();
+        createANORRLScreenGui();
     }
     
     if ( ARL::ScreenGui* theScreenGui = Instance::fastDynamicCast<ARL::ScreenGui>(screenGui.get()) )
@@ -946,7 +946,7 @@ void CoreGuiService::onDescendantAdded(Instance* instance)
 {
 	if(instance)
     {
-		instance->setRobloxLocked(true);
+		instance->setANORRLLocked(true);
     }
 
 	Super::onDescendantAdded(instance);

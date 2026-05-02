@@ -103,7 +103,7 @@ public:
 
 ExceptionAwareSoap<RCCServiceSoapService> service; 
 
-#define SVCNAME TEXT("RCCService")
+#define SVCNAME TEXT("ACCService")
 
 
 // http://msdn2.microsoft.com/en-us/library/ms687416(VS.85).aspx

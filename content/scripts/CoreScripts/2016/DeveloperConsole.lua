@@ -5,7 +5,7 @@ if useNewConsole then
 	local DeveloperConsoleModule;
 	local function RequireDeveloperConsoleModule()
 		if not DeveloperConsoleModule then
-			DeveloperConsoleModule = require(game:GetService("CoreGui"):WaitForChild('RobloxGui').Modules.DeveloperConsoleModule)
+			DeveloperConsoleModule = require(game:GetService("CoreGui"):WaitForChild('ANORRLGui').Modules.DeveloperConsoleModule)
 		end
 	end
 

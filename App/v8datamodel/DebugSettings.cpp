@@ -104,12 +104,12 @@ EnumDesc<Time::SampleMethod>::EnumDesc()
 }//namespace Reflection
 }//namespace ARL
 
-std::string DebugSettings::robloxVersion = "?";
-std::string DebugSettings::robloxProductName = "?";
+std::string DebugSettings::anorrlVersion = "?";
+std::string DebugSettings::anorrlProductName = "?";
 
 REFLECTION_BEGIN();
-static Reflection::PropDescriptor<DebugSettings, std::string> prop_RobloxVersion("RobloxVersion", "Profile", &DebugSettings::getRobloxVersion, NULL);
-static Reflection::PropDescriptor<DebugSettings, std::string> prop_RobloxProductName("RobloxProductName", "Profile", &DebugSettings::getRobloxProductName, NULL);
+static Reflection::PropDescriptor<DebugSettings, std::string> prop_ANORRLVersion("ANORRLVersion", "Profile", &DebugSettings::getANORRLVersion, NULL);
+static Reflection::PropDescriptor<DebugSettings, std::string> prop_ANORRLProductName("ANORRLProductName", "Profile", &DebugSettings::getANORRLProductName, NULL);
 static Reflection::PropDescriptor<DebugSettings, float> prop_getVertexShaderModel("VertexShaderModel", "Profile", &DebugSettings::getVertexShaderModel, NULL);
 static Reflection::PropDescriptor<DebugSettings, float> prop_getPixelShaderModel("PixelShaderModel", "Profile", &DebugSettings::getPixelShaderModel, NULL);
 static Reflection::PropDescriptor<DebugSettings, int> prop_videoMemory("VideoMemory", "Profile", &DebugSettings::videoMemory, NULL);
@@ -149,10 +149,10 @@ static Reflection::PropDescriptor<DebugSettings, int> prop_AltCdnSuccesses("AltC
 static Reflection::PropDescriptor<DebugSettings, int> prop_AltCdnFailures("AltCdnFailureCount", "Performance", &DebugSettings::getAlternateCdnFailureCount, NULL);
 static Reflection::PropDescriptor<DebugSettings, int> prop_blockMeshMapSize("BlockMeshSize", "Performance", &DebugSettings::getBlockMeshMapCount, NULL);
 static Reflection::PropDescriptor<DebugSettings, double> prop_LastCdnFailureTimeSpan("LastCdnFailureTimeSpan", "Performance", &DebugSettings::getLastCdnFailureTimeSpan, NULL);
-static Reflection::PropDescriptor<DebugSettings, int> prop_robloxSuccesses("RobloxSuccessCount", "Performance", &DebugSettings::getRobloxSuccessCount, NULL);
-static Reflection::PropDescriptor<DebugSettings, int> prop_robloxFailures("RobloxFailureCount", "Performance", &DebugSettings::getRobloxFalureCount, NULL);
-static Reflection::PropDescriptor<DebugSettings, double> prop_robloxResponce("RobloxRespoceTime", "Performance", &DebugSettings::getRobloxResponce, NULL);
-static Reflection::PropDescriptor<DebugSettings, double> prop_cdnReponce("CdnResponceTime", "Performance", &DebugSettings::getCdnRespoce, NULL);
+static Reflection::PropDescriptor<DebugSettings, int> prop_anorrlSuccesses("ANORRLSuccessCount", "Performance", &DebugSettings::getANORRLSuccessCount, NULL);
+static Reflection::PropDescriptor<DebugSettings, int> prop_anorrlFailures("ANORRLFailureCount", "Performance", &DebugSettings::getANORRLFailureCount, NULL);
+static Reflection::PropDescriptor<DebugSettings, double> prop_anorrlResponse("ANORRLResponseTime", "Performance", &DebugSettings::getANORRLResponse, NULL);
+static Reflection::PropDescriptor<DebugSettings, double> prop_cdnResponse("CdnResponseTime", "Performance", &DebugSettings::getCdnResponse, NULL);
 static Reflection::BoundFuncDesc<DebugSettings, shared_ptr<const Reflection::Tuple>()> prop_ResetCdnFailures(&DebugSettings::resetCdnFailureCounts, "ResetCdnFailureCounts", Security::LocalUser);
 
 // TODO: The setters here no longer do anying, get rid of these TaskSchedulerSettings!
@@ -354,32 +354,32 @@ long DebugSettings::getAlternateCdnFailureCount() const
 {
 	return Http::alternateCdnFailureCount;
 }
-long DebugSettings::getRobloxSuccessCount() const
+long DebugSettings::getANORRLSuccessCount() const
 {
-	return Http::robloxSuccessCount;
+	return Http::anorrlSuccessCount;
 }
-long DebugSettings::getRobloxFalureCount() const
+long DebugSettings::getANORRLFailureCount() const
 {
-	return Http::robloxFailureCount;
+	return Http::anorrlFailureCount;
 }
-double DebugSettings::getRobloxResponce() const
+double DebugSettings::getANORRLResponse() const
 {
-	if (!Http::getRobloxResponceLock())
+	if (!Http::getANORRLResponseLock())
 	{
 		return 0;
 	}
-	ARL::mutex::scoped_lock lock(*Http::getRobloxResponceLock());
-	return Http::robloxResponce.getStats().average;
+	ARL::mutex::scoped_lock lock(*Http::getANORRLResponseLock());
+	return Http::anorrlResponse.getStats().average;
 }
 
-double DebugSettings::getCdnRespoce() const
+double DebugSettings::getCdnResponse() const
 {
-	if (!Http::getCdnResponceLock())
+	if (!Http::getCdnResponseLock())
 	{
 		return 0;
 	}
-	ARL::mutex::scoped_lock lock(*Http::getCdnResponceLock());
-	return Http::cdnResponce.getStats().average;
+	ARL::mutex::scoped_lock lock(*Http::getCdnResponseLock());
+	return Http::cdnResponse.getStats().average;
 }
 
 shared_ptr<const Reflection::Tuple> DebugSettings::resetCdnFailureCounts()
@@ -389,15 +389,15 @@ shared_ptr<const Reflection::Tuple> DebugSettings::resetCdnFailureCounts()
 	result->values[1] = Http::cdnFailureCount.swap(0);
 	result->values[2] = Http::alternateCdnSuccessCount.swap(0);
 	result->values[3] = Http::alternateCdnFailureCount.swap(0);
-	result->values[4] = Http::robloxSuccessCount.swap(0);
-	result->values[5] = Http::robloxFailureCount.swap(0);
+	result->values[4] = Http::anorrlSuccessCount.swap(0);
+	result->values[5] = Http::anorrlFailureCount.swap(0);
 
 	{
-		if (Http::getRobloxResponceLock())
+		if (Http::getANORRLResponseLock())
 		{
-			ARL::mutex::scoped_lock lock(*Http::getRobloxResponceLock());
-			result->values[6] = Http::robloxResponce.getStats().average;
-			Http::robloxResponce.clear();
+			ARL::mutex::scoped_lock lock(*Http::getANORRLResponseLock());
+			result->values[6] = Http::anorrlResponse.getStats().average;
+			Http::anorrlResponse.clear();
 		}
 		else
 		{
@@ -406,11 +406,11 @@ shared_ptr<const Reflection::Tuple> DebugSettings::resetCdnFailureCounts()
 	}
 
 	{
-		if (Http::getCdnResponceLock())
+		if (Http::getCdnResponseLock())
 		{
-			ARL::mutex::scoped_lock lock(*Http::getCdnResponceLock());
-			result->values[7] = Http::cdnResponce.getStats().average;
-			Http::cdnResponce.clear();
+			ARL::mutex::scoped_lock lock(*Http::getCdnResponseLock());
+			result->values[7] = Http::cdnResponse.getStats().average;
+			Http::cdnResponse.clear();
 		}
 		else
 		{
@@ -514,7 +514,7 @@ bool DebugSettings::osIs64Bit() const
 
 std::string DebugSettings::systemProductName() const
 {
-#if defined( _WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined( _WIN32)
  	std::string name;
 	bool b = ARL::RegistryUtil::readString("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\BIOS\\SystemProductName", name);
 	if (b)
@@ -562,10 +562,7 @@ std::string DebugSettings::resolution() const
 
 double DebugSettings::processCores() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-//TODO
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
 	return ppc ? ppc->GetProcessCores() : 0.0;
 #elif __APPLE__
@@ -586,10 +583,7 @@ double DebugSettings::processCores() const
 
 double DebugSettings::getElapsedTime() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetElapsedTime() : 0.0;
 #else
@@ -600,10 +594,7 @@ double DebugSettings::getElapsedTime() const
 
 int DebugSettings::totalProcessorTime() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetTotalProcessorTime() : 0;
@@ -617,10 +608,7 @@ int DebugSettings::totalProcessorTime() const
 
 int DebugSettings::processorTime() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetProcessorTime() : 0;
@@ -632,10 +620,7 @@ int DebugSettings::processorTime() const
 
 int DebugSettings::privateBytes() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetPrivateBytes() : 0;
@@ -649,10 +634,7 @@ int DebugSettings::privateBytes() const
 
 int DebugSettings::privateWorkingSetBytes() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetPrivateWorkingSetBytes() : 0;
@@ -666,11 +648,7 @@ int DebugSettings::privateWorkingSetBytes() const
 
 int DebugSettings::GetVirtualBytes() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
-
+#if defined(_WIN32)
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetVirtualBytes() : 0;
 #else
@@ -683,10 +661,7 @@ int DebugSettings::GetVirtualBytes() const
 
 int DebugSettings::GetPageFileBytes() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetPageFileBytes() : 0;
@@ -698,10 +673,7 @@ int DebugSettings::GetPageFileBytes() const
 
 int DebugSettings::GetPageFaultsPerSecond() const
 {
-#if defined(ARL_PLATFORM_DURANGO)
-	// TODO: CPU performance tools available with May XDK update
-	return -1;
-#elif defined(_WIN32)
+#if defined(_WIN32)
 
     shared_ptr<CProcessPerfCounter> ppc = CProcessPerfCounter::getInstanceOptional();
     return ppc ? ppc->GetPageFaultsPerSecond() : 0;

@@ -31,11 +31,11 @@ namespace ARL
 	extern const char *const sFlyweightService;
 
 	class FlyweightService
-		: public DescribedCreatable<FlyweightService, Instance, sFlyweightService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox>
+		: public DescribedCreatable<FlyweightService, Instance, sFlyweightService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL>
 		, public Service
 	{
 	protected:
-		typedef DescribedCreatable<FlyweightService, Instance, sFlyweightService, Reflection::ClassDescriptor::PERSISTENT, Security::Roblox> Super;
+		typedef DescribedCreatable<FlyweightService, Instance, sFlyweightService, Reflection::ClassDescriptor::PERSISTENT, Security::ANORRL> Super;
 		typedef boost::unordered_map<std::string, InstanceStringData> FlyweightInstanceMap;
 
 		FlyweightInstanceMap instanceMap;

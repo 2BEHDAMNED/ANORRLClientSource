@@ -147,10 +147,10 @@ namespace ARL
 					}
 					else if(type == "instance")
 					{
-						if(const XmlElement* robloxRoot = valueElement->findFirstChildByTag(tag_roblox)){
+						if(const XmlElement* anorrlRoot = valueElement->findFirstChildByTag(tag_anorrl)){
 							Serializer serializer;
 							Instances instances;
-							serializer.loadInstancesFromText(robloxRoot, instances);
+							serializer.loadInstancesFromText(anorrlRoot, instances);
 							if(instances.size() == 1)
 							{
 								value = instances[0];

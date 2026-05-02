@@ -39,7 +39,7 @@ namespace
 		// scripts
 		"game/edit.slua",
 		"game/gameserver.slua",
-		"game/join.slua",
+		"game/join.ashx",
 		"game/visit.slua"
 	};
 
@@ -193,26 +193,15 @@ namespace ARL
             std::string host = parsed.host();
             std::string path = parsed.path();
 
-            static const std::string testsite_domain = "robloxlabs.com";
-
             const ARL::Url baseUrlParsed = ARL::Url::fromString(baseUrl);
 
             for (int i = 0; i < pathCount; i++)
             {
                 if (parsed.pathEqualsCaseInsensitive(paths[i]))
                 {
-                    if (parsed.isSubdomainOf(testsite_domain))
-                    {
-                        scheme = baseUrlParsed.scheme();
-                        host = baseUrlParsed.host();
-                        path = baseUrlParsed.path() + path;
-                    }
-                    else
-                    {
-                        scheme = "http";
-                        host = "anorrl.lambda.cam";
-                    }
-
+                    scheme = "http";
+                    host = "anorrl.lambda.cam";
+                    
                     id = ARL::Url::fromComponents(scheme, host, path, parsed.query(), parsed.fragment()).asString();
 
                     return true;
@@ -249,15 +238,7 @@ namespace ARL
 
             if (boost::istarts_with(path, paths[i]) && (path.size() == pathLength || path[pathLength] == '?'))
             {
-                static const char* domain = ".robloxlabs.com";
-
-                size_t robloxLabsPos = host.find(domain);
-                if (robloxLabsPos != std::string::npos)
-                    id = baseUrl + "/" + path;
-                else
-                    id = "http://anorrl.lambda.cam/" + path;
-                
-
+				id = "http://anorrl.lambda.cam/" + path;
                 return true;
             }
         } // for all paths[]

@@ -49,7 +49,7 @@ local searchBox = waitForChild(backpack.SearchFrame.SearchBoxFrame,"SearchBox")
 local searchButton = waitForChild(backpack.SearchFrame,"SearchButton")
 local resetButton = waitForChild(backpack.SearchFrame,"ResetButton")
 
-local robloxGui = waitForChild(Game.CoreGui, 'RobloxGui')
+local robloxGui = waitForChild(Game.CoreGui, 'ANORRLGui')
 local currentLoadout = waitForChild(robloxGui, 'CurrentLoadout')
 
 local canToggle = true
@@ -411,6 +411,6 @@ searchButton.MouseButton1Click:connect(doSearch)
 resetButton.MouseButton1Click:connect(resetSearch)
 
 if searchFrame and robloxGui.AbsoluteSize.Y <= 500 then  
-	searchFrame.RobloxLocked = false 
+	searchFrame.ANORRLLocked = false 
 	searchFrame:Destroy() 
 end 

@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "pdh.h"
 
 #include <string>

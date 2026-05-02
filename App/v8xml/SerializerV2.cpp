@@ -157,7 +157,7 @@ void SerializerV2::loadXML(std::istream& stream, ARL::DataModel* dataModel)
 	TextXmlParser machine(stream.rdbuf());
 	std::auto_ptr<XmlElement> root(machine.parse());
 	
-	if (root->getTag() == tag_roblox) 
+	if (root->getTag() == tag_anorrl) 
 	{
 		if(const XmlAttribute* version = root->findAttribute(tag_version))
         {
@@ -182,7 +182,7 @@ void SerializerV2::loadXML(std::istream& stream, ARL::DataModel* dataModel)
 	else
 	{
 		schemaVersionLoading = 1;
-		throw std::runtime_error("SerializerV2::loadXML ill-formed XML. No Roblox tag");
+		throw std::runtime_error("SerializerV2::loadXML ill-formed XML. No ANORRL tag");
 	}
 
 	// Should we need to do this???
@@ -218,7 +218,7 @@ void SerializerV2::loadInstancesXML(const XmlElement* root, Instances& result, I
 	//       Find a way of combining these code chunks
 	bool v4model = false;
 
-	if (root->getTag() == tag_roblox) {
+	if (root->getTag() == tag_anorrl) {
 		const XmlAttribute* version = root->findAttribute(tag_version);
 		if (version!=NULL && version->getValue(schemaVersionLoading) && schemaVersionLoading >= 4) {
 			v4model = true;
@@ -247,16 +247,16 @@ XmlElement* SerializerV2::newRootElement(const std::string& type)
 {
 	static const XmlTag& tag_xmlnsxmime = Name::declare("xmlns:xmime");
 
-	XmlElement* root = new XmlElement(tag_roblox);
+	XmlElement* root = new XmlElement(tag_anorrl);
 	root->addAttribute(tag_xmlnsxmime, "http://www.w3.org/2005/05/xmlmime");
 	root->addAttribute(tag_xmlnsxsi, "http://www.w3.org/2001/XMLSchema-instance");
-	root->addAttribute(tag_xsinoNamespaceSchemaLocation, "http://anorrl.lambda.cam/roblox.xsd");
+	root->addAttribute(tag_xsinoNamespaceSchemaLocation, "http://anorrl.lambda.cam/anorrl.xsd"); // i wonder if this is ever used...
 	root->addAttribute(tag_version, SerializerV2::CURRENT_SCHEMA_VERSION);
 	if(!type.empty()){
 		root->addAttribute(tag_assettype, type);
 	}
 
-	// Used for schema validation with Roblox.xsd:
+	// Used for schema validation with anorrl.xsd:
 	root->addChild(new XmlElement(tag_External, &value_IDREF_null));
 	root->addChild(new XmlElement(tag_External, &value_IDREF_nil));
 

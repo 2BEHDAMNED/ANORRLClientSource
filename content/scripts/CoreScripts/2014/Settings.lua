@@ -75,7 +75,7 @@ local function Color3I(r,g,b)
 end
 
 local function robloxLock(instance)
-  instance.RobloxLocked = true
+  instance.ANORRLLocked = true
   children = instance:GetChildren()
   if children then
 	 for i, child in ipairs(children) do
@@ -735,7 +735,7 @@ local function createGameSettingsMenu(baseZIndex, shield)
 		cameraLabel.ZIndex = baseZIndex + 4
 		cameraLabel.Parent = gameSettingsMenuFrame
 
-		local mouseLockLabel = game.CoreGui.RobloxGui:FindFirstChild("MouseLockLabel",true)
+		local mouseLockLabel = game.CoreGui.ANORRLGui:FindFirstChild("MouseLockLabel",true)
 
 		local enumItems = Enum.ControlMode:GetEnumItems()
 		local enumNames = {}
@@ -1551,7 +1551,7 @@ if UserSettings then
 			end)
 		end
 		
-		game.CoreGui.RobloxGui.Changed:connect(function(prop) -- We have stopped recording when we resize
+		game.CoreGui.ANORRLGui.Changed:connect(function(prop) -- We have stopped recording when we resize
 			if prop == "AbsoluteSize" and recordingVideo then
 				recordVideoClick(gameMainMenu.RecordVideoButton, gui.StopRecordButton)
 			end
@@ -1856,7 +1856,7 @@ local createSaveDialogs = function()
 	errorBoxButtons[buttonOffset+1].Style = Enum.ButtonStyle.RobloxRoundButton
 	errorBoxButtons[buttonOffset+1].ZIndex =  baseZIndex+3
 
-	local errorDialogMessageBox = RbxGui.CreateStyledMessageDialog("Upload Failed", "Sorry, we could not save your changes to ROBLOX. If this problem continues to occur, please make sure your Roblox account has a verified email address.", "Error", errorBoxButtons)
+	local errorDialogMessageBox = RbxGui.CreateStyledMessageDialog("Upload Failed", "Sorry, we could not save your changes to ANORRL. If this problem continues to occur, please make sure your Roblox account has a verified email address.", "Error", errorBoxButtons)
 	errorDialogMessageBox.Visible = false
 	errorDialogMessageBox.Parent = shield
 	errorDialogMessageBox.ZIndex = baseZIndex+2
@@ -1936,10 +1936,10 @@ local createSaveDialogs = function()
 		end)
 
 		--Do the save while the spinner is going, function will wait
-		local result = game:SaveToRoblox()
+		local result = game:SaveToANORRL()
 		if not result then
 			--Try once more
-			result = game:SaveToRoblox()
+			result = game:SaveToANORRL()
 		end
 
 		--Hide the spinner dialog

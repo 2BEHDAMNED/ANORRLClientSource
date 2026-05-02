@@ -271,7 +271,7 @@ protected:
 		{
 			// version = data + salt
 			std::string value = it->get<std::string>();
-			std::string version = ARL::sha1(value + "askljfLUZF");
+			std::string version = ARL::sha1(value + "alrrololrl");
 			versions.push_back(version);
 		}
 
@@ -1221,14 +1221,14 @@ CWebService::CWebService(bool crashUploadOnly) :
    doneEvent(TRUE, FALSE),
    dataModelCount(0)
 {
-	ARL::StandardOut::singleton()->print(ARL::MESSAGE_INFO, "Intializing Roblox Web Service");
+	ARL::StandardOut::singleton()->print(ARL::MESSAGE_INFO, "Intializing ANORRL Web Service");
 
 	{
 		CVersionInfo vi;
 		vi.Load(_AtlBaseModule.m_hInst);
-		ARL::DebugSettings::robloxVersion = vi.GetFileVersionAsDotString();
+		ARL::DebugSettings::anorrlVersion = vi.GetFileVersionAsDotString();
 
-		ARL::Analytics::setReporter("RCCService");
+		ARL::Analytics::setReporter("ACCService");
 		ARL::Analytics::setAppVersion(vi.GetFileVersionAsString());
 	}
 
@@ -1244,10 +1244,10 @@ CWebService::CWebService(bool crashUploadOnly) :
 
 	ARL::Analytics::InfluxDb::init();	// calls rand()
 
-	RobloxCrashReporter::silent = true;
+	ANORRLCrashReporter::silent = true;
 	mainLogManager->WriteCrashDump();
 
-    isThumbnailer = ::isServiceInstalled("Roblox.Thumbnails.Relay");
+    isThumbnailer = ::isServiceInstalled("ANORRL.Thumbnails.Relay");
 	LoadAppSettings();
 
 	LoadClientSettings(rccSettings);
@@ -1271,7 +1271,7 @@ CWebService::CWebService(bool crashUploadOnly) :
 	ARL::Network::initWithServerSecurity();
 
 	//If crashUploadOnly = true, don't create a separate thread of control for uploading
-	static DumpErrorUploader dumpErrorUploader(!crashUploadOnly, "RCCService");
+	static DumpErrorUploader dumpErrorUploader(!crashUploadOnly, "ACCService");
 
 	std::string dmpHandlerUrl = GetGridUrl(::GetBaseURL(), FFlag::UseDataDomain);
 	dumpErrorUploader.InitCrashEvent(dmpHandlerUrl, mainLogManager->getCrashEventName());
@@ -1387,7 +1387,7 @@ void CWebService::LoadClientSettings(RCCServiceSettings& dest)
 	LoadClientSettingsFromString(GetSettingsKey().c_str(), clientSettingsData, &dest);
     if (isThumbnailer)
     {
-	    LoadClientSettingsFromString("RccThumbnailers", thumbnailSettingsData, &dest);
+	    LoadClientSettingsFromString("AccThumbnailers", thumbnailSettingsData, &dest);
     }
 }
 
@@ -1403,7 +1403,7 @@ void CWebService::LoadClientSettings(std::string& clientDest, std::string& thumb
 	}
     if (isThumbnailer)
     {
-	    FetchClientSettingsData("RccThumbnailers", "D6925E56-BFB9-4908-AAA2-A5B1EC4B2D79", &thumbnailDest);
+	    FetchClientSettingsData("AccThumbnailers", "D6925E56-BFB9-4908-AAA2-A5B1EC4B2D79", &thumbnailDest);
     }
 
     bool invalidClientSettings = (clientDest.empty() || key.length() == 0);
@@ -1467,7 +1467,7 @@ std::vector<std::string> CWebService::fetchAllowedSecurityVersions()
 		BOOST_FOREACH(const boost::property_tree::ptree::value_type& child, pt.get_child("data"))
 		{
 			// version = data + salt
-			std::string version = ARL::sha1(child.second.data() + "askljfLUZF");
+			std::string version = ARL::sha1(child.second.data() + "alrrololrl");
 			versions.push_back(version);
 		}
 
@@ -1533,7 +1533,7 @@ int RCCServiceSoapService::GetVersion(_ns1__GetVersion *ns1__GetVersion, _ns1__G
 {
 	BEGIN_PRINT(GetVersion,"GetVersion");
 	::InterlockedIncrement(&getVersionCount);
-	ns1__GetVersionResponse->GetVersionResult = ARL::DebugSettings::robloxVersion.c_str();
+	ns1__GetVersionResponse->GetVersionResult = ARL::DebugSettings::anorrlVersion.c_str();
 	::InterlockedDecrement(&getVersionCount);
 	END_PRINT(GetVersion,"GetVersion");
 	return 0;
@@ -1546,7 +1546,7 @@ int RCCServiceSoapService::GetStatus(_ns1__GetStatus *ns1__GetStatus, _ns1__GetS
 	::InterlockedIncrement(&getStatusCount);
 	ns1__GetStatusResponse->GetStatusResult = soap_new_ns1__Status(this, -1);
 	ns1__GetStatusResponse->GetStatusResult->version = soap_new_std__string(this, -1);
-	*ns1__GetStatusResponse->GetStatusResult->version = ARL::DebugSettings::robloxVersion.c_str();
+	*ns1__GetStatusResponse->GetStatusResult->version = ARL::DebugSettings::anorrlVersion.c_str();
 	ns1__GetStatusResponse->GetStatusResult->environmentCount = CWebService::singleton->jobCount();
 	::InterlockedDecrement(&getStatusCount);
 	END_PRINT(GetStatus,"GetStatus");

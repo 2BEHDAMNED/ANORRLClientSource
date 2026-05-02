@@ -9,7 +9,7 @@
 #include "rbx/Memory.h"
 
 
-bool ARL::roblox_allocator::crashOnAllocationFailure = true;
+bool ARL::anorrl_allocator::crashOnAllocationFailure = true;
 
 namespace ARL 
 {
@@ -18,31 +18,31 @@ namespace ARL
     std::vector<size_t*> poolAllocationList;
 
 #ifdef ARL_MEMORY_SCALABLE_MALLOC
-	char* roblox_allocator::malloc(const size_type size)
+	char* anorrl_allocator::malloc(const size_type size)
 	{
 		return reinterpret_cast<char *>(scalable_malloc(size > 0 ? size : 1));
 	}
-	void roblox_allocator::free(char * const block)
+	void anorrl_allocator::free(char * const block)
 	{
 		return scalable_free(block);
 	}
-	char* roblox_allocator::realloc(char *ptr, size_t nsize)
+	char* anorrl_allocator::realloc(char *ptr, size_t nsize)
 	{
 		return reinterpret_cast<char *>(scalable_realloc(ptr, nsize));
 	}
 #else
-	char* roblox_allocator::malloc(const size_type size)
+	char* anorrl_allocator::malloc(const size_type size)
 	{
 		char* result = (char*)std::malloc(size > 0 ? size : 1);
 		if (!result && size && crashOnAllocationFailure)
 			ARLCRASH();	// We want a nice fat crash here so that the process quits and we can log it
 		return result;
 	}
-	void roblox_allocator::free(char * const block)
+	void anorrl_allocator::free(char * const block)
 	{
 		return std::free(block);
 	}
-	char* roblox_allocator::realloc(char *ptr, size_t nsize)
+	char* anorrl_allocator::realloc(char *ptr, size_t nsize)
 	{
 		char* result = (char*)std::realloc(ptr, nsize);
 		if (!result && nsize && crashOnAllocationFailure)
@@ -64,7 +64,7 @@ void* operator new(size_t size)
 	//(we return NULL if it is a no-throw implementation)
 	if (void* ptr = scalable_malloc(size > 0 ? size : 1))
         return ptr;
-	if (ARL::roblox_allocator::crashOnAllocationFailure)
+	if (ARL::anorrl_allocator::crashOnAllocationFailure)
 		ARLCRASH();	// We want a nice fat crash here so that the process quits and we can log it
     throw std::bad_alloc();
 }

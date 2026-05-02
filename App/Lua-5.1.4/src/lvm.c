@@ -445,7 +445,7 @@ void luaV_execute (lua_State *L, int nexeccalls) {
     int pcRel = ((pc) - (pcBase));
     const InstructionP iOp = rbxDecodeOpPartial(*pc++, ckey);
 
-#if defined(_WIN32) && !defined(_DEBUG) && !defined(_NOOPT) && !defined(ARL_TEST_BUILD) && !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(LOVE_ALL_ACCESS) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(_DEBUG) && !defined(_NOOPT) && !defined(ARL_TEST_BUILD) && !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(LOVE_ALL_ACCESS)
     if (ckey+2 < 4) break; // if invalid or identity, stop the interpreter
 #endif
     if ((L->hookmask & (LUA_MASKLINE | LUA_MASKCOUNT)) &&
@@ -945,7 +945,7 @@ void luaV_execute (lua_State *L, int nexeccalls) {
   }
 
   // added to counter an exploit.  
-#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_RCC_SECURITY) && !defined(ARL_STUDIO_BUILD) && !defined(_NOOPT) && !defined(_DEBUG) && defined(_WIN32)
   if (ARL::detectDllByExceptionChainTeb<2>(ARL::Security::kCheckDefault))
   {
     ARL::Security::setHackFlagVs<0>(ARL::Security::hackFlag8, HATE_SEH_CHECK);

@@ -265,7 +265,7 @@ echo placeholder &gt;$(BUILD_PATH)\Player\$(Platform)\$(Configuration)\boost.pdb
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="robloxHooks.cpp" />
+    <ClCompile Include="ANORRLHooks.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='NoOpt|Win32'">Create</PrecompiledHeader>
@@ -402,7 +402,7 @@ echo placeholder &gt;$(BUILD_PATH)\Player\$(Platform)\$(Configuration)\boost.pdb
     <ClInclude Include="RenderJob.h" />
     <ClInclude Include="..\ClientBase\RenderSettingsItem.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="RobloxHooks.h" />
+    <ClInclude Include="ANORRLHooks.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Teleporter.h" />
     <ClInclude Include="UserInput.h" />
@@ -420,7 +420,6 @@ echo placeholder &gt;$(BUILD_PATH)\Player\$(Platform)\$(Configuration)\boost.pdb
   </ItemGroup>
   <ItemGroup>
     <Image Include="ANORRL.ico" />
-    <Image Include="Roblox.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WindowsClient.rc" />

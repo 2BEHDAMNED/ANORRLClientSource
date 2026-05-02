@@ -60,3 +60,7 @@ Android/.gradle/*
 Android/.idea/*
 Android/build/
 Android/*/build/
+moc_*
+qrc_*
+uic_*
+ui_*.h

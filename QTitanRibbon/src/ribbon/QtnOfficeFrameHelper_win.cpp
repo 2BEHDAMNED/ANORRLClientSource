@@ -828,7 +828,7 @@ bool OfficeFrameHelperWin::isTheme2013() const
     if (OfficeStyle* officeStyle = qobject_cast<OfficeStyle*>(qApp->style()))
     {
         OfficeStyle::Theme theme = officeStyle->getTheme();
-        if (theme == OfficeStyle::Office2013White || theme == OfficeStyle::Office2013Gray)
+        if (theme == OfficeStyle::Office2013White || theme == OfficeStyle::Office2013Gray || theme == OfficeStyle::Office2013Black)
             return true;
     }
     return false;

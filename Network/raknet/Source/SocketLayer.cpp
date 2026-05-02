@@ -638,12 +638,6 @@ SOCKET SocketLayer::CreateBoundSocket_Old( unsigned short port, bool blockingSoc
 		}
 		dwIOError = GetLastError();
 		LPVOID messageBuffer;
-#if defined(ARL_PLATFORM_DURANGO) // Roblox Change
-		// something has gone wrong here...
-		RAKNET_DEBUG_PRINTF( "gethostname failed:Error code - %d\n", dwIOError );
-        (void)messageBuffer;
-		//Free the buffer.
-#else
 		//Desktop
 		FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL, dwIOError, MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),  // Default language
@@ -652,7 +646,6 @@ SOCKET SocketLayer::CreateBoundSocket_Old( unsigned short port, bool blockingSoc
 		RAKNET_DEBUG_PRINTF( "bind__(...) failed:Error code - %d\n%s", (unsigned int) dwIOError, (char*) messageBuffer );
 		//Free the buffer.
 		LocalFree( messageBuffer );
-#endif //defined(ARL_PLATFORM_DURANGO) 
 
 #elif (defined(__GNUC__) || defined(__GCCXML__)  ) && !defined(_WIN32)
 		switch (ret)
@@ -1583,13 +1576,6 @@ void GetMyIP_Win32( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTERNAL_IDS] )
 		DWORD dwIOError = GetLastError();
 		LPVOID messageBuffer;
 
-#if defined(ARL_PLATFORM_DURANGO) // Roblox Change
-		// WinRT
-		(void)messageBuffer;
-		// something has gone wrong here...
-		RAKNET_DEBUG_PRINTF( "gethostname failed:Error code - %d", dwIOError );
-		//Free the buffer.
-#else
 		//Desktop
 		FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL, dwIOError, MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),  // Default language
@@ -1598,7 +1584,6 @@ void GetMyIP_Win32( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTERNAL_IDS] )
 		RAKNET_DEBUG_PRINTF( "gethostname failed:Error code - %d\n%s", dwIOError, messageBuffer );
 		//Free the buffer.
 		LocalFree( messageBuffer );
-#endif // defined(ARL_PLATFORM_WIN_MOBILE)
 
 		#endif //defined(_WIN32)
 		return ;
@@ -1636,13 +1621,7 @@ void GetMyIP_Win32( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTERNAL_IDS] )
 	#ifdef _WIN32
 		DWORD dwIOError = GetLastError();
 		LPVOID messageBuffer;
-#if defined(ARL_PLATFORM_DURANGO) // Roblox Change
-		// WinRT
-		(void)messageBuffer;
-		// something has gone wrong here...
-		RAKNET_DEBUG_PRINTF( "gethostname failed:Error code - %d", dwIOError );
-		//Free the buffer.
-#else
+
 		//Desktop
 		FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL, dwIOError, MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),  // Default language
@@ -1652,7 +1631,6 @@ void GetMyIP_Win32( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTERNAL_IDS] )
 
 		//Free the buffer.
 		LocalFree( messageBuffer );
-#endif //defined(ARL_PLATFORM_DURANGO) 
 	#endif
 		return ;
 	}

@@ -61,7 +61,8 @@ namespace Qtitan
             Office2010Blue,
             Office2010Black,
             Office2013White,
-            Office2013Gray,
+			Office2013Gray,
+			Office2013Black
         };
 
         enum OfficePopupDecoration

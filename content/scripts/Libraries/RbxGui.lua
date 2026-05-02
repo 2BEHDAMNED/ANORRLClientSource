@@ -741,7 +741,7 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 		-- needed to maintain local scope for items in event listeners below
 		local button = choiceButton:clone()
 		if forRoblox then
-			button.RobloxLocked = true
+			button.ANORRLLocked = true
 		end		
 		button.Text = item
 		button.Parent = droppedDownMenu

@@ -35,7 +35,7 @@ static Reflection::EventDesc<ContextActionService, void(shared_ptr<Instance>)> e
 
 
 // lua function to action binding (user facing functions)
-static Reflection::BoundFuncDesc<ContextActionService, void(std::string, Lua::WeakFunctionRef, bool, shared_ptr<const Reflection::Tuple>)> func_bindCore(&ContextActionService::bindCoreActionForInputTypes, "BindCoreAction","actionName","functionToBind","createTouchButton","inputTypes", Security::RobloxScript);
+static Reflection::BoundFuncDesc<ContextActionService, void(std::string, Lua::WeakFunctionRef, bool, shared_ptr<const Reflection::Tuple>)> func_bindCore(&ContextActionService::bindCoreActionForInputTypes, "BindCoreAction","actionName","functionToBind","createTouchButton","inputTypes", Security::ANORRLScript);
 static Reflection::BoundFuncDesc<ContextActionService, void(std::string, Lua::WeakFunctionRef, bool, shared_ptr<const Reflection::Tuple>)> func_bind(&ContextActionService::bindActionForInputTypes, "BindAction","actionName","functionToBind","createTouchButton","inputTypes", Security::None);
 static Reflection::BoundFuncDesc<ContextActionService, void(std::string, Lua::WeakFunctionRef, bool, shared_ptr<const Reflection::Tuple>)> func_bind_old(&ContextActionService::bindActionForInputTypes, "BindActionToInputTypes","actionName","functionToBind","createTouchButton","inputTypes", Security::None, Reflection::Descriptor::Attributes::deprecated(func_bind));
 
@@ -50,7 +50,7 @@ static Reflection::BoundFuncDesc<ContextActionService, void(std::string, UDim2)>
 static Reflection::BoundYieldFuncDesc<ContextActionService, shared_ptr<Instance>(std::string)> func_GetButton(&ContextActionService::getButton, "GetButton","actionName", Security::None);
     
 // unbinding
-static Reflection::BoundFuncDesc<ContextActionService, void(std::string)> func_unbindCoreAction(&ContextActionService::unbindCoreAction, "UnbindCoreAction", "actionName", Security::RobloxScript);
+static Reflection::BoundFuncDesc<ContextActionService, void(std::string)> func_unbindCoreAction(&ContextActionService::unbindCoreAction, "UnbindCoreAction", "actionName", Security::ANORRLScript);
 static Reflection::BoundFuncDesc<ContextActionService, void(std::string)> func_unbindAction(&ContextActionService::unbindAction, "UnbindAction", "actionName", Security::None);
 static Reflection::BoundFuncDesc<ContextActionService, void()> func_unbindAll(&ContextActionService::unbindAll, "UnbindAllActions", Security::None);
     
@@ -59,14 +59,14 @@ static Reflection::BoundFuncDesc<ContextActionService, shared_ptr<const Reflecti
 static Reflection::BoundFuncDesc<ContextActionService, shared_ptr<const Reflection::ValueTable>()> func_getAllBoundFunctionData(&ContextActionService::getAllBoundActionData, "GetAllBoundActionInfo", Security::None);
 
 // backend signals (for core scripts, not user exposed)
-static Reflection::EventDesc<ContextActionService, void(std::string, std::string, shared_ptr<const Reflection::ValueTable>)> event_boundFunctionUpdated(&ContextActionService::boundActionChangedSignal, "BoundActionChanged", "actionChanged", "changeName" ,"changeTable", Security::RobloxScript);
-static Reflection::EventDesc<ContextActionService, void(std::string, bool, shared_ptr<const Reflection::ValueTable>)> event_addedBoundFunction(&ContextActionService::boundActionAddedSignal, "BoundActionAdded", "actionAdded","createTouchButton","functionInfoTable", Security::RobloxScript);
-static Reflection::EventDesc<ContextActionService, void(std::string, shared_ptr<const Reflection::ValueTable>)> event_removedBoundFunction(&ContextActionService::boundActionRemovedSignal, "BoundActionRemoved", "actionRemoved","functionInfoTable", Security::RobloxScript);
+static Reflection::EventDesc<ContextActionService, void(std::string, std::string, shared_ptr<const Reflection::ValueTable>)> event_boundFunctionUpdated(&ContextActionService::boundActionChangedSignal, "BoundActionChanged", "actionChanged", "changeName" ,"changeTable", Security::ANORRLScript);
+static Reflection::EventDesc<ContextActionService, void(std::string, bool, shared_ptr<const Reflection::ValueTable>)> event_addedBoundFunction(&ContextActionService::boundActionAddedSignal, "BoundActionAdded", "actionAdded","createTouchButton","functionInfoTable", Security::ANORRLScript);
+static Reflection::EventDesc<ContextActionService, void(std::string, shared_ptr<const Reflection::ValueTable>)> event_removedBoundFunction(&ContextActionService::boundActionRemovedSignal, "BoundActionRemoved", "actionRemoved","functionInfoTable", Security::ANORRLScript);
     
-static Reflection::EventDesc<ContextActionService, void(std::string)> event_getActionButton(&ContextActionService::getActionButtonSignal, "GetActionButtonEvent", "actionName", Security::RobloxScript);
-static Reflection::BoundFuncDesc<ContextActionService, void(std::string, shared_ptr<Instance>)> func_actionButtonFound(&ContextActionService::fireActionButtonFoundSignal, "FireActionButtonFoundSignal", "actionName","actionButton", Security::RobloxScript);
+static Reflection::EventDesc<ContextActionService, void(std::string)> event_getActionButton(&ContextActionService::getActionButtonSignal, "GetActionButtonEvent", "actionName", Security::ANORRLScript);
+static Reflection::BoundFuncDesc<ContextActionService, void(std::string, shared_ptr<Instance>)> func_actionButtonFound(&ContextActionService::fireActionButtonFoundSignal, "FireActionButtonFoundSignal", "actionName","actionButton", Security::ANORRLScript);
     
-static Reflection::BoundFuncDesc<ContextActionService, void(std::string, InputObject::UserInputState, shared_ptr<Instance>)> func_callFunction(&ContextActionService::callFunction, "CallFunction", "actionName", "state", "inputObject", Security::RobloxScript);
+static Reflection::BoundFuncDesc<ContextActionService, void(std::string, InputObject::UserInputState, shared_ptr<Instance>)> func_callFunction(&ContextActionService::callFunction, "CallFunction", "actionName", "state", "inputObject", Security::ANORRLScript);
 REFLECTION_END();
 
 ContextActionService::ContextActionService() : Super()

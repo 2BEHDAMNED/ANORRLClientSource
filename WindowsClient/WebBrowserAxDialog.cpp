@@ -67,7 +67,7 @@ HRESULT WebBrowserAxDialog::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pc
 	return E_NOTIMPL;
 }
 
-#define ROBLOX_BROWSERFLAGS \
+#define ANORRL_BROWSERFLAGS \
 	DOCHOSTUIFLAG_DISABLE_HELP_MENU |\
 	DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE |\
 	DOCHOSTUIFLAG_THEME |\
@@ -80,7 +80,7 @@ HRESULT WebBrowserAxDialog::GetHostInfo(DOCHOSTUIINFO *pInfo)
 {
 	pInfo->dwFlags |= 
 		DOCHOSTUIFLAG_NO3DBORDER | 
-		ROBLOX_BROWSERFLAGS |
+		ANORRL_BROWSERFLAGS |
 		0;
 
 	return S_OK;
@@ -307,7 +307,7 @@ DWORD ThreadDoUploadVideo(shared_ptr<ARL::DataModel> dataModel, bool siteSEO, st
 				"<media:category\r\n"
 				"scheme=\"http://gdata.youtube.com/schemas/2007/categories.cat\">Games\r\n"
 				"</media:category>\r\n"
-				"<media:keywords>ROBLOX, video, free game, online virtual world</media:keywords>\r\n"
+				"<media:keywords>ANORRL, video, free game, online virtual world</media:keywords>\r\n"
 				"</media:group>\r\n"
 				"</entry>\r\n"
 				"--f93dcbA3\r\n"
@@ -361,7 +361,7 @@ DWORD ThreadDoUploadVideo(shared_ptr<ARL::DataModel> dataModel, bool siteSEO, st
 		http.additionalHeaders["Authorization"] = "AuthSub token=\"" + youtubeToken + "\"";
 		http.additionalHeaders["GData-Version"] = "2";
 		http.additionalHeaders["X-GData-Key"] = "key=AI39si5sZKe6qAobFgnT9UFGXq9bBO7mUCsK3_cWy_LJmgKDtl-GOMHNNV_Bh7Jk7KqDX7vI8D30jFHwnu8RJcDmcJN47yPW7A";
-		http.additionalHeaders["Slug"] = "roblox.avi";
+		http.additionalHeaders["Slug"] = "anorrl.avi";
 		http.additionalHeaders["Connection"] = "close";
 		http.additionalHeaders["Content-Length"] = ARL::format("%d", buffer.str().length());
 

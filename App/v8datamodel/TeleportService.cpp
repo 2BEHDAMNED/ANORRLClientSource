@@ -44,9 +44,9 @@ static Reflection::BoundFuncDesc<TeleportService, void(int, std::string, shared_
 static Reflection::BoundFuncDesc<TeleportService, Reflection::Variant(std::string)> func_GetTeleportSetting(&TeleportService::GetTeleportSetting, "GetTeleportSetting", "setting", Security::None);
 static Reflection::BoundFuncDesc<TeleportService, void(std::string, Reflection::Variant)> func_SetTeleportSetting(&TeleportService::SetTeleportSetting, "SetTeleportSetting", "setting", "value", Security::None);
 
-static Reflection::BoundCallbackDesc<bool(std::string,int,std::string)> callback_ConfirmationCallback("ConfirmationCallback", &TeleportService::confirmationCallback, "message", "placeId", "spawnName", Security::RobloxScript);
-static Reflection::BoundCallbackDesc<void(std::string)> errorCallback("ErrorCallback", &TeleportService::showErrorCallback, "message", Security::RobloxScript);
-static Reflection::BoundFuncDesc<TeleportService, void()> func_TeleportCancel(&TeleportService::TeleportCancel, "TeleportCancel", Security::RobloxScript);
+static Reflection::BoundCallbackDesc<bool(std::string,int,std::string)> callback_ConfirmationCallback("ConfirmationCallback", &TeleportService::confirmationCallback, "message", "placeId", "spawnName", Security::ANORRLScript);
+static Reflection::BoundCallbackDesc<void(std::string)> errorCallback("ErrorCallback", &TeleportService::showErrorCallback, "message", Security::ANORRLScript);
+static Reflection::BoundFuncDesc<TeleportService, void()> func_TeleportCancel(&TeleportService::TeleportCancel, "TeleportCancel", Security::ANORRLScript);
 
 static Reflection::BoundFuncDesc<TeleportService, Reflection::Variant()> func_GetLocalTeleportData(&TeleportService::getLocalPlayerTeleportData, "GetLocalPlayerTeleportData", Security::None);
 
@@ -184,12 +184,7 @@ void TeleportService::TeleportImpl(shared_ptr<const Reflection::ValueTable> tele
         requestingTeleport = true;
 		ARLASSERT(!_baseUrl.empty());
 
-#if defined(ARL_PLATFORM_DURANGO)
-        char extraStuff[1024];
-        sprintf_s(extraStuff, 1024, "&gamerTag=%s", _callback->xBox_getGamerTag().c_str()); // We'll probably drop this crap in the future. Ask me in 5 years.       -- Max
-#else
         const char* extraStuff = "";
-#endif
 
 		if (FFlag::UseBuildGenericGameUrl)
 		{

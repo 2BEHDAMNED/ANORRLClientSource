@@ -37,11 +37,11 @@ local dialogConnections = {}
 
 local gui = nil
 waitForChild(game,"CoreGui")
-waitForChild(game.CoreGui,"RobloxGui")
-if game.CoreGui.RobloxGui:FindFirstChild("ControlFrame") then
-	gui = game.CoreGui.RobloxGui.ControlFrame
+waitForChild(game.CoreGui,"ANORRLGui")
+if game.CoreGui.ANORRLGui:FindFirstChild("ControlFrame") then
+	gui = game.CoreGui.ANORRLGui.ControlFrame
 else
-	gui = game.CoreGui.RobloxGui
+	gui = game.CoreGui.ANORRLGui
 end
 
 function currentTone()
@@ -61,7 +61,7 @@ function createChatNotificationGui()
 	chatNotificationGui.SizeOffset = Vector2.new(0,0)
 	chatNotificationGui.StudsOffset = Vector3.new(0.4, 4.3, 0)
 	chatNotificationGui.Enabled = true
-   chatNotificationGui.RobloxLocked = true
+   chatNotificationGui.ANORRLLocked = true
 	chatNotificationGui.Active = true
 
 	local image = Instance.new("ImageLabel")
@@ -71,7 +71,7 @@ function createChatNotificationGui()
 	image.Position = UDim2.new(0,0,0,0)
 	image.Size = UDim2.new(1.0,0,1.0,0)
 	image.Image = ""
-   image.RobloxLocked = true
+   image.ANORRLLocked = true
 	image.Parent = chatNotificationGui
    
 
@@ -82,7 +82,7 @@ function createChatNotificationGui()
 	button.Size = UDim2.new(0.829999983, 0, 0.460000008, 0)
 	button.Image = ""
 	button.BackgroundTransparency = 1
-   button.RobloxLocked = true
+   button.ANORRLLocked = true
 	button.Parent = image
 end
 
@@ -147,7 +147,7 @@ function createMessageDialog()
 	text.FontSize = Enum.FontSize.Size14
 	text.BackgroundTransparency = 1
 	text.TextColor3 = Color3.new(1,1,1)
-   text.RobloxLocked = true
+   text.ANORRLLocked = true
 	text.Parent = messageDialog
 end
 
@@ -269,7 +269,7 @@ function newChoice(numberText)
 	frame.MouseEnter:connect(function() highlightColor(frame, currentTone()) end)
 	frame.MouseLeave:connect(function() resetColor(frame, currentTone()) end)
 	frame.MouseButton1Click:connect(function() selectChoice(frame) end)
-   frame.RobloxLocked = true
+   frame.ANORRLLocked = true
 
 	local number = Instance.new("TextLabel")
 	number.Name = "Number"
@@ -281,7 +281,7 @@ function newChoice(numberText)
 	number.Size = UDim2.new(0,20,0,24)
 	number.TextXAlignment = Enum.TextXAlignment.Left
 	number.TextYAlignment = Enum.TextYAlignment.Top
-   number.RobloxLocked = true
+   number.ANORRLLocked = true
 	number.Parent = frame
 
 	local prompt = Instance.new("TextLabel")
@@ -294,7 +294,7 @@ function newChoice(numberText)
 	prompt.TextXAlignment = Enum.TextXAlignment.Left
 	prompt.TextYAlignment = Enum.TextYAlignment.Top
 	prompt.TextWrap = true
-   prompt.RobloxLocked = true
+   prompt.ANORRLLocked = true
 	prompt.Parent = frame
 
 	return frame
@@ -321,17 +321,17 @@ function initialize(parent)
 	imageLabel.Position = UDim2.new(1,8,0.25)
 	imageLabel.Image = "arlasset://textures/chatBubble_botBlue_tailRight.png"
 	imageLabel.BackgroundTransparency = 1
-   imageLabel.RobloxLocked = true
+   imageLabel.ANORRLLocked = true
 	imageLabel.Parent = mainFrame
 		
 	for n, obj in pairs(choices) do
-      obj.RobloxLocked = true
+      obj.ANORRLLocked = true
 		obj.Parent = mainFrame
 	end
-   lastChoice.RobloxLocked = true
+   lastChoice.ANORRLLocked = true
 	lastChoice.Parent = mainFrame
 
-   mainFrame.RobloxLocked = true
+   mainFrame.ANORRLLocked = true
 	mainFrame.Parent = parent
 end
 
@@ -466,7 +466,7 @@ function addDialog(dialog)
 			local chatGui = chatNotificationGui:clone()
 			chatGui.Enabled = not dialog.InUse		
 			chatGui.Adornee = dialog.Parent
-			chatGui.RobloxLocked = true
+			chatGui.ANORRLLocked = true
 			chatGui.Parent = game.CoreGui
 			chatGui.Image.Button.MouseButton1Click:connect(function() startDialog(dialog) end)
 			setChatNotificationTone(chatGui, dialog.Purpose, dialog.Tone)
@@ -528,7 +528,7 @@ function onLoad()
 
   --print("Creating MessageDialog")
   createMessageDialog()
-  messageDialog.RobloxLocked = true
+  messageDialog.ANORRLLocked = true
   messageDialog.Parent = gui
   
   --print("Waiting for BottomLeftControl")
@@ -540,7 +540,7 @@ function onLoad()
   frame.Position = UDim2.new(0,0,0,0)
   frame.Size = UDim2.new(0,0,0,0)
   frame.BackgroundTransparency = 1
-  frame.RobloxLocked = true
+  frame.ANORRLLocked = true
   frame.Parent = gui.BottomLeftControl
   initialize(frame)
 

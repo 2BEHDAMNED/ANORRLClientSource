@@ -24,13 +24,13 @@ while not Players.LocalPlayer do
 	wait()
 end
 local Player = Players.LocalPlayer
-local RobloxGui = CoreGui:WaitForChild('RobloxGui')
+local ANORRLGui = CoreGui:WaitForChild('ANORRLGui')
 
-RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local TenFootInterface = require(RobloxGui.Modules.TenFootInterface)
+ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local TenFootInterface = require(ANORRLGui.Modules.TenFootInterface)
 local isTenFootInterface = TenFootInterface:IsEnabled()
 
-local playerDropDownModule = require(RobloxGui.Modules:WaitForChild("PlayerDropDown"))
+local playerDropDownModule = require(ANORRLGui.Modules:WaitForChild("PlayerDropDown"))
 local blockingUtility = playerDropDownModule:CreateBlockingUtility()
 local playerDropDown = playerDropDownModule:CreatePlayerDropDown()
 
@@ -134,7 +134,7 @@ local SHADOW_SLICE_SIZE = 5
 local SHADOW_SLICE_RECT = Rect.new(SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE+1, SHADOW_SLICE_SIZE*2-1, SHADOW_SLICE_SIZE*2-1)
 
 local ADMINS = {	-- Admins with special icons
-    ['7210880'] = 'arlassetid://134032333', -- Jeditkacheff
+--[[    ['7210880'] = 'arlassetid://134032333', -- Jeditkacheff
     ['13268404'] = 'arlassetid://113059239', -- Sorcus
     ['261'] = 'arlassetid://105897927', -- shedlestky
     ['20396599'] = 'arlassetid://161078086', -- Robloxsai
@@ -143,7 +143,7 @@ local ADMINS = {	-- Admins with special icons
 	['41'] = 'arlassetid://2827',
 	['30'] = 'arlassetid://3165',
 	['48'] = 'arlassetid://3720',
-	['60'] = 'arlassetid://7429',
+	['60'] = 'arlassetid://7429',]]
 }
 
 local ABUSES = {
@@ -293,7 +293,7 @@ local function setAvatarIconAsync(player, iconImage)
 
 	local thumbnailLoader = nil
 	pcall(function()
-		thumbnailLoader = require(RobloxGui.Modules.ThumbnailLoader)
+		thumbnailLoader = require(ANORRLGui.Modules.ThumbnailLoader)
 	end)
 
 	local isFinalSuccess = false
@@ -385,7 +385,7 @@ end
 
 Container.BackgroundTransparency = 1
 Container.Visible = false
-Container.Parent = RobloxGui
+Container.Parent = ANORRLGui
 
 -- Scrolling Frame
 local noSelectionObject = Instance.new("Frame")
@@ -1503,7 +1503,7 @@ local function resizePlayerList()
 	clampCanvasPosition()
 end
 
-RobloxGui.Changed:connect(function(property)
+ANORRLGui.Changed:connect(function(property)
 	if property == 'AbsoluteSize' then
 		spawn(function()	-- must spawn because F11 delays when abs size is set
 			resizePlayerList()
@@ -1549,9 +1549,9 @@ end
 if IsServerFollowers and not isTenFootInterface then
 	-- spawn so we don't block script
 	spawn(function()
-		local RobloxReplicatedStorage = game:GetService('RobloxReplicatedStorage')
-		RemoveEvent_OnFollowRelationshipChanged = RobloxReplicatedStorage:WaitForChild('FollowRelationshipChanged')
-		RemoteFunc_GetFollowRelationships = RobloxReplicatedStorage:WaitForChild('GetFollowRelationships')
+		local ANORRLReplicatedStorage = game:GetService('ANORRLReplicatedStorage')
+		RemoveEvent_OnFollowRelationshipChanged = ANORRLReplicatedStorage:WaitForChild('FollowRelationshipChanged')
+		RemoteFunc_GetFollowRelationships = ANORRLReplicatedStorage:WaitForChild('GetFollowRelationships')
 
 		RemoveEvent_OnFollowRelationshipChanged.OnClientEvent:connect(function(result)
 			setFollowRelationshipsView(result)

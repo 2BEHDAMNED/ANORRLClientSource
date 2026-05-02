@@ -84,7 +84,7 @@ void StyleHelper::openIniFile(const QString& fileName)
         return;
 
     delete m_pSettings;
-    m_pSettings = new QSettings(fileName, QSettings::IniFormat);
+    m_pSettings = new QSettings(fileName, QSettings::IniFormat); 
 
     Q_ASSERT(m_pSettings->status() == QSettings::NoError);
 

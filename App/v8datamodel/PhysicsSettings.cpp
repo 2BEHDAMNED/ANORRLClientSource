@@ -15,7 +15,7 @@
 
 const char *const ARL::sPhysicsSettings = "PhysicsSettings";
 
-// Don't show tree in release mode - has ROBLOX specific secrets as to how we do assembly
+// Don't show tree in release mode - has ANORRL specific secrets as to how we do assembly
 
 #ifdef _DEBUG
 	#define __ARL_SECRET_DEBUGGING

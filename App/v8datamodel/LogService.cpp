@@ -42,22 +42,22 @@ namespace ARL {
     static Reflection::BoundFuncDesc<LogService, shared_ptr<const Reflection::ValueArray>() > func_GetLogHistory(
         &LogService::getLogHistory, "GetLogHistory", Security::None);
     static Reflection::BoundFuncDesc<LogService, void()> func_RequestServerOutput(
-        &LogService::requestServerOutput, "RequestServerOutput", Security::RobloxScript);
+        &LogService::requestServerOutput, "RequestServerOutput", Security::ANORRLScript);
 	static Reflection::BoundFuncDesc<LogService, void(std::string)> func_executeScript(
-		&LogService::executeScript, "ExecuteScript", "source", Security::RobloxScript);
+		&LogService::executeScript, "ExecuteScript", "source", Security::ANORRLScript);
     
     // Events and properties
     static Reflection::EventDesc<LogService, void(std::string, MessageType)> event_OutputMessage(
         &LogService::outputMessageSignal, "MessageOut", "message", "messageType");
     static Reflection::RemoteEventDesc<LogService, void(std::string, MessageType, int)> event_ServerOutputMessage(
         &LogService::serverOutputMessageSignal, "ServerMessageOut", "message", "messageType", "timestamp",
-        Security::RobloxScript, Reflection::RemoteEventCommon::SCRIPTING, Reflection::RemoteEventCommon::CLIENT_SERVER);
+        Security::ANORRLScript, Reflection::RemoteEventCommon::SCRIPTING, Reflection::RemoteEventCommon::CLIENT_SERVER);
     static Reflection::RemoteEventDesc<LogService, void(shared_ptr<Instance>)> event_RequestServerOutputSignal(
         &LogService::requestServerOutputSignal, "RequestServerOutputSignal", "requestingPlayer",
-        Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
+        Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
 	static Reflection::RemoteEventDesc<LogService, void(shared_ptr<Instance>, std::string)> event_requestScriptExecutionSignal(
 		&LogService::requestScriptExecutionSignal, "RequestScriptExecutionSignal", "requestingPlayer", "source",
-		Security::Roblox, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
+		Security::ANORRL, Reflection::RemoteEventCommon::REPLICATE_ONLY, Reflection::RemoteEventCommon::CLIENT_SERVER);
     REFLECTION_END();
 
     static void raiseServerEventFromMessage(shared_ptr<LogService> logService,
@@ -170,7 +170,7 @@ namespace ARL {
         std::string::size_type offset = 0;
         std::string::size_type offsetSaved = 0;
 
-        // prefilter the string and exit if http and (roblox or rbxcdn) is not found.
+        // prefilter the string and exit if http and (lambda or rbxcdn) is not found.
         std::string lowerText = text;
         std::transform(lowerText.begin(), lowerText.end(), lowerText.begin(), tolower);
         const std::string& lower = lowerText;
@@ -183,6 +183,7 @@ namespace ARL {
         offset = lower.find("lambda", offset);
         if (offset == std::string::npos)
         {
+			// rbxcdn huh.
             offset = lower.find("rbxcdn", offsetSaved);
             if (offset == std::string::npos)
                 return changeMask;

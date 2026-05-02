@@ -19,7 +19,7 @@
 #include <unistd.h>
 #endif
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "Mmsystem.h"
 #pragma comment (lib, "Winmm.lib")
 #endif
@@ -31,7 +31,7 @@ FASTINTVARIABLE(SpeedCountCap, 5)
 namespace ARL
 {
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 static volatile double currentSeconds = 0;
 static volatile bool cheater = false;
 static volatile bool isDebuggedValue = false;
@@ -186,7 +186,7 @@ long long Time::getStart()
 	return start;
 }
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 
 void CALLBACK directCallback(UINT, UINT, DWORD, DWORD, DWORD) 
 { 
@@ -299,7 +299,7 @@ Time Time::now<Time::Precise>()
 template<>
 Time Time::now<Time::Multimedia>()
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	return Time(timeGetTime() / 1000.0);
 #else
 	// TODO: Is this fast enough on Mac?
@@ -309,7 +309,7 @@ Time Time::now<Time::Multimedia>()
 
 bool Time::isSpeedCheater()
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	return cheater;
 #else
 	// No cheat engine for mac yet???
@@ -319,7 +319,7 @@ bool Time::isSpeedCheater()
 
 bool Time::isDebugged()
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	return isDebuggedValue;
 #else
 	return false;
@@ -329,7 +329,7 @@ bool Time::isDebugged()
 template<>
 Time Time::now<Time::Fast>()
 {
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 	if (preciseOverride <= Fast)
 		return now<Precise>();
 	

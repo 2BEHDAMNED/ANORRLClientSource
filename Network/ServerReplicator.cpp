@@ -278,12 +278,12 @@ using namespace ARL;
 using namespace ARL::Network;
 
 REFLECTION_BEGIN();
-static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, shared_ptr<Instance>)> desc_filterNew("NewFilter", &ServerReplicator::filterNew, "newItem", "parent", Security::RobloxPlace);
-static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>)> desc_filterDelete("DeleteFilter", &ServerReplicator::filterDelete, "deletingItem", Security::RobloxPlace);
-static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, std::string, Reflection::Variant)> desc_filterProperty("PropertyFilter", &ServerReplicator::filterProperty, "changingItem", "member", "value", Security::RobloxPlace);
-static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, std::string)> desc_filterEvent("EventFilter", &ServerReplicator::filterEvent, "firingItem", "event", Security::RobloxPlace);
-static Reflection::BoundFuncDesc<ServerReplicator, void(bool)> desc_SetBasicFilteringEnabled(&ServerReplicator::setBasicFilteringEnabled, "SetBasicFilteringEnabled", "value", Security::RobloxPlace);
-static Reflection::BoundFuncDesc<ServerReplicator, void()> desc_PreventTerrainChanges(&ServerReplicator::preventTerrainChanges, "PreventTerrainChanges", Security::RobloxPlace);
+static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, shared_ptr<Instance>)> desc_filterNew("NewFilter", &ServerReplicator::filterNew, "newItem", "parent", Security::ANORRLPlace);
+static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>)> desc_filterDelete("DeleteFilter", &ServerReplicator::filterDelete, "deletingItem", Security::ANORRLPlace);
+static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, std::string, Reflection::Variant)> desc_filterProperty("PropertyFilter", &ServerReplicator::filterProperty, "changingItem", "member", "value", Security::ANORRLPlace);
+static Reflection::BoundCallbackDesc<FilterResult(shared_ptr<Instance>, std::string)> desc_filterEvent("EventFilter", &ServerReplicator::filterEvent, "firingItem", "event", Security::ANORRLPlace);
+static Reflection::BoundFuncDesc<ServerReplicator, void(bool)> desc_SetBasicFilteringEnabled(&ServerReplicator::setBasicFilteringEnabled, "SetBasicFilteringEnabled", "value", Security::ANORRLPlace);
+static Reflection::BoundFuncDesc<ServerReplicator, void()> desc_PreventTerrainChanges(&ServerReplicator::preventTerrainChanges, "PreventTerrainChanges", Security::ANORRLPlace);
 static Reflection::EventDesc<ServerReplicator, void(int, bool, int)> event_TicketProcessed(&ServerReplicator::remoteTicketProcessedSignal, "TicketProcessed", "userId", "isAuthenticated", "protocolVersion");
 REFLECTION_END();
 
@@ -1653,9 +1653,9 @@ void CheatHandlingServerReplicator::processHashValue(const PmcHashContainer& net
     unsigned int goldChecks = ARL::Network::Players::checkGoldMemHashes(hashes);
 
     // Two additional items are sent in the same packet.  Check these items here.
-    static const size_t kRobloxTextBase = 0x401000;
-    static const size_t kRobloxSizeEstimate = 0x2000000;
-    if (hashes[numItems-1] != kRobloxTextBase || hashes[numItems-2] > kRobloxSizeEstimate)
+    static const size_t kANORRLTextBase = 0x401000;
+    static const size_t kANORRLSizeEstimate = 0x2000000;
+    if (hashes[numItems-1] != kANORRLTextBase || hashes[numItems-2] > kANORRLSizeEstimate)
     {
         if (DFFlag::US29001p1 && !reportedRangeError)
         {

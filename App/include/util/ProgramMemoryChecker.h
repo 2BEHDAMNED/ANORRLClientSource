@@ -124,7 +124,7 @@ struct PmcHashContainer
 
 extern PmcHashContainer pmcHash;
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 class NtApiCaller
 {
 private:

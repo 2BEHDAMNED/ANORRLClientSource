@@ -58,7 +58,7 @@
 
 #include "rbx/Profiler.h"
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "util/CheatEngine.h"
 #include "security/ApiSecurity.h"
 #endif
@@ -127,7 +127,7 @@ namespace ARL { namespace Network {
 		}
 	};
 
-#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD)
     // Periodically check that the program memory hashing job is still running
     class ClientReplicator::BadAppCheckerJob : public DataModelJob {
         shared_ptr<ClientReplicator> clientReplicator;
@@ -233,7 +233,7 @@ namespace ARL { namespace Network {
 
 
 
-#if !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_STUDIO_BUILD)
 	// Periodically hash program memory, and raise an alert if the hash changes
 	class ClientReplicator::MemoryCheckerJob : public DataModelJob {
 
@@ -375,7 +375,7 @@ namespace ARL { namespace Network {
 	};
 #endif
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO) && !defined(ARL_STUDIO_BUILD)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD)
 	// Periodically check that the program memory hashing job is still running
 	class ClientReplicator::MemoryCheckerCheckerJob : public DataModelJob {
 
@@ -454,7 +454,7 @@ namespace ARL { namespace Network {
             bool isVehUnhook = false;
             bool isFreeConsoleHooked = false;
             ++runCount;
-#if (!defined(NOOPT) && !defined(DEBUG)) && !defined(ARL_PLATFORM_DURANGO)
+#if (!defined(NOOPT) && !defined(DEBUG))
             // a switch statement might result in a jump table, which is not compatible with VMProtect.
             if (runCount % 8 == 0)
             {
@@ -563,8 +563,8 @@ using namespace ARL::Network;
 const char* const ARL::Network::sClientReplicator = "ClientReplicator";
 
 REFLECTION_BEGIN();
-static Reflection::BoundFuncDesc<ClientReplicator, void(bool)> func_requestServerStats(&ClientReplicator::requestServerStats, "RequestServerStats", "request", Security::RobloxScript);
-static Reflection::EventDesc<ClientReplicator, void(shared_ptr<const Reflection::ValueTable>)> event_StatsReceived(&ClientReplicator::statsReceivedSignal, "StatsReceived", "stats", Security::RobloxScript);
+static Reflection::BoundFuncDesc<ClientReplicator, void(bool)> func_requestServerStats(&ClientReplicator::requestServerStats, "RequestServerStats", "request", Security::ANORRLScript);
+static Reflection::EventDesc<ClientReplicator, void(shared_ptr<const Reflection::ValueTable>)> event_StatsReceived(&ClientReplicator::statsReceivedSignal, "StatsReceived", "stats", Security::ANORRLScript);
 REFLECTION_END();
 
 shared_ptr<Replicator::Stats> ClientReplicator::createStatsItem()
@@ -1682,7 +1682,7 @@ FilterResult ClientReplicator::filterReceivedParent(Instance* instance, Instance
 
 void ClientReplicator::onServiceProvider(ServiceProvider* oldProvider, ServiceProvider* newProvider)
 {
-#if !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(ARL_STUDIO_BUILD)
 #ifdef _WIN32
     TaskScheduler::singleton().remove(memoryCheckerCheckerJob);
     memoryCheckerCheckerJob.reset();
@@ -1715,17 +1715,17 @@ void ClientReplicator::onServiceProvider(ServiceProvider* oldProvider, ServicePr
 	{ 
 #if !defined(ARL_STUDIO_BUILD)
         VMProtectBeginMutation("30");
-#if !defined(LOVE_ALL_ACCESS) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(LOVE_ALL_ACCESS) && defined(_WIN32)
         badAppCheckerJob.reset(new BadAppCheckerJob(shared_from(this)));
         TaskScheduler::singleton().add(badAppCheckerJob);
 #endif
 
-#if !defined(LOVE_ALL_ACCESS) && (defined(_WIN32) || (defined(__APPLE__) && !defined(ARL_PLATFORM_IOS))) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(LOVE_ALL_ACCESS) && (defined(_WIN32) || (defined(__APPLE__) && !defined(ARL_PLATFORM_IOS)))
         memoryCheckerJob.reset(new MemoryCheckerJob(shared_from(this)));
         TaskScheduler::singleton().add(memoryCheckerJob);
 #endif
 
-#if !defined(LOVE_ALL_ACCESS) && defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if !defined(LOVE_ALL_ACCESS) && defined(_WIN32)
         memoryCheckerCheckerJob.reset(new MemoryCheckerCheckerJob(shared_from(this)));
         TaskScheduler::singleton().add(memoryCheckerCheckerJob);
         hashReadyConnection = memoryCheckerJob->hashReadySignal.connect(boost::bind(&ClientReplicator::onHashReady, this));

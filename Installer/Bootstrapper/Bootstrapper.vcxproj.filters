@@ -63,7 +63,7 @@
     <ClCompile Include="ProgressDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ClientShared\RobloxServicesTools.cpp">
+    <ClCompile Include="..\..\ClientShared\ANORRLServicesTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SharedHelpers.cpp">
@@ -72,7 +72,7 @@
     <ClCompile Include="ShutdownDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShutdownRobloxApp.cpp">
+    <ClCompile Include="ShutdownANORRLApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">

@@ -141,7 +141,7 @@ namespace ARL {
     
     REFLECTION_BEGIN();
 	// ROBLOX Only functions/events/props
-	static Reflection::BoundFuncDesc<UserInputService, UserInputService::Platform(void)> func_getPlatform(&UserInputService::getPlatformLua, "GetPlatform", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<UserInputService, UserInputService::Platform(void)> func_getPlatform(&UserInputService::getPlatformLua, "GetPlatform", Security::ANORRLScript);
 
 	static Reflection::BoundFuncDesc<UserInputService, InputObject::UserInputType()> func_getLastInputType(&UserInputService::getLastInputType, "GetLastInputType", Security::None);
 	static Reflection::EventDesc<UserInputService, void(InputObject::UserInputType)> event_lastInputTypeChanged(&UserInputService::lastInputTypeChangedSignal, "LastInputTypeChanged", "lastInputType", Security::None);
@@ -202,7 +202,7 @@ namespace ARL {
 
 	// Mouse Stuff
 	static const Reflection::PropDescriptor<UserInputService, bool>  prop_mouseIconEnabled("MouseIconEnabled", category_Data, &UserInputService::getMouseIconEnabled, &UserInputService::setMouseIconEnabled);
-	static const Reflection::EnumPropDescriptor<UserInputService, UserInputService::OverrideMouseIconBehavior>  prop_overrideMouseIconBehavior("OverrideMouseIconBehavior", category_Data, &UserInputService::getOverrideMouseIconBehavior, &UserInputService::setOverrideMouseIconBehavior, Reflection::PropertyDescriptor::SCRIPTING, Security::RobloxScript);
+	static const Reflection::EnumPropDescriptor<UserInputService, UserInputService::OverrideMouseIconBehavior>  prop_overrideMouseIconBehavior("OverrideMouseIconBehavior", category_Data, &UserInputService::getOverrideMouseIconBehavior, &UserInputService::setOverrideMouseIconBehavior, Reflection::PropertyDescriptor::SCRIPTING, Security::ANORRLScript);
 	static const Reflection::EnumPropDescriptor<UserInputService, UserInputService::MouseType>  prop_mouseType("MouseBehavior", category_Data, &UserInputService::getMouseType, &UserInputService::setMouseType);
     
 	// Keyboard Stuff
@@ -406,28 +406,28 @@ namespace ARL {
 	}
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getInputBeganEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreInputBeganEvent : &inputBeganEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreInputBeganEvent : &inputBeganEvent;
 	}
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getInputChangedEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreInputUpdatedEvent : &inputUpdatedEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreInputUpdatedEvent : &inputUpdatedEvent;
 	}
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getInputEndedEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreInputEndedEvent : &inputEndedEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreInputEndedEvent : &inputEndedEvent;
 	}
 
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getTouchBeganEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreTouchStartedEvent : &touchStartedEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreTouchStartedEvent : &touchStartedEvent;
 	}
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getTouchChangedEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreTouchMovedEvent : &touchMovedEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreTouchMovedEvent : &touchMovedEvent;
 	}
 	rbx::signal<void(shared_ptr<Instance>, bool)>* UserInputService::getTouchEndedEvent(bool whatever)
 	{
-		return ARL::Security::Context::current().hasPermission(ARL::Security::RobloxScript) ? &coreTouchEndedEvent : &touchEndedEvent;
+		return ARL::Security::Context::current().hasPermission(ARL::Security::ANORRLScript) ? &coreTouchEndedEvent : &touchEndedEvent;
 	}
     
     UserInputService::Platform UserInputService::getPlatform()
@@ -436,13 +436,9 @@ namespace ARL {
         return PLATFORM_IOS;
 #elif defined(__APPLE__) && !defined(ARL_PLATFORM_IOS)
         return PLATFORM_OSX;
-#elif defined(ARL_PLATFORM_DURANGO)
-		return PLATFORM_XBOXONE;
 #elif defined(ARL_PLATFORM_UWP)
 		return PLATFORM_UWP;
-#elif defined(ARL_PLATFORM_DURANGO)
-		return PLATFORM_XBOXONE;
-#elif defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO) && !defined(ARL_PLATFORM_UWP)
+#elif defined(_WIN32) && !defined(ARL_PLATFORM_UWP)
         return PLATFORM_WINDOWS;
 #elif defined(__ANDROID__)
         return PLATFORM_ANDROID;
@@ -655,7 +651,7 @@ namespace ARL {
                     shared_ptr<DataModel> dataModel = shared_from(DataModel::get(this));
                     if (CoreGuiService* cgs = dataModel->find<CoreGuiService>())
                     {
-                        if (Instance* parent = cgs->findFirstChildByName("RobloxGui"))
+                        if (Instance* parent = cgs->findFirstChildByName("ANORRLGui"))
                         {
                             newFrame->setParent(parent);
                         }
@@ -1263,7 +1259,7 @@ namespace ARL {
         {
             if (CoreGuiService* cgs = dataModel->find<CoreGuiService>())
             {
-                if (Instance* parent = cgs->findFirstChildByName("RobloxGui"))
+                if (Instance* parent = cgs->findFirstChildByName("ANORRLGui"))
                 {
                     if (Instance* controlFrame = parent->findFirstChildByName("ControlFrame"))
                     {
@@ -1735,7 +1731,7 @@ namespace ARL {
     {
         std::string clipBoardText = "";
         
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO) && !defined(ARL_PLATFORM_UWP)
+#if defined(_WIN32) && !defined(ARL_PLATFORM_UWP)
         if(::OpenClipboard(NULL))
 		{
 			HANDLE hData = ::GetClipboardData(CF_TEXT);

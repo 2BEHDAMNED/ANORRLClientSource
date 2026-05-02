@@ -29,8 +29,8 @@ namespace ARL {
 		typedef enum { DontReport, Prompt, Report } ErrorReporting;
 		ErrorReporting errorReporting;
 
-		static std::string robloxVersion;
-		static std::string robloxProductName;
+		static std::string anorrlVersion;
+		static std::string anorrlProductName;
 
 		DebugSettings();
 		static Reflection::BoundProp<bool> prop_stackTracingEnabled;
@@ -77,8 +77,8 @@ namespace ARL {
 		int cpuSpeed() const; // MHz
 		int cpuCount() const;
 		std::string systemProductName() const;
-		std::string getRobloxVersion() const { ARLASSERT(!robloxVersion.empty()); return robloxVersion; }
-		std::string getRobloxProductName() const { ARLASSERT(!robloxProductName.empty()); return robloxProductName; }
+		std::string getANORRLVersion() const { ARLASSERT(!anorrlVersion.empty()); return anorrlVersion; }
+		std::string getANORRLProductName() const { ARLASSERT(!anorrlProductName.empty()); return anorrlProductName; }
 		std::string osVer() const;
 		int osPlatformId() const;
 		std::string osPlatform() const;
@@ -112,10 +112,10 @@ namespace ARL {
 		long getAlternateCdnSuccessCount() const;
 		long getAlternateCdnFailureCount() const;
 		double getLastCdnFailureTimeSpan() const;
-		long getRobloxSuccessCount() const;
-		long getRobloxFalureCount() const;
-		double getRobloxResponce() const;
-		double getCdnRespoce() const;
+		long getANORRLSuccessCount() const;
+		long getANORRLFailureCount() const;
+		double getANORRLResponse() const;
+		double getCdnResponse() const;
 		shared_ptr<const Reflection::Tuple> resetCdnFailureCounts();
 	};
 

@@ -22,8 +22,7 @@
 
 DYNAMIC_FASTFLAG(EnableShowStatsLua)
 FASTFLAGVARIABLE(UseGameLoadedInLoadingScript, true)
-FASTFLAGVARIABLE(EnableSetCoreTopbarEnabled, false)
-FASTFLAGVARIABLE(Durango3DBackground, true)     // this is Xbox flag. Defined here so it is accessible in studio and xbox client
+FASTFLAGVARIABLE(EnableSetCoreTopbarEnabled, true)
 
 namespace ARL
 {
@@ -32,42 +31,42 @@ namespace ARL
 	static const Reflection::PropDescriptor<GuiService, bool> prop_IsModalDialog("IsModalDialog", category_Data, &GuiService::getModalDialogStatus, NULL, Reflection::PropertyDescriptor::Attributes::deprecated());
 	static const Reflection::PropDescriptor<GuiService, bool> prop_IsWindows("IsWindows", category_Data, &GuiService::getIsWindows, NULL, Reflection::PropertyDescriptor::Attributes::deprecated());
 
-	static Reflection::EventDesc<GuiService, void(std::string, std::string)> event_keypressed(&GuiService::keyPressed, "KeyPressed", "key", "modifiers", Security::RobloxScript);
-	static Reflection::EventDesc<GuiService, void(GuiService::SpecialKey, std::string)> event_specialKeypressed(&GuiService::specialKeyPressed, "SpecialKeyPressed", "key", "modifiers", Security::RobloxScript);
-	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_addKey(&GuiService::addKey, "AddKey", "key", Security::RobloxScript);
-	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_removeKey(&GuiService::removeKey, "RemoveKey", "key", Security::RobloxScript);
-	static Reflection::BoundFuncDesc<GuiService, void(GuiService::SpecialKey)> func_addSpecialKey(&GuiService::addSpecialKey, "AddSpecialKey", "key", Security::RobloxScript);
-	static Reflection::BoundFuncDesc<GuiService, void(GuiService::SpecialKey)> func_removeSpecialKey(&GuiService::removeSpecialKey, "RemoveSpecialKey", "key", Security::RobloxScript);
+	static Reflection::EventDesc<GuiService, void(std::string, std::string)> event_keypressed(&GuiService::keyPressed, "KeyPressed", "key", "modifiers", Security::ANORRLScript);
+	static Reflection::EventDesc<GuiService, void(GuiService::SpecialKey, std::string)> event_specialKeypressed(&GuiService::specialKeyPressed, "SpecialKeyPressed", "key", "modifiers", Security::ANORRLScript);
+	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_addKey(&GuiService::addKey, "AddKey", "key", Security::ANORRLScript);
+	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_removeKey(&GuiService::removeKey, "RemoveKey", "key", Security::ANORRLScript);
+	static Reflection::BoundFuncDesc<GuiService, void(GuiService::SpecialKey)> func_addSpecialKey(&GuiService::addSpecialKey, "AddSpecialKey", "key", Security::ANORRLScript);
+	static Reflection::BoundFuncDesc<GuiService, void(GuiService::SpecialKey)> func_removeSpecialKey(&GuiService::removeSpecialKey, "RemoveSpecialKey", "key", Security::ANORRLScript);
 
-	static Reflection::EventDesc<GuiService, void()> event_escapeKeypressed(&GuiService::escapeKeyPressed, "EscapeKeyPressed", Security::RobloxScript);
+	static Reflection::EventDesc<GuiService, void()> event_escapeKeypressed(&GuiService::escapeKeyPressed, "EscapeKeyPressed", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, void(shared_ptr<Instance>, GuiService::CenterDialogType, Lua::WeakFunctionRef, Lua::WeakFunctionRef)> func_showCenterDialog(&GuiService::addCenterDialog, "AddCenterDialog", "dialog", "centerDialogType", "showFunction", "hideFunction", Security::RobloxScript);
-	static Reflection::BoundFuncDesc<GuiService, void(shared_ptr<Instance>)> func_hideCenterDialog(&GuiService::removeCenterDialog, "RemoveCenterDialog", "dialog", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, void(shared_ptr<Instance>, GuiService::CenterDialogType, Lua::WeakFunctionRef, Lua::WeakFunctionRef)> func_showCenterDialog(&GuiService::addCenterDialog, "AddCenterDialog", "dialog", "centerDialogType", "showFunction", "hideFunction", Security::ANORRLScript);
+	static Reflection::BoundFuncDesc<GuiService, void(shared_ptr<Instance>)> func_hideCenterDialog(&GuiService::removeCenterDialog, "RemoveCenterDialog", "dialog", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, void(int, int, int, int)> func_globalGuiInset(&GuiService::setGlobalGuiInset, "SetGlobalGuiInset", "x1", "y1", "x2", "y2", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, void(int, int, int, int)> func_globalGuiInset(&GuiService::setGlobalGuiInset, "SetGlobalGuiInset", "x1", "y1", "x2", "y2", Security::ANORRLScript);
     
-    static Reflection::BoundYieldFuncDesc<GuiService, Vector2(void)> func_getScreenResolution(&GuiService::getScreenResolutionLua, "GetScreenResolution", Security::RobloxScript);
+    static Reflection::BoundYieldFuncDesc<GuiService, Vector2(void)> func_getScreenResolution(&GuiService::getScreenResolutionLua, "GetScreenResolution", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_openBrowserWindow(&GuiService::openBrowserWindow, "OpenBrowserWindow", "url", Security::RobloxScript);
-	static Reflection::EventDesc<GuiService, void()> event_urlWindowClosed(&GuiService::urlWindowClosed, "BrowserWindowClosed", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_openBrowserWindow(&GuiService::openBrowserWindow, "OpenBrowserWindow", "url", Security::ANORRLScript);
+	static Reflection::EventDesc<GuiService, void()> event_urlWindowClosed(&GuiService::urlWindowClosed, "BrowserWindowClosed", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, shared_ptr<Instance>(Vector3)> func_GetClosestDialogToPosition(&GuiService::getClosestDialogToPosition, "GetClosestDialogToPosition", "position", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, shared_ptr<Instance>(Vector3)> func_GetClosestDialogToPosition(&GuiService::getClosestDialogToPosition, "GetClosestDialogToPosition", "position", Security::ANORRLScript);
 	
-	static Reflection::BoundFuncDesc<GuiService, int()> func_GetBrickCount(&GuiService::getBrickCount, "GetBrickCount", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, int()> func_GetBrickCount(&GuiService::getBrickCount, "GetBrickCount", Security::ANORRLScript);
 
 	static Reflection::BoundFuncDesc<GuiService, void(GuiService::UiMessageType, std::string)> func_setUiMessage(&GuiService::setUiMessage, "SetUiMessage", "msgType", "uiMessage", Security::LocalUser);
-	static Reflection::BoundFuncDesc<GuiService, std::string()> func_getUiMessage(&GuiService::getUiMessage, "GetUiMessage", Security::RobloxScript);
-	static Reflection::EventDesc<GuiService, void(GuiService::UiMessageType, std::string)> event_newUiMessage(&GuiService::newUiMessageSignal, "UiMessageChanged", "msgType", "newUiMessage", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, std::string()> func_getUiMessage(&GuiService::getUiMessage, "GetUiMessage", Security::ANORRLScript);
+	static Reflection::EventDesc<GuiService, void(GuiService::UiMessageType, std::string)> event_newUiMessage(&GuiService::newUiMessageSignal, "UiMessageChanged", "msgType", "newUiMessage", Security::ANORRLScript);
 
 	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_setErrorMessage(&GuiService::setErrorMessage, "SetErrorMessage", "errorMessage", Security::LocalUser, Reflection::Descriptor::Attributes::deprecated(func_setUiMessage));
-	static Reflection::BoundFuncDesc<GuiService, std::string()> func_getErrorMessage(&GuiService::getErrorMessage, "GetErrorMessage", Security::RobloxScript, Reflection::Descriptor::Attributes::deprecated(func_getUiMessage));
-	static Reflection::EventDesc<GuiService, void(std::string)> event_newError(&GuiService::newErrorSignal, "ErrorMessageChanged", "newErrorMessage", Security::RobloxScript, Reflection::Descriptor::Attributes::deprecated(event_newUiMessage));
+	static Reflection::BoundFuncDesc<GuiService, std::string()> func_getErrorMessage(&GuiService::getErrorMessage, "GetErrorMessage", Security::ANORRLScript, Reflection::Descriptor::Attributes::deprecated(func_getUiMessage));
+	static Reflection::EventDesc<GuiService, void(std::string)> event_newError(&GuiService::newErrorSignal, "ErrorMessageChanged", "newErrorMessage", Security::ANORRLScript, Reflection::Descriptor::Attributes::deprecated(event_newUiMessage));
 
-	static Reflection::EventDesc<GuiService, void()> event_showLeaveConfirmation(&GuiService::showLeaveConfirmationSignal, "ShowLeaveConfirmation", Security::RobloxScript);
+	static Reflection::EventDesc<GuiService, void()> event_showLeaveConfirmation(&GuiService::showLeaveConfirmationSignal, "ShowLeaveConfirmation", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, void()> func_toggleFullscreen(&GuiService::toggleFullscreen, "ToggleFullscreen", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, void()> func_toggleFullscreen(&GuiService::toggleFullscreen, "ToggleFullscreen", Security::ANORRLScript);
 
-	static Reflection::BoundFuncDesc<GuiService, bool()> func_isTenFootInterface(&GuiService::isTenFootInterface, "IsTenFootInterface", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, bool()> func_isTenFootInterface(&GuiService::isTenFootInterface, "IsTenFootInterface", Security::ANORRLScript);
 
 	static Reflection::BoundFuncDesc<GuiService, void(std::string, shared_ptr<Instance>)> func_addSelectionGroup(&GuiService::addSelectionGroup, "AddSelectionParent", "selectionName", "selectionParent", Security::None);
 	static Reflection::BoundFuncDesc<GuiService, void(std::string, shared_ptr<const Reflection::Tuple>)> func_addSelectionGroupTuple(&GuiService::addSelectionGroup, "AddSelectionTuple", "selectionName", "selections", Security::None);
@@ -75,20 +74,20 @@ namespace ARL
 	static Reflection::BoundFuncDesc<GuiService, void(std::string)> func_removeSelectionGroup(&GuiService::removeSelectionGroup, "RemoveSelectionGroup", "selectionName", Security::None);
 
 	Reflection::RefPropDescriptor<GuiService, GuiObject> GuiService::prop_selectedGuiObject("SelectedObject", category_Data, &GuiService::getSelectedGuiObjectLua, &GuiService::setSelectedGuiObjectLua);
-    Reflection::RefPropDescriptor<GuiService, GuiObject> GuiService::prop_selectedCoreGuiObject("SelectedCoreObject", category_Data, &GuiService::getSelectedCoreGuiObjectLua, &GuiService::setSelectedCoreGuiObjectLua, Reflection::PropertyDescriptor::UI, Security::RobloxScript);
+    Reflection::RefPropDescriptor<GuiService, GuiObject> GuiService::prop_selectedCoreGuiObject("SelectedCoreObject", category_Data, &GuiService::getSelectedCoreGuiObjectLua, &GuiService::setSelectedCoreGuiObjectLua, Reflection::PropertyDescriptor::UI, Security::ANORRLScript);
     
 	static const Reflection::PropDescriptor<GuiService, bool> prop_autoGuiSelectionAllowed("AutoSelectGuiEnabled", category_Data, &GuiService::getAutoGuiSelectionAllowed, &GuiService::setAutoGuiSelectionAllowed);
     static const Reflection::PropDescriptor<GuiService, bool> prop_gamepadNavigationEnabled("GuiNavigationEnabled", category_Data, &GuiService::getGamepadNavEnabled, &GuiService::setGamepadNavEnabled);
 	static const Reflection::PropDescriptor<GuiService, bool> prop_coreGamepadNavigationEnabled("CoreGuiNavigationEnabled", category_Data, &GuiService::getCoreGamepadNavEnabled, &GuiService::setCoreGamepadNavEnabled);
 
-	static Reflection::BoundAsyncCallbackDesc<GuiService, void(std::string, std::string)> callback_notificationCallback("SendCoreUiNotification", &GuiService::notificationCallback, "title", "text", Security::RobloxScript);
+	static Reflection::BoundAsyncCallbackDesc<GuiService, void(std::string, std::string)> callback_notificationCallback("SendCoreUiNotification", &GuiService::notificationCallback, "title", "text", Security::ANORRLScript);
 	static const Reflection::PropDescriptor<GuiService, bool> prop_menuOpen("MenuIsOpen", category_Data, &GuiService::getMenuOpen, NULL);
-	static const Reflection::BoundFuncDesc<GuiService, void(bool)> func_setMenuOpen(&GuiService::setMenuOpen, "SetMenuIsOpen", "open", Security::RobloxScript);
+	static const Reflection::BoundFuncDesc<GuiService, void(bool)> func_setMenuOpen(&GuiService::setMenuOpen, "SetMenuIsOpen", "open", Security::ANORRLScript);
 		
 	static Reflection::EventDesc<GuiService, void()> event_menuOpened(&GuiService::menuOpenedSignal, "MenuOpened", Security::None);
 	static Reflection::EventDesc<GuiService, void()> event_menuClosed(&GuiService::menuClosedSignal, "MenuClosed", Security::None);
 
-	static Reflection::BoundFuncDesc<GuiService, bool(std::string)> func_ShowStatsBasedOnInputString(&GuiService::showStatsBasedOnInputString, "ShowStatsBasedOnInputString","input", Security::RobloxScript);
+	static Reflection::BoundFuncDesc<GuiService, bool(std::string)> func_ShowStatsBasedOnInputString(&GuiService::showStatsBasedOnInputString, "ShowStatsBasedOnInputString","input", Security::ANORRLScript);
     REFLECTION_END();
 
 	namespace Reflection {
@@ -491,7 +490,7 @@ namespace ARL
 
 	void GuiService::openBrowserWindow(std::string url)
 	{
-		if( !ARL::Http::isRobloxSite(url.c_str()) )
+		if( !ARL::Http::isANORRLSite(url.c_str()) )
 		{
 			StandardOut::singleton()->print(MESSAGE_WARNING, "GuiService::OpenBrowserWindow() was called on non-ANORRL url.");
 			return;
@@ -830,7 +829,7 @@ namespace ARL
 		{
 			if (CoreGuiService* cgs = dataModel->find<CoreGuiService>())
 			{
-				if (Instance* parent = cgs->findFirstChildByName("RobloxGui"))
+				if (Instance* parent = cgs->findFirstChildByName("ANORRLGui"))
 				{
 					if (Instance* controlFrame = parent->findFirstChildByName("ControlFrame"))
 					{

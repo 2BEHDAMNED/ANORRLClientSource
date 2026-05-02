@@ -24,7 +24,7 @@ local Player = PlayersService.LocalPlayer
 
 local mouse = Player:GetMouse()
 
-local GuiRoot = CoreGuiService:WaitForChild('RobloxGui')
+local GuiRoot = CoreGuiService:WaitForChild('ANORRLGui')
 
 local topbarEnabled = true
 
@@ -188,26 +188,19 @@ local function CreateEmotes()
 			return frame
 		end
 		
-		local angle_step = (2 * math.pi) / this.MaxEmotes
+		-- grace and phil bring you this very sexy radians code
+		local starting_angle = math.pi/2 -- 90 deg
+		local angle_step = math.pi/4 -- 45 deg
+		
 		local radius = 0.4
 		local offset = 0.5 - 50/whole_frame.AbsoluteSize.X
-		
 		
 		for i, v in ipairs(this.Emotes) do
 			if i > this.MaxEmotes then
 				break
 			end
 			
-			local max_emotes = #this.Emotes
-			if #this.Emotes > this.MaxEmotes then
-				max_emotes = this.MaxEmotes
-			end
-		
-			local max_angle = (max_emotes - 1) * angle_step - (math.pi / 2)
-			
-			local angle = (i - 1) * angle_step - (math.pi / 2)
-			
-			angle = (max_angle) + angle	
+			local angle = i * angle_step + starting_angle
 			
 			local cos = math.cos(angle)
 			local sin = math.sin(angle)
@@ -244,6 +237,7 @@ local function CreateEmotes()
 		emote_label.ZIndex = 6
 		emote_label.Name = "EName"
 		emote_label.TextColor3 = Color3.new(1,1,1)
+		emote_label.Text = "" -- yeah 
 		
 		return frame, emote_label
 	end
@@ -271,7 +265,6 @@ local function CreateEmotes()
 	function this:CharacterAdded(character)
 		self.EmoteHandler = character:WaitForChild("HandleEmote") -- what the hell was i even thinking
 		for i, v in ipairs(self.Emotes) do
-			print("registering")
 			self.EmoteHandler:Fire("register", v.id)
 		end
 	end

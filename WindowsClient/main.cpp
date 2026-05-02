@@ -15,7 +15,7 @@ TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 ARL::Application* appPtr;
 
 LOGGROUP(HangDetection)
-LOGGROUP(RobloxWndInit)
+LOGGROUP(ANORRLWndInit)
 
 //  Processes messages for the main window.
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -142,7 +142,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	catch (const ARL::initialization_error& e) 
 	{
 		const char* const errorMessage = e.what();
-		FASTLOGS(FLog::RobloxWndInit, "Error during initialization. User message = %s", errorMessage);
+		FASTLOGS(FLog::ANORRLWndInit, "Error during initialization. User message = %s", errorMessage);
 		MessageBoxA(hWnd, errorMessage, "ANORRL", MB_OK);
 		app.AboutToShutdown();
 		app.Shutdown();

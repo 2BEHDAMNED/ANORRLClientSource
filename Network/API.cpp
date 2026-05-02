@@ -31,8 +31,7 @@
 
 FASTSTRINGVARIABLE(ClientExternalBrowserUserAgent, "ANORRL/WinInet")
 
-#define ROBLOX_URL_IDENTIFIER "lambda.cam/"
-#define ROBLOXLABS_URL_IDENTIFIER ".robloxlabs.com/"
+#define ANORRL_URL_IDENTIFIER "lambda.cam/"
 
 #pragma comment (lib, "Ws2_32.lib")
 
@@ -108,22 +107,9 @@ static shared_ptr<ARL::Network::ServerReplicator> createSecureReplicator(RakNet:
 
 static void initVersion1()
 {
-
 	// security key: generated externally (version+platform+product+salt), modify per release, send from client to server
-
-#if (defined(_WIN32) && (defined(LOVE_ALL_ACCESS) || defined(_NOOPT) || defined(_DEBUG) || defined(ARL_TEST_BUILD))) || (defined(__APPLE__) && defined(__arm__)) || defined(__ANDROID__) || (defined(__APPLE__) && defined(__aarch64__)) || defined(ARL_PLATFORM_DURANGO)
-	// If we are Apple iOS, Android, or if we are Windows noopt/debug/test, use this fixed key:
-	// INTERNALiosapp, 2e427f51c4dab762fe9e3471c6cfa1650841723b
-	ARL::Network::securityKey = ARL::rot13("2r427s51p4qno762sr9r3471p6psn1650841723o");
-#elif defined(_WIN32)
 	//22.02.2026pcplayeraskljfLUZF, sha1: 153632cb34cef9cefd1194aad71bccb9d8af29b5, then rot13 and put below
 	ARL::Network::securityKey = ARL::rot13("153632po34prs9prsq1194nnq71oppo9q8ns29o5");
-#elif defined(__APPLE__) && defined(__i386)
-	//0.235.0macplayeraskljfLUZF, sha1: a7377e56dedd0d8e0fecafbec93cf00f0b2edca1, then rot13 and put below
-	ARL::Network::securityKey = ARL::rot13("n7377r56qrqq0q8r0srpnsorp93ps00s0o2rqpn1");
-#else
-    #error "Unsupported platform"
-#endif
 
 	ARL::Network::versionB += '7';
 	ARL::Network::versionB += (char)79;
@@ -206,24 +192,11 @@ bool ARL::Network::isTrustedContent(const char* url)
 	std::string urlString(url);
 	boost::algorithm::to_lower(urlString);
 
-    bool isRobloxLabsUrl = false;
-	size_t foundPos = urlString.find(ROBLOX_URL_IDENTIFIER);
-	if(foundPos == std::string::npos)
-    {
-        foundPos = urlString.find(ROBLOXLABS_URL_IDENTIFIER);
-        if(foundPos == std::string::npos)
-            return false;
-        
-        isRobloxLabsUrl = true;
-    }
+	size_t foundPos = urlString.find(ANORRL_URL_IDENTIFIER);
+urlString = urlString.substr(foundPos,std::string::npos); // remove all of string before URL_IDENTIFIER
     
-	urlString = urlString.substr(foundPos,std::string::npos); // remove all of string before URL_IDENTIFIER
-    
-     // put our iterator at end of URL_IDENTIFIER
-    if(isRobloxLabsUrl)
-        foundPos = sizeof(ROBLOXLABS_URL_IDENTIFIER) - 1;
-    else
-        foundPos = sizeof(ROBLOX_URL_IDENTIFIER) - 1;
+    // put our iterator at end of URL_IDENTIFIER
+    foundPos = sizeof(ANORRL_URL_IDENTIFIER) - 1;
 
 	while(foundPos < urlString.size() && (urlString[foundPos] == '\\' || urlString[foundPos] == '/'))
 		++foundPos;
@@ -247,7 +220,7 @@ bool ARL::Network::isTrustedContent(const char* url)
 		urlString.substr(foundPos,13)		== "placerolesets";
 }
 
-#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32) && !defined(ARL_STUDIO_BUILD)
 namespace {
 void isDebuggedDirectThreadFunc(weak_ptr<ARL::DataModel> weakDataModel) {
 #if !defined(LOVE_ALL_ACCESS) && !defined(_NOOPT) && !defined(_DEBUG)

@@ -76,10 +76,10 @@ local Player = PlayersService.LocalPlayer
 local GuiRoot = nil
 if NON_CORESCRIPT_MODE then
 	GuiRoot = Instance.new("ScreenGui")
-	GuiRoot.Name = "RobloxGui"
+	GuiRoot.Name = "ANORRLGui"
 	GuiRoot.Parent = Player:WaitForChild('PlayerGui')
 else
-	GuiRoot = CoreGuiService:WaitForChild('RobloxGui')
+	GuiRoot = CoreGuiService:WaitForChild('ANORRLGui')
 end
 
 local chatRepositioned = false

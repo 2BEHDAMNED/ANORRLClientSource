@@ -31,7 +31,7 @@ using namespace ARL;
 const Reflection::PropDescriptor<Script, ProtectedString> Script::prop_EmbeddedSourceCode("Source", category_Data, &Script::getEmbeddedCodeSafe, &Script::setEmbeddedCode, Reflection::PropertyDescriptor::STANDARD, Security::Plugin );
 const Reflection::PropDescriptor<BaseScript, ScriptId> BaseScript::prop_SourceCodeId("LinkedSource", category_Data, &BaseScript::getScriptId, &BaseScript::setScriptId);
 const Reflection::PropDescriptor<BaseScript, bool> BaseScript::prop_Disabled("Disabled", category_Behavior, &BaseScript::getDisabled, &BaseScript::setDisabled);
-const Reflection::BoundFuncDesc<Script, std::string()> Script::func_GetHash(&Script::getHash, "GetHash", Security::RobloxPlace);
+const Reflection::BoundFuncDesc<Script, std::string()> Script::func_GetHash(&Script::getHash, "GetHash", Security::ANORRLPlace);
 
 BaseScript::BaseScript()
 	:workspace(NULL)

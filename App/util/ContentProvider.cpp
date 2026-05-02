@@ -17,7 +17,7 @@
 #include "StringConv.h"
 #include "ANORRLServicesTools.h"
 
-#if defined(_WIN32) && !defined(ARL_PLATFORM_DURANGO)
+#if defined(_WIN32)
 #include "ATLPath.h"
 #include "FastLog.h"
 #endif
@@ -706,11 +706,11 @@ namespace ARL {
 
 					struct stat buffer;
 					// Try once to find the path.  If it fails, try once more with the
-					// parent directory.  The logic for this is that RobloxStudio
-					// will look for scripts relative to the ARLL, but RobloxTest
-					// will look for scripts relative to the ProjectDir for RobloxTest,
-					// which is one higher than the ARLL.  So, in the case of
-					// RobloxStudio, we forcefully push one directory higher if the file
+					// parent directory.  The logic for this is that ANORRLStudio
+					// will look for scripts relative to the ARL, but ANORRLTest
+					// will look for scripts relative to the ProjectDir for ANORRLTest,
+					// which is one higher than the ARL.  So, in the case of
+					// ANORRLStudio, we forcefully push one directory higher if the file
 					// wasn't found next to the ARLL.
 					if (-1 == stat(path.string().c_str(), &buffer))
 					{
@@ -836,7 +836,7 @@ namespace ARL
 {
 	static fs::path getCachePath(const char* subFolder, bool createPath)
 	{
-		// Returns something like "C:\Documents and Settings\All Users\Application Data\Roblox\Cache"
+		// Returns something like "C:\Documents and Settings\All Users\Application Data\ANORRL\Cache"
         if (createPath)
         {
             static const fs::path path = ARL::FileSystem::getCacheDirectory(true, subFolder);
@@ -1017,15 +1017,10 @@ namespace ARL
 
             appendSlashIfRequired(path);
 
-#if defined(ARL_PLATFORM_DURANGO)
-            fs::path platformAssetFolderModifier = "../PlatformContent/durango/";
-#elif defined(ARL_PLATFORM_IOS)
+#if defined(ARL_PLATFORM_IOS)
             fs::path platformAssetFolderModifier = "../ios/";
 #elif defined(__APPLE__) || defined(_WIN32)
             fs::path platformAssetFolderModifier = "../PlatformContent/pc/";
-#   if  ENABLE_XBOX_STUDIO_BUILD
-            platformAssetFolderModifier = "../PlatformContent/Durango/";
-#   endif
 #elif defined(__ANDROID__)
             fs::path platformAssetFolderModifier = "../android/";
 #else

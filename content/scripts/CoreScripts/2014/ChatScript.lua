@@ -21,7 +21,7 @@ end
 
 local function IsPhone()
 	local cGui = Game:GetService('CoreGui')
-	local rGui = WaitForChild(cGui, 'RobloxGui')
+	local rGui = WaitForChild(cGui, 'ANORRLGui')
 	if rGui.AbsoluteSize.Y < 600 then 
 		return true 
 	end 
@@ -694,7 +694,7 @@ end
 -- Create the initial Chat stuff 
 -- Done only once 
 function Chat:CreateGui()
-	self.Gui = WaitForChild(CoreGuiService, 'RobloxGui')
+	self.Gui = WaitForChild(CoreGuiService, 'ANORRLGui')
 	self.Frame = Gui.Create'Frame'
 				{	
 					Name = 'ChatFrame';
@@ -917,7 +917,7 @@ end
 function Chat:LockAllFields(gui)
 	local children = gui:GetChildren()
 	for i = 1, #children do 
-		children[i].RobloxLocked = true
+		children[i].ANORRLLocked = true
 		if #children[i]:GetChildren() > 0 then 
 			Chat:LockAllFields(children[i])
 		end 
@@ -979,7 +979,7 @@ function Chat:Initialize()
 		Chat:CullThread() 
 	end)
 
-	self.Frame.RobloxLocked = true 
+	self.Frame.ANORRLLocked = true 
 	Chat:LockAllFields(self.Frame)
 	self.Frame.DescendantAdded:connect(function(descendant)
 		Chat:LockAllFields(descendant)

@@ -1,10 +1,10 @@
 local GameSettings = UserSettings().GameSettings
 local currentVirtualVersion = nil
-local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ANORRLGui = game:GetService("CoreGui"):WaitForChild("ANORRLGui")
 local ContextActionService = game:GetService("ContextActionService")
 
 local function clearCorescripts()
-    for _, obj in pairs(RobloxGui:GetChildren()) do
+    for _, obj in pairs(ANORRLGui:GetChildren()) do
         if obj.Name ~= "Modules" and obj.Name ~= "CoreScripts/2016/DeveloperConsole" and obj.Name ~= "ControlFrame" then
 			obj:Destroy()
         end
@@ -15,23 +15,23 @@ function load2016StarterScript()
 	local scriptContext = game:GetService("ScriptContext")
 	local touchEnabled = game:GetService("UserInputService").TouchEnabled
 
-	local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+	local ANORRLGui = game:GetService("CoreGui"):WaitForChild("ANORRLGui")
 	
-	if not RobloxGui:FindFirstChild("ControlFrame") then
+	if not ANORRLGui:FindFirstChild("ControlFrame") then
 		clearCorescripts()
 		local controlFrame = Instance.new("Frame")
 		controlFrame.Name = "ControlFrame"
 		controlFrame.Size = UDim2.new(1, 0, 1, 0)
 		controlFrame.BackgroundTransparency = 1
-		controlFrame.RobloxLocked = true
-		controlFrame.Parent = RobloxGui
+		controlFrame.ANORRLLocked = true
+		controlFrame.Parent = ANORRLGui
 
 		local bottomLeftControl = Instance.new("Frame")
 		bottomLeftControl.Name = "BottomLeftControl"
 		bottomLeftControl.Size = UDim2.new(0, 130, 0, 46)
 		bottomLeftControl.Position = UDim2.new(0, 0, 1, -46)
 		bottomLeftControl.BackgroundTransparency = 1
-		bottomLeftControl.RobloxLocked = true
+		bottomLeftControl.ANORRLLocked = true
 		bottomLeftControl.Parent = controlFrame
 
 		local bottomRightControl = Instance.new("Frame")
@@ -39,77 +39,77 @@ function load2016StarterScript()
 		bottomRightControl.Size = UDim2.new(0, 180, 0, 41)
 		bottomRightControl.Position = UDim2.new(1, -180, 1, -41)
 		bottomRightControl.BackgroundTransparency = 1
-		bottomRightControl.RobloxLocked = true
+		bottomRightControl.ANORRLLocked = true
 		bottomRightControl.Parent = controlFrame
 
 		local topLeftControl = Instance.new("Frame")
 		topLeftControl.Name = "TopLeftControl"
 		topLeftControl.Size = UDim2.new(0.05, 0, 0.05, 0)
 		topLeftControl.BackgroundTransparency = 1
-		topLeftControl.RobloxLocked = true
+		topLeftControl.ANORRLLocked = true
 		topLeftControl.Parent = controlFrame
 	end
 
 	local soundFolder = Instance.new("Folder")
 	soundFolder.Name = "Sounds"
-	soundFolder.Parent = RobloxGui
+	soundFolder.Parent = ANORRLGui
 
 	-- TopBar
 	local topbarSuccess, topbarFlagValue = pcall(function() return settings():GetFFlag("UseInGameTopBar") end)
 	local useTopBar = (topbarSuccess and topbarFlagValue == true)
 	if useTopBar then
-		scriptContext:AddCoreScriptLocal("CoreScripts/2016/Topbar", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2016/Topbar", ANORRLGui)
 	end
 
 	-- SettingsScript
 	local luaControlsSuccess, luaControlsFlagValue = pcall(function() return settings():GetFFlag("UseLuaCameraAndControl") end)
 
 	-- MainBotChatScript (the Lua part of Dialogs)
-	scriptContext:AddCoreScriptLocal("CoreScripts/2016/MainBotChatScript2", RobloxGui)
+	scriptContext:AddCoreScriptLocal("CoreScripts/2016/MainBotChatScript2", ANORRLGui)
 
 	-- Developer Console Script
-	scriptContext:AddCoreScriptLocal("CoreScripts/2016/DeveloperConsole", RobloxGui)
+	scriptContext:AddCoreScriptLocal("CoreScripts/2016/DeveloperConsole", ANORRLGui)
 
 	-- In-game notifications script
-	scriptContext:AddCoreScriptLocal("CoreScripts/2016/NotificationScript2", RobloxGui)
+	scriptContext:AddCoreScriptLocal("CoreScripts/2016/NotificationScript2", ANORRLGui)
 
 	-- Chat script
 	if useTopBar then
-		spawn(function() require(RobloxGui.Modules.Chat) end)
-		spawn(function() require(RobloxGui.Modules.Emotes) end)
-		spawn(function() require(RobloxGui.Modules.PlayerlistModule) end)
+		spawn(function() require(ANORRLGui.Modules.Chat) end)
+		spawn(function() require(ANORRLGui.Modules.Emotes) end)
+		spawn(function() require(ANORRLGui.Modules.PlayerlistModule) end)
 	end
 
 	local luaBubbleChatSuccess, luaBubbleChatFlagValue = pcall(function() return settings():GetFFlag("LuaBasedBubbleChat") end)
 	if luaBubbleChatSuccess and luaBubbleChatFlagValue then
-		scriptContext:AddCoreScriptLocal("CoreScripts/2016/BubbleChat", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2016/BubbleChat", ANORRLGui)
 	end
 
 	-- Purchase Prompt Script
-	scriptContext:AddCoreScriptLocal("CoreScripts/2016/PurchasePromptScript2", RobloxGui)
+	scriptContext:AddCoreScriptLocal("CoreScripts/2016/PurchasePromptScript2", ANORRLGui)
 
 	-- Health Script
 	if not useTopBar then
-		scriptContext:AddCoreScriptLocal("CoreScripts/2016/HealthScript", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2016/HealthScript", ANORRLGui)
 	end
 
 	do -- Backpack!
-		spawn(function() require(RobloxGui.Modules.BackpackScript) end)
+		spawn(function() require(ANORRLGui.Modules.BackpackScript) end)
 	end
 
 	if useTopBar then
-		scriptContext:AddCoreScriptLocal("CoreScripts/2016/VehicleHud", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2016/VehicleHud", ANORRLGui)
 	end
 
-	scriptContext:AddCoreScriptLocal("CoreScripts/2016/GamepadMenu", RobloxGui)
+	scriptContext:AddCoreScriptLocal("CoreScripts/2016/GamepadMenu", ANORRLGui)
 
 	if touchEnabled then -- touch devices don't use same control frame
 		-- only used for touch device button generation
-		scriptContext:AddCoreScriptLocal("CoreScripts/2016/ContextActionTouch", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2016/ContextActionTouch", ANORRLGui)
 
-		RobloxGui:WaitForChild("ControlFrame")
-		RobloxGui.ControlFrame:WaitForChild("BottomLeftControl")
-		RobloxGui.ControlFrame.BottomLeftControl.Visible = false
+		ANORRLGui:WaitForChild("ControlFrame")
+		ANORRLGui.ControlFrame:WaitForChild("BottomLeftControl")
+		ANORRLGui.ControlFrame.BottomLeftControl.Visible = false
 	end
 end
 
@@ -121,14 +121,14 @@ function load2014StarterScript()
 	local scriptContext = game:GetService("ScriptContext")
 	local touchEnabled = game:GetService("UserInputService").TouchEnabled
 
-	Game:GetService("CoreGui"):WaitForChild("RobloxGui")
-	local screenGui = Game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+	Game:GetService("CoreGui"):WaitForChild("ANORRLGui")
+	local screenGui = Game:GetService("CoreGui"):FindFirstChild("ANORRLGui")
 	
 	local controlFrame = Instance.new("Frame")
 	controlFrame.Name = "ControlFrame"
 	controlFrame.Size = UDim2.new(1, 0, 1, 0)
 	controlFrame.BackgroundTransparency = 1
-	controlFrame.Parent = RobloxGui
+	controlFrame.Parent = ANORRLGui
 
 	local topLeftControl = Instance.new("Frame")
 	topLeftControl.Name = "TopLeftControl"
@@ -183,7 +183,7 @@ function load2014StarterScript()
 
 	local luaBubbleChatSuccess, luaBubbleChatFlagValue = pcall(function() return settings():GetFFlag("LuaBasedBubbleChat") end)
 	if luaBubbleChatSuccess and luaBubbleChatFlagValue then
-		scriptContext:AddCoreScriptLocal("CoreScripts/2014/BubbleChat", RobloxGui)
+		scriptContext:AddCoreScriptLocal("CoreScripts/2014/BubbleChat", ANORRLGui)
 	end
 
 	if not touchEnabled then 
@@ -229,9 +229,9 @@ function load(newVersion)
 	end
 	
 	if currentVirtualVersion == Enum.VirtualVersion["2016"] and GameSettings.VirtualVersion ~= Enum.VirtualVersion["2016"] then
-		if RobloxGui:FindFirstChild("Modules") then
+		if ANORRLGui:FindFirstChild("Modules") then
 			-- fffffffuck youuu
-            for _, module in pairs(RobloxGui.Modules:GetDescendants()) do
+            for _, module in pairs(ANORRLGui.Modules:GetDescendants()) do
 				module:Destroy()
             end
         end

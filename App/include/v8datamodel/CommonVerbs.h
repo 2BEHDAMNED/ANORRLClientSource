@@ -42,7 +42,7 @@ class PlayerHopper;
 class StarterPackService;
 class Adorn;
 
-// Contain a set of verbs used by Roblox
+// Contain a set of verbs used by ANORRL
 class CommonVerbs
 {
 public:
