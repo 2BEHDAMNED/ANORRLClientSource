@@ -84,9 +84,13 @@ const char* Bridge<G3D::Color3>::className("Color3");
 
 const luaL_reg Color3Bridge::classLibrary[] = {
 	{"new", newColor3},
+	{"fromRGB", newColor3FromRGB},
+	{"toHSV", color3ToHSV},
+	{"fromHSV", newColor3FromHSV},
+	{"fromHex", newColor3FromHex},
 	{NULL, NULL}
 };
-    
+
 void Color3Bridge::registerClassLibrary (lua_State *L) {
     
 	// Register the "new" function
@@ -99,7 +103,7 @@ void Color3Bridge::pushColor3(lua_State *L, const G3D::Color3& color)
 {
     pushNewObject(L, color);
 }
-    
+
 int Color3Bridge::newColor3(lua_State *L)
 {
 	float color[3];
@@ -112,6 +116,82 @@ int Color3Bridge::newColor3(lua_State *L)
 		color[i] = 0.0;
 	pushNewObject(L, color);
 	return 1;
+}
+
+int Color3Bridge::newColor3FromRGB(lua_State* L)
+{
+	float color[3];
+
+	// There should be up to 3 numerical parameters (r,g,b). Following Lua conventions ignore others and use 0 for missing
+	int count = std::min(3, lua_gettop(L));
+	for (int i = 0; i < count; i++)
+		color[i] = lua_tofloat(L, i + 1) / 255.0f;
+	for (int i = count; i < 3; i++)
+		color[i] = 0.0;
+	pushNewObject(L, color);
+	return 1;
+}
+
+int Color3Bridge::color3ToHSV(lua_State* L)
+{
+	if (lua_gettop(L) < 1) ARL::runtime_error("Color3.toHSV requires a Color3 argument");
+
+	G3D::Color3 rgb = Color3Bridge::getObject(L, 1);
+	Vector3 hsv = G3D::Color3::toHSV(rgb);
+
+	lua_pushnumber(L, hsv.x);
+	lua_pushnumber(L, hsv.y);
+	lua_pushnumber(L, hsv.z);
+	return 3;
+}
+
+int Color3Bridge::newColor3FromHSV(lua_State* L)
+{
+	float color[3];
+
+	if (lua_gettop(L) < 3) throw ARL::runtime_error("Color3.fromHSV requires three arguments");
+	for (int i = 0; i < 3; i++)
+		color[i] = lua_tofloat(L, i + 1);
+	
+	Vector3 hsv = Vector3(color);
+	Color3 color3 = G3D::Color3::fromHSV(hsv);
+
+	color[0] = color3.r;
+	color[1] = color3.g;
+	color[2] = color3.b;
+
+	pushNewObject(L, color);
+	return 1;
+}
+
+int Color3Bridge::newColor3FromHex(lua_State* L)
+{
+	float color[3];
+
+	if (lua_gettop(L) < 1) throw ARL::runtime_error("Color3.fromHex requires one argument");
+
+	const char* s = safe_lua_tostring(L, 1); // Actual Roblox from 2022 has G3D::Color3::fromHex(hex);
+	if (strlen(s) >= 3) {
+		if (s[0] == '#') {
+			s++; // jump #
+		}
+		for (int i = 0; i < 3; i++) {
+			char buf[3] = { 0 };
+			if (strlen(s) == 6) {
+				buf[0] = s[i * 2];
+				buf[1] = s[i * 2 + 1];
+			} else if (strlen(s) == 3) {
+				buf[0] = s[i];
+				buf[1] = s[i];
+			} else {
+				throw ARL::runtime_error("Unable to convert characters to hex value");
+			}
+			color[i] = (char)strtol(buf, NULL, 16) / 255.0f;
+		}
+		pushNewObject(L, color);
+		return 1;
+	}
+	throw ARL::runtime_error("Unable to convert characters to hex value");
 }
 
 template<>
@@ -1470,8 +1550,11 @@ const luaL_reg CoordinateFrameBridge::classLibrary[] = {
 	{"fromEulerAnglesXYZ", fromEulerAnglesXYZ},
 	{"FromEulerAnglesXYZ", fromEulerAnglesXYZ},
 	{"Angles", fromEulerAnglesXYZ},	//Synonym, much shorter for 
+	{"fromEulerAnglesYXZ", fromEulerAnglesYXZ},
+	{"fromOrientation", fromEulerAnglesYXZ},
 	{"fromAxisAngle", fromAxisAngle},
 	{"FromAxisAngle", fromAxisAngle},
+	{"lookAt", fromLookAt},
 	{NULL, NULL}
 };
 
@@ -1729,10 +1812,29 @@ int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State *L)
 	return 1;
 };
 
+int CoordinateFrameBridge::fromEulerAnglesYXZ(lua_State* L)
+{
+	G3D::CoordinateFrame cf;
+	cf.rotation = G3D::Matrix3::fromEulerAnglesYXZ((float)luaL_checknumber(L, 1), (float)luaL_checknumber(L, 2), (float)luaL_checknumber(L, 3));
+	CoordinateFrameBridge::pushNewObject(L, cf);
+	return 1;
+};
+
 int CoordinateFrameBridge::fromAxisAngle(lua_State *L)
 {
 	G3D::CoordinateFrame cf;
 	cf.rotation = G3D::Matrix3::fromAxisAngle(Vector3Bridge::getObject(L, 1), (float) luaL_checknumber(L, 2));
+	CoordinateFrameBridge::pushNewObject(L, cf);
+	return 1;
+};
+
+int CoordinateFrameBridge::fromLookAt(lua_State* L)
+{
+	G3D::Vector3 pivot_offset = (lua_gettop(L) == 3) ? Vector3Bridge::getObject(L, 3) : G3D::Vector3(0.0f, 1.0f, 0.0f);
+	G3D::CoordinateFrame cf;
+	cf.translation = pivot_offset + Vector3Bridge::getObject(L, 1);
+	cf.lookAt(Vector3Bridge::getObject(L, 2));
+	cf.translation -= pivot_offset;
 	CoordinateFrameBridge::pushNewObject(L, cf);
 	return 1;
 };
