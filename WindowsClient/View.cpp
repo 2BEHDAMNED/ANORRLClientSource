@@ -22,7 +22,7 @@
 LOGGROUP(PlayerShutdownLuaTimeoutSeconds)
 LOGGROUP(ANORRLWndInit)
 FASTFLAGVARIABLE(DirectX11Enable, false)
-FASTFLAGVARIABLE(UseNewAppBridgeInputWindows, true)
+FASTFLAGVARIABLE(UseNewAppBridgeInputWindows, false)
 
 DYNAMIC_FASTFLAGVARIABLE(FullscreenRefocusingFix, false)
 

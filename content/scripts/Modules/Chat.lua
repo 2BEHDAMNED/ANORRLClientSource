@@ -1399,7 +1399,7 @@ local function CreateChatBarWidget(settings)
 				TextColor3 = this.Settings.GlobalTextColor;
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
-				Font = Enum.Font.SourceSansBold;
+				Font = Enum.Font.NotoSansBold;
 				FontSize = Enum.FontSize.Size18;
 				Parent = chatBarContainer;
 			}
@@ -1426,7 +1426,7 @@ local function CreateChatBarWidget(settings)
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
 				TextColor3 = this.Settings.GlobalTextColor;
-				Font = Enum.Font.SourceSansBold;
+				Font = Enum.Font.NotoSansBold;
 				FontSize = Enum.FontSize.Size18;
 				ClearTextOnFocus = false;
 				Visible = not Util.IsTouchDevice();
@@ -1452,7 +1452,7 @@ local function CreateChatBarWidget(settings)
 				TextColor3 = this.Settings.WhisperTextColor;
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
-				Font = Enum.Font.SourceSansBold;
+				Font = Enum.Font.NotoSansBold;
 				FontSize = Enum.FontSize.Size18;
 				Parent = chatBarContainer;
 			}
@@ -2124,7 +2124,7 @@ local function CreateChat()
 		AdminTextColor = Color3.new(236/255, 204/255, 255/255);
 		TextStrokeTransparency = 0.75;
 		TextStrokeColor = Color3.new(34/255,34/255,34/255);
-		Font = Enum.Font.SourceSansBold;
+		Font = Enum.Font.NotoSansBold;
 		SmallScreenFontSize = Enum.FontSize.Size14;
 		FontSize = Enum.FontSize.Size18;
 		MaxWindowChatMessages = 50;
