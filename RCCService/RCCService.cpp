@@ -460,8 +460,8 @@ void EventLongUninstall()
 void EventLogInstall()
 {
 	CRegKey key;
-	if (key.Create(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Services\\Eventlog\\Application\\RCCService") != ERROR_SUCCESS)
-		throw std::runtime_error("couldn't create RCCService reg key");
+	if (key.Create(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Services\\Eventlog\\Application\\ACCService") != ERROR_SUCCESS)
+		throw std::runtime_error("couldn't create ACCService reg key");
 
     TCHAR szPath[MAX_PATH];
 

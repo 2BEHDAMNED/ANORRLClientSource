@@ -85,6 +85,7 @@
     <OutDir>$(BUILD_PATH)\ACCService\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>obj\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>ACCService</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTest|Win32'">
     <OutDir>$(RCCServiceRootBin)$(Platform)\$(Configuration)\</OutDir>
@@ -156,6 +157,9 @@
       </BaseAddress>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <OutputFile>$(OutDir)ACCService$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)ACCService.pdb</ProgramDatabaseFile>
+      <ManifestFile>$(IntDir)$(TargetName)ACCService.intermediate.manifest</ManifestFile>
+      <ProfileGuidedDatabase>$(OutDir)ACCService.pgd</ProfileGuidedDatabase>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(ProjectDir)$(OutDir)Log.dll" (

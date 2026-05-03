@@ -226,9 +226,13 @@ ANORRLMainWindow::ANORRLMainWindow(const QMap<QString, QString> argMap)
 
 			srand(time(NULL)); // call just once or explode or something
 
-			int randSplashNumber = rand()%38;
+			int randSplashNumber = rand()%41;
 			if (randSplashNumber <= 0) {
 				randSplashNumber = 1;
+			}
+
+			if (randSplashNumber > 40) {
+				randSplashNumber = 40;
 			}
 
 			std::string path = ARL::format(":/images/ANORRLStudioSplash-%s.png", std::to_string(randSplashNumber).c_str());

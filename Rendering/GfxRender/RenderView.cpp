@@ -955,29 +955,41 @@ void RenderView::renderPrepareImpl(IMetric* metric, bool updateViewport)
 	float saturationIntensity = 0.0f;
 	float blurIntensity = 0.0f;
 	G3D::Color3 tintColorIntensity = G3D::Color3::white();
+
+	// this could be done so much better but i cannot be asked i want to go sleep ...
+	// 00:04
+	bool blurEffectOnLighting = true;
 	
 	// this is fine
 	if (Instance* inst = cameraobj->findFirstChildOfType("BlurEffect")) {
-
 		// oh my god what am i doing
 		if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
-			if (blur->isEnabled())
+			if (blur->isEnabled()) {
+				blurEffectOnLighting = false;
 				blurIntensity = (blur->getSize() / 56.f)*15.f;
+			}
 		}
-	} else if (Instance* inst = lighting->findFirstChildOfType("BlurEffect")) {
-		// oh my god what am i doing
-		if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
-			if (blur->isEnabled())
-				blurIntensity = (blur->getSize() / 56.f)*15.f;
+	}
+	
+	if(blurEffectOnLighting) {
+		if (Instance* inst = lighting->findFirstChildOfType("BlurEffect")) {
+			// oh my god what am i doing
+			if (BlurEffect* blur = inst->fastDynamicCast<ARL::BlurEffect>()) {
+				if (blur->isEnabled())
+					blurIntensity = (blur->getSize() / 56.f)*15.f;
+			}
 		}
 	}
 
+	// this could be done so much better but i cannot be asked i want to go sleep ...
+	// 00:04
+	bool colorCorrectionEffectOnLighting = true;
 
 	if (Instance* inst = cameraobj->findFirstChildOfType("ColorCorrectionEffect")) {
-
 		// oh my god what am i doing
 		if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
 			if (colorCorrection->isEnabled()) {
+				colorCorrectionEffectOnLighting = false;
 				brightnessIntensity = colorCorrection->getBrightness();
 				contrastIntensity = colorCorrection->getContrast();
 				saturationIntensity = colorCorrection->getSaturation();
@@ -985,14 +997,18 @@ void RenderView::renderPrepareImpl(IMetric* metric, bool updateViewport)
 			}
 
 		}
-	} else if (Instance* inst = lighting->findFirstChildOfType("ColorCorrectionEffect")) {
-		// oh my god what am i doing
-		if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
-			if (colorCorrection->isEnabled()) {
-				brightnessIntensity = colorCorrection->getBrightness();
-				contrastIntensity = colorCorrection->getContrast();
-				saturationIntensity = colorCorrection->getSaturation();
-				tintColorIntensity = colorCorrection->getTintColor();
+	}
+	
+	if(colorCorrectionEffectOnLighting) {
+		if (Instance* inst = lighting->findFirstChildOfType("ColorCorrectionEffect")) {
+			// oh my god what am i doing
+			if (ColorCorrectionEffect* colorCorrection = inst->fastDynamicCast<ARL::ColorCorrectionEffect>()) {
+				if (colorCorrection->isEnabled()) {
+					brightnessIntensity = colorCorrection->getBrightness();
+					contrastIntensity = colorCorrection->getContrast();
+					saturationIntensity = colorCorrection->getSaturation();
+					tintColorIntensity = colorCorrection->getTintColor();
+				}
 			}
 		}
 	}
