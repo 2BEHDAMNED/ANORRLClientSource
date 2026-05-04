@@ -65,7 +65,7 @@ FASTFLAG(TeamCreateOptimizeRemoteSelection)
 
 LOGGROUP(Explorer)
 
-bool DepthCompare::operator() (const ANORRLTreeWidgetItem* lhs, const ANORRLTreeWidgetItem* rhs)
+bool DepthCompare::operator() (const ANORRLTreeWidgetItem* lhs, const ANORRLTreeWidgetItem* rhs) const
 {
 	if (lhs->getTreeWidgetDepth() == rhs->getTreeWidgetDepth())
 		return lhs < rhs;

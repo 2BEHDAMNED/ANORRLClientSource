@@ -26,9 +26,7 @@ using boost::shared_ptr;
 using boost::scoped_ptr;
 using boost::weak_ptr;
 
-#ifdef _WIN32
-//#include <windows.h>
-#else 
+#ifndef _WIN32
 #include "RbxFormat.h"
 #include <pthread.h>
 // This is a hack. Truncates a pointer.

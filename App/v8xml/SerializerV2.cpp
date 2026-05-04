@@ -13,7 +13,7 @@
 #include <map>
 
 #ifdef _WIN32
-   using std::mem_fun1;
+   using std::mem_fn;
 #else
 #include <ext/functional>
    using __gnu_cxx::mem_fun1;
@@ -96,9 +96,11 @@ public:
 		int count = 0;
 		
 		count += count_if(
-			idrefBindings.begin(), 
+			idrefBindings.begin(),
+
 			idrefBindings.end(), 
-			std::bind1st(mem_fun1(&ArchiveBinder::resolveIDREF),this)
+			
+			std::bind1st(mem_fn(&ArchiveBinder::resolveIDREF),this)
 		);
 
 		return Super::resolveRefs() && (count == idrefBindings.size());

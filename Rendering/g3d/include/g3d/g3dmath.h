@@ -52,6 +52,7 @@
 #define __USE_ISOC991
 
 #include <math.h>
+#include <algorithm>
 
 #include "G3D/debug.h"
 

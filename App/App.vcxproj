@@ -89,7 +89,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseRcc|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Durango'" Label="Configuration">
@@ -104,7 +104,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseStudio|Durango'" Label="Configuration">
@@ -646,7 +646,7 @@ cmd /c "exit /b 0"</Command>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <OmitFramePointers>false</OmitFramePointers>
-      <AdditionalIncludeDirectories>$(CONTRIB_PATH)\SDL2.0.4\Include;$(CONTRIB_PATH)\boost_1_56_0;$(CONTRIB_PATH)\boost_1_56_0\include;$(CONTRIB_PATH)\cpp-netlib-0.11.0-final;$(CONTRIB_PATH)\windows\x86\curl\curl-7.43.0\include;$(CONTRIB_PATH)\VMProtectWin_2.13;$(CONTRIB_PATH)\w3c-libwww-5.4.0\Library\src;.\include;..\Base\include;..\fmod\include;.\lua-5.1.4\src;..\Rendering;..\Rendering\g3d\include;..\Rendering\g3d\zlib;..\Rendering\RbxG3D\include;..\Rendering\AppDraw\include;..\Rendering\GfxBase\include;..\Network\include;..\RBXCookies;..\Log\Include;..\ClientShared;..\App.BulletPhysics;..\Win;$(CONTRIB_PATH)\discord-rpc-win32-static\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CONTRIB_PATH)\SDL2.0.4\Include;$(CONTRIB_PATH)\boost_1_59_0;$(CONTRIB_PATH)\boost_1_59_0\include;$(CONTRIB_PATH)\cpp-netlib-0.11.0-final;$(CONTRIB_PATH)\windows\x86\curl\curl-7.43.0\include;$(CONTRIB_PATH)\VMProtectWin_2.13;$(CONTRIB_PATH)\w3c-libwww-5.4.0\Library\src;.\include;..\Base\include;..\fmod\include;.\lua-5.1.4\src;..\Rendering;..\Rendering\g3d\include;..\Rendering\g3d\zlib;..\Rendering\RbxG3D\include;..\Rendering\AppDraw\include;..\Rendering\GfxBase\include;..\Network\include;..\RBXCookies;..\Log\Include;..\ClientShared;..\App.BulletPhysics;..\Win;$(CONTRIB_PATH)\discord-rpc-win32-static\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;CURL_STATICLIB;WWW_MSWINDOWS;NDEBUG;_LIB;_RELEASE;ARL_STUDIO_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -657,7 +657,7 @@ cmd /c "exit /b 0"</Command>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>

@@ -811,7 +811,7 @@ bool UniverseSettings::isLoadedAndParsed() const
 
 bool UniverseSettings::hasRootPlace()
 {
-	return properties.get<int>("RootPlace");
+	return properties.get<int>("RootPlace") != NULL;
 }
 
 int UniverseSettings::rootPlaceId()

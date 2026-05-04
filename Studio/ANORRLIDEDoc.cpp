@@ -3200,7 +3200,7 @@ void ANORRLIDEDoc::onIdeReset()
 
 bool ANORRLIDEDoc::isIdeResetEnabled()
 {
-	return m_PlayGame.m_Game;
+	return m_PlayGame.m_Game != NULL;
 }
 
 bool ANORRLIDEDoc::isCloudEditSession()

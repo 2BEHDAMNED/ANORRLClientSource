@@ -12,6 +12,12 @@
 
 using namespace RakNet;
 
+#if defined(_MSC_VER) && _MSC_VER > 0
+#define PRINTF_64_BIT_MODIFIER "I64"
+#else
+#define PRINTF_64_BIT_MODIFIER "ll"
+#endif
+
 // Verbosity level currently supports 0 (low), 1 (medium), 2 (high)
 // Buffer must be hold enough to hold the output string.  See the source to get an idea of how many bytes will be output
 void RAK_DLL_EXPORT RakNet::StatisticsToString(const RakNetStatistics *s, char *buffer, int verbosityLevel )
@@ -25,7 +31,7 @@ void RAK_DLL_EXPORT RakNet::StatisticsToString(const RakNetStatistics *s, char *
 	if (verbosityLevel==0)
 	{
 		sprintf(buffer,
-			"Bytes per second sent     %"PRINTF_64_BIT_MODIFIER"u\n"
+			"Bytes per second sent     %I64u\n"
 			"Bytes per second received %"PRINTF_64_BIT_MODIFIER"u\n"
 			"Current packetloss        %.1f%%\n",
 			(long long unsigned int) s->valueOverLastSecond[ACTUAL_BYTES_SENT],
