@@ -67,6 +67,8 @@ local allowDisableChatBar = getDisableChatBarSuccess and disableChatBarValue
 local Settings = UserSettings()
 local GameSettings = Settings.GameSettings
 
+local emotesModule = nil
+
 --[[ SCRIPT VARIABLES ]]
 
 -- I am not fond of waiting at the top of the script here...
@@ -80,6 +82,7 @@ if NON_CORESCRIPT_MODE then
 	GuiRoot.Parent = Player:WaitForChild('PlayerGui')
 else
 	GuiRoot = CoreGuiService:WaitForChild('ANORRLGui')
+	emotesModule = require(GuiRoot.Modules.Emotes)
 end
 
 local chatRepositioned = false
@@ -983,6 +986,7 @@ local function CreateChatBarWidget(settings)
 				this.SpecialKeyPressedConn = Util.DisconnectEvent(this.SpecialKeyPressedConn)
 				GuiService:AddSpecialKey(Enum.SpecialKey.ChatHotkey)
 				this.SpecialKeyPressedConn = GuiService.SpecialKeyPressed:connect(function(key)
+					if emotesModule and emotesModule:GetVisibility() then return end
 					if key == Enum.SpecialKey.ChatHotkey then
 						this:FocusChatBar()
 					end
@@ -1399,7 +1403,7 @@ local function CreateChatBarWidget(settings)
 				TextColor3 = this.Settings.GlobalTextColor;
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
-				Font = Enum.Font.NotoSansBold;
+				Font = Enum.Font.SourceSansBold;
 				FontSize = Enum.FontSize.Size18;
 				Parent = chatBarContainer;
 			}
@@ -1426,7 +1430,7 @@ local function CreateChatBarWidget(settings)
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
 				TextColor3 = this.Settings.GlobalTextColor;
-				Font = Enum.Font.NotoSansBold;
+				Font = Enum.Font.SourceSansBold;
 				FontSize = Enum.FontSize.Size18;
 				ClearTextOnFocus = false;
 				Visible = not Util.IsTouchDevice();
@@ -1452,7 +1456,7 @@ local function CreateChatBarWidget(settings)
 				TextColor3 = this.Settings.WhisperTextColor;
 				TextXAlignment = Enum.TextXAlignment.Left;
 				TextYAlignment = Enum.TextYAlignment.Top;
-				Font = Enum.Font.NotoSansBold;
+				Font = Enum.Font.SourceSansBold;
 				FontSize = Enum.FontSize.Size18;
 				Parent = chatBarContainer;
 			}
@@ -2124,7 +2128,7 @@ local function CreateChat()
 		AdminTextColor = Color3.new(236/255, 204/255, 255/255);
 		TextStrokeTransparency = 0.75;
 		TextStrokeColor = Color3.new(34/255,34/255,34/255);
-		Font = Enum.Font.NotoSansBold;
+		Font = Enum.Font.SourceSansBold;
 		SmallScreenFontSize = Enum.FontSize.Size14;
 		FontSize = Enum.FontSize.Size18;
 		MaxWindowChatMessages = 50;
@@ -2157,6 +2161,7 @@ local function CreateChat()
 						self.SpecialKeyPressedConn = Util.DisconnectEvent(self.SpecialKeyPressedConn)
 						GuiService:AddSpecialKey(Enum.SpecialKey.ChatHotkey)
 						self.SpecialKeyPressedConn = GuiService.SpecialKeyPressed:connect(function(key)
+							if emotesModule and emotesModule:GetVisibility() then return end
 							if key == Enum.SpecialKey.ChatHotkey then
 								if self.Visible == false then
 									self:ToggleVisibility()
@@ -2342,7 +2347,7 @@ local function CreateChat()
 			this.ChatWindowWidget:AddSystemChatMessage("/unmute [PlayerName] - Restore in-game communications with Target Player")
 			
 			this.ChatWindowWidget:AddSystemChatMessage("Emotes:")
-			this.ChatWindowWidget:AddSystemChatMessage("wave, point, cheer, laugh, caramelldansen, dwyec, otsukare, unlockit, californiagurls, hakari, torturedancion, mannrobics, minecraft, gangnam, gmod, retro, jumpstyle, awesomeface, creeper")
+			this.ChatWindowWidget:AddSystemChatMessage("wave, point, cheer, laugh, caramelldansen, dwyec, otsukare, unlockit, californiagurls, hakari, torturedancion, mannrobics, minecraft, gangnam, gmod, retro, jumpstyle, awesomeface, creeper, rampage")
 		end
 	end
 
@@ -2669,4 +2674,3 @@ do
 end
 
 return moduleApiTable
-
