@@ -80,7 +80,10 @@ local function Initialize()
 			fullScreenInit = 2
 		end
 		
-		
+		local graphicsEnablerInit = 2
+		if GameSettings.SavedQualityLevel == Enum.SavedQualitySetting.Automatic then
+			graphicsEnablerInit = 1
+		end
 
 		this.FullscreenFrame, 
 		this.FullscreenLabel,
@@ -95,7 +98,7 @@ local function Initialize()
 		------------------ Gfx Enabler Selection GUI Setup ------------------
 		this.GraphicsEnablerFrame, 
 		this.GraphicsEnablerLabel,
-		this.GraphicsQualityEnabler = utility:AddNewRow(this, "Graphics Mode", "Selector", {"Automatic", "Manual"}, 1)
+		this.GraphicsQualityEnabler = utility:AddNewRow(this, "Graphics Mode", "Selector", {"Automatic", "Manual"}, graphicsEnablerInit)
 
 		------------------ Gfx Slider GUI Setup  ------------------
 		this.GraphicsQualityFrame, 
@@ -116,7 +119,7 @@ local function Initialize()
 		this.DarkModeEnablerEnabler = utility:AddNewRow(this, "Loading Screen Dark Mode", "Selector", {"Off", "On"}, darkModeIndex)
 
 		------------------------- Connection Setup ----------------------------
-		settings().Rendering.EnableFRM = false
+		settings().Rendering.EnableFRM = true
 
 		function SetGraphicsQuality(newValue, automaticSettingAllowed)
 			local percentage = newValue/GRAPHICS_QUALITY_LEVELS
@@ -131,7 +134,7 @@ local function Initialize()
 			elseif newQualityLevel > settings().Rendering:GetMaxQualityLevel() then
 				newQualityLevel = settings().Rendering:GetMaxQualityLevel() - 1
 			end
-
+			
 			GameSettings.SavedQualityLevel = newValue
 			settings().Rendering.QualityLevel = newQualityLevel
 		end
@@ -176,6 +179,7 @@ local function Initialize()
 		this.GraphicsQualityEnabler.IndexChanged:connect(function(newIndex)
 			if newIndex == 1 then
 				setGraphicsToAuto()
+				this.GraphicsQualitySlider:SetInteractable(false)
 			elseif newIndex == 2 then
 				setGraphicsToManual( this.GraphicsQualitySlider:GetValue() )
 			end
@@ -188,7 +192,7 @@ local function Initialize()
 		-- initialize the slider position
 		if GameSettings.SavedQualityLevel == Enum.SavedQualitySetting.Automatic then
 			this.GraphicsQualitySlider:SetValue(5)
-			this.GraphicsQualityEnabler:SetSelectionIndex(1)
+			this.GraphicsQualitySlider:SetInteractable(false)
 		else
 			local graphicsLevel = tostring(GameSettings.SavedQualityLevel)
 			if GRAPHICS_QUALITY_TO_INT[graphicsLevel] then
@@ -199,7 +203,6 @@ local function Initialize()
 
 			spawn(function()
 				this.GraphicsQualitySlider:SetValue(graphicsLevel)
-				this.GraphicsQualityEnabler:SetSelectionIndex(2)
 			end)
 		end
 	end
