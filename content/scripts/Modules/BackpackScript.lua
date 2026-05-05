@@ -71,6 +71,8 @@ local ANORRLGui = CoreGui:WaitForChild('ANORRLGui')
 ANORRLGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
 local isTenFootInterface = require(ANORRLGui.Modules.TenFootInterface):IsEnabled()
 local utility = require(ANORRLGui.Modules.Settings.Utility)
+local emotesModule = require(ANORRLGui.Modules.Emotes)
+
 local topbarEnabled = true
 
 if isTenFootInterface then
@@ -795,6 +797,7 @@ local function OnCharacterAdded(character)
 end
 
 local function OnInputBegan(input, isProcessed)
+	if emotesModule:GetVisibility() then return end
 	-- Pass through keyboard hotkeys when not typing into a TextBox and not disabled (except for the Drop key)
 	if input.UserInputType == Enum.UserInputType.Keyboard and not TextBoxFocused and (WholeThingEnabled or input.KeyCode.Value == DROP_HOTKEY_VALUE) then
 		local hotkeyBehavior = HotkeyFns[input.KeyCode.Value]
