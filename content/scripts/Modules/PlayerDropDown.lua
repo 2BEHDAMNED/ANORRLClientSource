@@ -528,8 +528,7 @@ function createPlayerDropDown()
 		end
 
 		local blocked = isBlocked(playerDropDown.Player.userId)
-		print("blocked: ", blocked)
-
+		
 		if not blocked then
 			table.insert(buttons, {
 				Name = "FriendButton",
@@ -549,7 +548,6 @@ function createPlayerDropDown()
 		if IsServerFollowers or IsFollowersEnabled then
 			local following = isFollowing(playerDropDown.Player.userId, LocalPlayer.userId)
 			local followerText = following and "Unfollow Player" or "Follow Player"
-			print("following:",following)
 			
 			if not blocked then
 				table.insert(buttons, {
