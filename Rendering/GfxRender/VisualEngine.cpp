@@ -117,6 +117,7 @@ VisualEngine::VisualEngine(Device* device, CRenderSettings* settings)
 			"fonts/zekton_rg.ttf",
 			"fonts/FingerPaint-Regular.ttf",
 			"fonts/ComicSans.ttf",
+			"fonts/ComicSans-Bold.ttf",
 			"fonts/silkscreen.ttf",
 			"fonts/ProximaNova.ttf",
 			"fonts/NotoSans-Regular.ttf",

@@ -148,8 +148,6 @@ static int math_ldexp (lua_State *L) {
   return 1;
 }
 
-
-
 static int math_min (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
   lua_Number dmin = luaL_checknumber(L, 1);
@@ -162,7 +160,6 @@ static int math_min (lua_State *L) {
   lua_pushnumber(L, dmin);
   return 1;
 }
-
 
 static int math_max (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
@@ -177,7 +174,31 @@ static int math_max (lua_State *L) {
   return 1;
 }
 
-// 32 bit signed limit rahhh
+static int math_clamp(lua_State *L) {
+	int n = lua_gettop(L);
+	if (n == 3) {
+		lua_Number input = luaL_checknumber(L, 1);
+		lua_Number min = luaL_checknumber(L, 2);
+		lua_Number max = luaL_checknumber(L, 3);
+
+		if (min > max) {
+			return luaL_error(L, "max must be greater than min");
+		}
+
+		if (input < min) {
+			lua_pushnumber(L, min);
+		}
+		else if (input > max) {
+			lua_pushnumber(L, max);
+		}
+		else {
+			lua_pushnumber(L, input);
+		}
+		return 1;
+	}
+	return luaL_error(L, "wrong number of arguments");
+}
+
 static int math_random (lua_State *L) {
   /* the `%' avoids the (rare) case of r==1, and is needed also because on
      some systems (SunOS!) `rand()' may return a value larger than RAND_MAX */
@@ -241,6 +262,7 @@ static const luaL_Reg mathlib[] = {
   {"sqrt",  math_sqrt},
   {"tanh",   math_tanh},
   {"tan",   math_tan},
+  {"clamp",   math_clamp},
   {NULL, NULL}
 };
 

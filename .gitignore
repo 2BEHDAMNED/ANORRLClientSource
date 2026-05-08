@@ -64,3 +64,4 @@ moc_*
 qrc_*
 uic_*
 ui_*.h
+Network/API.cpp

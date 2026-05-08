@@ -263,9 +263,12 @@ local function CreateEmotes()
 	end
 	
 	function this:CharacterAdded(character)
-		self.EmoteHandler = character:WaitForChild("HandleEmote") -- what the hell was i even thinking
-		for i, v in ipairs(self.Emotes) do
-			self.EmoteHandler:Fire("register", v.id)
+		self.EmoteHandler = character:FindFirstChild("HandleEmote") -- what the hell was i even thinking
+		-- if not found, assume Animate script was overwritten or something
+		if self.EmoteHandler then
+			for i, v in ipairs(self.Emotes) do
+				self.EmoteHandler:Fire("register", v.id)
+			end
 		end
 	end
 	

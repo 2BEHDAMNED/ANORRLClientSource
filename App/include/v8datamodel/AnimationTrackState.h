@@ -36,6 +36,7 @@ namespace ARL {
 		double fadeEndWeight;
 
 		bool isPlaying;
+		bool isLooped;
 
 		double getGameTime(); // helper
 
@@ -82,6 +83,8 @@ namespace ARL {
 
 		bool isStopped(double time);
 		bool getIsPlaying() const { return isPlaying; };
+		
+		void setLooped(bool value);
 
 		double getDurationClampedKeyframeTime(double keyframeTime);
 

@@ -30,6 +30,7 @@ namespace ARL {
 		void forwardStopped();
 
 		double getGameTime() const;
+		bool looped;
 
 	public:
 		AnimationTrack(shared_ptr<AnimationTrackState> animationTrackState, weak_ptr<Animator> animator, shared_ptr<Animation> anim);
@@ -57,6 +58,9 @@ namespace ARL {
 		void setPriority(KeyframeSequence::Priority priority);
 
         const std::string getAnimationName() const;
+
+		bool getLooped() const { return looped;  }
+		void setLooped(bool value);
 
 		rbx::signal<void(std::string)> keyframeReachedSignal;
 		rbx::signal<void()> stoppedSignal;

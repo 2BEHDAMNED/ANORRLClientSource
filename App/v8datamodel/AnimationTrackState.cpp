@@ -280,7 +280,7 @@ void AnimationTrackState::step(std::vector<PoseAccumulator>& jointposes, double 
 
 	kfs->apply(jointposes, lastKeyframeTime, keyframetime, trackweight);
 
-	if(!kfs->getLoop()) // play one time. give stop command after trigger of last keyframe.
+	if(!isLooped)  // kfs->getLoop() // play one time. give stop command after trigger of last keyframe.
 	{
 		//determine if we are finished with the animation
 		bool doneWithAnimation;
@@ -328,7 +328,7 @@ void AnimationTrackState::detectKeyframeReached(double animationTime, double las
         return;
 
 	//did we just loop? if so, fire the keyframes relevant. of course, only if the animation does loop
-	if (kfs->getLoop())
+	if (isLooped) //kfs->getLoop()
 	{
 		if (!inReverse())
 		{
@@ -369,7 +369,14 @@ void AnimationTrackState::detectKeyframeReached(double animationTime, double las
 			preKeyframe = index;
 			break;
 		}
+	}	
+}
+
+void AnimationTrackState::setLooped(bool value) {
+	if (isLooped != value) {
+		isLooped = value;
 	}
 }
+
 
 }

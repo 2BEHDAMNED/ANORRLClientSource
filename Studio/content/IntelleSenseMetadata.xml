@@ -30,6 +30,7 @@
     <StaticFunction name ="sqrt" tooltip="number math.sqrt(x)%1Returns the square root of x. (You can also use the expression x^0.5 to compute this value.)" />
     <StaticFunction name ="tan" tooltip="number math.tan(x)%1Returns the tangent of x (assumed to be in radians)." />
     <StaticFunction name ="tanh" tooltip="number math.tanh(x)%1Returns the hyperbolic tangent of x." />
+    <StaticFunction name ="clamp" tooltip="number math.clamp(x, min, max)%1Returns a number." />
     <StaticProperty name="huge" tooltip="The value HUGE_VAL, a value larger than or equal to any other numerical value."/>
     <StaticProperty name ="pi" tooltip="The value of pi."/>
   </LuaLibrary>

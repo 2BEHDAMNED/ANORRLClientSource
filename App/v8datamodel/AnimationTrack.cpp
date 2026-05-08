@@ -32,6 +32,8 @@ static Reflection::PropDescriptor<AnimationTrack, float> prop_Length("Length", c
 static Reflection::PropDescriptor<AnimationTrack, bool> prop_IsPlaying("IsPlaying", category_Data, &AnimationTrack::getIsPlaying, NULL, Reflection::PropertyDescriptor::SCRIPTING);
 static Reflection::PropDescriptor<AnimationTrack, float> prop_TimePosition("TimePosition", category_Data, &AnimationTrack::getTimePosition, &AnimationTrack::setTimePosition, Reflection::PropertyDescriptor::UI);
 
+static Reflection::PropDescriptor<AnimationTrack, bool> prop_Looped("Looped", category_Data, &AnimationTrack::getLooped, &AnimationTrack::setLooped, Reflection::PropertyDescriptor::SCRIPTING);
+
 static Reflection::RefPropDescriptor<AnimationTrack, Animation> prop_Animation("Animation", category_Data, &AnimationTrack::getAnimation, NULL, Reflection::PropertyDescriptor::SCRIPTING);
 
 const Reflection::EnumPropDescriptor<AnimationTrack, KeyframeSequence::Priority> prop_Priority("Priority", category_Data, &AnimationTrack::getPriority, &AnimationTrack::setPriority);
@@ -231,6 +233,14 @@ double AnimationTrack::getTimeOfKeyframe(std::string keyframeName)
 		}
 	}
 	throw ARL::runtime_error("Could not find a keyframe by that name!");
+}
+
+void AnimationTrack::setLooped(bool value) {
+	if (looped != value) {
+		looped = value;
+		animationTrackState->setLooped(looped);
+		raisePropertyChanged(prop_Looped);
+	}
 }
 
 }

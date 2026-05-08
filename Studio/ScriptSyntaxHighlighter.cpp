@@ -100,7 +100,7 @@ void ScriptSyntaxHighlighter::initData()
 		<< "abs" << "acos" << "asin" << "atan" << "atan2" 
 		<< "ceil" << "cos" << "deg" << "exp" << "floor"
 		<< "format" << "frexp" << "gsub" << "ldexp" << "log" 
-		<< "log10" << "max" << "min" << "mod" << "rad"
+		<< "log10" << "max" << "min" << "mod" << "rad" << "clamp"
 		<< "random" << "randomseed" << "sin" << "sqrt" << "strbyte" 
 		<< "strchar" << "strfind" << "strlen" << "strlower" 
 		<< "strrep" << "strsub" << "strupper" << "tan"

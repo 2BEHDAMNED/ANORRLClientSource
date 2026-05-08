@@ -54,6 +54,7 @@ EnumDesc<TextService::Font>::EnumDesc()
 	addPair(TextService::FONT_SCIFI, "SciFi");
 	addPair(TextService::FONT_FINGERPAINT, "Fingerpaint");
 	addPair(TextService::FONT_COMICSANS, "ComicSans");
+	addPair(TextService::FONT_COMICSANSBOLD, "ComicSansBold");
 	addPair(TextService::FONT_SILKSCREEN, "SilkScreen");
 	addPair(TextService::FONT_PROXIMANOVA, "ProximaNova");
 	addPair(TextService::FONT_NOTOSANS, "NotoSans");
@@ -117,6 +118,7 @@ TextService::Font TextService::FromTextFont(Text::Font font)
 	case Text::FONT_FINGERPAINT:	return FONT_FINGERPAINT;
 
 	case Text::FONT_COMICSANS:	return FONT_COMICSANS;
+	case Text::FONT_COMICSANSBOLD:	return FONT_COMICSANSBOLD;
 	case Text::FONT_SILKSCREEN:	return FONT_SILKSCREEN;
 	case Text::FONT_PROXIMANOVA:	return FONT_PROXIMANOVA; 
 	case Text::FONT_NOTOSANS:	return FONT_NOTOSANS;
@@ -149,6 +151,7 @@ Text::Font TextService::ToTextFont(Font font)
 	case FONT_SCIFI:	return Text::FONT_SCIFI;
 	case FONT_FINGERPAINT:	return Text::FONT_FINGERPAINT;
 	case FONT_COMICSANS:	return Text::FONT_COMICSANS;
+	case FONT_COMICSANSBOLD:	return Text::FONT_COMICSANSBOLD;
 	case FONT_SILKSCREEN:	return Text::FONT_SILKSCREEN;
 	case FONT_PROXIMANOVA:	return Text::FONT_PROXIMANOVA; 
 	case FONT_NOTOSANS:	return Text::FONT_NOTOSANS;
