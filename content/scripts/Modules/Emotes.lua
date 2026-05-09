@@ -263,13 +263,17 @@ local function CreateEmotes()
 	end
 	
 	function this:CharacterAdded(character)
-		self.EmoteHandler = character:FindFirstChild("HandleEmote") -- what the hell was i even thinking
-		-- if not found, assume Animate script was overwritten or something
-		if self.EmoteHandler then
-			for i, v in ipairs(self.Emotes) do
-				self.EmoteHandler:Fire("register", v.id)
+		if not game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Emotes) then return end
+		coroutine.resume(coroutine.create(function()
+			wait(1.5)
+			self.EmoteHandler = character:FindFirstChild("HandleEmote") -- what the hell was i even thinking
+			-- if not found, assume Animate script was overwritten or something
+			if self.EmoteHandler then
+				for i, v in ipairs(self.Emotes) do
+					self.EmoteHandler:Fire("register", v.id)
+				end
 			end
-		end
+		end))
 	end
 	
 	function this:Initialize()
@@ -302,6 +306,7 @@ local function CreateEmotes()
 
 		InputService.InputBegan:connect(function(inputObj, gameProcessed)
 			local keyCode = inputObj.KeyCode.Value
+			if not game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Emotes) then return end
 			if not gameProcessed and keyCode == Enum.KeyCode.B.Value then
 				this:ToggleVisibility(not self.WidgetVisible)
 			end
