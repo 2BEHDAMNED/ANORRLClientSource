@@ -719,6 +719,28 @@ local function CreateSettingsIcon(topBarInstance)
 		else
 			settingsIconImage:TweenSizeAndPosition(UDim2.new(0, 32, 0, 25), UDim2.new(0.5, -16, 0.5, -12), Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, 0.15, true)
 		end
+		
+		-- something
+	
+		function lerp(initial, final, startTime, duration)
+			return initial + ((final - initial) * ( ( tick() - startTime ) / duration)) 
+		end
+	
+		local num, startTime, dest = nil, tick(), nil
+		
+		if settingsActive then
+			num = TOPBAR_THICKNESS
+			dest = 0
+		else
+			num = 0
+			dest = TOPBAR_THICKNESS
+		end
+		
+		while math.floor(num) ~= dest do
+			num = lerp(num, dest, startTime, 0.25)
+			Util.SetGUIInsetBounds(0, num, 0,0)
+			wait(0.0001)
+		end
 	end
 
 	local function toggleSettings()
