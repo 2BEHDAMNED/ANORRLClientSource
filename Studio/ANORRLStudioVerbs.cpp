@@ -1645,9 +1645,9 @@ StartPlayerVerb::StartPlayerVerb(ARL::VerbContainer* pVerbContainer)
 
 void StartPlayerVerb::doIt(ARL::IDataState*)
 {
-    // loadfile('http://anorrl.lambda.cam//game/join.slua?UserID=0&serverPort=53640')()
+    // loadfile('http://anorrl.lambda.cam/game/join.ashx?UserID=0&serverPort=53640')()
 	QString script;
-	script = QString("loadfile(\"%1/game/join.slua?UserID=0&serverPort=53640&universeId=%2\")()\n")
+	script = QString("loadfile(\"%1/game/join.ashx?UserID=0&serverPort=53640&universeId=%2\")()\n")
 		.arg(ANORRLSettings::getBaseURL())
 		.arg(m_pDataModel->getUniverseId());
 	

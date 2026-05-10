@@ -153,7 +153,7 @@ namespace StudioUtilities
 
 	bool containsJoinScript(const QString& url)
 	{
-		return url.contains("join.slua", Qt::CaseInsensitive);
+		return url.contains("join.ashx", Qt::CaseInsensitive);
 	}
 
 	bool containsVisitScript(const QString& url)
