@@ -31,10 +31,13 @@ function MakeButton(name, text, size, position, parent, func)
 	return button
 end
 
-function PlaySound(id)
+function PlaySound(id, volume)
+	if not volume then
+		volume = 0.5
+	end
 	local sound = Instance.new("Sound", game.CoreGui)
 	sound.SoundId = id
-	sound.Volume = 0.5
+	sound.Volume = volume
 	sound.Ended:connect(function()
 		sound:Remove()
 	end)
@@ -114,7 +117,7 @@ local function CreateSettingsHub()
 		end
 		self.skateboard:TweenPosition(UDim2.new(0.5,0,2,0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.75, false, onSkateboardDone)
 		wait(0.1)
-		PlaySound("arlasset://sounds/pause/trrrks.ogg")
+		PlaySound("arlasset://sounds/pause/trrrks.ogg", 0.2)
 		wait(0.1)
 		self.skateboardMenu.Visible = false
 	end
@@ -135,7 +138,7 @@ local function CreateSettingsHub()
 		self.skateboard:TweenPosition(UDim2.new(0.5,0,0.5,0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.75, false)
 		wait(0.1)
 		self.skateboardMenu.Visible = true
-		PlaySound("arlasset://sounds/pause/skrrrt.ogg")
+		PlaySound("arlasset://sounds/pause/skrrrt.ogg", 0.2)
 		wait(0.3)
 		
 	end
