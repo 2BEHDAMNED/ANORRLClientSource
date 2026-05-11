@@ -250,10 +250,8 @@ local function createGamepadMenuGui()
 	-------- Player List ------------
 	local playerListFunc = function() 
 		toggleCoreGuiRadial(true)
-		local PlayerListModule = require(GuiRoot.Modules.PlayerlistModule)
-		if not PlayerListModule:IsOpen() then
-			PlayerListModule:ToggleVisibility()
-		end
+		local MenuModule = require(GuiRoot.Modules.Settings.SettingsHub)
+		MenuModule:SetVisibility(true, false, require(GuiRoot.Modules.Settings.Pages.Players), true)
 	end
 	local playerListRadial = createRadialButton("PlayerList", "Player List", 2, not StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.PlayerList), Enum.CoreGuiType.PlayerList, playerListFunc)
 	playerListRadial.Parent = gamepadSettingsFrame

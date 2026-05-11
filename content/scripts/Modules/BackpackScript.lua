@@ -1445,7 +1445,7 @@ do -- Make the Inventory expand/collapse arrow (unless TopBar)
 	
 	local function openClose()
 
-		local SettingsHub = require(ANORRLGui.Modules.Settings:WaitForChild("SettingsHub"))
+		local SettingsHub = require(ANORRLGui.Modules:WaitForChild("PauseMenu"))
 		if SettingsHub.Instance.Visible then
 			--SettingsHub:SetVisibility(false)
 			setVis(false)

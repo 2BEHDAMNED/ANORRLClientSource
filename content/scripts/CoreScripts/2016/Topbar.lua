@@ -25,7 +25,7 @@ local HEALTH_GREEN_COLOR = Color3.new(164/255, 69/255, 222/255)
 
 local HEALTH_PERCANTAGE_FOR_OVERLAY = 5 / 100
 
-local HURT_OVERLAY_IMAGE = "arlassetid://3654"
+local HURT_OVERLAY_IMAGE = "arlasset://textures/ui/hurtBkg.png"
 
 local DEBOUNCE_TIME = 0.25
 
@@ -676,9 +676,8 @@ end
 --- SETTINGS ---
 local function CreateSettingsIcon(topBarInstance)
 	local MenuModule = nil
-	game.CoreGui.ANORRLGui.Modules:WaitForChild("Settings")
-	game.CoreGui.ANORRLGui.Modules.Settings:WaitForChild("SettingsHub")
-	MenuModule = require(game.CoreGui.ANORRLGui.Modules.Settings.SettingsHub)
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("PauseMenu")
+	MenuModule = require(game.CoreGui.ANORRLGui.Modules.PauseMenu)
 
 	local settingsIconButton = Util.Create'ImageButton'
 	{
@@ -722,11 +721,11 @@ local function CreateSettingsIcon(topBarInstance)
 		
 		-- something
 	
-		function lerp(initial, final, startTime, duration)
+		--[[function lerp(initial, final, startTime, duration)
 			return initial + ((final - initial) * ( ( tick() - startTime ) / duration)) 
 		end
 	
-		local num, startTime, dest = nil, tick(), nil
+		local num, startTime, dest, duration = nil, tick(), nil, 0.25
 		
 		if settingsActive then
 			num = TOPBAR_THICKNESS
@@ -734,13 +733,14 @@ local function CreateSettingsIcon(topBarInstance)
 		else
 			num = 0
 			dest = TOPBAR_THICKNESS
+			duration = 0.15
 		end
 		
 		while math.floor(num) ~= dest do
-			num = lerp(num, dest, startTime, 0.25)
+			num = lerp(num, dest, startTime, duration)
 			Util.SetGUIInsetBounds(0, num, 0,0)
 			wait(0.0001)
-		end
+		end]]
 	end
 
 	local function toggleSettings()
@@ -865,9 +865,8 @@ local function CreateChatIcon()
 	local ChatModule = require(GuiRoot.Modules.Chat)
 	
 	local MenuModule = nil
-	game.CoreGui.ANORRLGui.Modules:WaitForChild("Settings")
-	game.CoreGui.ANORRLGui.Modules.Settings:WaitForChild("SettingsHub")
-	MenuModule = require(game.CoreGui.ANORRLGui.Modules.Settings.SettingsHub)
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("PauseMenu")
+	MenuModule = require(game.CoreGui.ANORRLGui.Modules.PauseMenu)
 
 	local bubbleChatIsOn = not PlayersService.ClassicChat and PlayersService.BubbleChat
 	local debounce = 0

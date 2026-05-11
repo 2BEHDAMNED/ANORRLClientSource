@@ -336,7 +336,7 @@ public:
     
     virtual bool isVisible(const Extents& extents, const CoordinateFrame& cframe) { return true; }
 
-	static const int maximumZIndex = 10;
+	static const int maximumZIndex = 100;
 
 protected:	
 	Vector4 userGuiInset;

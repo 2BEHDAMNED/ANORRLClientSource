@@ -27,7 +27,7 @@ namespace ARL {
 		GuiBase(const char* name);
 
 		static int minZIndex() {return 0;}
-		static int maxZIndex() {return 10;}
+		static int maxZIndex() {return 100;}
 
 		static int minZIndex2d() {return minZIndex() + 1;}
 		static int maxZIndex2d() {return maxZIndex();}

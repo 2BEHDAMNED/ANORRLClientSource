@@ -3384,7 +3384,7 @@ const char* ANORRLIDEDoc::getOpenFileFilters()
 
 const char* ANORRLIDEDoc::getSaveFileFilters()
 {
-	return "ANORRL Place Files (*.arl);;ANORRL XML Place Files (*.arl)";
+	return "ANORRL Place Files (*.arl);;ANORRL XML Place Files (*.arlx)";
 }
 
 /**

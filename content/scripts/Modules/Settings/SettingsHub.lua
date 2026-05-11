@@ -975,13 +975,6 @@ local function CreateSettingsHub()
 		this.Shield.BackgroundTransparency = 1
 	end
 
-	local closeMenuFunc = function(name, inputState, input)
-		if inputState and inputState ~= Enum.UserInputState.Begin then return end
-		
-		this:PopMenu(false, true)
-	end
-	ContextActionService:BindCoreAction("RBXEscapeMainMenu", closeMenuFunc, false, Enum.KeyCode.Escape)
-
 	this.ResetCharacterPage:SetHub(this)
 	this.LeaveGamePage:SetHub(this)
 
