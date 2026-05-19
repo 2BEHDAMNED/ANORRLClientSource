@@ -2417,7 +2417,7 @@ void ANORRLGameExplorer::afterBadgesFinished(int originatingSessionId)
 							if (!thumbnailUrl.empty())
 							{
 								HttpOptions options;
-								options.setExternal(true);
+								//options.setExternal(true);
 								HttpAsync::get(thumbnailUrl, options).then(boost::bind(&invokeThumbnailLoadedForImage, this,
 											                                    currentSessionId, newItem->index(), _1));
 							}

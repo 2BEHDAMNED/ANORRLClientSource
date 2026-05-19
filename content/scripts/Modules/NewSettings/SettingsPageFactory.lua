@@ -237,7 +237,7 @@ local function Initialize()
 				row.ValueChanger.HubRef = this.HubRef
 			end
 			
-			this.Page.ZIndex += hubRef.ZIndex
+			this.Page.ZIndex = this.Page.ZIndex + hubRef.ZIndex
 		end
 	end
 

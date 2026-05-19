@@ -316,7 +316,7 @@ void ANORRLIDEDoc::initializeNewPlace()
 
 	// set up part instance
     ARL::BaldPtr<ARL::PartInstance> partInstance = static_cast<ARL::PartInstance*>(instance.get());
-    partInstance->setName("BasePlate");
+    partInstance->setName("Baseplate");
 
 	if (shared_ptr<ARL::BasicPartInstance> basicPartInstance = ARL::Instance::fastSharedDynamicCast<ARL::BasicPartInstance>(instance))
 		basicPartInstance->setFormFactorXml(ARL::PartInstance::SYMETRIC);
@@ -623,7 +623,7 @@ bool ANORRLIDEDoc::openStream(const QString& fileName, std::istream* stream, boo
 		}
 
 #ifdef STUDIO_ADMIN_BUILD
-		if (fileName.indexOf("Join.slua") != -1)
+		if (fileName.indexOf("Join.ashx") != -1)
 		{
 			m_EditGame.m_Game.reset(new ARL::SecurePlayerGame(NULL, baseUrl.toStdString().c_str(), false));
 		}

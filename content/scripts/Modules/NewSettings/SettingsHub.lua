@@ -677,7 +677,7 @@ local function CreateSettingsHub(parent)
 		for _, v in pairs(pageToSwitchTo.Page:GetDescendants()) do
 			if v:IsA("GuiObject") then
 				if v.ZIndex < SETTINGS_BASE_ZINDEX then
-					v.ZIndex += SETTINGS_BASE_ZINDEX
+					v.ZIndex = v.ZIndex + SETTINGS_BASE_ZINDEX
 				end
 			end
 		end

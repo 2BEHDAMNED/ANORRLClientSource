@@ -91,6 +91,15 @@ const luaL_reg Color3Bridge::classLibrary[] = {
 	{NULL, NULL}
 };
 
+static int lerpColor3(lua_State *L)
+{
+	G3D::Color3& self = Bridge<G3D::Color3>::getObject(L, 1);
+	G3D::Color3& v = Bridge<G3D::Color3>::getObject(L, 2);
+	float alpha = lua_tofloat(L, 3);
+	Bridge<G3D::Color3>::pushNewObject(L, self.lerp(v, alpha));
+	return 1;
+}
+
 void Color3Bridge::registerClassLibrary (lua_State *L) {
     
 	// Register the "new" function
@@ -210,6 +219,11 @@ int Bridge<G3D::Color3>::on_index(const G3D::Color3& object, const char* name, l
 	if (strcmp(name,"b")==0)
 	{
 		lua_pushnumber(L, object.b);
+		return 1;
+	}
+
+	if (strcmp(name, "Lerp") == 0 || strcmp(name, "lerp") == 0) {
+		lua_pushcfunction(L, lerpColor3);
 		return 1;
 	}
 

@@ -18,7 +18,7 @@ function MakeButton(name, text, size, position, parent, func)
 	button.ZIndex = parent.ZIndex + 1
 	for _, v in pairs(button:GetDescendants()) do
 		if v:IsA("GuiObject") then
-			v.ZIndex += parent.ZIndex
+			v.ZIndex = v.ZIndex + parent.ZIndex
 		end
 		if v:IsA("TextLabel") then
 			v.Font = Enum.Font.Fingerpaint
@@ -336,7 +336,7 @@ local function CreateSettingsHub()
 		
 		for _, v in pairs(menuModule.Instance.Shield:GetDescendants()) do
 			if v:IsA("GuiObject") and v.ZIndex <= settingsFrame.ZIndex then
-				v.ZIndex += settingsFrame.ZIndex
+				v.ZIndex = v.ZIndex + settingsFrame.ZIndex
 			end
 		end
 		
@@ -344,10 +344,10 @@ local function CreateSettingsHub()
 			this:OpenSettingsMenu()
 		end
 		
-		local resumeBtn   = MakeButton("ARLPauseMenuResumeGameBtn", "Resume Game", UDim2.new(1, 0, 0, sizeY),    UDim2.new(0,0,0,y),   actualMenu, closeMenu); y += sizeY + 5
-		local settingsBtn = MakeButton("ARLPauseMenuSettingsBtn",   "Settings",    UDim2.new(1, 0, 0, sizeY),    UDim2.new(0,0,0,y),   actualMenu, openSettingsMenu); y += sizeY + 5
+		local resumeBtn   = MakeButton("ARLPauseMenuResumeGameBtn", "Resume Game", UDim2.new(1, 0, 0, sizeY),    UDim2.new(0,0,0,y),   actualMenu, closeMenu); y = y + sizeY + 5
+		local settingsBtn = MakeButton("ARLPauseMenuSettingsBtn",   "Settings",    UDim2.new(1, 0, 0, sizeY),    UDim2.new(0,0,0,y),   actualMenu, openSettingsMenu); y = y + sizeY + 5
 		local scrnShotBtn = MakeButton("ARLPauseMenuScreenshotBtn", "Screenshot",  UDim2.new(0.5, -5, 0, sizeY), UDim2.new(0,0,0,y),   actualMenu, noAnimMenu)
-		local recordBtn   = MakeButton("ARLPauseMenuRecordBtn",     "Record Video",UDim2.new(0.5, -5, 0, sizeY), UDim2.new(0.5,5,0,y), actualMenu, noAnimMenu); y += sizeY + 5
+		local recordBtn   = MakeButton("ARLPauseMenuRecordBtn",     "Record Video",UDim2.new(0.5, -5, 0, sizeY), UDim2.new(0.5,5,0,y), actualMenu, noAnimMenu); y = y + sizeY + 5
 		local resetBtn    = MakeButton("ARLPauseMenuResetBtn",      "Reset",       UDim2.new(0.5, -5, 0, sizeY), UDim2.new(0,0,0,y),   actualMenu, openResetMenu)
 		local leaveBtn    = MakeButton("ARLPauseMenuLeaveBtn",      "Leave",       UDim2.new(0.5, -5, 0, sizeY), UDim2.new(0.5,5,0,y), actualMenu, openLeaveMenu)
 		
@@ -369,7 +369,7 @@ local function CreateSettingsHub()
 		
 		RunService.Heartbeat:Connect(function(time)
 			if this.Visible then
-				timeElapsed += time
+				timeElapsed = timeElapsed + time
 				
 				if math.floor(timeElapsed) % 1 <= 0.1 and not clocked then
 					

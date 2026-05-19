@@ -416,10 +416,10 @@ void Attachment::verifyAddChild(const Instance* newChild) const
 {
     Super::verifyAddChild( newChild );
 
-    if( newChild != NULL /*&& newChild->fastDynamicCast< Constraints::Constraint >() == NULL*/ )
-    {
-        throw ARL::runtime_error("Attachments can't have children.");
-    }
+    //if( newChild != NULL /*&& newChild->fastDynamicCast< Constraints::Constraint >() == NULL*/ )
+    //{
+    //    throw ARL::runtime_error("Attachments can't have children.");
+    //}
 }
 
 } // namespace

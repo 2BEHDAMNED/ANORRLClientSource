@@ -174,6 +174,32 @@ static int math_max (lua_State *L) {
   return 1;
 }
 
+// https://stackoverflow.com/a/4572591
+static int round(double x) {
+	if (x < 0.0)
+		return (int)(x - 0.5);
+	else
+		return (int)(x + 0.5);
+}
+
+static int math_round(lua_State *L) {
+	lua_pushnumber(L, round(luaL_checknumber(L, 1)));
+	return 1;
+}
+
+static int math_sign(lua_State *L) {
+	lua_Number num = luaL_checknumber(L, 1);
+	if (num == 0)
+		lua_pushnumber(L, 0);
+	else if (num < 0)
+		lua_pushnumber(L, -1);
+	else if (num > 0) 
+		lua_pushnumber(L, 1);
+	return 1;
+}
+
+
+
 static int math_clamp(lua_State *L) {
 	int n = lua_gettop(L);
 	if (n == 3) {
@@ -263,6 +289,8 @@ static const luaL_Reg mathlib[] = {
   {"tanh",   math_tanh},
   {"tan",   math_tan},
   {"clamp",   math_clamp},
+  {"round",   math_round},
+  {"sign",   math_sign},
   {NULL, NULL}
 };
 

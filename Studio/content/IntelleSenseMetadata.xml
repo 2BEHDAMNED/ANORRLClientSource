@@ -20,7 +20,7 @@
     <StaticFunction name ="max" tooltip="number math.max(x, ...)%1Returns the maximum value among its arguments." />
     <StaticFunction name ="min" tooltip="number math.min(x, ...)%1Returns the minimum value among its arguments." />
     <StaticFunction name ="modf" tooltip="number math.modf(x)%1Returns two numbers, the integral part of x and the fractional part of x." />
-	<StaticFunction name ="noise" tooltip="number math.noise(x [, y [, z]])%1Returns a value between -0.5 and 0.5 generated from its arguments" />
+	  <StaticFunction name ="noise" tooltip="number math.noise(x [, y [, z]])%1Returns a value between -0.5 and 0.5 generated from its arguments" />
     <StaticFunction name ="pow" tooltip="number math.pow(x, y)%1Returns x^y. (You can also use the expression x^y to compute this value.)" />
     <StaticFunction name ="rad" tooltip="number math.rad(x)%1Returns the angle x (given in degrees) in radians." />
     <StaticFunction name ="random" tooltip="number math.random([m [, n]])%1This function is an interface to the simple pseudo-random generator function rand provided by ANSI C. (No guarantees can be given for its statistical properties.)%1%1When called without arguments, returns a uniform pseudo-random real number in the range [0,1). When called with an integer number m, math.random returns a uniform%1pseudo-random integer in the range [1, m]. When called with two integer numbers m and n, math.random returns a uniform pseudo-random integer in the range [m, n]." />
@@ -30,8 +30,10 @@
     <StaticFunction name ="sqrt" tooltip="number math.sqrt(x)%1Returns the square root of x. (You can also use the expression x^0.5 to compute this value.)" />
     <StaticFunction name ="tan" tooltip="number math.tan(x)%1Returns the tangent of x (assumed to be in radians)." />
     <StaticFunction name ="tanh" tooltip="number math.tanh(x)%1Returns the hyperbolic tangent of x." />
-    <StaticFunction name ="clamp" tooltip="number math.clamp(x, min, max)%1Returns a number." />
-    <StaticProperty name="huge" tooltip="The value HUGE_VAL, a value larger than or equal to any other numerical value."/>
+    <StaticFunction name ="clamp" tooltip="number math.clamp(x, min, max)%1Returns a number between min and max, inclusive." />
+    <StaticFunction name ="sign" tooltip="number math.sign(x)%1Returns -1 if x is less than 0, 0 if x equals 0, or 1 if x is greater than 0." />
+    <StaticFunction name ="round" tooltip="number math.round(x)%1Returns the integer with the smallest difference between it and the given number." />
+    <StaticProperty name ="huge" tooltip="The value HUGE_VAL, a value larger than or equal to any other numerical value."/>
     <StaticProperty name ="pi" tooltip="The value of pi."/>
   </LuaLibrary>
   <LuaLibrary name="string">
@@ -195,6 +197,8 @@
     <Property name="g" tooltip="Number Color3.g%1The green value of the color"/>
     <Property name="b" tooltip="Number Color3.b%1The blue value of the color"/>
   </ItemStruct>
+  <Function name="Lerp" tooltip="Color3 Color3:Lerp(Color3 goal, number alpha)%1Returns a Color3 linearly interpolated between this Color3 and the goal by the fraction alpha"/>
+  <Function name="lerp" tooltip="Color3 Color3:lerp(Color3 goal, number alpha)%1Returns a Color3 linearly interpolated between this Color3 and the goal by the fraction alpha"/>
   <ItemStruct name="ColorSequence">
     <StaticFunction name="new" tooltip="ColorSequence ColorSequence.new(Color3 c)%1Creates a sequence of two keypoints with `c` for each value"/>
 	<StaticFunction name="new" tooltip="ColorSequence ColorSequence.new(Color3 c0, Color3 c1)%1Creates a sequence of two keypoints with `c0` and `c1` as the value"/>

@@ -1229,6 +1229,15 @@ local function CreateEmotesIcon()
 	GameSettings.AeroChanged:connect(function(active)
 		UpdateEmotesIcon()
 	end)
+	
+	local settingsModule = nil
+	game.CoreGui.ANORRLGui.Modules:WaitForChild("PauseMenu")
+	settingsModule = require(game.CoreGui.ANORRLGui.Modules.PauseMenu)
+	settingsModule.SettingsShowSignal:connect(function(active)
+		if not active then
+			MenuModule:ToggleVisibility(false)
+		end
+	end)
 
 	return CreateMenuItem(emotesIconButton)
 end

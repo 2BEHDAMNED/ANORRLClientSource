@@ -107,7 +107,8 @@ void ScriptSyntaxHighlighter::initData()
         << "openfile" << "closefile" << "readfrom" << "writeto" << "appendto"
 		<< "remove" << "rename" << "flush" << "seek" << "tmpfile" 
 		<< "tmpname" << "read" << "write" << "clock" << "date"
-		<< "difftime" << "execute" << "exit" << "getenv" << "setlocale" << "time";
+		<< "difftime" << "execute" << "exit" << "getenv" << "setlocale" << "time"
+		<< "round" << "sign";
 	
 	m_foldStarts << "function" << "if" << "do" << "repeat" << "[[" << "[==[" << "{" << "(";
 	m_foldEnds << "end" << "until" << "]]" << "]==]" << "}" << ")";

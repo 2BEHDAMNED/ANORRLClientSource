@@ -303,9 +303,15 @@ local function CreateEmotes()
 				end
 			end
 		end)
-
+		
+		local pauseMenuHub = nil
+		
 		InputService.InputBegan:connect(function(inputObj, gameProcessed)
 			local keyCode = inputObj.KeyCode.Value
+			if not pauseMenuHub then
+				pauseMenuHub = require(GuiRoot.Modules.PauseMenu)
+			end
+			if pauseMenuHub:GetVisibility() then this:ToggleVisibility(false) return end
 			if not game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Emotes) then return end
 			if not gameProcessed and keyCode == Enum.KeyCode.B.Value then
 				this:ToggleVisibility(not self.WidgetVisible)

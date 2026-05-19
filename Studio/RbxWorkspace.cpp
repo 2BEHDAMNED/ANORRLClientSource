@@ -66,8 +66,8 @@
 #include "QtUtilities.h"
 
 // Publish Selection to ANORRL
-bool RbxWorkspace::isScriptAssetUploadEnabled = false;
-bool RbxWorkspace::isAnimationAssetUploadEnabled = false;
+bool RbxWorkspace::isScriptAssetUploadEnabled = true;
+bool RbxWorkspace::isAnimationAssetUploadEnabled = true;
 bool RbxWorkspace::isImageModelAssetUploadEnabled = false;
 
 FASTFLAG(StudioCSGAssets)
